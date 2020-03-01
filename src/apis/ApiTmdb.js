@@ -14,3 +14,11 @@ export const ApiTmdbId = async id => {
   const data = await response.json();
   return data;
 };
+
+export const ApiTmdbImages = async id => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}/images?api_key=3e296e6f6a1b142633468c58b584ab9b&language=en`
+  );
+  const data = await response.json();
+  return data.backdrops;
+};
