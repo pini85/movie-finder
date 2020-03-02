@@ -1,7 +1,7 @@
 const ApiKey = "3e296e6f6a1b142633468c58b584ab9b";
 export const ApiTmdbQuery = async query => {
   const response = await fetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=${ApiKey}&language=en-US&query=star%20wars&page=1&include_adult=false`
+    `https://api.themoviedb.org/3/search/movie?api_key=${ApiKey}&language=en-US&query=${query}&page=1&include_adult=false`
   );
   const data = await response.json();
   return data;
