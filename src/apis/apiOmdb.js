@@ -1,7 +1,7 @@
 const ApiOmdb = async imdbId => {
   const apiKey = "c9f0874f";
   const response = await fetch(
-    `http://www.omdbapi.com/?i=${imdbId}&apikey=${apiKey}`
+    `https://www.omdbapi.com/?i=${imdbId}&apikey=${apiKey}`
   );
   const data = await response.json();
   return data;

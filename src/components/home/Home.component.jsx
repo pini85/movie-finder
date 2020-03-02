@@ -1,53 +1,52 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Input from "../input/Input.component";
 import MovieList from "../movieList/MovieList";
-import ApiOmdb from "../../apiOmdb";
+import Suggestions from "../Suggestions/Suggestions.component";
+
+import { ApiTmdbQuery } from "../../apis/ApiTmdb";
 
 const Home = () => {
   const [isSending, setIsSending] = useState(false);
-  const [movieData, setMovieData] = useState(null);
-  const [searchQuery, setQueryData] = useState("");
-  const [toggle, setToggle] = useState(false);
+  const [movieData, setMovieData] = useState(false);
+  const [userSuggestions, setUserSuggestions] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const initialRender = useRef(true);
 
-  const sendRequest = useCallback(async () => {
-    if (isSending) return;
+  useEffect(() => {
+    const handleSearchChange = async () => {
+      if (initialRender.current) {
+        initialRender.current = false;
+      } else {
+        if (searchQuery.length > 0) {
+          const data = await ApiTmdbQuery(searchQuery);
+          setUserSuggestions(data);
+        } else {
+          setUserSuggestions(false);
+        }
+      }
+    };
+    handleSearchChange();
+  }, [searchQuery]);
+
+  const sendRequest = async () => {
     setIsSending(true);
-    const data = await ApiOmdb(searchQuery);
+    const data = await ApiTmdbQuery(searchQuery);
     setMovieData(data);
     setIsSending(false);
-  }, [isSending]);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const response = await fetch(
-  //       `http://www.omdbapi.com/?t=${searchQuery}&apikey=${apiKey}`
-  //     );
-  //     const data = await response.json();
-  //     setMovieData(data);
-  //   };
-  //   fetchData();
-  // }, [searchQuery]);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const response = await fetch(
-  //       `http://www.omdbapi.com/?s=${searchQuery}&apikey=${apiKey}`
-  //     );
-  //     const data = await response.json();
-  //     setMovieData(data);
-  //   };
-  //   fetchData();
-  // }, [toggle]);
-
-  const handleSearchChange = e => {
-    setQueryData(e.target.value);
+    setUserSuggestions(false);
   };
 
   return (
     <div>
       <Input
         sendRequest={sendRequest}
-        handleSearchChange={handleSearchChange}
+        handleSearchChange={setSearchQuery}
         isDisabled={isSending}
+        value={searchQuery}
       />
+
+      {userSuggestions ? <Suggestions items={userSuggestions} /> : null}
+
       {movieData ? <MovieList movies={movieData} /> : null}
     </div>
   );
