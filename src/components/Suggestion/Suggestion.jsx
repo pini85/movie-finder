@@ -5,21 +5,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilm, faStar } from "@fortawesome/free-solid-svg-icons";
 
 const Suggestion = ({ item }) => {
-  console.log(item);
-
-  //   const [suggestion, setSuggestion] = useState(false);
-  //   const [item, setItem] = useState(props.item);
-
-  //   useEffect(() => {
-  //     const fetchData = async () => {
-  //       const id = item.id;
-  //       const data = await ApiTmdbId(id);
-  //       setSuggestion(data);
-  //       console.log(suggestio);
-  //     };
-  //     fetchData();
-  //   }, []);
-
   const styleContainer = {
     display: "flex",
     alignItems: "center",

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { ApiTmdbId, ApiTmdbImages } from "../../apis/ApiTmdb";
+import YouTube from "react-youtube";
+import PirateBay from "thepiratebay";
+import { ApiTmdbId, ApiTmdbImages, ApiTmdbTrailers } from "../../apis/ApiTmdb";
 import ApiOmdb from "../../apis/apiOmdb";
 
 const ShowMovie = props => {
@@ -9,8 +11,7 @@ const ShowMovie = props => {
       const id = props.location.state.data.id;
       const tmdbData = await ApiTmdbId(id);
       const omdbData = await ApiOmdb(tmdbData.imdb_id);
-      console.log();
-
+      const trailers = await ApiTmdbTrailers(id);
       const images = await ApiTmdbImages(id);
 
       const item = {
@@ -26,14 +27,36 @@ const ShowMovie = props => {
         plot2: omdbData.Plot,
         tagLine: tmdbData.tagline,
         langauge: omdbData.Langauge,
-        images: images
+        images: images,
+        trailers: trailers.results
       };
       setData(item);
 
-      console.log("Tmdb", tmdbData, "Omdb", omdbData);
+      // console.log("Tmdb", tmdbData, "Omdb", omdbData);
     };
     fetchData();
   }, []);
+  const opts = {
+    height: "390",
+    width: "640",
+    playerVars: {
+      // https://developers.google.com/youtube/player_parameters
+      autoplay: 0
+    }
+  };
+  const search = async () => {
+    const x = await PirateBay.getTorrent("10676856");
+    console.log(x);
+
+    //   const searchResults .= await PirateBay.search("harry potter", {
+    //     category: "video",
+    //     page: 3,
+    //     orderBy: "seeds",
+    //     sortBy: "desc"
+    //   });
+    //   console.log(searchResults);
+  };
+  search();
 
   const ratings = () => {
     return (
@@ -49,6 +72,10 @@ const ShowMovie = props => {
         })}
       </div>
     );
+  };
+  const _onReady = event => {
+    // access to player in all event handlers via event.target
+    event.target.pauseVideo();
   };
 
   const images = () => {
@@ -74,13 +101,31 @@ const ShowMovie = props => {
     <div>
       {data ? (
         <div>
-          {console.log(data.title)}
           <h3>{data.title}</h3>
           {ratings()}
           <div>Year: {data.year}</div>
           <div>Genre: {data.genre}</div>
           <div>Actors: {data.actors}</div>
-          {images()}hi
+          {images()}
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "space-around"
+            }}
+          >
+            {data.trailers.map(trailer => {
+              return (
+                <>
+                  <YouTube
+                    videoId={trailer.key}
+                    opts={opts}
+                    onReady={_onReady}
+                  />
+                </>
+              );
+            })}
+          </div>
         </div>
       ) : null}
     </div>

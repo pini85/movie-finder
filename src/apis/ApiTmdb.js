@@ -20,5 +20,23 @@ export const ApiTmdbImages = async id => {
     `https://api.themoviedb.org/3/movie/${id}/images?api_key=3e296e6f6a1b142633468c58b584ab9b&language=en`
   );
   const data = await response.json();
-  return data.backdrops;
+  console.log(data);
+
+  if (data.backdrops.length < 2) {
+    if (data.posters.length > 8) {
+      return data.posters.splice(0, 6);
+    } else {
+      return data.posters;
+    }
+  } else {
+    return data.backdrops;
+  }
+};
+
+export const ApiTmdbTrailers = async id => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}/videos?api_key=3e296e6f6a1b142633468c58b584ab9b&language=en-US`
+  );
+  const data = await response.json();
+  return data;
 };

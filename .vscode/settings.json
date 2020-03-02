@@ -1,6 +1,8 @@
 {
     "cSpell.ignoreWords": [
         "api",
-        "omdb"
+        "omdb",
+        "tmdb",
+        "trailers"
     ]
 }
