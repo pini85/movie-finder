@@ -45,16 +45,12 @@ const ShowMovie = props => {
     }
   };
   const search = async () => {
-    const x = await PirateBay.getTorrent("10676856");
-    console.log(x);
-
-    //   const searchResults .= await PirateBay.search("harry potter", {
-    //     category: "video",
-    //     page: 3,
-    //     orderBy: "seeds",
-    //     sortBy: "desc"
-    //   });
-    //   console.log(searchResults);
+    const searchResults = await PirateBay.search("harry potter", {
+      category: "video",
+      page: 3,
+      orderBy: "seeds",
+      sortBy: "desc"
+    });
   };
   search();
 
@@ -82,8 +78,6 @@ const ShowMovie = props => {
     return (
       <div>
         {data.images.map(image => {
-          console.log(image);
-
           return (
             <div>
               <img

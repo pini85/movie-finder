@@ -22,13 +22,21 @@ export const ApiTmdbImages = async id => {
   const data = await response.json();
   console.log(data);
 
-  if (data.backdrops.length < 2) {
+  if (data.backdrops.length < 4) {
+    console.log("less than 2 backdrops");
+
     if (data.posters.length > 8) {
+      console.log("posters length more than 8");
+
       return data.posters.splice(0, 6);
     } else {
+      console.log("returning posters");
+
       return data.posters;
     }
   } else {
+    console.log("returning backdrops");
+
     return data.backdrops;
   }
 };
