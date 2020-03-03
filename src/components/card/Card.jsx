@@ -54,7 +54,8 @@ const Card = ({ movie }) => {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    background: "linear-gradient(to bottom, #FDC830,#F37335)",
+    background:
+      "linear-gradient(to bottom, var(--primary-color),var(--primary-color-dark))",
     color: "white"
   };
 
@@ -62,13 +63,13 @@ const Card = ({ movie }) => {
     position: "absolute",
     bottom: 0,
     width: "100%",
-    backgroundColor: "orange",
+    backgroundColor: "var(--primary-color)",
     color: "white",
     padding: "0 5px"
   };
   const styleBackTitle = {
     width: "100%",
-    backgroundColor: "orange",
+    backgroundColor: "var(--primary-color)",
     color: "white",
     padding: "0 5px"
   };

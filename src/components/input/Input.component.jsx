@@ -3,7 +3,8 @@ import React from "react";
 const Input = ({ sendRequest, handleSearchChange, isDisabled, value }) => {
   const styleInput = {
     width: "18rem",
-    height: "2.5rem"
+    height: "2.5rem",
+    padding: "2rem"
   };
   return (
     <div>

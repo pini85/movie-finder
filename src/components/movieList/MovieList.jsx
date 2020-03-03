@@ -7,7 +7,8 @@ const MovieList = ({ movies }) => {
   const styleDiv = {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "center"
+    justifyContent: "center",
+    background: "var(--background-color)"
   };
 
   return (

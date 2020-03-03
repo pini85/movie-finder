@@ -29,15 +29,18 @@ const Home = () => {
   }, [searchQuery]);
 
   const sendRequest = async () => {
-    setIsSending(true);
-    const data = await ApiTmdbQuery(searchQuery);
-    setMovieData(data);
-    setIsSending(false);
-    setUserSuggestions(false);
+    if (searchQuery.length > 0) {
+      setIsSending(true);
+      const data = await ApiTmdbQuery(searchQuery);
+      setMovieData(data);
+      setIsSending(false);
+      setUserSuggestions(false);
+      setSearchQuery("");
+    }
   };
 
   return (
-    <div>
+    <div style={{ background: "var(--primary-color)" }}>
       <Input
         sendRequest={sendRequest}
         handleSearchChange={setSearchQuery}

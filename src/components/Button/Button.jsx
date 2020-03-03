@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const Button = ({ title }) => {
   const styleButton = {
     padding: "1rem 2.5rem",
-    backgroundColor: "orangered",
+    backgroundColor: "var(--secondary-color)",
     border: "none",
     borderRadius: "5px",
     cursor: "pointer",

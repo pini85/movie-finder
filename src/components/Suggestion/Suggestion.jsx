@@ -9,10 +9,9 @@ const Suggestion = ({ item }) => {
     display: "flex",
     alignItems: "center",
     width: "35rem",
-    padding: "0.5rem 1rem 0.5rem 1rem",
-    background: "black",
+    padding: "0rem 1rem 1rem 0.5rem",
     fontSize: "1.7rem",
-    color: "rgb(189, 185, 185)"
+    color: "#ffeec9"
   };
   const styleImg = {
     height: "7rem",
