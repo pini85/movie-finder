@@ -12,9 +12,10 @@ const Input = ({ sendRequest, handleSearchChange, isDisabled, value }) => {
         style={styleInput}
         value={value}
         onChange={e => handleSearchChange(e.target.value)}
+        // onKeyPress={sendRequest}
         type="text"
       />
-      <button disabled={isDisabled} onClick={sendRequest}>
+      <button disabled={isDisabled} onClick={e => sendRequest(e)}>
         Search
       </button>
     </div>

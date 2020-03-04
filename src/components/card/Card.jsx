@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 const Card = ({ movie }) => {
+  console.log(movie.poster_path);
+
   //   const styleCard = {
   //     backgroundColor: "transparent",
   //     width: "26rem",
@@ -23,12 +25,19 @@ const Card = ({ movie }) => {
   //     transformStyle: "preserve-3d",
   //     boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)"
   //   };
+  const image = () => {
+    if (movie.poster_path === null) {
+      return "https://underscoremusic.co.uk/site/wp-content/uploads/2014/05/no-poster.jpg";
+    } else {
+      return `http://image.tmdb.org/t/p/w185//${movie.poster_path}`;
+    }
+  };
   const styleFrontCard = {
     // position: "absolute",
     // width: "100%",
     // height: "100%",
     // backfaceVisibility: "hidden",
-    background: `url(http://image.tmdb.org/t/p/w185//${movie.poster_path})no-repeat center center`,
+    background: `url(${image()})no-repeat center center`,
     backgroundSize: "cover"
     // color: "white"
   };

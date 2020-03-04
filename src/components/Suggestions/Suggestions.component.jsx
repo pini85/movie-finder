@@ -4,9 +4,11 @@ import Suggestion from "../Suggestion/Suggestion";
 const Suggestions = ({ items }) => {
   const container = {
     position: "absolute",
+    marginTop: "0.4rem",
+    marginLeft: "0.4rem",
     background: "var(--primary-color)",
     color: "var(text-between)",
-    paddingBottom: "1rem"
+    zIndex: "10"
   };
   return (
     <div style={container}>
