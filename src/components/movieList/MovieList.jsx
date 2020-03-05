@@ -1,8 +1,9 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+
 import Card from "../card/Card";
-const MovieList = ({ movies }) => {
-  console.log(movies);
+const MovieList = props => {
+  console.log(props);
 
   const styleDiv = {
     display: "flex",
@@ -13,8 +14,8 @@ const MovieList = ({ movies }) => {
 
   return (
     <div style={styleDiv}>
-      {movies
-        ? movies.results.map(movie => {
+      {props.selectedMovies
+        ? props.selectedMovies.results.map(movie => {
             return <Card movie={movie}></Card>;
           })
         : null}
@@ -22,5 +23,7 @@ const MovieList = ({ movies }) => {
     //
   );
 };
-
-export default withRouter(MovieList);
+const mapStateToProps = state => ({
+  selectedMovies: state.selectedMovies
+});
+export default connect(mapStateToProps)(MovieList);

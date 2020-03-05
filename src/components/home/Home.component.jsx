@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
+import { withRouter } from "react-router";
+
+import { connect } from "react-redux";
+import { selectedMovies } from "../../redux/actions/index";
+
 import Input from "../input/Input.component";
 import MovieList from "../movieList/MovieList";
 import Suggestions from "../Suggestions/Suggestions.component";
-import { YifyService } from "yify-api";
-
 import { ApiTmdbQuery } from "../../apis/ApiTmdb";
+import { compose } from "redux";
 
-const Home = () => {
-  const [test, setTest] = useState(false);
+const Home = props => {
   const [isSending, setIsSending] = useState(false);
   const [movieData, setMovieData] = useState(false);
   const [userSuggestions, setUserSuggestions] = useState(false);
@@ -37,23 +40,16 @@ const Home = () => {
       if (e.charCode == 13 || e.target) {
         setIsSending(true);
         const data = await ApiTmdbQuery(searchQuery);
-        setMovieData(data);
+        // setMovieData(data);
+        props.selectedMovies(data);
         setIsSending(false);
         setUserSuggestions(false);
         setSearchQuery("");
+
+        props.history.push("/show-list");
       }
     }
   };
-  // useEffect(() => {
-  //   const fetcher = async () => {
-  //     const data = await fetch(
-  //       "https://yts.mx/api/v2/movie_details.json?movie_id=11"
-  //     );
-  //     const x = await data.json();
-  //     setTest(x);
-  //   };
-  //   fetcher();
-  // }, []);
 
   return (
     <div style={{ background: "var(--primary-color)" }}>
@@ -63,13 +59,17 @@ const Home = () => {
         isDisabled={isSending}
         value={searchQuery}
       />
-      {console.log(test)}
 
       {userSuggestions ? <Suggestions items={userSuggestions} /> : null}
 
-      {movieData ? <MovieList movies={movieData} /> : null}
+      {/* {movieData ? <MovieList movies={movieData} /> : null} */}
     </div>
   );
 };
 
-export default Home;
+export default compose(
+  withRouter,
+  connect(null, {
+    selectedMovies: selectedMovies
+  })
+)(Home);

@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { selectedMovie } from "../../redux/actions/index";
 import YouTube from "react-youtube";
-import PirateBay from "thepiratebay";
 import { ApiTmdbId, ApiTmdbImages, ApiTmdbTrailers } from "../../apis/ApiTmdb";
 import ApiOmdb from "../../apis/apiOmdb";
+import apiYts from "../../apis/apiYts";
 
 const ShowMovie = props => {
   const [data, setData] = useState(null);
+  const [test, setTest] = useState("");
   useEffect(() => {
     const fetchData = async () => {
       const id = props.location.state.data.id;
@@ -13,6 +16,33 @@ const ShowMovie = props => {
       const omdbData = await ApiOmdb(tmdbData.imdb_id);
       const trailers = await ApiTmdbTrailers(id);
       const images = await ApiTmdbImages(id);
+      const torrentData = await apiYts(tmdbData.imdb_id);
+
+      const OS = require("opensubtitles-api");
+      const OpenSubtitles = new OS({
+        useragent: "emporaryUserAgent",
+        username: "pini85",
+        password: "memory00",
+        ssl: true
+      });
+
+      let torrents;
+      if (!torrentData) {
+        torrents = [];
+      } else {
+        torrents = torrentData.map(torrent => {
+          const obj = {
+            url: torrent.url,
+            quality: torrent.quality,
+            type: torrent.type,
+            seeds: torrent.seeds,
+            peers: torrent.peers,
+            size: torrent.size
+          };
+          return obj;
+        });
+      }
+      // console.log(omdbData, tmdbData);
 
       const item = {
         title: omdbData.Title,
@@ -26,13 +56,15 @@ const ShowMovie = props => {
         plot: tmdbData.overview,
         plot2: omdbData.Plot,
         tagLine: tmdbData.tagline,
-        langauge: omdbData.Langauge,
+        language: omdbData.Langauge,
         images: images,
-        trailers: trailers.results
+        trailers: trailers.results,
+        torrents: torrents
       };
-      setData(item);
+      // setData(item);
+      props.selectedMovie(item);
 
-      // console.log("Tmdb", tmdbData, "Omdb", omdbData);
+      //
     };
     fetchData();
   }, []);
@@ -40,24 +72,14 @@ const ShowMovie = props => {
     height: "390",
     width: "640",
     playerVars: {
-      // https://developers.google.com/youtube/player_parameters
       autoplay: 0
     }
   };
-  const search = async () => {
-    const searchResults = await PirateBay.search("harry potter", {
-      category: "video",
-      page: 3,
-      orderBy: "seeds",
-      sortBy: "desc"
-    });
-  };
-  search();
 
   const ratings = () => {
     return (
       <div>
-        {data.ratings.map(item => {
+        {props.movie.ratings.map(item => {
           return (
             <div>
               <div>
@@ -77,7 +99,7 @@ const ShowMovie = props => {
   const images = () => {
     return (
       <div>
-        {data.images.map(image => {
+        {props.movie.images.map(image => {
           return (
             <div>
               <img
@@ -93,13 +115,14 @@ const ShowMovie = props => {
 
   return (
     <div>
-      {data ? (
+      {console.log(test)}
+      {props.movie ? (
         <div>
-          <h3>{data.title}</h3>
+          <h3>{props.movie.title}</h3>
           {ratings()}
-          <div>Year: {data.year}</div>
-          <div>Genre: {data.genre}</div>
-          <div>Actors: {data.actors}</div>
+          <div>Year: {props.movie.year}</div>
+          <div>Genre: {props.movie.genre}</div>
+          <div>Actors: {props.movie.actors}</div>
           {images()}
           <div
             style={{
@@ -108,7 +131,7 @@ const ShowMovie = props => {
               justifyContent: "space-around"
             }}
           >
-            {data.trailers.map(trailer => {
+            {props.movie.trailers.map(trailer => {
               return (
                 <>
                   <YouTube
@@ -119,6 +142,20 @@ const ShowMovie = props => {
                 </>
               );
             })}
+            {props.movie.torrents.map(torrent => {
+              return (
+                <div>
+                  <div>
+                    Url: <a href={torrent.url}>link!!!</a>
+                  </div>
+                  <div>seeds: {torrent.seeds}</div>
+                  <div>peers: {torrent.peers}</div>
+                  <div>size:{torrent.size}</div>
+                  <div>type:{torrent.type}</div>
+                  seeds: {torrent.seeds}
+                </div>
+              );
+            })}
           </div>
         </div>
       ) : null}
@@ -126,4 +163,9 @@ const ShowMovie = props => {
   );
 };
 
-export default ShowMovie;
+const mapStateToProps = state => {
+  return { movie: state.selectedMovie };
+};
+export default connect(mapStateToProps, {
+  selectedMovie: selectedMovie
+})(ShowMovie);
