@@ -40,7 +40,7 @@ const Home = props => {
       if (e.charCode == 13 || e.target) {
         setIsSending(true);
         const data = await ApiTmdbQuery(searchQuery);
-        // setMovieData(data);
+        setMovieData(data);
         props.selectedMovies(data);
         setIsSending(false);
         setUserSuggestions(false);
@@ -62,7 +62,7 @@ const Home = props => {
 
       {userSuggestions ? <Suggestions items={userSuggestions} /> : null}
 
-      {/* {movieData ? <MovieList movies={movieData} /> : null} */}
+      {movieData ? <MovieList movies={movieData} /> : null}
     </div>
   );
 };

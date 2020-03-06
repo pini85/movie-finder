@@ -5,6 +5,7 @@ import YouTube from "react-youtube";
 import { ApiTmdbId, ApiTmdbImages, ApiTmdbTrailers } from "../../apis/ApiTmdb";
 import ApiOmdb from "../../apis/apiOmdb";
 import apiYts from "../../apis/apiYts";
+import subtitles from "../../apis/subtitles";
 
 const ShowMovie = props => {
   const [data, setData] = useState(null);
@@ -17,14 +18,6 @@ const ShowMovie = props => {
       const trailers = await ApiTmdbTrailers(id);
       const images = await ApiTmdbImages(id);
       const torrentData = await apiYts(tmdbData.imdb_id);
-
-      const OS = require("opensubtitles-api");
-      const OpenSubtitles = new OS({
-        useragent: "emporaryUserAgent",
-        username: "pini85",
-        password: "memory00",
-        ssl: true
-      });
 
       let torrents;
       if (!torrentData) {
@@ -42,6 +35,7 @@ const ShowMovie = props => {
           return obj;
         });
       }
+      const subtitle = await subtitles(tmdbData.imdb_id);
       // console.log(omdbData, tmdbData);
 
       const item = {
@@ -59,22 +53,28 @@ const ShowMovie = props => {
         language: omdbData.Langauge,
         images: images,
         trailers: trailers.results,
-        torrents: torrents
+        torrents: torrents,
+        subtitle: subtitle
       };
       // setData(item);
       props.selectedMovie(item);
 
-      //
+      //`
     };
     fetchData();
   }, []);
-  const opts = {
+
+  const optsYouTube = {
     height: "390",
     width: "640",
     playerVars: {
       autoplay: 0
     }
   };
+  // const _onReadyYouTube = event => {
+  //   // access to player in all event handlers via event.target
+  //   event.target.pauseVideo();
+  // };
 
   const ratings = () => {
     return (
@@ -90,10 +90,6 @@ const ShowMovie = props => {
         })}
       </div>
     );
-  };
-  const _onReady = event => {
-    // access to player in all event handlers via event.target
-    event.target.pauseVideo();
   };
 
   const images = () => {
@@ -115,7 +111,6 @@ const ShowMovie = props => {
 
   return (
     <div>
-      {console.log(test)}
       {props.movie ? (
         <div>
           <h3>{props.movie.title}</h3>
@@ -136,8 +131,8 @@ const ShowMovie = props => {
                 <>
                   <YouTube
                     videoId={trailer.key}
-                    opts={opts}
-                    onReady={_onReady}
+                    opts={optsYouTube}
+                    // onReady={_onReadyYouTube}
                   />
                 </>
               );
@@ -152,10 +147,15 @@ const ShowMovie = props => {
                   <div>peers: {torrent.peers}</div>
                   <div>size:{torrent.size}</div>
                   <div>type:{torrent.type}</div>
-                  seeds: {torrent.seeds}
                 </div>
               );
             })}
+
+            {props.movie.subtitle ? (
+              <div>
+                <a href={props.movie.subtitle}> subtitle</a>
+              </div>
+            ) : null}
           </div>
         </div>
       ) : null}
