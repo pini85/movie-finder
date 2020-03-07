@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { withRouter } from "react-router";
 
 import { connect } from "react-redux";
-import { selectedMovies } from "../../redux/actions/index";
+import { selectedMovies, movieSuggestions } from "../../redux/actions/index";
 
 import Input from "../input/Input.component";
 import MovieList from "../movieList/MovieList";
@@ -12,7 +12,6 @@ import { compose } from "redux";
 
 const Home = props => {
   const [isSending, setIsSending] = useState(false);
-  const [movieData, setMovieData] = useState(false);
   const [userSuggestions, setUserSuggestions] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const initialRender = useRef(true);
@@ -24,9 +23,11 @@ const Home = props => {
       } else {
         if (searchQuery.length > 0) {
           const data = await tmdbQueryApi(searchQuery);
-          setUserSuggestions(data);
+          // setUserSuggestions(data);
+          props.movieSuggestions(data);
         } else {
           setUserSuggestions(false);
+          props.movieSuggestions(false);
         }
       }
     };
@@ -57,17 +58,21 @@ const Home = props => {
         isDisabled={isSending}
         value={searchQuery}
       />
+      {}
 
-      {userSuggestions ? <Suggestions items={userSuggestions} /> : null}
-
-      {movieData ? <MovieList movies={movieData} /> : null}
+      {props.userSuggestions && <Suggestions items={props.movieSuggestions} />}
     </div>
   );
 };
 
+const mapStateToProps = state => ({
+  userSuggestions: state.movieSuggestions
+});
+
 export default compose(
   withRouter,
-  connect(null, {
-    selectedMovies: selectedMovies
+  connect(mapStateToProps, {
+    selectedMovies: selectedMovies,
+    movieSuggestions: movieSuggestions
   })
 )(Home);

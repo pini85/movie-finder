@@ -10,3 +10,9 @@ export const selectedMovies = movies => {
     payload: movies
   };
 };
+export const movieSuggestions = movies => {
+  return {
+    type: "MOVIE_SUGGESTIONS",
+    payload: movies
+  };
+};

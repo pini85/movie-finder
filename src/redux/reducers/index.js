@@ -13,7 +13,15 @@ const selectedMoviesReducer = (selectedMovies = null, action) => {
   return selectedMovies;
 };
 
+const movieSuggestionsReducer = (movieSuggestions = false, action) => {
+  if (action.type === "MOVIE_SUGGESTIONS") {
+    return action.payload;
+  }
+  return movieSuggestions;
+};
+
 export default combineReducers({
   selectedMovie: selectedMovieReducer,
-  selectedMovies: selectedMoviesReducer
+  selectedMovies: selectedMoviesReducer,
+  movieSuggestions: movieSuggestionsReducer
 });

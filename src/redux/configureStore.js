@@ -6,7 +6,8 @@ import reducers from "./reducers/index";
 
 const persistConfig = {
   key: "root",
-  storage
+  storage,
+  blacklist: ["movieSuggestions"]
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
