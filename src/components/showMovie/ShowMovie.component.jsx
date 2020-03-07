@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { selectedMovie } from "../../redux/actions/index";
 import YouTube from "react-youtube";
-import { ApiTmdbId, ApiTmdbImages, ApiTmdbTrailers } from "../../apis/ApiTmdb";
-import ApiOmdb from "../../apis/apiOmdb";
-import apiYts from "../../apis/apiYts";
-import subtitles from "../../apis/subtitles";
+import { tmdbIdApi, tmdbImagesApi, tmdbTrailersApi } from "../../apis/tmdbApi";
+import omdbApi from "../../apis/omdbApi";
+import torrentApi from "../../apis/torrentApi";
+import subtitlesApi from "../../apis/subtitlesApi";
 
 const ShowMovie = props => {
   const [data, setData] = useState(null);
@@ -13,11 +13,11 @@ const ShowMovie = props => {
   useEffect(() => {
     const fetchData = async () => {
       const id = props.location.state.data.id;
-      const tmdbData = await ApiTmdbId(id);
-      const omdbData = await ApiOmdb(tmdbData.imdb_id);
-      const trailers = await ApiTmdbTrailers(id);
-      const images = await ApiTmdbImages(id);
-      const torrentData = await apiYts(tmdbData.imdb_id);
+      const tmdbData = await tmdbIdApi(id);
+      const omdbData = await omdbApi(tmdbData.imdb_id);
+      const trailers = await tmdbTrailersApi(id);
+      const images = await tmdbImagesApi(id);
+      const torrentData = await torrentApi(tmdbData.imdb_id);
 
       let torrents;
       if (!torrentData) {
@@ -35,7 +35,7 @@ const ShowMovie = props => {
           return obj;
         });
       }
-      const subtitle = await subtitles(tmdbData.imdb_id);
+      const subtitle = await subtitlesApi(tmdbData.imdb_id);
       // console.log(omdbData, tmdbData);
 
       const item = {
@@ -109,6 +109,48 @@ const ShowMovie = props => {
     );
   };
 
+  const trailers = () => {
+    return props.movie.trailers.map(trailer => {
+      return (
+        <>
+          <YouTube
+            videoId={trailer.key}
+            opts={optsYouTube}
+            // onReady={_onReadyYouTube}
+          />
+        </>
+      );
+    });
+  };
+
+  const torrents = () => {
+    console.log(props.movie);
+
+    return props.movie.torrents.map(torrent => {
+      return (
+        <div>
+          <div>
+            Url: <a href={torrent.url}>link!!!</a>
+          </div>
+          <div>seeds: {torrent.seeds}</div>
+          <div>peers: {torrent.peers}</div>
+          <div>size:{torrent.size}</div>
+          <div>type:{torrent.type}</div>
+        </div>
+      );
+    });
+  };
+
+  const subtitle = () => {
+    console.log(props);
+
+    return props.movie.subtitle ? (
+      <div>
+        <a href={props.movie.subtitle}> subtitle</a>
+      </div>
+    ) : null;
+  };
+
   return (
     <div>
       {props.movie ? (
@@ -119,44 +161,10 @@ const ShowMovie = props => {
           <div>Genre: {props.movie.genre}</div>
           <div>Actors: {props.movie.actors}</div>
           {images()}
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "space-around"
-            }}
-          >
-            {props.movie.trailers.map(trailer => {
-              return (
-                <>
-                  <YouTube
-                    videoId={trailer.key}
-                    opts={optsYouTube}
-                    // onReady={_onReadyYouTube}
-                  />
-                </>
-              );
-            })}
-            {props.movie.torrents.map(torrent => {
-              return (
-                <div>
-                  <div>
-                    Url: <a href={torrent.url}>link!!!</a>
-                  </div>
-                  <div>seeds: {torrent.seeds}</div>
-                  <div>peers: {torrent.peers}</div>
-                  <div>size:{torrent.size}</div>
-                  <div>type:{torrent.type}</div>
-                </div>
-              );
-            })}
 
-            {props.movie.subtitle ? (
-              <div>
-                <a href={props.movie.subtitle}> subtitle</a>
-              </div>
-            ) : null}
-          </div>
+          {trailers()}
+          {torrents()}
+          {subtitle()}
         </div>
       ) : null}
     </div>

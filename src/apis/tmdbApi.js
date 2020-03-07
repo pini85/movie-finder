@@ -1,12 +1,12 @@
 const ApiKey = "3e296e6f6a1b142633468c58b584ab9b";
-export const ApiTmdbQuery = async query => {
+export const tmdbQueryApi = async query => {
   const response = await fetch(
     `https://api.themoviedb.org/3/search/movie?api_key=${ApiKey}&language=en-US&query=${query}&page=1&include_adult=false`
   );
   const data = await response.json();
   return data;
 };
-export const ApiTmdbId = async id => {
+export const tmdbIdApi = async id => {
   const response = await fetch(
     `
     https://api.themoviedb.org/3/movie/${id}?api_key=${ApiKey}&language=en-US`
@@ -15,7 +15,7 @@ export const ApiTmdbId = async id => {
   return data;
 };
 
-export const ApiTmdbImages = async id => {
+export const tmdbImagesApi = async id => {
   const response = await fetch(
     `https://api.themoviedb.org/3/movie/${id}/images?api_key=3e296e6f6a1b142633468c58b584ab9b&language=en`
   );
@@ -32,7 +32,7 @@ export const ApiTmdbImages = async id => {
   }
 };
 
-export const ApiTmdbTrailers = async id => {
+export const tmdbTrailersApi = async id => {
   const response = await fetch(
     `https://api.themoviedb.org/3/movie/${id}/videos?api_key=3e296e6f6a1b142633468c58b584ab9b&language=en-US`
   );

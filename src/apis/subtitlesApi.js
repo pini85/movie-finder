@@ -1,4 +1,4 @@
-const subtitles = async id => {
+const subtitlesApi = async id => {
   const OS = require("opensubtitles-api");
   const OpenSubtitles = new OS({
     useragent: "pini85",
@@ -16,7 +16,7 @@ const subtitles = async id => {
     return;
   }
 
-  return subtitles;
+  return subtitles.en.url;
 };
 
-export default subtitles;
+export default subtitlesApi;

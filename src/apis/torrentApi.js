@@ -1,4 +1,4 @@
-const apiYts = async id => {
+const torrentApi = async id => {
   const response = await fetch(
     `https://yts.mx/api/v2/list_movies.json?query_term=${id}`
   );
@@ -25,4 +25,4 @@ const apiYts = async id => {
     return torrents.sort(compare);
   }
 };
-export default apiYts;
+export default torrentApi;

@@ -7,7 +7,7 @@ import { selectedMovies } from "../../redux/actions/index";
 import Input from "../input/Input.component";
 import MovieList from "../movieList/MovieList";
 import Suggestions from "../Suggestions/Suggestions.component";
-import { ApiTmdbQuery } from "../../apis/ApiTmdb";
+import { tmdbQueryApi } from "../../apis/tmdbApi";
 import { compose } from "redux";
 
 const Home = props => {
@@ -23,7 +23,7 @@ const Home = props => {
         initialRender.current = false;
       } else {
         if (searchQuery.length > 0) {
-          const data = await ApiTmdbQuery(searchQuery);
+          const data = await tmdbQueryApi(searchQuery);
           setUserSuggestions(data);
         } else {
           setUserSuggestions(false);
@@ -34,13 +34,11 @@ const Home = props => {
   }, [searchQuery]);
 
   const sendRequest = async e => {
-    console.log(e);
-
     if (searchQuery.length > 0) {
       if (e.charCode == 13 || e.target) {
         setIsSending(true);
-        const data = await ApiTmdbQuery(searchQuery);
-        setMovieData(data);
+        const data = await tmdbQueryApi(searchQuery);
+        // setMovieData(data);
         props.selectedMovies(data);
         setIsSending(false);
         setUserSuggestions(false);

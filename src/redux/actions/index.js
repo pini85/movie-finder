@@ -6,7 +6,7 @@ export const selectedMovie = movie => {
 };
 export const selectedMovies = movies => {
   return {
-    type: "MOVIE_SELECTED",
+    type: "MOVIES_SELECTED",
     payload: movies
   };
 };

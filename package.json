@@ -21,6 +21,7 @@
     "react-scripts": "3.4.0",
     "react-youtube": "^7.9.0",
     "redux": "^4.0.5",
+    "redux-persist": "^6.0.0",
     "thepiratebay": "^1.4.7",
     "yify-api": "^1.1.1"
   },
