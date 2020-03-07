@@ -13,15 +13,14 @@ const Suggestions = props => {
   };
   return (
     <div style={container}>
-      {props.userSuggestions
-        ? props.userSuggestions.results.splice(0, 5).map(suggestion => {
-            return (
-              <div>
-                <Suggestion item={suggestion} />
-              </div>
-            );
-          })
-        : null}
+      {props.userSuggestions &&
+        props.userSuggestions.results.map(suggestion => {
+          return (
+            <div>
+              <Suggestion item={suggestion} />
+            </div>
+          );
+        })}
     </div>
   );
 };

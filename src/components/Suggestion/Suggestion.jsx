@@ -45,7 +45,7 @@ const Suggestion = ({ item }) => {
           <div style={styleIconAndYearContainer}>
             <FontAwesomeIcon icon={faFilm} />
             <div style={{ marginLeft: "1rem" }}>
-              {item.release_date.substr(0, 4)}
+              {item.release_date ? item.release_date.substr(0, 4) : null}
             </div>
           </div>
           <div>
