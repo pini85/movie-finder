@@ -14,7 +14,7 @@ const Suggestions = props => {
   return (
     <div style={container}>
       {props.userSuggestions &&
-        props.userSuggestions.results.map(suggestion => {
+        props.userSuggestions.results.splice(0, 6).map(suggestion => {
           return (
             <div>
               <Suggestion item={suggestion} />

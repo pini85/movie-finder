@@ -8,8 +8,6 @@ import torrentApi from "../../apis/torrentApi";
 import subtitlesApi from "../../apis/subtitlesApi";
 
 const ShowMovie = props => {
-  const [data, setData] = useState(null);
-  const [test, setTest] = useState("");
   useEffect(() => {
     const fetchData = async () => {
       const id = props.location.state.data.id;
@@ -36,7 +34,7 @@ const ShowMovie = props => {
         });
       }
       const subtitle = await subtitlesApi(tmdbData.imdb_id);
-      // console.log(omdbData, tmdbData);
+      console.log("omdbData", omdbData, "tmdbData", tmdbData);
 
       const item = {
         title: omdbData.Title,
@@ -48,9 +46,8 @@ const ShowMovie = props => {
         actors: omdbData.Actors,
         runTime: tmdbData.runtime,
         plot: tmdbData.overview,
-        plot2: omdbData.Plot,
         tagLine: tmdbData.tagline,
-        language: omdbData.Langauge,
+        language: omdbData.Language,
         images: images,
         trailers: trailers.results,
         torrents: torrents,
@@ -124,8 +121,6 @@ const ShowMovie = props => {
   };
 
   const torrents = () => {
-    console.log(props.movie);
-
     return props.movie.torrents.map(torrent => {
       return (
         <div>
@@ -142,8 +137,6 @@ const ShowMovie = props => {
   };
 
   const subtitle = () => {
-    console.log(props);
-
     return props.movie.subtitle ? (
       <div>
         <a href={props.movie.subtitle}> subtitle</a>
@@ -160,8 +153,13 @@ const ShowMovie = props => {
           <div>Year: {props.movie.year}</div>
           <div>Genre: {props.movie.genre}</div>
           <div>Actors: {props.movie.actors}</div>
+          <div>Director: {props.movie.director}</div>
+          <div>Writer: {props.movie.writer}</div>
+          <div>Runtime: {props.movie.runTime}</div>
+          <div>plot: {props.movie.plot}</div>
+          <div>tagline: {props.movie.tagLine}</div>
+          <div>language: {props.movie.language}</div>
           {images()}
-
           {trailers()}
           {torrents()}
           {subtitle()}

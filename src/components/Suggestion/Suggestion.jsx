@@ -25,8 +25,7 @@ const Suggestion = ({ item }) => {
     display: "flex",
     alignItems: "center"
   };
-  const styleCardBottom = {};
-  //title, movie image/year,duration,rate
+
   return (
     <Link
       to={{
