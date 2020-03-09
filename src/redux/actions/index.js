@@ -16,3 +16,9 @@ export const movieSuggestions = movies => {
     payload: movies
   };
 };
+export const searchQuery = query => {
+  return {
+    type: "SEARCH_QUERY",
+    payload: query
+  };
+};

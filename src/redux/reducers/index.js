@@ -20,8 +20,16 @@ const movieSuggestionsReducer = (movieSuggestions = false, action) => {
   return movieSuggestions;
 };
 
+const searchQueryReducer = (movieQuery = null, action) => {
+  if (action.type === "SEARCH_QUERY") {
+    return action.payload;
+  }
+  return movieQuery;
+};
+
 export default combineReducers({
   selectedMovie: selectedMovieReducer,
   selectedMovies: selectedMoviesReducer,
-  movieSuggestions: movieSuggestionsReducer
+  movieSuggestions: movieSuggestionsReducer,
+  searchQuery: searchQueryReducer
 });

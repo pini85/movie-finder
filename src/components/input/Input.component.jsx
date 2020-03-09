@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { searchQuery } from "../../redux/actions";
 
-const Input = ({ sendRequest, handleSearchChange, isDisabled, value }) => {
+const Input = props => {
+  // {
+  //   sendRequest,
+  //   handleSearchChange,
+  //   isDisabled,
+  //   value,
+  //   props
+  // }
+  console.log(props);
+
+  const [searchQuery, setSearchQuery] = useState("");
   const styleInput = {
     width: "18rem",
     height: "2.5rem",
@@ -10,16 +22,17 @@ const Input = ({ sendRequest, handleSearchChange, isDisabled, value }) => {
     <div>
       <input
         style={styleInput}
-        value={value}
-        onChange={e => handleSearchChange(e.target.value)}
-        // onKeyPress={sendRequest}
+        value={props.searchQuery(searchQuery)}
+        onChange={e => setSearchQuery(e.target.value)}
         type="text"
       />
-      <button disabled={isDisabled} onClick={e => sendRequest(e)}>
+      {/* <button disabled={isDisabled} onClick={e => sendRequest(e)}>
         Search
-      </button>
+      </button> */}
     </div>
   );
 };
 
-export default Input;
+export default connect(null, {
+  searchQuery: () => searchQuery()
+})(Input);
