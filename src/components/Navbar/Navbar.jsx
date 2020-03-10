@@ -1,5 +1,7 @@
 import React from "react";
 import Input from "../input/Input.component";
+import { connect } from "react-redux";
+import { movieSuggestions } from "../../redux/actions/index";
 
 const Navbar = props => {
   return (
@@ -8,4 +10,9 @@ const Navbar = props => {
     </div>
   );
 };
-export default Navbar;
+const mapStateToProps = state => ({
+  userSuggestions: state.movieSuggestions
+});
+export default connect(mapStateToProps, {
+  movieSuggestions: movieSuggestions
+})(Navbar);

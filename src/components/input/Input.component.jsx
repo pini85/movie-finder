@@ -2,23 +2,34 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
-import { search, fetchMovies, selectedMovies } from "../../redux/actions";
+import { search, fetchMovies, movieSuggestions } from "../../redux/actions";
+import { tmdbQueryApi } from "../../apis/tmdbApi";
+import Suggestions from "../Suggestions/Suggestions.component";
 
 const Input = props => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSending, setIsSending] = useState(false);
+
   useEffect(() => {
-    props.search(searchQuery);
+    const asyncFunc = async () => {
+      props.search(searchQuery);
+      if (searchQuery.length > 0) {
+        const data = await tmdbQueryApi(searchQuery);
+
+        props.movieSuggestions(data);
+      } else {
+        props.movieSuggestions(false);
+      }
+    };
+    asyncFunc();
   }, [searchQuery]);
+
   const handleClick = () => {
     setIsSending(true);
-
     props.fetchMovies(props.history);
-    props.history.push("/show-list");
-    setSearchQuery("");
-
     setSearchQuery("");
     setIsSending(false);
+    props.history.push("/show-list");
   };
 
   const styleInput = {
@@ -38,6 +49,7 @@ const Input = props => {
       <button disabled={isSending} onClick={handleClick}>
         Search
       </button>
+      {props.userSuggestions && <Suggestions items={props.userSuggestions} />}
     </div>
   );
 };
@@ -45,13 +57,16 @@ const Input = props => {
 const mapStateToProps = state => ({
   // isSending: state.isSending,
   fetchMoves: fetchMovies,
-  selectedMovies: state.selectedMovies
+  selectedMovies: state.selectedMovies,
+  userSuggestions: state.movieSuggestions,
+  query: state.search
 });
 
 export default compose(
   withRouter,
   connect(mapStateToProps, {
     search: search,
-    fetchMovies: fetchMovies
+    fetchMovies: fetchMovies,
+    movieSuggestions: movieSuggestions
   })
 )(Input);

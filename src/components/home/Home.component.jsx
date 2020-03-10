@@ -16,17 +16,17 @@ import { compose } from "redux";
 
 const Home = props => {
   // const [isSending, setIsSending] = useState(false);
-  const [userSuggestions, setUserSuggestions] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const handleSearchChange = async () => {
       if (props.query.length > 0) {
         const data = await tmdbQueryApi(props.query);
+        console.log("im in home", data);
+
         // setUserSuggestions(data);
         props.movieSuggestions(data);
       } else {
-        setUserSuggestions(false);
         props.movieSuggestions(false);
       }
     };
@@ -42,7 +42,7 @@ const Home = props => {
         // setMovieData(data);
         props.selectedMovies(data);
         // props.isSending(false);
-        setUserSuggestions(false);
+
         setSearchQuery("");
         props.history.push("/show-list");
       }
@@ -51,7 +51,7 @@ const Home = props => {
 
   return (
     <div style={{ background: "var(--primary-color)" }}>
-      {props.userSuggestions && <Suggestions items={props.movieSuggestions} />}
+      {/* {props.userSuggestions && <Suggestions items={props.movieSuggestions} />} */}
     </div>
   );
 };
