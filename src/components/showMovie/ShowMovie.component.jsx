@@ -8,13 +8,19 @@ import torrentApi from "../../apis/torrentApi";
 import subtitlesApi from "../../apis/subtitlesApi";
 
 const ShowMovie = props => {
+  console.log("show movie", props.movie.id);
+
   useEffect(() => {
     const fetchData = async () => {
-      const id = props.location.state.data.id;
+      const id = props.movie.id;
       const tmdbData = await tmdbIdApi(id);
+      console.log("hi", tmdbData);
+
       const omdbData = await omdbApi(tmdbData.imdb_id);
       const trailers = await tmdbTrailersApi(id);
       const images = await tmdbImagesApi(id);
+      console.log(images);
+
       const torrentData = await torrentApi(tmdbData.imdb_id);
 
       let torrents;
@@ -76,15 +82,17 @@ const ShowMovie = props => {
   const ratings = () => {
     return (
       <div>
-        {props.movie.ratings.map(item => {
-          return (
-            <div>
-              <div>
-                {item.Source}: {item.Value}
-              </div>
-            </div>
-          );
-        })}
+        {props.movie.ratings
+          ? props.movie.ratings.map(item => {
+              return (
+                <div>
+                  <div>
+                    {item.Source}: {item.Value}
+                  </div>
+                </div>
+              );
+            })
+          : null}
       </div>
     );
   };
@@ -92,52 +100,59 @@ const ShowMovie = props => {
   const images = () => {
     return (
       <div>
-        {props.movie.images.map(image => {
-          return (
-            <div>
-              <img
-                src={`http://image.tmdb.org/t/p/w185//${image.file_path}`}
-                alt=""
-              />
-            </div>
-          );
-        })}
+        {props.movie.images &&
+          props.movie.images.map(image => {
+            return (
+              <div>
+                <img
+                  src={`http://image.tmdb.org/t/p/w185//${image.file_path}`}
+                  alt=""
+                />
+              </div>
+            );
+          })}
       </div>
     );
   };
 
   const trailers = () => {
-    return props.movie.trailers.map(trailer => {
-      return (
-        <>
-          <YouTube
-            videoId={trailer.key}
-            opts={optsYouTube}
-            // onReady={_onReadyYouTube}
-          />
-        </>
-      );
-    });
+    return (
+      props.movie.trailers &&
+      props.movie.trailers.map(trailer => {
+        return (
+          <>
+            <YouTube
+              videoId={trailer.key}
+              opts={optsYouTube}
+              // onReady={_onReadyYouTube}
+            />
+          </>
+        );
+      })
+    );
   };
 
   const torrents = () => {
-    return props.movie.torrents.map(torrent => {
-      return (
-        <div>
+    return (
+      props.movie.torrents &&
+      props.movie.torrents.map(torrent => {
+        return (
           <div>
-            Url: <a href={torrent.url}>link!!!</a>
+            <div>
+              Url: <a href={torrent.url}>link!!!</a>
+            </div>
+            <div>seeds: {torrent.seeds}</div>
+            <div>peers: {torrent.peers}</div>
+            <div>size:{torrent.size}</div>
+            <div>type:{torrent.type}</div>
           </div>
-          <div>seeds: {torrent.seeds}</div>
-          <div>peers: {torrent.peers}</div>
-          <div>size:{torrent.size}</div>
-          <div>type:{torrent.type}</div>
-        </div>
-      );
-    });
+        );
+      })
+    );
   };
 
   const subtitle = () => {
-    return props.movie.subtitle ? (
+    return props.movie.subtitle && props.movie.subtitle ? (
       <div>
         <a href={props.movie.subtitle}> subtitle</a>
       </div>

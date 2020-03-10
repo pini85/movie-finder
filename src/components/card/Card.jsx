@@ -1,12 +1,20 @@
 import React from "react";
 import "./card.styles.scss";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { compose } from "redux";
+import { selectedMovie } from "../../redux/actions/index";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Button from "../Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
-const Card = ({ movie }) => {
+const Card = props => {
+  const handleClick = () => {
+    props.selectedMovie(props.movie);
+    props.history.push("/show-movie");
+  };
   //   const styleCard = {
   //     backgroundColor: "transparent",
   //     width: "26rem",
@@ -23,10 +31,10 @@ const Card = ({ movie }) => {
   //     boxShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)"
   //   };
   const image = () => {
-    if (movie.poster_path === null) {
+    if (props.movie.poster_path === null) {
       return "https://underscoremusic.co.uk/site/wp-content/uploads/2014/05/no-poster.jpg";
     } else {
-      return `http://image.tmdb.org/t/p/w185//${movie.poster_path}`;
+      return `http://image.tmdb.org/t/p/w185//${props.movie.poster_path}`;
     }
   };
   const styleFrontCard = {
@@ -89,14 +97,14 @@ const Card = ({ movie }) => {
         // transition={{ duration: 0.5 }}
       >
         <div style={styleFrontCard} className="card-front">
-          <div style={styleYear}>{movie.release_date.substr(0, 4)}</div>
+          <div style={styleYear}>{props.movie.release_date.substr(0, 4)}</div>
           <div style={styleRating}>
             <div style={{ marginRight: "5px" }}>
               <FontAwesomeIcon icon={faStar} />
             </div>
-            <div>{movie.vote_average}</div>
+            <div>{props.movie.vote_average}</div>
           </div>
-          <div style={styleTitle}> {movie.title}</div>
+          <div style={styleTitle}> {props.movie.title}</div>
         </div>
         <div
           style={styleBackCard}
@@ -107,18 +115,27 @@ const Card = ({ movie }) => {
           //   transition={{ duration: 0.5 }}
         >
           <div></div>
-          <Link
-            to={{
-              pathname: "/show-movie",
-              state: { data: movie }
-            }}
-          >
+          <a onClick={handleClick}>
             <Button title="Details" />
-          </Link>
-          <div style={styleBackTitle}> {movie.title}</div>
+          </a>
+          <div style={styleBackTitle}> {props.movie.title}</div>
         </div>
       </div>
     </div>
   );
 };
-export default Card;
+export default compose(
+  withRouter,
+  connect(null, {
+    selectedMovie: selectedMovie
+  })
+)(Card);
+
+// export default compose(
+//   withRouter,
+//   connect(mapStateToProps, {
+//     search: search,
+//     fetchMovies: fetchMovies,
+//     movieSuggestions: movieSuggestions
+//   })
+// )(Input);

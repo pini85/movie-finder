@@ -16,6 +16,8 @@ export const tmdbIdApi = async id => {
 };
 
 export const tmdbImagesApi = async id => {
+  console.log("heloooooooo", id);
+
   const response = await fetch(
     `https://api.themoviedb.org/3/movie/${id}/images?api_key=3e296e6f6a1b142633468c58b584ab9b&language=en`
   );
