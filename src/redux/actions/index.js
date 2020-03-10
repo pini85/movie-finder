@@ -16,9 +16,15 @@ export const movieSuggestions = movies => {
     payload: movies
   };
 };
-export const searchQuery = query => {
+export const search = query => {
   return {
     type: "SEARCH_QUERY",
     payload: query
+  };
+};
+export const isSending = bool => {
+  return {
+    type: "IS_SENDING",
+    payload: bool
   };
 };

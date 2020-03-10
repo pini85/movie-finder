@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { searchQuery } from "../../redux/actions";
+import { search } from "../../redux/actions";
 
 const Input = props => {
   // {
@@ -10,29 +10,38 @@ const Input = props => {
   //   value,
   //   props
   // }
-  console.log(props);
 
   const [searchQuery, setSearchQuery] = useState("");
+  const handleChange = e => {
+    setSearchQuery(e.target.value);
+    props.search(searchQuery);
+  };
   const styleInput = {
     width: "18rem",
     height: "2.5rem",
     padding: "2rem"
   };
+  console.log(searchQuery);
+
   return (
     <div>
       <input
         style={styleInput}
-        value={props.searchQuery(searchQuery)}
-        onChange={e => setSearchQuery(e.target.value)}
+        value={searchQuery}
+        onChange={handleChange}
         type="text"
       />
-      {/* <button disabled={isDisabled} onClick={e => sendRequest(e)}>
+      <button disabled={props.isSending} onClick={e => props.sendRequest(e)}>
         Search
-      </button> */}
+      </button>
     </div>
   );
 };
 
-export default connect(null, {
-  searchQuery: () => searchQuery()
+const mapStateToProps = state => ({
+  isSending: state.isSending
+});
+
+export default connect(mapStateToProps, {
+  search: search
 })(Input);

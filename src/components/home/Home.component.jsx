@@ -2,7 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import { withRouter } from "react-router";
 
 import { connect } from "react-redux";
-import { selectedMovies, movieSuggestions } from "../../redux/actions/index";
+import {
+  selectedMovies,
+  movieSuggestions,
+  isSending
+} from "../../redux/actions/index";
 
 import Input from "../input/Input.component";
 import MovieList from "../movieList/MovieList";
@@ -11,7 +15,7 @@ import { tmdbQueryApi } from "../../apis/tmdbApi";
 import { compose } from "redux";
 
 const Home = props => {
-  const [isSending, setIsSending] = useState(false);
+  // const [isSending, setIsSending] = useState(false);
   const [userSuggestions, setUserSuggestions] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const initialRender = useRef(true);
@@ -37,11 +41,11 @@ const Home = props => {
   const sendRequest = async e => {
     if (searchQuery.length > 0) {
       if (e.charCode == 13 || e.target) {
-        setIsSending(true);
+        props.isSending(true);
         const data = await tmdbQueryApi(searchQuery);
         // setMovieData(data);
         props.selectedMovies(data);
-        setIsSending(false);
+        props.isSending(false);
         setUserSuggestions(false);
         setSearchQuery("");
 
@@ -55,7 +59,7 @@ const Home = props => {
       <Input
         sendRequest={sendRequest}
         handleSearchChange={setSearchQuery}
-        isDisabled={isSending}
+        // isDisabled={isSending}
         value={searchQuery}
       />
       {}
@@ -73,6 +77,7 @@ export default compose(
   withRouter,
   connect(mapStateToProps, {
     selectedMovies: selectedMovies,
-    movieSuggestions: movieSuggestions
+    movieSuggestions: movieSuggestions,
+    isSending: isSending
   })
 )(Home);
