@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 
 import Card from "../card/Card";
 const MovieList = props => {
-  console.log(props);
-
   const styleDiv = {
     display: "flex",
     flexWrap: "wrap",
@@ -14,9 +12,13 @@ const MovieList = props => {
 
   return (
     <div style={styleDiv}>
-      {props.selectedMovies
-        ? props.selectedMovies.results.map(movie => {
-            return <Card movie={movie}></Card>;
+      {props.fetchMovies
+        ? props.fetchMovies.results.map(movie => {
+            return (
+              <div key={movie.id}>
+                <Card movie={movie}></Card>
+              </div>
+            );
           })
         : null}
     </div>
@@ -24,6 +26,6 @@ const MovieList = props => {
   );
 };
 const mapStateToProps = state => ({
-  selectedMovies: state.selectedMovies
+  fetchMovies: state.fetchMovies
 });
 export default connect(mapStateToProps)(MovieList);

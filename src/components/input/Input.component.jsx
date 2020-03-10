@@ -1,37 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { search } from "../../redux/actions";
+import { withRouter } from "react-router-dom";
+import { compose } from "redux";
+import { search, fetchMovies, selectedMovies } from "../../redux/actions";
 
 const Input = props => {
-  // {
-  //   sendRequest,
-  //   handleSearchChange,
-  //   isDisabled,
-  //   value,
-  //   props
-  // }
-
   const [searchQuery, setSearchQuery] = useState("");
-  const handleChange = e => {
-    setSearchQuery(e.target.value);
+  const [isSending, setIsSending] = useState(false);
+  useEffect(() => {
     props.search(searchQuery);
+  }, [searchQuery]);
+  const handleClick = () => {
+    setIsSending(true);
+
+    props.fetchMovies(props.history);
+    props.history.push("/show-list");
+    setSearchQuery("");
+
+    setSearchQuery("");
+    setIsSending(false);
   };
+
   const styleInput = {
     width: "18rem",
     height: "2.5rem",
     padding: "2rem"
   };
-  console.log(searchQuery);
 
   return (
     <div>
       <input
         style={styleInput}
         value={searchQuery}
-        onChange={handleChange}
+        onChange={e => setSearchQuery(e.target.value)}
         type="text"
       />
-      <button disabled={props.isSending} onClick={e => props.sendRequest(e)}>
+      <button disabled={isSending} onClick={handleClick}>
         Search
       </button>
     </div>
@@ -39,9 +43,15 @@ const Input = props => {
 };
 
 const mapStateToProps = state => ({
-  isSending: state.isSending
+  // isSending: state.isSending,
+  fetchMoves: fetchMovies,
+  selectedMovies: state.selectedMovies
 });
 
-export default connect(mapStateToProps, {
-  search: search
-})(Input);
+export default compose(
+  withRouter,
+  connect(mapStateToProps, {
+    search: search,
+    fetchMovies: fetchMovies
+  })
+)(Input);

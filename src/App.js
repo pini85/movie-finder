@@ -10,8 +10,8 @@ import MovieList from "./components/movieList/MovieList";
 const App = () => {
   return (
     <>
-      <Navbar />
       <Router>
+        <Navbar />
         <Switch>
           <Route path="/show-list/" component={MovieList} />
           <Route path="/show-movie/" component={ShowMovie} />

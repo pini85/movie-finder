@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router";
 
 import { connect } from "react-redux";
@@ -18,37 +18,32 @@ const Home = props => {
   // const [isSending, setIsSending] = useState(false);
   const [userSuggestions, setUserSuggestions] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const initialRender = useRef(true);
 
   useEffect(() => {
     const handleSearchChange = async () => {
-      if (initialRender.current) {
-        initialRender.current = false;
+      if (props.query.length > 0) {
+        const data = await tmdbQueryApi(props.query);
+        // setUserSuggestions(data);
+        props.movieSuggestions(data);
       } else {
-        if (searchQuery.length > 0) {
-          const data = await tmdbQueryApi(searchQuery);
-          // setUserSuggestions(data);
-          props.movieSuggestions(data);
-        } else {
-          setUserSuggestions(false);
-          props.movieSuggestions(false);
-        }
+        setUserSuggestions(false);
+        props.movieSuggestions(false);
       }
     };
     handleSearchChange();
-  }, [searchQuery]);
+  }, [props.query]);
 
   const sendRequest = async e => {
-    if (searchQuery.length > 0) {
+    if (props.query.length > 0) {
       if (e.charCode == 13 || e.target) {
         props.isSending(true);
-        const data = await tmdbQueryApi(searchQuery);
+
+        const data = await tmdbQueryApi(props.query);
         // setMovieData(data);
         props.selectedMovies(data);
-        props.isSending(false);
+        // props.isSending(false);
         setUserSuggestions(false);
         setSearchQuery("");
-
         props.history.push("/show-list");
       }
     }
@@ -56,22 +51,14 @@ const Home = props => {
 
   return (
     <div style={{ background: "var(--primary-color)" }}>
-      <Input
-        sendRequest={sendRequest}
-        handleSearchChange={setSearchQuery}
-        // isDisabled={isSending}
-        value={searchQuery}
-      />
-      {}
-
       {props.userSuggestions && <Suggestions items={props.movieSuggestions} />}
     </div>
   );
 };
-
-const mapStateToProps = state => ({
-  userSuggestions: state.movieSuggestions
-});
+// return { songs: state.songs};
+const mapStateToProps = state => {
+  return { userSuggestions: state.movieSuggestions, query: state.search };
+};
 
 export default compose(
   withRouter,

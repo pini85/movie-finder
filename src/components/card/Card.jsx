@@ -2,7 +2,6 @@ import React from "react";
 import "./card.styles.scss";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { whileStatement } from "@babel/types";
 import Button from "../Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
@@ -81,8 +80,8 @@ const Card = ({ movie }) => {
     padding: "0 5px"
   };
   return (
-    <motion.div className="card">
-      <motion.div
+    <div className="card">
+      <div
         className="card-inner"
         // whileHover={{
         //   transform: "rotateY(180deg)"
@@ -99,7 +98,7 @@ const Card = ({ movie }) => {
           </div>
           <div style={styleTitle}> {movie.title}</div>
         </div>
-        <motion.div
+        <div
           style={styleBackCard}
           className="card-back"
           //   whileHover={{
@@ -117,9 +116,9 @@ const Card = ({ movie }) => {
             <Button title="Details" />
           </Link>
           <div style={styleBackTitle}> {movie.title}</div>
-        </motion.div>
-      </motion.div>
-    </motion.div>
+        </div>
+      </div>
+    </div>
   );
 };
 export default Card;

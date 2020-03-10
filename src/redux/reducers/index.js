@@ -1,17 +1,24 @@
 import { combineReducers } from "redux";
 
+const fetchMoviesReducer = (request = null, action) => {
+  if (action.type === "FETCH_MOVIES") {
+    return action.payload;
+  }
+  return request;
+};
 const selectedMovieReducer = (selectedMovie = null, action) => {
   if (action.type === "MOVIE_SELECTED") {
     return action.payload;
   }
   return selectedMovie;
 };
-const selectedMoviesReducer = (selectedMovies = null, action) => {
-  if (action.type === "MOVIES_SELECTED") {
-    return action.payload;
-  }
-  return selectedMovies;
-};
+// const selectedMoviesReducer = (selectedMovies = false, action) => {
+//   if (action.type === "MOVIES_SELECTED") {
+//
+//     return action.payload;
+//   }
+//   return selectedMovies;
+// };
 
 const movieSuggestionsReducer = (movieSuggestions = false, action) => {
   if (action.type === "MOVIE_SUGGESTIONS") {
@@ -35,8 +42,8 @@ const isSendingReducer = (sending = false, action) => {
 };
 
 export default combineReducers({
+  fetchMovies: fetchMoviesReducer,
   selectedMovie: selectedMovieReducer,
-  selectedMovies: selectedMoviesReducer,
   movieSuggestions: movieSuggestionsReducer,
   search: searchQueryReducer,
   isSending: isSendingReducer
