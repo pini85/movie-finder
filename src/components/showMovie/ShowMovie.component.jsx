@@ -8,6 +8,7 @@ import omdbApi from "../../apis/omdbApi";
 import torrentApi from "../../apis/torrentApi";
 import subtitlesApi from "../../apis/subtitlesApi";
 import magnet from "../../apis/magnet";
+import Test from "../skeletons/test";
 
 const ShowMovie = props => {
   const [isLoading, setIsLoading] = useState(false);
@@ -182,27 +183,25 @@ const ShowMovie = props => {
 
   return (
     <div>
-      {isLoading ? (
-        <div>LOADING</div>
-      ) : (
-        <div>
-          <h3>{props.item.title}</h3>
-          {ratings()}
-          <div>Year: {props.item.year}</div>
-          <div>Genre: {props.item.genre}</div>
-          <div>Actors: {props.item.actors}</div>
-          <div>Director: {props.item.director}</div>
-          <div>Writer: {props.item.writer}</div>
-          <div>Runtime: {props.item.runTime}</div>
-          <div>plot: {props.item.plot}</div>
-          <div>tagline: {props.item.tagLine}</div>
-          <div>language: {props.item.language}</div>
-          {images()}
-          {trailers()}
-          {torrents()}
-          {subtitle()}
-          {magnets()}
-        </div>
+      <div>LOADING</div>
+      <div>
+        {!isLoading ? <h3>{props.item.title}</h3> : <Test />}
+        {ratings()}
+        <div>Year: {props.item.year}</div>
+        <div>Genre: {props.item.genre}</div>
+        <div>Actors: {props.item.actors}</div>
+        <div>Director: {props.item.director}</div>
+        <div>Writer: {props.item.writer}</div>
+        <div>Runtime: {props.item.runTime}</div>
+        <div>plot: {props.item.plot}</div>
+        <div>tagline: {props.item.tagLine}</div>
+        <div>language: {props.item.language}</div>
+        {images()}
+        {trailers()}
+        {torrents()}
+        {subtitle()}
+        {magnets()}
+      </div>
       )}
     </div>
   );
