@@ -6,12 +6,19 @@ const fetchMoviesReducer = (request = null, action) => {
   }
   return request;
 };
+const selectedMovieIdReducer = (selectedMovieId = null, action) => {
+  if (action.type === "MOVIE_ID_SELECTED") {
+    return action.payload;
+  }
+  return selectedMovieId;
+};
 const selectedMovieReducer = (selectedMovie = null, action) => {
   if (action.type === "MOVIE_SELECTED") {
     return action.payload;
   }
   return selectedMovie;
 };
+
 // const selectedMoviesReducer = (selectedMovies = false, action) => {
 //   if (action.type === "MOVIES_SELECTED") {
 //
@@ -46,5 +53,6 @@ export default combineReducers({
   selectedMovie: selectedMovieReducer,
   movieSuggestions: movieSuggestionsReducer,
   search: searchQueryReducer,
-  isSending: isSendingReducer
+  isSending: isSendingReducer,
+  selectedMovieId: selectedMovieIdReducer
 });

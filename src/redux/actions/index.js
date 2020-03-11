@@ -5,6 +5,12 @@ export const selectedMovie = movie => {
     payload: movie
   };
 };
+export const selectedMovieId = id => {
+  return {
+    type: "MOVIE_ID_SELECTED",
+    payload: id
+  };
+};
 export const selectedMovies = movies => {
   return {
     type: "MOVIES_SELECTED",

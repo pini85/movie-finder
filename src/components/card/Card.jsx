@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import "./card.styles.scss";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
-import { selectedMovie } from "../../redux/actions/index";
+import { selectedMovieId } from "../../redux/actions/index";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Button from "../Button/Button";
@@ -12,7 +12,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 const Card = props => {
   const handleClick = () => {
-    props.selectedMovie(props.movie);
+    props.selectedMovieId(props.movie.id);
     props.history.push("/show-movie");
   };
   //   const styleCard = {
@@ -127,15 +127,6 @@ const Card = props => {
 export default compose(
   withRouter,
   connect(null, {
-    selectedMovie: selectedMovie
+    selectedMovieId: selectedMovieId
   })
 )(Card);
-
-// export default compose(
-//   withRouter,
-//   connect(mapStateToProps, {
-//     search: search,
-//     fetchMovies: fetchMovies,
-//     movieSuggestions: movieSuggestions
-//   })
-// )(Input);

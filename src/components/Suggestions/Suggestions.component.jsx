@@ -3,7 +3,7 @@ import Suggestion from "../Suggestion/Suggestion";
 import { connect } from "react-redux";
 
 const Suggestions = props => {
-  console.log("im being invoked");
+  console.log("suggestions");
 
   const container = {
     position: "absolute",

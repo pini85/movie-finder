@@ -6,26 +6,32 @@ import { tmdbIdApi, tmdbImagesApi, tmdbTrailersApi } from "../../apis/tmdbApi";
 import omdbApi from "../../apis/omdbApi";
 import torrentApi from "../../apis/torrentApi";
 import subtitlesApi from "../../apis/subtitlesApi";
+import magnet from "../../apis/magnet";
 
 const ShowMovie = props => {
-  console.log("show movie", props.movie.id);
+  // setId()
+  // const id = props.item.id;
 
   useEffect(() => {
     const fetchData = async () => {
-      const id = props.movie.id;
-      const tmdbData = await tmdbIdApi(id);
-      console.log("hi", tmdbData);
+      console.log(props);
 
+      const id = props.id;
+      console.log(id);
+
+      const tmdbData = await tmdbIdApi(id);
       const omdbData = await omdbApi(tmdbData.imdb_id);
       const trailers = await tmdbTrailersApi(id);
       const images = await tmdbImagesApi(id);
-      console.log(images);
-
+      const subtitle = await subtitlesApi(tmdbData.imdb_id);
       const torrentData = await torrentApi(tmdbData.imdb_id);
+      console.log(id, tmdbData);
 
       let torrents;
+      let magnets;
       if (!torrentData) {
         torrents = [];
+        magnets = [];
       } else {
         torrents = torrentData.map(torrent => {
           const obj = {
@@ -38,9 +44,12 @@ const ShowMovie = props => {
           };
           return obj;
         });
+        magnets = torrentData.map(torrent => {
+          const obj = {};
+
+          return magnet(omdbData.Title, torrent.hash, torrent.url);
+        });
       }
-      const subtitle = await subtitlesApi(tmdbData.imdb_id);
-      console.log("omdbData", omdbData, "tmdbData", tmdbData);
 
       const item = {
         title: omdbData.Title,
@@ -57,8 +66,10 @@ const ShowMovie = props => {
         images: images,
         trailers: trailers.results,
         torrents: torrents,
-        subtitle: subtitle
+        subtitle: subtitle,
+        magnets: magnets
       };
+
       // setData(item);
       props.selectedMovie(item);
 
@@ -82,8 +93,8 @@ const ShowMovie = props => {
   const ratings = () => {
     return (
       <div>
-        {props.movie.ratings
-          ? props.movie.ratings.map(item => {
+        {props.item.ratings
+          ? props.item.ratings.map(item => {
               return (
                 <div>
                   <div>
@@ -100,25 +111,26 @@ const ShowMovie = props => {
   const images = () => {
     return (
       <div>
-        {props.movie.images &&
-          props.movie.images.map(image => {
-            return (
-              <div>
-                <img
-                  src={`http://image.tmdb.org/t/p/w185//${image.file_path}`}
-                  alt=""
-                />
-              </div>
-            );
-          })}
+        {props.item.images
+          ? props.item.images.map(image => {
+              return (
+                <div>
+                  <img
+                    src={`http://image.tmdb.org/t/p/w185//${image.file_path}`}
+                    alt=""
+                  />
+                </div>
+              );
+            })
+          : null}
       </div>
     );
   };
 
   const trailers = () => {
     return (
-      props.movie.trailers &&
-      props.movie.trailers.map(trailer => {
+      props.item.trailers &&
+      props.item.trailers.map(trailer => {
         return (
           <>
             <YouTube
@@ -134,8 +146,8 @@ const ShowMovie = props => {
 
   const torrents = () => {
     return (
-      props.movie.torrents &&
-      props.movie.torrents.map(torrent => {
+      props.item.torrents &&
+      props.item.torrents.map(torrent => {
         return (
           <div>
             <div>
@@ -151,33 +163,47 @@ const ShowMovie = props => {
     );
   };
 
+  const magnets = () => {
+    return (
+      props.item.magnets &&
+      props.item.magnets.map(magnet => {
+        return (
+          <div>
+            <a href={magnet}>magnet</a>
+          </div>
+        );
+      })
+    );
+  };
+
   const subtitle = () => {
-    return props.movie.subtitle && props.movie.subtitle ? (
+    return props.item.subtitle && props.item.subtitle ? (
       <div>
-        <a href={props.movie.subtitle}> subtitle</a>
+        <a href={props.item.subtitle}> subtitle</a>
       </div>
     ) : null;
   };
 
   return (
     <div>
-      {props.movie ? (
+      {props.item ? (
         <div>
-          <h3>{props.movie.title}</h3>
+          <h3>{props.item.title}</h3>
           {ratings()}
-          <div>Year: {props.movie.year}</div>
-          <div>Genre: {props.movie.genre}</div>
-          <div>Actors: {props.movie.actors}</div>
-          <div>Director: {props.movie.director}</div>
-          <div>Writer: {props.movie.writer}</div>
-          <div>Runtime: {props.movie.runTime}</div>
-          <div>plot: {props.movie.plot}</div>
-          <div>tagline: {props.movie.tagLine}</div>
-          <div>language: {props.movie.language}</div>
+          <div>Year: {props.item.year}</div>
+          <div>Genre: {props.item.genre}</div>
+          <div>Actors: {props.item.actors}</div>
+          <div>Director: {props.item.director}</div>
+          <div>Writer: {props.item.writer}</div>
+          <div>Runtime: {props.item.runTime}</div>
+          <div>plot: {props.item.plot}</div>
+          <div>tagline: {props.item.tagLine}</div>
+          <div>language: {props.item.language}</div>
           {images()}
           {trailers()}
           {torrents()}
           {subtitle()}
+          {magnets()}
         </div>
       ) : null}
     </div>
@@ -185,7 +211,11 @@ const ShowMovie = props => {
 };
 
 const mapStateToProps = state => {
-  return { movie: state.selectedMovie };
+  return {
+    item: state.selectedMovie,
+    query: state.search,
+    id: state.selectedMovieId
+  };
 };
 export default connect(mapStateToProps, {
   selectedMovie: selectedMovie

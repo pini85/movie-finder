@@ -15,45 +15,23 @@ import { tmdbQueryApi } from "../../apis/tmdbApi";
 import { compose } from "redux";
 
 const Home = props => {
-  // const [isSending, setIsSending] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
+  // useEffect(() => {
+  //   console.log("im being calllled");
 
-  useEffect(() => {
-    const handleSearchChange = async () => {
-      if (props.query.length > 0) {
-        const data = await tmdbQueryApi(props.query);
-        console.log("im in home", data);
+  //   const handleSearchChange = async () => {
+  //     if (props.query.length > 0) {
+  //       const data = await tmdbQueryApi(props.query);
 
-        // setUserSuggestions(data);
-        props.movieSuggestions(data);
-      } else {
-        props.movieSuggestions(false);
-      }
-    };
-    handleSearchChange();
-  }, [props.query]);
+  //       // setUserSuggestions(data);
+  //       props.movieSuggestions(data);
+  //     } else {
+  //       props.movieSuggestions(false);
+  //     }
+  //   };
+  //   handleSearchChange();
+  // }, [props.query]);
 
-  const sendRequest = async e => {
-    if (props.query.length > 0) {
-      if (e.charCode == 13 || e.target) {
-        props.isSending(true);
-
-        const data = await tmdbQueryApi(props.query);
-        // setMovieData(data);
-        props.selectedMovies(data);
-        // props.isSending(false);
-
-        setSearchQuery("");
-        props.history.push("/show-list");
-      }
-    }
-  };
-
-  return (
-    <div style={{ background: "var(--primary-color)" }}>
-      {/* {props.userSuggestions && <Suggestions items={props.movieSuggestions} />} */}
-    </div>
-  );
+  return <div style={{ background: "var(--primary-color)" }}></div>;
 };
 // return { songs: state.songs};
 const mapStateToProps = state => {
