@@ -14,7 +14,7 @@ const App = () => {
         <Navbar />
         <Switch>
           <Route path="/show-list/" component={MovieList} />
-          <Route path="/show-movie/" component={ShowMovie} />
+          <Route path="/show-movie/:id" component={ShowMovie} />
           <Route exact path="/" component={Home} />
         </Switch>
       </Router>

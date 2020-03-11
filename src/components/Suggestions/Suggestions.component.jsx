@@ -3,8 +3,6 @@ import Suggestion from "../Suggestion/Suggestion";
 import { connect } from "react-redux";
 
 const Suggestions = props => {
-  console.log("suggestions");
-
   const container = {
     position: "absolute",
     marginTop: "0.4rem",

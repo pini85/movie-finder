@@ -13,7 +13,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 const Card = props => {
   const handleClick = () => {
     props.selectedMovieId(props.movie.id);
-    props.history.push("/show-movie");
+    props.history.push(`/show-movie/${props.movie.id}`);
   };
   //   const styleCard = {
   //     backgroundColor: "transparent",

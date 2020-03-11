@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { selectedMovie } from "../../redux/actions/index";
 
 import Card from "../card/Card";
 const MovieList = props => {
@@ -28,4 +29,6 @@ const MovieList = props => {
 const mapStateToProps = state => ({
   fetchMovies: state.fetchMovies
 });
-export default connect(mapStateToProps)(MovieList);
+export default connect(mapStateToProps, {
+  selectedMovie: selectedMovie
+})(MovieList);

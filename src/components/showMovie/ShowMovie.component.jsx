@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { connect } from "react-redux";
+import Skeleton from "react-loading-skeleton";
 import { selectedMovie } from "../../redux/actions/index";
 import YouTube from "react-youtube";
 import { tmdbIdApi, tmdbImagesApi, tmdbTrailersApi } from "../../apis/tmdbApi";
@@ -9,15 +10,12 @@ import subtitlesApi from "../../apis/subtitlesApi";
 import magnet from "../../apis/magnet";
 
 const ShowMovie = props => {
-  // setId()
-  // const id = props.item.id;
-
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
-      console.log(props);
+      setIsLoading(true);
 
       const id = props.id;
-      console.log(id);
 
       const tmdbData = await tmdbIdApi(id);
       const omdbData = await omdbApi(tmdbData.imdb_id);
@@ -25,7 +23,6 @@ const ShowMovie = props => {
       const images = await tmdbImagesApi(id);
       const subtitle = await subtitlesApi(tmdbData.imdb_id);
       const torrentData = await torrentApi(tmdbData.imdb_id);
-      console.log(id, tmdbData);
 
       let torrents;
       let magnets;
@@ -45,8 +42,6 @@ const ShowMovie = props => {
           return obj;
         });
         magnets = torrentData.map(torrent => {
-          const obj = {};
-
           return magnet(omdbData.Title, torrent.hash, torrent.url);
         });
       }
@@ -72,11 +67,12 @@ const ShowMovie = props => {
 
       // setData(item);
       props.selectedMovie(item);
+      setIsLoading(false);
 
       //`
     };
     fetchData();
-  }, []);
+  }, [props.id]);
 
   const optsYouTube = {
     height: "390",
@@ -186,7 +182,9 @@ const ShowMovie = props => {
 
   return (
     <div>
-      {props.item ? (
+      {isLoading ? (
+        <div>LOADING</div>
+      ) : (
         <div>
           <h3>{props.item.title}</h3>
           {ratings()}
@@ -205,7 +203,7 @@ const ShowMovie = props => {
           {subtitle()}
           {magnets()}
         </div>
-      ) : null}
+      )}
     </div>
   );
 };

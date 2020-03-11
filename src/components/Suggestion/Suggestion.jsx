@@ -12,11 +12,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilm, faStar } from "@fortawesome/free-solid-svg-icons";
 
 const Suggestion = props => {
+  console.log("hi");
+
   const handleClick = () => {
     props.selectedMovieId(props.item.id);
-    // props.movieSuggestions(false);
+    props.movieSuggestions(false);
     props.search("");
-    props.history.push("/show-movie");
+    props.history.push(`/show-movie/${props.item.id}`);
   };
   const styleContainer = {
     display: "flex",
