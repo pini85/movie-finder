@@ -1,4 +1,13 @@
 const ApiKey = "3e296e6f6a1b142633468c58b584ab9b";
+
+export const tmdbApi = async () => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1`
+  );
+  const data = await response.json();
+
+  return data;
+};
 export const tmdbQueryApi = async query => {
   const response = await fetch(
     `https://api.themoviedb.org/3/search/movie?api_key=${ApiKey}&language=en-US&query=${query}&page=1&include_adult=false`
