@@ -1,4 +1,4 @@
-import { tmdbQueryApi } from "../../apis/tmdbApi";
+import { tmdbQueryApi, tmdbApi, tmdbIdApi } from "../../apis/tmdbApi";
 export const selectedMovie = movie => {
   return {
     type: "MOVIE_SELECTED",
@@ -39,12 +39,33 @@ export const search = query => {
   };
 };
 
-export const popularMovies = movies => {
-  return {
-    type: "POPULAR_MOVIES",
-    payload: movies
-  };
+export const fetchPopularMovies = () => async dispatch => {
+  const popularMoviesData = [];
+  const data = await tmdbApi();
+
+  Promise.all(
+    data.map(async item => {
+      const data = await tmdbIdApi(item.id);
+      popularMoviesData.push(data);
+    })
+  );
+  setTimeout(() => {
+    dispatch({ type: "FETCH_POPULAR_MOVIES", payload: popularMoviesData });
+  }, 1000);
 };
+
+// const popularMoviesData = [];
+//       const data = await tmdbApi();
+//       Promise.all(
+//         data.map(async item => {
+//           const movies = await tmdbIdApi(item.id);
+
+//           popularMoviesData.push(movies);
+//         })
+//       );
+//       props.popularMovies(popularMoviesData);
+//     };
+
 export const isSending = bool => {
   return {
     type: "IS_SENDING",

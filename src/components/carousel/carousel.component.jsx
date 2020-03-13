@@ -1,6 +1,8 @@
-import React, { Component } from "react";
+import React from "react";
+import { connect } from "react-redux";
+
 import Slider from "react-slick";
-import movieSlider from "../movieSLider/MovieSlider.component";
+import MovieSlider from "../movieSLider/MovieSlider.component";
 const Carousel = props => {
   console.log(props);
 
@@ -15,29 +17,21 @@ const Carousel = props => {
   };
   return (
     <div>
-      <h2> Single Item</h2>
       <Slider {...settings}>
-        <div>
-          <h3>1</h3>
-        </div>
-        <div>
-          <h3>2</h3>
-        </div>
-        <div>
-          <h3>3</h3>
-        </div>
-        <div>
-          <h3>4</h3>
-        </div>
-        <div>
-          <h3>5</h3>
-        </div>
-        <div>
-          <h3>6</h3>
-        </div>
+        {props.movies.length > 0 &&
+          props.movies.map(movie => {
+            return (
+              <div>
+                <MovieSlider movie={movie}></MovieSlider>
+              </div>
+            );
+          })}
       </Slider>
     </div>
   );
 };
+const mapStateToProps = state => ({
+  movies: state.popularMovies
+});
 
-export default Carousel;
+export default connect(mapStateToProps)(Carousel);

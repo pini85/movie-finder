@@ -1,16 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
 
 const movieSlider = props => {
   console.log(props);
-
-  // const obj = {
-  //     title: ,
-  //     plot: ,
-  //     releaseData: ,
-  //     rated: ,
-  //     genre:
-
-  // }
 
   return <div>MovieSlider</div>;
 };

@@ -41,10 +41,8 @@ const searchQueryReducer = (movieQuery = "", action) => {
   return movieQuery;
 };
 
-const popularMoviesreducer = (popularMovies = null, action) => {
-  console.log(popularMovies);
-
-  if (action.type === "POPULAR_MOVIES") {
+const popularMoviesReducer = (popularMovies = null, action) => {
+  if (action.type === "FETCH_POPULAR_MOVIES") {
     return action.payload;
   }
   return popularMovies;
@@ -64,5 +62,5 @@ export default combineReducers({
   search: searchQueryReducer,
   isSending: isSendingReducer,
   selectedMovieId: selectedMovieIdReducer,
-  popularMoviesreducer: popularMoviesreducer
+  popularMovies: popularMoviesReducer
 });

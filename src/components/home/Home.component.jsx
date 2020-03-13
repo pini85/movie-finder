@@ -1,22 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { popularMovies } from "../../redux/actions";
+import { fetchPopularMovies } from "../../redux/actions";
 import { tmdbApi, tmdbIdApi } from "../../apis/tmdbApi";
 import Carousel from "../carousel/carousel.component";
 
 const Home = props => {
   useEffect(() => {
     const fetchData = async () => {
-      const popularMoviesData = [];
-      const data = await tmdbApi();
-      Promise.all(
-        data.map(async item => {
-          const movies = await tmdbIdApi(item.id);
-
-          popularMoviesData.push(movies);
-        })
-      );
-      props.popularMovies(popularMoviesData);
+      props.popularMovies();
     };
 
     fetchData();
@@ -39,5 +30,5 @@ const Home = props => {
 };
 
 export default connect(null, {
-  popularMovies: popularMovies
+  popularMovies: fetchPopularMovies
 })(Home);
