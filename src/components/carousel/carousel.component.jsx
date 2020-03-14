@@ -1,4 +1,5 @@
 import React from "react";
+import "./carousel.styles.css";
 import { connect } from "react-redux";
 
 import Slider from "react-slick";
@@ -11,17 +12,23 @@ const Carousel = props => {
     infinite: true,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 2000,
+    autoplay: false,
+    autoplaySpeed: 4000,
+    fade: true,
     pauseOnHover: true
   };
+  const styleContainer = {
+    display: "flex",
+    justifyContent: "center"
+  };
+
   return (
-    <div>
+    <div style={styleContainer}>
       <Slider {...settings}>
         {props.movies.length > 0 &&
           props.movies.map(movie => {
             return (
-              <div>
+              <div className="hi">
                 <MovieSlider movie={movie}></MovieSlider>
               </div>
             );

@@ -46,6 +46,7 @@ export const fetchPopularMovies = () => async dispatch => {
   Promise.all(
     data.map(async item => {
       const data = await tmdbIdApi(item.id);
+
       popularMoviesData.push(data);
     })
   );
