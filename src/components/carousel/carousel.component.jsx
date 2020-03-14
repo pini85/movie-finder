@@ -19,7 +19,8 @@ const Carousel = props => {
   };
   const styleContainer = {
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
+    marginTop: "2rem"
   };
 
   return (

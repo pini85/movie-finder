@@ -1,3 +1,15 @@
 .slick-slider {
   width: 81vw;
 }
+.slick-dots li button:before {
+  color: white;
+}
+.slick-dots li.slick-active button:before {
+  color: var(--primary-color);
+}
+.slick-next:before {
+  color: var(--primary-color);
+}
+.slick-prev:before {
+  color: var(--primary-color);
+}

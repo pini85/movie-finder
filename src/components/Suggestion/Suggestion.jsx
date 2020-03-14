@@ -12,8 +12,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilm, faStar } from "@fortawesome/free-solid-svg-icons";
 
 const Suggestion = props => {
-  console.log("hi");
-
   const handleClick = () => {
     props.selectedMovieId(props.item.id);
     props.movieSuggestions(false);
@@ -25,13 +23,14 @@ const Suggestion = props => {
     width: "35rem",
     padding: "1rem",
     fontSize: "1.7rem",
-    color: "#ffeec9",
-    borderBottom: "1px solid var(--background-color)"
+    color: "var(--text-white)",
+    borderBottom: "1px solid white"
   };
   const styleImg = {
     height: "7rem",
     width: "5rem",
-    marginRight: "1rem"
+    marginRight: "1rem",
+    alignSelf: "center"
   };
   const styleTitle = {};
 

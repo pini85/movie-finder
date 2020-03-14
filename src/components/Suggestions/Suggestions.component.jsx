@@ -5,14 +5,17 @@ import { connect } from "react-redux";
 const Suggestions = props => {
   const container = {
     position: "absolute",
-    marginTop: "0.4rem",
-    marginLeft: "0.4rem",
-    background: "var(--primary-color)",
-    color: "var(text-between)",
+    marginTop: "1.2rem",
+    marginLeft: "-8.2rem",
+    background: "var(--secondary-color)",
+    color: "text-white",
+    borderLeft: "1px solid white",
+    borderTop: "1px solid white",
+    borderRight: "1px solid white",
     zIndex: "10"
   };
   return (
-    <div style={container}>
+    <div className="hiiiii" style={container}>
       {props.userSuggestions &&
         props.userSuggestions.results.splice(0, 6).map(suggestion => {
           return (

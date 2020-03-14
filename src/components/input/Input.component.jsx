@@ -5,6 +5,7 @@ import { compose } from "redux";
 import { search, fetchMovies, movieSuggestions } from "../../redux/actions";
 import { tmdbQueryApi } from "../../apis/tmdbApi";
 import Suggestions from "../Suggestions/Suggestions.component";
+import Button from "../Button/Button";
 
 const Input = props => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -46,9 +47,12 @@ const Input = props => {
         onChange={e => setSearchQuery(e.target.value)}
         type="text"
       />
-      <button disabled={isSending} onClick={handleClick}>
-        Search
-      </button>
+      <Button
+        title={"search"}
+        disabled={isSending}
+        handleClick={handleClick}
+      ></Button>
+
       {props.userSuggestions && <Suggestions items={props.userSuggestions} />}
     </div>
   );

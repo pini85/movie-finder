@@ -15,7 +15,8 @@ const Home = props => {
 
   const styleContainer = {
     height: "calc(100vh - 6vh)",
-    backgroundColor: "white",
+
+    backgroundColor: "var(--secondary-color)",
     overflow: "hidden"
   };
   return (
