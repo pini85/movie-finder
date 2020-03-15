@@ -7,9 +7,9 @@ const movieSlider = props => {
   const styleContainer = {
     height: "52rem",
 
-    background: `url(https://image.tmdb.org/t/p/w1280//${props.movie.backdrop_path}) `,
-    backgroundSize: "100% 70%",
-    /* background-position: center 30%; */
+    background: `url(https://image.tmdb.org/t/p/w1280//${props.movie.backdrop_path})`,
+    backgroundSize: "100% 100%",
+    /* background-position: enter 30%; */
     backgroundRepeat: "fixed",
     color: "var(--text-white)",
     display: "flex",

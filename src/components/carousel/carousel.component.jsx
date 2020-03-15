@@ -26,7 +26,7 @@ const Carousel = props => {
   return (
     <div style={styleContainer}>
       <Slider {...settings}>
-        {props.movies.length > 0 &&
+        {props.movies &&
           props.movies.map(movie => {
             return (
               <div className="hi">

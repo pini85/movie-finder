@@ -1,23 +1,11 @@
 import React from "react";
-import "./button.styles.css";
+import { ButtonContainer } from "./button.styles";
 
 const Button = props => {
-  const styleButton = {
-    padding: "1rem 2.5rem",
-    backgroundColor: "var(--primary-color)",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-    color: "white"
-  };
   return (
-    <button
-      disabled={props.disabled}
-      onClick={props.handleClick}
-      style={styleButton}
-    >
+    <ButtonContainer disabled={props.disabled} onClick={props.handleClick}>
       {props.title}
-    </button>
+    </ButtonContainer>
   );
 };
 

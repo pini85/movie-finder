@@ -6,5 +6,7 @@
   --background-color: #fff3da;
   --text-white: #ffffff;
   --text-between: #ffeec9;
-  --text-dark: #82d8d8;
+  --text-dark: #333333;
+  --heading-secondary: 2.3rem;
+  --paragraph: 1.6rem;
 }

@@ -1,6 +1,13 @@
 import React from "react";
+import {
+  Container,
+  DetailContainer,
+  Header,
+  Plot
+} from "./MoveSliderInfo.styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
+import Button from "../Button/Button";
 const MovieSliderInfo = ({ title, plot, releaseDate, runTime, vote }) => {
   const plotDetails = plot => {
     if (plot.length > 200) {
@@ -23,11 +30,11 @@ const MovieSliderInfo = ({ title, plot, releaseDate, runTime, vote }) => {
     marginTop: "2rem"
   };
   return (
-    <div style={styleContainer}>
-      <h3>{title}</h3>
-      <p>{plotDetails(plot)}</p>
-      <div style={styleDetailContainer}>
-        <button style={{ height: "3.5rem" }}>Details</button>
+    <Container>
+      <Header>{title}</Header>
+      <Plot>{plotDetails(plot)}</Plot>
+      <DetailContainer>
+        <Button title="details" />
 
         <div>
           <div style={{ marginBottom: "-3px" }}>{releaseDate.slice(0, 4)}</div>
@@ -37,8 +44,8 @@ const MovieSliderInfo = ({ title, plot, releaseDate, runTime, vote }) => {
           <FontAwesomeIcon icon={faStar} />
         </div>
         <div>{vote}</div>
-      </div>
-    </div>
+      </DetailContainer>
+    </Container>
   );
 };
 
