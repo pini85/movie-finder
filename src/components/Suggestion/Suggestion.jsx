@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { Container, Img, IconAndYearContainer } from "./Suggestion.styles";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
@@ -7,7 +8,6 @@ import {
   movieSuggestions,
   search
 } from "../../redux/actions/index";
-import "./suggestion.styles.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilm, faStar } from "@fortawesome/free-solid-svg-icons";
 
@@ -18,45 +18,25 @@ const Suggestion = props => {
     props.search("");
     props.history.push(`/show-movie/${props.item.id}`);
   };
-  const styleContainer = {
-    display: "flex",
-    width: "35rem",
-    padding: "1rem",
-    fontSize: "1.7rem",
-    color: "var(--text-white)",
-    borderBottom: "1px solid white"
-  };
-  const styleImg = {
-    height: "7rem",
-    width: "5rem",
-    marginRight: "1rem",
-    alignSelf: "center"
-  };
-  const styleTitle = {};
-
-  const styleIconAndYearContainer = {
-    display: "flex",
-    alignItems: "center"
-  };
 
   return (
     <a onClick={handleClick}>
-      <div className="container" style={styleContainer}>
-        <img
-          style={styleImg}
+      <Container>
+        <Img
           src={`http://image.tmdb.org/t/p/w92//${props.item.poster_path}`}
           alt=""
         />
+
         <div>
-          <div style={styleTitle}> {props.item.title}</div>
-          <div style={styleIconAndYearContainer}>
+          <div> {props.item.title}</div>
+          <IconAndYearContainer>
             <FontAwesomeIcon icon={faFilm} />
             <div style={{ marginLeft: "1rem" }}>
               {props.item.release_date
                 ? props.item.release_date.substr(0, 4)
                 : null}
             </div>
-          </div>
+          </IconAndYearContainer>
           <div>
             <FontAwesomeIcon
               icon={faStar}
@@ -65,7 +45,7 @@ const Suggestion = props => {
             {props.item.vote_average}
           </div>
         </div>
-      </div>
+      </Container>
     </a>
   );
 };

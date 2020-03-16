@@ -1,21 +1,11 @@
 import React from "react";
 import Suggestion from "../Suggestion/Suggestion";
 import { connect } from "react-redux";
+import { Container } from "./suggestions.styles";
 
 const Suggestions = props => {
-  const container = {
-    position: "absolute",
-    marginTop: "1.2rem",
-    marginLeft: "-8.2rem",
-    background: "var(--secondary-color)",
-    color: "text-white",
-    borderLeft: "1px solid white",
-    borderTop: "1px solid white",
-    borderRight: "1px solid white",
-    zIndex: "10"
-  };
   return (
-    <div className="hiiiii" style={container}>
+    <Container>
       {props.userSuggestions &&
         props.userSuggestions.results.splice(0, 6).map(suggestion => {
           return (
@@ -24,7 +14,7 @@ const Suggestions = props => {
             </div>
           );
         })}
-    </div>
+    </Container>
   );
 };
 const mapStateToProps = state => ({
