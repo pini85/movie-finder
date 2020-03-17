@@ -9,11 +9,13 @@ const styleContainer = {
   alignItems: "center",
   boxShadow: "rgba(0, 0, 0, 0.16) 0px 6px 20px",
   background: "var(--secondary-color-light)",
-  height: "7vh"
+  height: "7vh",
+  padding: "3rem"
 };
 const image = {
   height: "6rem",
-  width: "23rem"
+  width: "23rem",
+  marginTop: "1rem"
 };
 const Navbar = props => {
   return (

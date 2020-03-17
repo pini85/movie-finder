@@ -1,5 +1,5 @@
 .slick-slider {
-  width: 88vw;
+  width: 100vw;
 }
 .slick-dots li button:before {
   color: white;
@@ -7,13 +7,24 @@
 .slick-dots li.slick-active button:before {
   color: var(--primary-color);
 }
+.slick-next {
+  position: absolute;
+  z-index: 3;
+  right: 10rem;
+}
+.slick-prev {
+  position: absolute;
+  z-index: 3;
+  left: 10rem;
+}
 .slick-next:before {
   color: var(--primary-color);
-  font-size: 8rem;
-  margin-right: 7rem;
+  font-size: 4vw;
+  margin-right: -3.8vw;
 }
+
 .slick-prev:before {
   color: var(--primary-color);
-  font-size: 8rem;
-  margin-left: -7rem;
+  font-size: 4vw;
+  margin-left: -4vw;
 }

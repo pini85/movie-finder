@@ -1,11 +1,23 @@
+import shuffle from "lodash/shuffle";
 const ApiKey = "3e296e6f6a1b142633468c58b584ab9b";
 
-export const tmdbApi = async () => {
+export const tmdbApiDiscover = async () => {
   const response = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&total_results=1&page=1`
   );
   const data = await response.json();
+
   return data.results.slice(0, 5);
+};
+export const tmdbApiPopular = async () => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&sort_by=popularity.desc&vote_average.gte=7&&vote_count.gte=1000&include_adult=false&include_video=false&total_results=1&page=1`
+  );
+  const data = await response.json();
+
+  const shuffled = shuffle(data.results);
+
+  return shuffled.slice(0, 5);
 };
 export const tmdbQueryApi = async query => {
   const response = await fetch(
@@ -45,5 +57,14 @@ export const tmdbTrailersApi = async id => {
     `https://api.themoviedb.org/3/movie/${id}/videos?api_key=3e296e6f6a1b142633468c58b584ab9b&language=en-US`
   );
   const data = await response.json();
+  return data;
+};
+
+export const tmdbLatestApi = async () => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/popular?api_key=${ApiKey}&language=en-US &release_date.gte=2019&page=1`
+  );
+  const data = await response.json();
+  console.log(data);
   return data;
 };

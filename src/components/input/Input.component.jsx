@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
@@ -33,14 +34,21 @@ const Input = props => {
     props.history.push("/show-list");
   };
 
+  const container = {
+    display: "flex",
+    alignItems: "center"
+  };
+
   const styleInput = {
     width: "18rem",
     height: "2.5rem",
-    padding: "2rem"
+    padding: "1.5rem",
+    marginRight: "1rem",
+    border: "2px solid var(--primary-color)"
   };
 
   return (
-    <div>
+    <div style={container}>
       <input
         style={styleInput}
         value={searchQuery}
@@ -48,6 +56,7 @@ const Input = props => {
         type="text"
       />
       <Button
+        search={true}
         title={"search"}
         disabled={isSending}
         handleClick={handleClick}

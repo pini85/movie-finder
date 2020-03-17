@@ -1,4 +1,4 @@
-import { tmdbQueryApi, tmdbApi, tmdbIdApi } from "../../apis/tmdbApi";
+import { tmdbQueryApi, tmdbApiPopular, tmdbIdApi } from "../../apis/tmdbApi";
 export const selectedMovie = movie => {
   return {
     type: "MOVIE_SELECTED",
@@ -41,7 +41,7 @@ export const search = query => {
 
 export const fetchPopularMovies = () => async dispatch => {
   const popularMoviesData = [];
-  const data = await tmdbApi();
+  const data = await tmdbApiPopular();
 
   Promise.all(
     data.map(async item => {

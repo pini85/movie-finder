@@ -3,14 +3,12 @@ import { connect } from "react-redux";
 import MovieSliderInfo from "../movie-slider-info/MovieSliderInfo.component";
 
 const movieSlider = props => {
-  console.log(props);
   const styleContainer = {
-    height: "52rem",
+    height: "48rem",
 
     background: `url(https://image.tmdb.org/t/p/w1280//${props.movie.backdrop_path})`,
-    backgroundSize: "100% 100%",
-    /* background-position: enter 30%; */
-    backgroundRepeat: "fixed",
+    backgroundSize: "100% 60%",
+    backgroundRepeat: "cover",
     color: "var(--text-white)",
     display: "flex",
     justifyContent: "center",

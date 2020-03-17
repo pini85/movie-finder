@@ -11,9 +11,10 @@ export const Container = styled.div`
 export const DetailContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   width: 24rem;
   margin-top: 2rem;
+  width: 23rem;
 `;
 
 export const Header = styled.div`
