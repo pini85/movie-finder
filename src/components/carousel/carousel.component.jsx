@@ -5,8 +5,6 @@ import { connect } from "react-redux";
 import Slider from "react-slick";
 import MovieSlider from "../movieSLider/MovieSlider.component";
 const Carousel = props => {
-  console.log(props);
-
   const settings = {
     dots: true,
     infinite: true,
@@ -28,7 +26,7 @@ const Carousel = props => {
         {props.movies &&
           props.movies.map(movie => {
             return (
-              <div className="hi">
+              <div>
                 <MovieSlider movie={movie}></MovieSlider>
               </div>
             );
@@ -38,7 +36,7 @@ const Carousel = props => {
   );
 };
 const mapStateToProps = state => ({
-  movies: state.popularMovies
+  movies: state.movieSlider
 });
 
 export default connect(mapStateToProps)(Carousel);

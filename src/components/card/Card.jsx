@@ -50,7 +50,7 @@ const Card = props => {
     position: "absolute",
     top: "5px",
     left: "5px",
-    backgroundColor: "orange",
+    backgroundColor: "var(--primary-color)",
     borderRadius: "5px",
     padding: "0 5px"
   };
@@ -59,7 +59,7 @@ const Card = props => {
     position: "absolute",
     top: "5px",
     right: "5px",
-    backgroundColor: "orange",
+    backgroundColor: "var(--primary-color)",
     borderRadius: "5px",
     padding: "0 5px"
   };
@@ -78,14 +78,20 @@ const Card = props => {
     bottom: 0,
     width: "100%",
     backgroundColor: "var(--primary-color)",
-    color: "white",
+    color: "var(--text-dark)",
     padding: "0 5px"
   };
   const styleBackTitle = {
     width: "100%",
     backgroundColor: "var(--primary-color)",
-    color: "white",
+    color: "var(--text-dark)",
     padding: "0 5px"
+  };
+  const title = name => {
+    if (name.length > 17) {
+      return name.slice(0, 17) + "...";
+    }
+    return name;
   };
   return (
     <div className="card">
@@ -104,7 +110,7 @@ const Card = props => {
             </div>
             <div>{props.movie.vote_average}</div>
           </div>
-          <div style={styleTitle}> {props.movie.title}</div>
+          <div style={styleTitle}> {title(props.movie.title)}</div>
         </div>
         <div
           style={styleBackCard}
@@ -114,11 +120,11 @@ const Card = props => {
           //   }}
           //   transition={{ duration: 0.5 }}
         >
-          <div></div>
+          <div empty flex container></div>
           <a onClick={handleClick}>
             <Button title="Details" />
           </a>
-          <div style={styleBackTitle}> {props.movie.title}</div>
+          <div style={styleBackTitle}> {title(props.movie.title)}</div>
         </div>
       </div>
     </div>

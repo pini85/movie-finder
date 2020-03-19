@@ -18,5 +18,5 @@ export const Paragraph = styled.div`
 export const OptionContainer = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 3rem;
+  margin: 3rem 0 4rem 0;
 `;

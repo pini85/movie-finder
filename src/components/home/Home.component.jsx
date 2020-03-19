@@ -1,26 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { Header, Paragraph, OptionContainer } from "./Home.styles";
+import React, { useEffect } from "react";
+import { Header, Paragraph } from "./Home.styles";
 import { connect } from "react-redux";
-import { fetchPopularMovies } from "../../redux/actions";
-import { tmdbApi, tmdbIdApi, tmdbLatestApi } from "../../apis/tmdbApi";
+import { fetchMovieSlider, fetchNewestMovies } from "../../redux/actions";
+
 import Carousel from "../carousel/carousel.component";
-import Option from "../Option/Option.component";
-import Card from "../card/Card";
+import Options from "../Options/Options.component";
+
+import MovieList from "../movieList/MovieList";
 
 const Home = props => {
-  const [data, setData] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
-      props.popularMovies();
-      const movies = await tmdbLatestApi();
-      setData(movies);
+      props.movieSlider();
+      props.newestMovies();
     };
 
     fetchData();
   }, []);
 
   const styleContainer = {
-    height: "100vh",
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
 
     backgroundColor: "var(--secondary-color)",
     overflow: "hidden"
@@ -31,26 +32,26 @@ const Home = props => {
         <div>
           <Carousel></Carousel>
         </div>
-        <Header>Welcome to Movie Finder</Header>
-        <Paragraph>Discover and watch</Paragraph>
-        <OptionContainer>
-          <Option title="Most Popular Today"></Option>
-          <Option title="Highest Rating"></Option>
-          <Option title="Recommded for you"></Option>
-        </OptionContainer>
-        <div>
-          {data &&
-            data.results.map(item => {
-              console.log(item);
-
-              return <Card movie={item}></Card>;
-            })}
+        <div style={{ width: "100%" }}>
+          <Header>Welcome to Movie Finder</Header>
+          <Paragraph>Discover and watch</Paragraph>
         </div>
+        <Options />
+
+        {props.newestMoviesData && (
+          <MovieList movies={props.newestMoviesData.results} />
+        )}
       </div>
     </div>
   );
 };
+const mapStateToDispatch = {
+  newestMovies: fetchNewestMovies,
+  movieSlider: fetchMovieSlider
+};
+const mapStateToProps = state => ({
+  newestMoviesData: state.newestMovies,
+  movieSliderData: state.movieSliderData
+});
 
-export default connect(null, {
-  popularMovies: fetchPopularMovies
-})(Home);
+export default connect(mapStateToProps, mapStateToDispatch)(Home);

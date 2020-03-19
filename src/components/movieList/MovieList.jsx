@@ -8,13 +8,22 @@ const MovieList = props => {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
-    background: "var(--background-color)"
+    background: "var(--secondary-color)"
   };
 
   return (
     <div style={styleDiv}>
-      {props.fetchMovies
+      {/* {props.fetchMovies
         ? props.fetchMovies.results.map(movie => {
+            return (
+              <div key={movie.id}>
+                <Card movie={movie}></Card>
+              </div>
+            );
+          })
+        : null} */}
+      {props.movies
+        ? props.movies.map(movie => {
             return (
               <div key={movie.id}>
                 <Card movie={movie}></Card>

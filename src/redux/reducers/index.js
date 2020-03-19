@@ -41,11 +41,18 @@ const searchQueryReducer = (movieQuery = "", action) => {
   return movieQuery;
 };
 
-const popularMoviesReducer = (popularMovies = null, action) => {
-  if (action.type === "FETCH_POPULAR_MOVIES") {
+const movieSliderReducer = (movieSlider = null, action) => {
+  if (action.type === "FETCH_MOVIE_SLIDER") {
     return action.payload;
   }
-  return popularMovies;
+  return movieSlider;
+};
+
+const newestMoviesReducer = (popularToday = null, action) => {
+  if (action.type === "FETCH_NEWEST_MOVIES") {
+    return action.payload;
+  }
+  return popularToday;
 };
 
 const isSendingReducer = (sending = false, action) => {
@@ -62,5 +69,6 @@ export default combineReducers({
   search: searchQueryReducer,
   isSending: isSendingReducer,
   selectedMovieId: selectedMovieIdReducer,
-  popularMovies: popularMoviesReducer
+  movieSlider: movieSliderReducer,
+  newestMovies: newestMoviesReducer
 });

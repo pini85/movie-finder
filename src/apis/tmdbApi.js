@@ -1,4 +1,5 @@
 import shuffle from "lodash/shuffle";
+import { dateMonthsBack } from "../utlis/date";
 const ApiKey = "3e296e6f6a1b142633468c58b584ab9b";
 
 export const tmdbApiDiscover = async () => {
@@ -9,7 +10,7 @@ export const tmdbApiDiscover = async () => {
 
   return data.results.slice(0, 5);
 };
-export const tmdbApiPopular = async () => {
+export const tmdbMovieSliderApi = async () => {
   const response = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&sort_by=popularity.desc&vote_average.gte=7&&vote_count.gte=1000&include_adult=false&include_video=false&total_results=1&page=1`
   );
@@ -65,6 +66,18 @@ export const tmdbLatestApi = async () => {
     `https://api.themoviedb.org/3/movie/popular?api_key=${ApiKey}&language=en-US &release_date.gte=2019&page=1`
   );
   const data = await response.json();
+
+  return data;
+};
+
+export const tmdbNewestTodayApi = async () => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&region=US&release_date.gte=${dateMonthsBack(
+      3
+    )}&release_date.lte=${dateMonthsBack(2)}`
+  );
+  const data = await response.json();
   console.log(data);
+
   return data;
 };
