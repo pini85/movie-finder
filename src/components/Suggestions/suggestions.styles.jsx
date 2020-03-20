@@ -1,8 +1,8 @@
 import styled from "styled-components";
 export const Container = styled.div`
   position: absolute;
-  margin-top: 1.2rem;
-  margin-left: -8.2rem;
+  top: 7rem;
+  right: 0.5rem;
   background: var(--secondary-color);
   color: text-white;
   border-left: 1px solid white;
