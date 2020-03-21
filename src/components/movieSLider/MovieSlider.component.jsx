@@ -1,12 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
+
 import MovieSliderInfo from "../movie-slider-info/MovieSliderInfo.component";
-import { Container } from "./MovieSlider.styles";
+
 import styled from "styled-components";
 
 const movieSlider = props => {
-  console.log(props);
-
   // const styleContainer = {
   //   height: "48rem",
 

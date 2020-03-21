@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import "./card.styles.scss";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { selectedMovieId } from "../../redux/actions/index";
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import Button from "../Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
@@ -95,13 +93,7 @@ const Card = props => {
   };
   return (
     <div className="card">
-      <div
-        className="card-inner"
-        // whileHover={{
-        //   transform: "rotateY(180deg)"
-        // }}
-        // transition={{ duration: 0.5 }}
-      >
+      <div className="card-inner">
         <div style={styleFrontCard} className="card-front">
           <div style={styleYear}>{props.movie.release_date.substr(0, 4)}</div>
           <div style={styleRating}>
@@ -112,15 +104,8 @@ const Card = props => {
           </div>
           <div style={styleTitle}> {title(props.movie.title)}</div>
         </div>
-        <div
-          style={styleBackCard}
-          className="card-back"
-          //   whileHover={{
-          //     transform: "rotateY(180deg)"
-          //   }}
-          //   transition={{ duration: 0.5 }}
-        >
-          <div empty flex container></div>
+        <div style={styleBackCard} className="card-back">
+          <div></div>
           <a onClick={handleClick}>
             <Button title="Details" />
           </a>

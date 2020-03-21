@@ -23,6 +23,5 @@ export const dateMonthsBack = monthsBefore => {
 
   return [year, month, day].join("-");
 };
-console.log(dateMonthsBack(3));
 
 // gte = 2019-011-18 lte= 2019-12-18

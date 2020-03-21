@@ -26,7 +26,7 @@ const Carousel = props => {
         {props.movies &&
           props.movies.map(movie => {
             return (
-              <div>
+              <div key={movie.id}>
                 <MovieSlider movie={movie}></MovieSlider>
               </div>
             );

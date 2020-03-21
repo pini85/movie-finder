@@ -77,7 +77,13 @@ export const tmdbNewestTodayApi = async () => {
     )}&release_date.lte=${dateMonthsBack(2)}`
   );
   const data = await response.json();
-  console.log(data);
 
+  return data;
+};
+
+export const tmdbHighestRatedApi = async () => {
+  const response = await fetch(`
+  https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&sort_by=vote_count.desc&vote_average.desc&include_adult=false&include_video=false&page=1`);
+  const data = await response.json();
   return data;
 };

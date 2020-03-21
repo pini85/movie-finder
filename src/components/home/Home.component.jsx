@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import { Header, Paragraph } from "./Home.styles";
 import { connect } from "react-redux";
-import { fetchMovieSlider, fetchNewestMovies } from "../../redux/actions";
+import {
+  fetchMovieSlider,
+  fetchNewestMovies,
+  fetchHighestRatedMovies
+} from "../../redux/actions";
 
 import Carousel from "../carousel/carousel.component";
 import Options from "../Options/Options.component";
@@ -10,13 +14,41 @@ import MovieList from "../movieList/MovieList";
 
 const Home = props => {
   useEffect(() => {
+    console.log("props", props.optionActive);
+
     const fetchData = async () => {
       props.movieSlider();
-      props.newestMovies();
+      switch (props.optionActive) {
+        case "1":
+          props.newestMovies();
+          break;
+        case "2":
+          props.highestRatedMovies();
+        case "3":
+      }
     };
 
     fetchData();
-  }, []);
+  }, [props.optionActive]);
+
+  const showList = () => {
+    switch (props.optionActive) {
+      case "1":
+        return (
+          props.newestMoviesData && (
+            <MovieList movies={props.newestMoviesData.results} />
+          )
+        );
+      case "2":
+        return (
+          props.highestRatedMoviesData && (
+            <MovieList movies={props.highestRatedMoviesData.results} />
+          )
+        );
+      case "3":
+        return "Coming soon";
+    }
+  };
 
   const styleContainer = {
     display: "flex",
@@ -35,23 +67,25 @@ const Home = props => {
         <div style={{ width: "100%" }}>
           <Header>Welcome to Movie Finder</Header>
           <Paragraph>Discover and watch</Paragraph>
+          {console.log(props.highestRatedMoviesData)}
         </div>
         <Options />
 
-        {props.newestMoviesData && (
-          <MovieList movies={props.newestMoviesData.results} />
-        )}
+        {showList()}
       </div>
     </div>
   );
 };
 const mapStateToDispatch = {
   newestMovies: fetchNewestMovies,
-  movieSlider: fetchMovieSlider
+  movieSlider: fetchMovieSlider,
+  highestRatedMovies: fetchHighestRatedMovies
 };
 const mapStateToProps = state => ({
   newestMoviesData: state.newestMovies,
-  movieSliderData: state.movieSliderData
+  movieSliderData: state.movieSliderData,
+  highestRatedMoviesData: state.highestRatedMovies,
+  optionActive: state.optionActive
 });
 
 export default connect(mapStateToProps, mapStateToDispatch)(Home);

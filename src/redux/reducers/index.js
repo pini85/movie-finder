@@ -54,12 +54,25 @@ const newestMoviesReducer = (popularToday = null, action) => {
   }
   return popularToday;
 };
+const highestRatedReducer = (highestRated = null, action) => {
+  if (action.type === "FETCH_HIGHEST_RATED_MOVIES") {
+    return action.payload;
+  }
+  return highestRated;
+};
 
 const isSendingReducer = (sending = false, action) => {
   if (action.type === "IS_SENDING") {
     return action.payload;
   }
   return sending;
+};
+
+const optionActiveReducer = (active = "1", action) => {
+  if (action.type === "OPTION_ACTIVE") {
+    return action.payload;
+  }
+  return active;
 };
 
 export default combineReducers({
@@ -70,5 +83,7 @@ export default combineReducers({
   isSending: isSendingReducer,
   selectedMovieId: selectedMovieIdReducer,
   movieSlider: movieSliderReducer,
-  newestMovies: newestMoviesReducer
+  newestMovies: newestMoviesReducer,
+  highestRatedMovies: highestRatedReducer,
+  optionActive: optionActiveReducer
 });

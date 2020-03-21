@@ -6,13 +6,14 @@ export const Container = styled.div`
   font-size: 1.5rem;
   line-height: 1.5;
   border-radius: 0.2rem;
-  background: transparent;
+  /* background: transparent; */
+
   border: 1px solid var(--primary-color);
   margin: 0 1.5rem;
   transition: all 0.3s;
   cursor: pointer;
   &:hover {
     color: var(--text-dark);
-    background: var(--primary-color);
+    background: var(--primary-color) !important;
   }
 `;

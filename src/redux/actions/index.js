@@ -3,7 +3,8 @@ import {
   tmdbApiPopular,
   tmdbIdApi,
   tmdbNewestTodayApi,
-  tmdbMovieSliderApi
+  tmdbMovieSliderApi,
+  tmdbHighestRatedApi
 } from "../../apis/tmdbApi";
 export const selectedMovie = movie => {
   return {
@@ -65,6 +66,19 @@ export const fetchMovieSlider = () => async dispatch => {
   setTimeout(() => {
     dispatch({ type: "FETCH_MOVIE_SLIDER", payload: popularMoviesData });
   }, 1000);
+};
+
+export const fetchHighestRatedMovies = () => async dispatch => {
+  const data = await tmdbHighestRatedApi();
+  console.log(data);
+
+  dispatch({ type: "FETCH_HIGHEST_RATED_MOVIES", payload: data });
+};
+export const optionActive = e => {
+  return {
+    type: "OPTION_ACTIVE",
+    payload: e.target.getAttribute("data-type")
+  };
 };
 
 // const popularMoviesData = [];
