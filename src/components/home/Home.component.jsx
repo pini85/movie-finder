@@ -14,8 +14,6 @@ import MovieList from "../movieList/MovieList";
 
 const Home = props => {
   useEffect(() => {
-    console.log("props", props.optionActive);
-
     const fetchData = async () => {
       props.movieSlider();
       switch (props.optionActive) {
@@ -67,7 +65,7 @@ const Home = props => {
         <div style={{ width: "100%" }}>
           <Header>Welcome to Movie Finder</Header>
           <Paragraph>Discover and watch</Paragraph>
-          {console.log(props.highestRatedMoviesData)}
+          {}
         </div>
         <Options />
 

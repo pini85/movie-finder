@@ -70,7 +70,6 @@ export const fetchMovieSlider = () => async dispatch => {
 
 export const fetchHighestRatedMovies = () => async dispatch => {
   const data = await tmdbHighestRatedApi();
-  console.log(data);
 
   dispatch({ type: "FETCH_HIGHEST_RATED_MOVIES", payload: data });
 };
