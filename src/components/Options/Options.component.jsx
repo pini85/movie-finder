@@ -10,9 +10,9 @@ import { OptionsContainer } from "./Options.styles";
 const Options = props => {
   return (
     <OptionsContainer>
-      <Option title="newest movies" dataType="1"></Option>
-      <Option title="highest rating" dataType="2"></Option>
-      <Option title="recommended to you" dataType="3"></Option>
+      <Option title="Newest Movies" dataType="1"></Option>
+      <Option title="Highest Rating" dataType="2"></Option>
+      <Option title="Recommended To You" dataType="3"></Option>
     </OptionsContainer>
   );
 };

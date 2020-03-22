@@ -39,8 +39,8 @@ export const fetchMovies = () => async (dispatch, getState) => {
   }
 };
 
-export const fetchNewestMovies = () => async (dispatch, getState) => {
-  const response = await tmdbNewestTodayApi();
+export const fetchNewestMovies = page => async (dispatch, getState) => {
+  const response = await tmdbNewestTodayApi(page);
 
   dispatch({ type: "FETCH_NEWEST_MOVIES", payload: response });
 };
@@ -54,6 +54,7 @@ export const search = query => {
 
 export const fetchMovieSlider = () => async dispatch => {
   const popularMoviesData = [];
+
   const data = await tmdbMovieSliderApi();
 
   Promise.all(
@@ -61,15 +62,16 @@ export const fetchMovieSlider = () => async dispatch => {
       const data = await tmdbIdApi(item.id);
 
       popularMoviesData.push(data);
+      console.log(popularMoviesData);
+
+      if (popularMoviesData.length === 5)
+        dispatch({ type: "FETCH_MOVIE_SLIDER", payload: popularMoviesData });
     })
   );
-  setTimeout(() => {
-    dispatch({ type: "FETCH_MOVIE_SLIDER", payload: popularMoviesData });
-  }, 1000);
 };
 
-export const fetchHighestRatedMovies = () => async dispatch => {
-  const data = await tmdbHighestRatedApi();
+export const fetchHighestRatedMovies = page => async dispatch => {
+  const data = await tmdbHighestRatedApi(page);
 
   dispatch({ type: "FETCH_HIGHEST_RATED_MOVIES", payload: data });
 };

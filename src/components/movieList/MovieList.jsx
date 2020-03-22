@@ -22,15 +22,17 @@ const MovieList = props => {
             );
           })
         : null} */}
-      {props.movies
-        ? props.movies.map(movie => {
-            return (
-              <div key={movie.id}>
-                <Card movie={movie}></Card>
-              </div>
-            );
-          })
-        : null}
+      {props.movies &&
+        props.movies.map(movie => {
+          if (movie === null) return;
+          // console.log("movies", movie);
+
+          return (
+            <div key={movie.id}>
+              <Card movie={movie}></Card>
+            </div>
+          );
+        })}
     </div>
     //
   );

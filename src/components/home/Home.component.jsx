@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Header, Paragraph } from "./Home.styles";
 import { connect } from "react-redux";
 import {
@@ -6,6 +6,7 @@ import {
   fetchNewestMovies,
   fetchHighestRatedMovies
 } from "../../redux/actions";
+import usePagination from "../../hooks/usePagination.hook";
 
 import Carousel from "../carousel/carousel.component";
 import Options from "../Options/Options.component";
@@ -13,21 +14,31 @@ import Options from "../Options/Options.component";
 import MovieList from "../movieList/MovieList";
 
 const Home = props => {
+  //couldn't wrap connect to custom hooks below. Had to lift the state.
+  const [currentPage, setCurrentPage] = useState(1);
   useEffect(() => {
     const fetchData = async () => {
       props.movieSlider();
       switch (props.optionActive) {
         case "1":
-          props.newestMovies();
+          props.newestMovies(1);
+
           break;
         case "2":
-          props.highestRatedMovies();
+          props.highestRatedMovies(1);
         case "3":
       }
     };
 
     fetchData();
   }, [props.optionActive]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     props.movieSlider();
+  //   };
+
+  //   fetchData();
+  // }, []);
 
   const showList = () => {
     switch (props.optionActive) {
@@ -47,11 +58,23 @@ const Home = props => {
         return "Coming soon";
     }
   };
+  const currentData = () => {
+    switch (props.optionActive) {
+      case "1":
+        return [props.newestMovies, props.newestMoviesData];
+
+      case "2":
+        return [props.highestRatedMovies, props.highestRatedMoviesData];
+      case "3":
+        return "Coming soon";
+    }
+  };
 
   const styleContainer = {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
+    flexDirection: "column",
 
     backgroundColor: "var(--secondary-color)",
     overflow: "hidden"
@@ -68,16 +91,32 @@ const Home = props => {
           {}
         </div>
         <Options />
+        <div style={{ margin: "0 auto" }}>
+          {usePagination(
+            currentData(),
+            currentPage,
+            setCurrentPage,
+            props.optionActive
+          )}
+        </div>
 
         {showList()}
+        <div style={{ margin: "0 auto" }}>
+          {usePagination(
+            currentData(),
+            currentPage,
+            setCurrentPage,
+            props.optionActive
+          )}
+        </div>
       </div>
     </div>
   );
 };
 const mapStateToDispatch = {
-  newestMovies: fetchNewestMovies,
+  newestMovies: page => fetchNewestMovies(page),
   movieSlider: fetchMovieSlider,
-  highestRatedMovies: fetchHighestRatedMovies
+  highestRatedMovies: page => fetchHighestRatedMovies(page)
 };
 const mapStateToProps = state => ({
   newestMoviesData: state.newestMovies,

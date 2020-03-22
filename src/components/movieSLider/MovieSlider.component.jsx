@@ -1,23 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import MovieSliderInfo from "../movie-slider-info/MovieSliderInfo.component";
 
 import styled from "styled-components";
 
 const movieSlider = props => {
-  // const styleContainer = {
-  //   height: "48rem",
-
-  //   background: `url(https://image.tmdb.org/t/p/w1280//${props.movie.backdrop_path})`,
-  //   backgroundSize: "100% 60%",
-  //   backgroundRepeat: "cover",
-  //   color: "var(--text-white)",
-  //   display: "flex",
-  //   justifyContent: "center",
-  //   alignItems: "flex-end",
-
-  //   backgroundAttachment: "fixed"
-  // };
+  console.log("movieslider", props.movie.title);
 
   const Container = styled.div`
     height: 48rem;
@@ -34,13 +22,7 @@ const movieSlider = props => {
 
   return (
     <Container>
-      <MovieSliderInfo
-        title={props.movie.title}
-        plot={props.movie.overview}
-        releaseDate={props.movie.release_date}
-        runTime={props.movie.runtime}
-        vote={props.movie.vote_average}
-      />
+      <MovieSliderInfo movie={props} />
     </Container>
   );
 };

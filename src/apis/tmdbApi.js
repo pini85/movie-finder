@@ -70,20 +70,20 @@ export const tmdbLatestApi = async () => {
   return data;
 };
 
-export const tmdbNewestTodayApi = async () => {
+export const tmdbNewestTodayApi = async page => {
   const response = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&region=US&release_date.gte=${dateMonthsBack(
       3
-    )}&release_date.lte=${dateMonthsBack(2)}`
+    )}&release_date.lte=${dateMonthsBack(2)}&page=${page}`
   );
   const data = await response.json();
 
   return data;
 };
 
-export const tmdbHighestRatedApi = async () => {
+export const tmdbHighestRatedApi = async page => {
   const response = await fetch(`
-  https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&sort_by=vote_count.desc&vote_average.desc&include_adult=false&include_video=false&page=1`);
+  https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&sort_by=vote_count.desc&vote_average.desc&include_adult=false&include_video=false&page=${page}`);
   const data = await response.json();
   return data;
 };

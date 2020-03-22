@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./carousel.styles.css";
 import { connect } from "react-redux";
 
@@ -25,6 +25,8 @@ const Carousel = props => {
       <Slider {...settings}>
         {props.movies &&
           props.movies.map(movie => {
+            console.log("iteration", movie.title);
+
             return (
               <div key={movie.id}>
                 <MovieSlider movie={movie}></MovieSlider>
