@@ -16,7 +16,7 @@ const Input = props => {
     const asyncFunc = async () => {
       props.search(searchQuery);
       if (searchQuery.length > 0) {
-        const data = await tmdbQueryApi(searchQuery);
+        const data = await tmdbQueryApi(1, searchQuery);
 
         props.movieSuggestions(data);
       } else {
@@ -28,7 +28,7 @@ const Input = props => {
 
   const handleClick = () => {
     setIsSending(true);
-    props.fetchMovies(props.history);
+    props.fetchMovies(1);
     setSearchQuery("");
     setIsSending(false);
     props.history.push("/show-list");
@@ -68,8 +68,8 @@ const Input = props => {
 };
 
 const mapStateToProps = state => ({
-  // isSending: state.isSending,
-  fetchMoves: fetchMovies,
+  isSending: state.isSending,
+  // fetchMoves: state.fetchMovies,
   selectedMovies: state.selectedMovies,
   userSuggestions: state.movieSuggestions,
   query: state.search
@@ -79,7 +79,7 @@ export default compose(
   withRouter,
   connect(mapStateToProps, {
     search: search,
-    fetchMovies: fetchMovies,
+    fetchMovies: page => fetchMovies(page),
     movieSuggestions: movieSuggestions
   })
 )(Input);

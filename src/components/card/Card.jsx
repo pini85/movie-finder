@@ -95,7 +95,11 @@ const Card = props => {
     <div className="card">
       <div className="card-inner">
         <div style={styleFrontCard} className="card-front">
-          <div style={styleYear}>{props.movie.release_date.substr(0, 4)}</div>
+          <div style={styleYear}>
+            {props.movie.release_date
+              ? props.movie.release_date.substr(0, 4)
+              : "N/A"}
+          </div>
           <div style={styleRating}>
             <div style={{ marginRight: "5px" }}>
               <FontAwesomeIcon icon={faStar} />

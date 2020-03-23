@@ -5,6 +5,7 @@ export const ButtonContainer = styled.button`
   font-size: 1.5rem;
   background: var(--secondary-color-light);
   color: var(--text-white);
+  width: 4.5rem !important;
 
   padding: 3px 8px;
   border: 1px solid var(--secondary-color-lightest);

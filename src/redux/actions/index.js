@@ -30,10 +30,12 @@ export const movieSuggestions = movies => {
     payload: movies
   };
 };
-export const fetchMovies = () => async (dispatch, getState) => {
+export const fetchMovies = page => async (dispatch, getState) => {
   const state = getState();
   if (state.search.length > 0) {
-    const response = await tmdbQueryApi(state.search);
+    console.log("action", page);
+
+    const response = await tmdbQueryApi(page, state.search);
 
     dispatch({ type: "FETCH_MOVIES", payload: response });
   }
@@ -62,7 +64,6 @@ export const fetchMovieSlider = () => async dispatch => {
       const data = await tmdbIdApi(item.id);
 
       popularMoviesData.push(data);
-      console.log(popularMoviesData);
 
       if (popularMoviesData.length === 5)
         dispatch({ type: "FETCH_MOVIE_SLIDER", payload: popularMoviesData });
@@ -98,5 +99,12 @@ export const isSending = bool => {
   return {
     type: "IS_SENDING",
     payload: bool
+  };
+};
+
+export const currentPage = page => {
+  return {
+    type: "CURRENT_PAGE",
+    payload: page
   };
 };

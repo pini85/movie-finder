@@ -43,6 +43,8 @@ const searchQueryReducer = (movieQuery = "", action) => {
 
 const movieSliderReducer = (movieSlider = null, action) => {
   if (action.type === "FETCH_MOVIE_SLIDER") {
+    console.log("reducer", movieSlider);
+
     return action.payload;
   }
   return movieSlider;
@@ -75,6 +77,13 @@ const optionActiveReducer = (active = "1", action) => {
   return active;
 };
 
+const currentPageReducer = (page = 1, action) => {
+  if (action.type === "CURRENT_PAGE") {
+    return action.payload;
+  }
+  return page;
+};
+
 export default combineReducers({
   fetchMovies: fetchMoviesReducer,
   selectedMovie: selectedMovieReducer,
@@ -85,5 +94,6 @@ export default combineReducers({
   movieSlider: movieSliderReducer,
   newestMovies: newestMoviesReducer,
   highestRatedMovies: highestRatedReducer,
-  optionActive: optionActiveReducer
+  optionActive: optionActiveReducer,
+  currentPage: currentPageReducer
 });

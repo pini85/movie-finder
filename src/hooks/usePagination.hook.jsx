@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import Pagination from "../components/Pagination/Pagination.component";
+
 const usePagination = (api, currentPage, setCurrentPage, active) => {
   const fetchApi = api[0];
   const data = api[1];
+  console.log(currentPage);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,16 +15,16 @@ const usePagination = (api, currentPage, setCurrentPage, active) => {
   const maxPage = data.total_pages;
 
   const next = () => {
-    setCurrentPage(currentPage => Math.min(currentPage + 1, maxPage));
+    setCurrentPage(Math.min(currentPage + 1, maxPage));
   };
 
   const prev = () => {
-    setCurrentPage(currentPage => Math.max(currentPage - 1, 1));
+    setCurrentPage(Math.max(currentPage - 1, 1));
   };
 
   const jump = (page, e) => {
     const pageNumber = Math.max(1, page);
-    setCurrentPage(currentPage => Math.min(pageNumber, maxPage));
+    setCurrentPage(Math.min(pageNumber, maxPage));
   };
   const first = () => {
     setCurrentPage(1);

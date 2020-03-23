@@ -25,8 +25,6 @@ const Carousel = props => {
       <Slider {...settings}>
         {props.movies &&
           props.movies.map(movie => {
-            console.log("iteration", movie.title);
-
             return (
               <div key={movie.id}>
                 <MovieSlider movie={movie}></MovieSlider>

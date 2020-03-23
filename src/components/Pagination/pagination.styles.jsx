@@ -4,7 +4,8 @@ export const Container = styled.div`
   display: flex;
   width: 70rem;
   justify-content: center;
-  margin-bottom: 4rem;
+  padding-bottom: 4rem;
+  background: var(--secondary-color);
 `;
 export const ButtonContainer = styled.button`
   display: flex;

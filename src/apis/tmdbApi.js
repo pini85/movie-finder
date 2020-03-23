@@ -17,12 +17,15 @@ export const tmdbMovieSliderApi = async () => {
   const data = await response.json();
 
   const shuffled = shuffle(data.results);
+  console.log("shuffled", shuffled);
 
   return shuffled.slice(0, 5);
 };
-export const tmdbQueryApi = async query => {
+export const tmdbQueryApi = async (page, query) => {
+  console.log(page);
+
   const response = await fetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=${ApiKey}&language=en-US&query=${query}&page=1&include_adult=false`
+    `https://api.themoviedb.org/3/search/movie?api_key=${ApiKey}&language=en-US&query=${query}&page=${page}&include_adult=false`
   );
   const data = await response.json();
   return data;
