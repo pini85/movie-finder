@@ -23,7 +23,7 @@ const Home = props => {
       switch (props.optionActive) {
         case "1":
           props.newestMovies(1);
-          props.currentPage(1);
+
           console.log(props.currentPageData);
 
           // setCurrentPage(1);

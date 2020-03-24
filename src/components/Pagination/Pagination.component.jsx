@@ -6,57 +6,32 @@ import { connect } from "react-redux";
 
 const Pagination = props => {
   const [buttons, setButtons] = useState(null);
+  const [count, setCount] = useState(1);
+  const [amount, setAmount] = useState(20);
+
+  console.log(count);
 
   useEffect(() => {
-    let x = [];
-    if (props.currentPageData < 10) {
-      for (let i = 1; i <= props.totalPages; i++) {
-        x.push(i);
-      }
+    props.currentPage(1);
+  }, []);
+
+  useEffect(() => {
+    let amountOfButtons = [];
+
+    for (let i = count; i <= props.totalPages; i++) {
+      amountOfButtons.push(i);
     }
-    if (props.currentPageData > 9) {
-      let number = 1;
-
-      const addition = page => {
-        for (let i = 10; i < page; i++) {
-          console.log("im here");
-
-          if (props.currentPageData + 9 >= props.totalPages) {
-            console.log("im in", number);
-
-            number = props.totalPages - 10 - 9;
-            console.log("number", number);
-
-            break;
-          }
-
-          number++;
-          console.log(number);
-        }
-        return number;
-      };
-      for (let i = 0 + addition(); i <= props.totalPages; i++) {
-        x.push(i);
-      }
-    }
-
-    // if (currentPage === 10) {
-    //   console.log("currentPage", currentPage);
-    //   for (let i = 1; i <= totalPages; i++) {
-
-    //     x.push(i + 1);
-    //   }
-    // }
-    // if (currentPage === 11) {
-    //   console.log("currentPage", currentPage);
-    //   for (let i = 1; i <= totalPages; i++) {
-    //     debugger;
-    //     x.push(i + 2);
-    //   }
-    // }
-
-    setButtons(x);
+    setButtons(amountOfButtons);
   }, [props.active, props.currentPageData]);
+
+  const changeCounter = () => {
+    if (
+      props.currentPageData > amount / 2 - 1 &&
+      props.currentPageData < props.totalPages - 10
+    )
+      return setCount;
+  };
+
   const bold = page =>
     page === props.currentPageData
       ? { fontWeight: "700", background: "var(--secondary-color-lightest)" }
@@ -64,17 +39,19 @@ const Pagination = props => {
 
   return (
     <Container>
-      <ButtonContainer onClick={props.prev}>
+      <ButtonContainer onClick={() => props.prev(count, changeCounter())}>
         <div>&#8592;</div> Prev
       </ButtonContainer>
-      <ButtonContainer onClick={props.first}>First</ButtonContainer>
-      {buttons && buttons.length > 20
-        ? buttons.slice(0, 20).map(page => {
+      <ButtonContainer onClick={() => props.first(setCount)}>
+        First
+      </ButtonContainer>
+      {buttons && buttons.length > amount
+        ? buttons.slice(0, amount).map(page => {
             return (
               <div className="hiiii" style={{ ovderflow: "hidden" }}>
                 <ButtonContainer
                   style={bold(page)}
-                  onClick={e => props.jump(page, e)}
+                  onClick={e => props.jump(page)}
                 >
                   {page}
                 </ButtonContainer>
@@ -94,8 +71,12 @@ const Pagination = props => {
               </div>
             );
           })}
-      <ButtonContainer onClick={props.last}>Last</ButtonContainer>
-      <ButtonContainer onClick={props.next}>Next</ButtonContainer>
+      <ButtonContainer onClick={() => props.last(setCount)}>
+        Last
+      </ButtonContainer>
+      <ButtonContainer onClick={() => props.next(count, changeCounter())}>
+        Next
+      </ButtonContainer>
     </Container>
   );
 };

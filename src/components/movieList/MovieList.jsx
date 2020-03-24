@@ -10,8 +10,6 @@ import { tmdbQueryApi } from "../../apis/tmdbApi";
 
 import Card from "../card/Card";
 const MovieList = props => {
-  console.log(props);
-
   const styleDiv = {
     display: "flex",
     flexdirection: "column",
@@ -42,7 +40,7 @@ const MovieList = props => {
         {props.fetchMoviesData &&
           props.fetchMoviesData.results.map(movie => {
             if (movie === null) return;
-            // console.log("movies", movie);
+            //
 
             return (
               <div key={movie.id}>

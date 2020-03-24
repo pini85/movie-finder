@@ -9,7 +9,7 @@ const middleWares = [thunk];
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["movieSuggestions", "optionActive", " movieSlider"]
+  blacklist: ["movieSuggestions", "optionActive", " movieSlider", "movieList"]
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
