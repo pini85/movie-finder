@@ -14,8 +14,6 @@ const usePagination = (api, currentPage, setCurrentPage, active) => {
   const maxPage = data.total_pages;
 
   const next = (count, setCount) => {
-    console.log(count);
-
     setCurrentPage(Math.min(currentPage + 1, maxPage));
     if (setCount !== undefined) {
       setCount(value => ++value);
@@ -23,8 +21,6 @@ const usePagination = (api, currentPage, setCurrentPage, active) => {
   };
 
   const prev = (count, setCount) => {
-    console.log(count);
-
     setCurrentPage(Math.max(currentPage - 1, 1));
     if (setCount !== undefined && count > 1) {
       console.log("im here");
@@ -33,9 +29,15 @@ const usePagination = (api, currentPage, setCurrentPage, active) => {
     }
   };
 
-  const jump = (page, e) => {
+  const jump = (page, setCount) => {
+    console.log("im here");
+
     const pageNumber = Math.max(1, page);
     setCurrentPage(Math.min(pageNumber, maxPage));
+
+    if (setCount !== undefined) {
+      setCount(page - 10);
+    }
   };
   const first = setCount => {
     setCurrentPage(1);

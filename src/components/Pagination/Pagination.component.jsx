@@ -9,8 +9,6 @@ const Pagination = props => {
   const [count, setCount] = useState(1);
   const [amount, setAmount] = useState(20);
 
-  console.log(count);
-
   useEffect(() => {
     props.currentPage(1);
   }, []);
@@ -25,11 +23,32 @@ const Pagination = props => {
   }, [props.active, props.currentPageData]);
 
   const changeCounter = () => {
+    debugger;
     if (
       props.currentPageData > amount / 2 - 1 &&
-      props.currentPageData < props.totalPages - 10
+      props.currentPageData >= props.totalPages - amount / 2
     )
       return setCount;
+  };
+  const changeCounterForJump = page => {
+    console.log("helloooo");
+    // debugger;
+
+    if (page > amount / 2) {
+      setCount(page - 9);
+      props.currentPage(page);
+    } else if (page < props.currentPageData && page > amount / 2 - 1) {
+      setCount(props.currentPageData - page);
+      props.currentPage(page);
+    } else if (props.currentPageData > 10 && page < 10) {
+      setCount(1);
+    }
+    // } else if (
+    //   props.currentPageData > amount / 2 - 1 &&
+    //   props.currentPageData < props.totalPages - 10
+    // ) {
+    //   return setCount;
+    // }
   };
 
   const bold = page =>
@@ -51,7 +70,7 @@ const Pagination = props => {
               <div className="hiiii" style={{ ovderflow: "hidden" }}>
                 <ButtonContainer
                   style={bold(page)}
-                  onClick={e => props.jump(page)}
+                  onClick={e => props.jump(page, changeCounterForJump(page))}
                 >
                   {page}
                 </ButtonContainer>
@@ -64,7 +83,7 @@ const Pagination = props => {
               <div className="hiiii" style={{ ovderflow: "hidden" }}>
                 <ButtonContainer
                   style={bold(page)}
-                  onClick={e => props.jump(page, e)}
+                  onClick={() => props.jump(page, changeCounter())}
                 >
                   {page}
                 </ButtonContainer>
