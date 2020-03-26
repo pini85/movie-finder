@@ -7,24 +7,23 @@ import {
   fetchHighestRatedMovies,
   currentPage
 } from "../../redux/actions";
-import usePagination from "../../hooks/usePagination.hook";
 
 import Carousel from "../carousel/carousel.component";
 import Options from "../Options/Options.component";
 
-import MovieList from "../movieList/MovieList";
+import MovieListHome from "../MovieListHome/MoveListHome.component";
 
 const Home = props => {
-  //couldn't wrap connect to custom hooks below. Had to lift the state.
-  // const [currentPage, setCurrentPage] = useState(1);
+  useEffect(() => {
+    props.movieSlider();
+    props.newestMovies(1);
+    props.highestRatedMovies(1);
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
-      props.movieSlider();
       switch (props.optionActive) {
         case "1":
           props.newestMovies(1);
-
-          console.log(props.currentPageData);
 
           // setCurrentPage(1);
 
@@ -38,40 +37,31 @@ const Home = props => {
     };
 
     fetchData();
-  }, [props.optionActive]);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     props.movieSlider();
-  //   };
+  }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      props.movieSlider();
+    };
 
-  //   fetchData();
-  // }, []);
+    fetchData();
+  }, []);
 
   const showList = () => {
+    console.log();
+
     switch (props.optionActive) {
       case "1":
         return (
           props.newestMoviesData && (
-            <MovieList movies={props.newestMoviesData.results} />
+            <MovieListHome movies={props.newestMoviesData.results} />
           )
         );
       case "2":
         return (
           props.highestRatedMoviesData && (
-            <MovieList movies={props.highestRatedMoviesData.results} />
+            <MovieListHome movies={props.highestRatedMoviesData.results} />
           )
         );
-      case "3":
-        return "Coming soon";
-    }
-  };
-  const currentData = () => {
-    switch (props.optionActive) {
-      case "1":
-        return [props.newestMovies, props.newestMoviesData];
-
-      case "2":
-        return [props.highestRatedMovies, props.highestRatedMoviesData];
       case "3":
         return "Coming soon";
     }
@@ -95,27 +85,10 @@ const Home = props => {
         <div style={{ width: "100%" }}>
           <Header>Welcome to Movie Finder</Header>
           <Paragraph>Discover and watch</Paragraph>
-          {}
         </div>
         <Options />
-        <div style={{ margin: "0 auto" }}>
-          {usePagination(
-            currentData(),
-            props.currentPageData,
-            props.currentPage,
-            props.optionActive
-          )}
-        </div>
 
         {showList()}
-        <div style={{ margin: "0 auto" }}>
-          {usePagination(
-            currentData(),
-            props.currentPageData,
-            props.CurrentPage,
-            props.optionActive
-          )}
-        </div>
       </div>
     </div>
   );

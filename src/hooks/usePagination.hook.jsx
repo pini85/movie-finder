@@ -7,37 +7,23 @@ const usePagination = (api, currentPage, setCurrentPage, active) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      fetchApi(currentPage);
+      await fetchApi(currentPage);
     };
     fetchData();
   }, [currentPage]);
   const maxPage = data.total_pages;
 
-  const next = (count, setCount) => {
+  const next = () => {
     setCurrentPage(Math.min(currentPage + 1, maxPage));
-    if (setCount !== undefined) {
-      setCount(value => ++value);
-    }
   };
 
-  const prev = (count, setCount) => {
+  const prev = () => {
     setCurrentPage(Math.max(currentPage - 1, 1));
-    if (setCount !== undefined && count > 1) {
-      console.log("im here");
-
-      setCount(value => --value);
-    }
   };
 
-  const jump = (page, setCount) => {
-    console.log("im here");
-
+  const jump = page => {
     const pageNumber = Math.max(1, page);
     setCurrentPage(Math.min(pageNumber, maxPage));
-
-    if (setCount !== undefined) {
-      setCount(page - 10);
-    }
   };
   const first = setCount => {
     setCurrentPage(1);

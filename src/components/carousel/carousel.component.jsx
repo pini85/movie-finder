@@ -5,6 +5,8 @@ import { connect } from "react-redux";
 import Slider from "react-slick";
 import MovieSlider from "../movieSLider/MovieSlider.component";
 const Carousel = props => {
+  console.log("carousel", props.movies);
+
   const settings = {
     dots: true,
     infinite: true,

@@ -43,8 +43,6 @@ const searchQueryReducer = (movieQuery = "", action) => {
 
 const movieSliderReducer = (movieSlider = null, action) => {
   if (action.type === "FETCH_MOVIE_SLIDER") {
-    console.log("reducer", movieSlider);
-
     return action.payload;
   }
   return movieSlider;

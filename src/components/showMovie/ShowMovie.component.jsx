@@ -17,6 +17,7 @@ const ShowMovie = props => {
       setIsLoading(true);
 
       const id = props.id;
+      console.log("showMive", id);
 
       const tmdbData = await tmdbIdApi(id);
       const omdbData = await omdbApi(tmdbData.imdb_id);

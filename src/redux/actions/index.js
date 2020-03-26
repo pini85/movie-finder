@@ -7,6 +7,7 @@ import {
   tmdbHighestRatedApi
 } from "../../apis/tmdbApi";
 export const selectedMovie = movie => {
+  console.log("selectedMovies Action", movie.title);
   return {
     type: "MOVIE_SELECTED",
     payload: movie
@@ -33,8 +34,6 @@ export const movieSuggestions = movies => {
 export const fetchMovies = page => async (dispatch, getState) => {
   const state = getState();
   if (state.search.length > 0) {
-    console.log("action", page);
-
     const response = await tmdbQueryApi(page, state.search);
 
     dispatch({ type: "FETCH_MOVIES", payload: response });
@@ -59,16 +58,14 @@ export const fetchMovieSlider = () => async dispatch => {
 
   const data = await tmdbMovieSliderApi();
 
-  Promise.all(
-    data.map(async item => {
-      const data = await tmdbIdApi(item.id);
+  for (let i = 0; i < data.length; i++) {
+    const x = await tmdbIdApi(data[i].id);
+    popularMoviesData.push(x);
+  }
 
-      popularMoviesData.push(data);
-
-      if (popularMoviesData.length === 5)
-        dispatch({ type: "FETCH_MOVIE_SLIDER", payload: popularMoviesData });
-    })
-  );
+  if (popularMoviesData.length === 1) {
+    dispatch({ type: "FETCH_MOVIE_SLIDER", payload: popularMoviesData });
+  }
 };
 
 export const fetchHighestRatedMovies = page => async dispatch => {

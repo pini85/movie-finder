@@ -1,5 +1,6 @@
 import React from "react";
 import Input from "../input/Input.component";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { movieSuggestions } from "../../redux/actions/index";
 import { logo } from "../../images/logo.png";
@@ -20,14 +21,16 @@ const image = {
 const Navbar = props => {
   return (
     <div style={styleContainer}>
-      <div className="hi">
-        <img
-          style={image}
-          className="YUP"
-          src={require("../../images/logo.png")}
-          alt=""
-        />
-      </div>
+      <Link to="/">
+        <div className="hi">
+          <img
+            style={image}
+            className="YUP"
+            src={require("../../images/logo.png")}
+            alt=""
+          />
+        </div>
+      </Link>
 
       <Input />
     </div>

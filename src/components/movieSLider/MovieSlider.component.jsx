@@ -5,6 +5,8 @@ import MovieSliderInfo from "../movie-slider-info/MovieSliderInfo.component";
 import styled from "styled-components";
 
 const movieSlider = props => {
+  console.log("movieSlider", props.movie.title);
+
   const Container = styled.div`
     height: 48rem;
     background: url(https://image.tmdb.org/t/p/w1280//${props.movie.backdrop_path});
@@ -20,7 +22,7 @@ const movieSlider = props => {
 
   return (
     <Container>
-      <MovieSliderInfo movie={props} />
+      <MovieSliderInfo movie={props.movie} />
     </Container>
   );
 };

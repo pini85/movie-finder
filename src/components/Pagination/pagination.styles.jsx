@@ -24,4 +24,7 @@ export const ButtonContainer = styled.button`
     background: var(--secondary-color-lightest);
     color: var(--text-dark);
   }
+  &:focus {
+    outline: 0 !important;
+  }
 `;

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
-import { selectedMovieId } from "../../redux/actions/index";
+import { selectedMovie } from "../../redux/actions/index";
 import {
   Container,
   DetailContainer,
@@ -14,9 +14,15 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import Button from "../Button/Button";
 
 const MovieSliderInfo = props => {
+  console.log("moviesliderinfo", props.movie.title, props.movie.id);
+
   const handleClick = () => {
-    props.selectedMovieId(props.movie.movie.id);
-    props.history.push(`/show-movie/${props.movie.movie.id}`);
+    console.log("my movie is", props.movie.id);
+
+    props.selectedMovie(props.movie);
+    props.selectedMovieId(props.movie.id);
+
+    props.history.push(`/show-movie/${props.movie.id}`);
   };
   const plotDetails = plot => {
     if (plot.length > 200) {
@@ -27,8 +33,8 @@ const MovieSliderInfo = props => {
 
   return (
     <Container>
-      <Header>{props.movie.movie.title}</Header>
-      <Plot>{plotDetails(props.movie.movie.overview)}</Plot>
+      <Header>{props.movie.title}</Header>
+      <Plot>{plotDetails(props.movie.overview)}</Plot>
       <DetailContainer>
         <a onClick={handleClick}>
           <Button title="Details" />
@@ -36,11 +42,9 @@ const MovieSliderInfo = props => {
 
         <div style={{ fontSize: "1.5rem" }}>
           <div style={{ marginBottom: "-3px" }}>
-            {props.movie.movie.release_date.slice(0, 4)}
+            {props.movie.release_date.slice(0, 4)}
           </div>
-          <div style={{ marginTop: "-3px" }}>
-            {props.movie.movie.runTime} min
-          </div>
+          <div style={{ marginTop: "-3px" }}>{props.movie.runTime} min</div>
         </div>
         <div style={{ display: "flex" }}>
           <div
@@ -52,7 +56,7 @@ const MovieSliderInfo = props => {
           >
             <FontAwesomeIcon icon={faStar} />
           </div>
-          <div style={{ fontSize: "1.4rem" }}>{props.movie.movie.vote}</div>
+          <div style={{ fontSize: "1.4rem" }}>{props.movie.vote}</div>
         </div>
       </DetailContainer>
     </Container>
@@ -62,6 +66,7 @@ const MovieSliderInfo = props => {
 export default compose(
   withRouter,
   connect(null, {
-    selectedMovieId: selectedMovieId
+    selectedMovie: movie => selectedMovie(movie),
+    selectedMovieId: id => selectedMovie(id)
   })
 )(MovieSliderInfo);

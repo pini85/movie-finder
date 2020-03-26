@@ -22,33 +22,26 @@ const Pagination = props => {
     setButtons(amountOfButtons);
   }, [props.active, props.currentPageData]);
 
-  const changeCounter = () => {
-    debugger;
+  const changeCounter = type => {
+    const difference = props.currentPageData - amount / 2;
+    console.log(difference);
     if (
-      props.currentPageData > amount / 2 - 1 &&
-      props.currentPageData >= props.totalPages - amount / 2
-    )
-      return setCount;
+      difference > 0 &&
+      props.totalPages - props.currentPageData > amount / 2
+    ) {
+      type === "next" ? setCount(value => ++value) : setCount(value => --value);
+    }
   };
   const changeCounterForJump = page => {
-    console.log("helloooo");
-    // debugger;
+    const difference = page - amount / 2;
 
-    if (page > amount / 2) {
-      setCount(page - 9);
-      props.currentPage(page);
-    } else if (page < props.currentPageData && page > amount / 2 - 1) {
-      setCount(props.currentPageData - page);
-      props.currentPage(page);
-    } else if (props.currentPageData > 10 && page < 10) {
+    if (difference >= 0 && props.totalPages - page >= 10) {
+      setCount(difference + 1);
+    } else if (props.totalPages - page < 10 && page > amount / 2) {
+      setCount(props.totalPages - 10 - 10);
+    } else {
       setCount(1);
     }
-    // } else if (
-    //   props.currentPageData > amount / 2 - 1 &&
-    //   props.currentPageData < props.totalPages - 10
-    // ) {
-    //   return setCount;
-    // }
   };
 
   const bold = page =>
@@ -58,7 +51,7 @@ const Pagination = props => {
 
   return (
     <Container>
-      <ButtonContainer onClick={() => props.prev(count, changeCounter())}>
+      <ButtonContainer onClick={() => props.prev(count, changeCounter("prev"))}>
         <div>&#8592;</div> Prev
       </ButtonContainer>
       <ButtonContainer onClick={() => props.first(setCount)}>
@@ -70,7 +63,10 @@ const Pagination = props => {
               <div className="hiiii" style={{ ovderflow: "hidden" }}>
                 <ButtonContainer
                   style={bold(page)}
-                  onClick={e => props.jump(page, changeCounterForJump(page))}
+                  onClick={() => {
+                    props.jump(page);
+                    changeCounterForJump(page);
+                  }}
                 >
                   {page}
                 </ButtonContainer>
@@ -93,7 +89,7 @@ const Pagination = props => {
       <ButtonContainer onClick={() => props.last(setCount)}>
         Last
       </ButtonContainer>
-      <ButtonContainer onClick={() => props.next(count, changeCounter())}>
+      <ButtonContainer onClick={() => props.next(count, changeCounter("next"))}>
         Next
       </ButtonContainer>
     </Container>
