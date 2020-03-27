@@ -3,14 +3,17 @@ import "./card.styles.scss";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
-import { selectedMovieId } from "../../redux/actions/index";
+import { selectedMovieId, selectedMovie } from "../../redux/actions/index";
 import Button from "../Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 const Card = props => {
   const handleClick = () => {
+    console.log(props.movie);
+
     props.selectedMovieId(props.movie.id);
+    props.selectedMovie(props.movie);
     props.history.push(`/show-movie/${props.movie.id}`);
   };
   //   const styleCard = {
@@ -122,6 +125,7 @@ const Card = props => {
 export default compose(
   withRouter,
   connect(null, {
-    selectedMovieId: selectedMovieId
+    selectedMovieId: selectedMovieId,
+    selectedMovie: movie => selectedMovie(movie)
   })
 )(Card);

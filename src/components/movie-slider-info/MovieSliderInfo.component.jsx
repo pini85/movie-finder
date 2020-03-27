@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
-import { selectedMovie } from "../../redux/actions/index";
+import { selectedMovieId, selectedMovie } from "../../redux/actions/index";
 import {
   Container,
   DetailContainer,
@@ -14,15 +14,13 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import Button from "../Button/Button";
 
 const MovieSliderInfo = props => {
-  console.log("moviesliderinfo", props.movie.title, props.movie.id);
-
   const handleClick = () => {
-    console.log("my movie is", props.movie.id);
-
     props.selectedMovie(props.movie);
     props.selectedMovieId(props.movie.id);
+    console.log(props.movie.title);
 
     props.history.push(`/show-movie/${props.movie.id}`);
+    debugger;
   };
   const plotDetails = plot => {
     if (plot.length > 200) {
@@ -66,7 +64,7 @@ const MovieSliderInfo = props => {
 export default compose(
   withRouter,
   connect(null, {
-    selectedMovie: movie => selectedMovie(movie),
-    selectedMovieId: id => selectedMovie(id)
+    selectedMovieId: id => selectedMovieId(id),
+    selectedMovie: movie => selectedMovie(movie)
   })
 )(MovieSliderInfo);

@@ -82,6 +82,13 @@ const currentPageReducer = (page = 1, action) => {
   return page;
 };
 
+const displayMovieReducer = (movie = null, action) => {
+  if (action.type === "DISPLAY_MOVIE") {
+    return action.payload;
+  }
+  return movie;
+};
+
 export default combineReducers({
   fetchMovies: fetchMoviesReducer,
   selectedMovie: selectedMovieReducer,
@@ -93,5 +100,6 @@ export default combineReducers({
   newestMovies: newestMoviesReducer,
   highestRatedMovies: highestRatedReducer,
   optionActive: optionActiveReducer,
-  currentPage: currentPageReducer
+  currentPage: currentPageReducer,
+  displayMovie: displayMovieReducer
 });

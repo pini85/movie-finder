@@ -11,7 +11,9 @@ const styleContainer = {
   boxShadow: "rgba(0, 0, 0, 0.16) 0px 6px 20px",
   background: "var(--secondary-color-light)",
   height: "7vh",
-  padding: "3rem"
+  padding: "3rem",
+  zIndex: "2",
+  position: "relative"
 };
 const image = {
   height: "6rem",

@@ -4,7 +4,6 @@ const torrentApi = async id => {
   );
 
   const data = await response.json();
-  console.log(data);
 
   if (data.data.movie_count === 0) {
     return false;
