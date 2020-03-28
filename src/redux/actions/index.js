@@ -148,6 +148,13 @@ export const displayMovie = page => async (dispatch, getState) => {
   dispatch({ type: "DISPLAY_MOVIE", payload: item });
 };
 
+export const fetchTrailers = () => async (dispatch, getState) => {
+  const id = getState().selectedMovieId;
+  const trailers = await tmdbTrailersApi(id);
+  console.log("action", trailers);
+
+  dispatch({ type: "FETCH_TRAILERS", payload: trailers });
+};
 export const optionActive = e => {
   return {
     type: "OPTION_ACTIVE",

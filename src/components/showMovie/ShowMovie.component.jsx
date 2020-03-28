@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import framer from "framer-motion";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import Skeleton from "react-loading-skeleton";
@@ -6,6 +7,7 @@ import { selectedMovie, displayMovie } from "../../redux/actions/index";
 import YouTube from "react-youtube";
 import Test from "../skeletons/test";
 import ShowMovieInfo from "../showMovieInfo/ShowMovieInfo.component";
+import Trailer from "../Trailer/Trailer.component";
 
 const ShowMovie = props => {
   console.log("WHAT", props.item);
@@ -206,53 +208,6 @@ const ShowMovie = props => {
     height: calc(100vh - 7vh);
   `;
 
-  const TrailerContainer = styled.div`
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform: skewY(-2.5deg);
-    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-    background: url(https://image.tmdb.org/t/p/w185//${props.item ? props.item.poster : null});
-
-    background-size: 100% 100%;
-    background-repeat: cover;
-    background-attachment: inherit;
-    height: 25rem;
-    width: 17rem;
-    bottom: -75px;
-    right: -60px;
-    transition: all 0.3s;
-    &:hover {
-      transform: scale(1.1);
-    }
-  `;
-  const TrailerPlay = styled.div`
-    cursor: pointer;
-    position: relative;
-    height: 35%;
-    width: 50%;
-    border-radius: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    transition: all 0.3s;
-    /* &:hover {
-      background: var(--secondary-color);
-    } */
-    &:hover:after {
-      color: ${colors.vibrantDark};
-    }
-    &:after {
-      content: "\\0025BA";
-      position: absolute;
-      font-size: 4rem;
-      color: ${colors.vibrant};
-      top: 50%;
-      left: 53%;
-      transform: translate(-50%, -50%);
-      transition: all 0.3s;
-    }
-  `;
-
   return (
     <div>
       <Container>
@@ -265,9 +220,12 @@ const ShowMovie = props => {
                 year={props.item.year}
               />
             </TopContainer>
-            <TrailerContainer>
-              <TrailerPlay />
-            </TrailerContainer>
+            <Trailer
+              poster={props.item.poster}
+              vibrant={colors.vibrant}
+              vibrantDark={colors.vibrantDark}
+              trailers={trailers}
+            />
           </HeroContainer>
         </MovieCard>
         <div style={{ display: "flex" }}>

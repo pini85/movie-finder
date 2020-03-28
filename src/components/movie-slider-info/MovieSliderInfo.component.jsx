@@ -14,6 +14,8 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import Button from "../Button/Button";
 
 const MovieSliderInfo = props => {
+  console.log("MOVIESLIDERINFO", props);
+
   const handleClick = () => {
     props.selectedMovie(props.movie);
     props.selectedMovieId(props.movie.id);

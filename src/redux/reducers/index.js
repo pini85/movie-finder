@@ -88,6 +88,12 @@ const displayMovieReducer = (movie = null, action) => {
   }
   return movie;
 };
+const fetchTrailersReducer = (trailers = null, action) => {
+  if (action.type === "FETCH_TRAILERS") {
+    return action.payload;
+  }
+  return trailers;
+};
 
 export default combineReducers({
   fetchMovies: fetchMoviesReducer,
@@ -101,5 +107,6 @@ export default combineReducers({
   highestRatedMovies: highestRatedReducer,
   optionActive: optionActiveReducer,
   currentPage: currentPageReducer,
-  displayMovie: displayMovieReducer
+  displayMovie: displayMovieReducer,
+  trailers: fetchTrailersReducer
 });
