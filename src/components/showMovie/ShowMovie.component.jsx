@@ -8,30 +8,15 @@ import YouTube from "react-youtube";
 import Test from "../skeletons/test";
 import ShowMovieInfo from "../showMovieInfo/ShowMovieInfo.component";
 import Trailer from "../Trailer/Trailer.component";
+import ShowMovieOption from "../ShowMovieOption/ShowMovieOption.component";
 
 const ShowMovie = props => {
-  console.log("WHAT", props.item);
-
   const [isLoading, setIsLoading] = useState(false);
+  const [isModalTorrents, setModalTorrents] = useState(false);
 
   useEffect(() => {
-    console.log("im envoked");
-
     props.displayMovie();
   }, [props.id]);
-
-  const optsYouTube = {
-    height: "390",
-    width: "640",
-    playerVars: {
-      autoplay: 0
-    }
-  };
-
-  const _onReadyYouTube = event => {
-    // access to player in all event handlers via event.target
-    event.target.pauseVideo();
-  };
 
   const ratings = () => {
     return (
@@ -51,62 +36,18 @@ const ShowMovie = props => {
     );
   };
 
-  const trailers = () => {
-    return (
-      props.item &&
-      props.item.trailers.map(trailer => {
-        return (
-          <>
-            <YouTube
-              videoId={trailer.key}
-              opts={optsYouTube}
-              // onReady={_onReadyYouTube}
-            />
-          </>
-        );
-      })
-    );
-  };
-
-  const torrents = () => {
-    return (
-      props.item &&
-      props.item.torrents.map(torrent => {
-        return (
-          <div>
-            <div>
-              Url: <a href={torrent.url}>link!!!</a>
-            </div>
-            <div>seeds: {torrent.seeds}</div>
-            <div>peers: {torrent.peers}</div>
-            <div>size:{torrent.size}</div>
-            <div>type:{torrent.type}</div>
-          </div>
-        );
-      })
-    );
-  };
-
-  const magnets = () => {
-    return (
-      props.item &&
-      props.item.magnets.map(magnet => {
-        return (
-          <div>
-            <a href={magnet}>magnet</a>
-          </div>
-        );
-      })
-    );
-  };
-
-  const subtitle = () => {
-    return props.item && props.item.subtitle ? (
-      <div>
-        <a href={props.item.subtitle}> subtitle</a>
-      </div>
-    ) : null;
-  };
+  // const magnets = () => {
+  //   return (
+  //     props.item &&
+  //     props.item.magnets.map(magnet => {
+  //       return (
+  //         <div>
+  //           <a href={magnet}>magnet</a>
+  //         </div>
+  //       );
+  //     })
+  //   );
+  // };
 
   const imageTarget = () => {
     return `http://image.tmdb.org/t/p/w185//${props.item.poster_path}`;
@@ -164,9 +105,10 @@ const ShowMovie = props => {
 
   const Container = styled.div`
     padding: 0 14vw;
-    background: ${props.item
-      ? props.item.colors[2]
-      : "var(primary-color-light)"};
+    background-image: ${`linear-gradient(to bottom, ${colors.mutedDark}, ${colors.muted})`};
+    /* background: ${
+      props.item ? colors.mutedDark : "var(primary-color-light)"
+    }; */
   `;
 
   const HeroContainer = styled.div`
@@ -204,8 +146,9 @@ const ShowMovie = props => {
   `;
 
   const MovieCard = styled.div`
-    background: white;
+    background: ${colors.vibrantLight};
     height: calc(100vh - 7vh);
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
   `;
 
   return (
@@ -224,9 +167,11 @@ const ShowMovie = props => {
               poster={props.item.poster}
               vibrant={colors.vibrant}
               vibrantDark={colors.vibrantDark}
-              trailers={trailers}
             />
           </HeroContainer>
+          <ShowMovieOption title="TORRENT" type="torrent" />
+          <ShowMovieOption title="SUBTITLES" type="subtitle" />
+          <ShowMovieOption title="MAGNETS" type="magnets" />
         </MovieCard>
         <div style={{ display: "flex" }}>
           <DarkVibrant></DarkVibrant>
@@ -251,15 +196,6 @@ const ShowMovie = props => {
               <div>plot: {props.item.plot}</div>
               <div>tagline: {props.item.tagLine}</div>
               <div>language: {props.item.language}</div>
-              <img
-                src={`http://image.tmdb.org/t/p/w185//${props.item.poster}`}
-                alt=""
-              />
-              {/* {images()} */}
-              {trailers()}
-              {torrents()}
-              {subtitle()}
-              {magnets()}
             </>
           ) : null}
         </div>

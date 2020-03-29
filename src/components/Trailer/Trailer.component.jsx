@@ -2,19 +2,24 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchTrailers } from "../../redux/actions/index";
 import YouTube from "react-youtube";
-
 import styled from "styled-components";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilm } from "@fortawesome/free-solid-svg-icons";
 import Modal from "../Modal/Modal.component";
 import Carousel from "../carousel/carousel.component";
 
 const Trailer = ({ poster, vibrant, vibrantDark, ...props }) => {
-  console.log("trailer", props);
-
   const [isToggled, setToggled] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   useEffect(() => {
-    isToggled && props.fetchTrailers();
-    console.log("useeffect", props.trailers);
+    const fetchData = async () => {
+      if (isToggled) {
+        setLoading(true);
+        await props.fetchTrailers();
+        setLoading(false);
+      }
+    };
+    fetchData();
   }, [isToggled]);
   const trailersYouTube = () => {
     const optsYouTube = {
@@ -23,6 +28,10 @@ const Trailer = ({ poster, vibrant, vibrantDark, ...props }) => {
       playerVars: {
         autoplay: 0
       }
+    };
+    const _onReadyYouTube = event => {
+      // access to player in all event handlers via event.target
+      event.target.pauseVideo();
     };
     return (
       props.trailers &&
@@ -89,12 +98,14 @@ const Trailer = ({ poster, vibrant, vibrantDark, ...props }) => {
       <TrailerContainer>
         <TrailerPlay onClick={() => setToggled(true)} />
       </TrailerContainer>
-      <Modal
-        isToggled={isToggled}
-        setToggled={setToggled}
-        items={trailersYouTube()}
-      >
+      <Modal skew={true} isToggled={isToggled} setToggled={setToggled}>
         <Carousel items={trailersYouTube()} type="trailers"></Carousel>
+        {isLoading ? (
+          <FontAwesomeIcon
+            icon={faFilm}
+            style={{ fontSize: "10rem", color: "red" }}
+          />
+        ) : null}
       </Modal>
     </>
   );

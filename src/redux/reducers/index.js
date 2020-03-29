@@ -95,6 +95,23 @@ const fetchTrailersReducer = (trailers = null, action) => {
   return trailers;
 };
 
+const fetchTorrentsReducer = (torrents = null, action) => {
+  console.log("REDUCER");
+
+  if (action.type === "FETCH_TORRENTS") {
+    return action.payload;
+  }
+  return torrents;
+};
+const fetchSubtitlesReducer = (subtitle = null, action) => {
+  console.log("REDUCER");
+
+  if (action.type === "FETCH_SUBTITLES") {
+    return action.payload;
+  }
+  return subtitle;
+};
+
 export default combineReducers({
   fetchMovies: fetchMoviesReducer,
   selectedMovie: selectedMovieReducer,
@@ -108,5 +125,7 @@ export default combineReducers({
   optionActive: optionActiveReducer,
   currentPage: currentPageReducer,
   displayMovie: displayMovieReducer,
-  trailers: fetchTrailersReducer
+  trailers: fetchTrailersReducer,
+  fetchTorrents: fetchTorrentsReducer,
+  fetchSubtitles: fetchSubtitlesReducer
 });

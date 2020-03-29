@@ -2,15 +2,17 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   position: absolute;
+  top: -5vh;
+  left: -14vw;
+  z-index: 999;
   display: flex;
   justify-content: center;
 
   padding-top: 8rem;
   background: rgba(0, 0, 0, 0.5);
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -25%) skewY(-2.5deg);
-  height: calc(100vh - 7vh);
+
+  /* transform: translate(-50%, -25%) skewY(-2.5deg); */
+  height: 100vh;
   width: 100vw;
 `;
 
