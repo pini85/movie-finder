@@ -1,5 +1,5 @@
 import React from "react";
-import Input from "../input/Input.component";
+import Search from "../Search/Search.component";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { movieSuggestions } from "../../redux/actions/index";
@@ -23,7 +23,7 @@ const image = {
 const Navbar = props => {
   return (
     <div style={styleContainer}>
-      <Link to="/">
+      {/* <Link to="/">
         <div className="hi">
           <img
             style={image}
@@ -34,7 +34,7 @@ const Navbar = props => {
         </div>
       </Link>
 
-      <Input />
+      <Search /> */}
     </div>
   );
 };

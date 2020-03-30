@@ -15,7 +15,7 @@ export const tmdbMovieSliderApi = async () => {
     `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&sort_by=popularity.desc&vote_average.gte=7&&vote_count.gte=1000&include_adult=false&include_video=false&total_results=1&page=1`
   );
   const data = await response.json();
-  return data.results.slice(0, 3);
+  return data.results.slice(0, 5);
 
   // const shuffled = shuffle(data.results);
 

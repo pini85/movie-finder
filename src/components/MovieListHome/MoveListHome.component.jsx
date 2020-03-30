@@ -11,6 +11,8 @@ import usePagination from "../../hooks/usePagination.hook";
 
 import Card from "../card/Card";
 const MovieList = props => {
+  console.log("movieList", props);
+
   useEffect(() => {
     const fetchData = async () => {
       switch (props.optionActive) {
@@ -62,12 +64,12 @@ const MovieList = props => {
         }}
       >
         <div style={{ margin: "0 auto" }}>
-          {usePagination(
+          {/* {usePagination(
             currentData(),
             props.currentPageData,
             props.currentPage,
             props.optionActive
-          )}
+          )} */}
         </div>
       </div>
       <div style={styleDiv}>
@@ -84,12 +86,12 @@ const MovieList = props => {
           })}
       </div>
       <div style={{ margin: "0 auto" }}>
-        {usePagination(
+        {/* {usePagination(
           currentData(),
           props.currentPageData,
           props.currentPage,
           props.optionActive
-        )}
+        )} */}
       </div>
     </>
     //

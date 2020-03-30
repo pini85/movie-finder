@@ -16,39 +16,26 @@ import MovieListHome from "../MovieListHome/MoveListHome.component";
 const Home = props => {
   useEffect(() => {
     props.movieSlider();
-    props.newestMovies(1);
-    props.highestRatedMovies(1);
+    // props.newestMovies(1);
+    // props.highestRatedMovies(1);
   }, []);
-  useEffect(() => {
-    const fetchData = async () => {
-      switch (props.optionActive) {
-        case "1":
-          props.newestMovies(1);
+  // useEffect(() => {
+  //   switch (props.optionActive) {
+  //     case "1":
+  //       props.newestMovies(1);
 
-          // setCurrentPage(1);
+  //       // setCurrentPage(1);
 
-          break;
-        case "2":
-          props.highestRatedMovies(1);
-          props.currentPage(1);
-        // setCurrentPage(1);
-        case "3":
-      }
-    };
+  //       break;
+  //     case "2":
+  //       props.highestRatedMovies(1);
+  //       props.currentPage(1);
 
-    fetchData();
-  }, []);
-  useEffect(() => {
-    const fetchData = async () => {
-      props.movieSlider();
-    };
-
-    fetchData();
-  }, []);
+  //     case "3":
+  //   }
+  // }, []);
 
   const showList = () => {
-    console.log();
-
     switch (props.optionActive) {
       case "1":
         return (
@@ -77,19 +64,16 @@ const Home = props => {
     overflow: "hidden"
   };
   return (
-    <div>
-      <div style={styleContainer}>
-        <div>
-          <Carousel></Carousel>
-        </div>
-        <div style={{ width: "100%" }}>
-          <Header>Welcome to Movie Finder</Header>
-          <Paragraph>Discover and watch</Paragraph>
-        </div>
-        <Options />
+    <div style={styleContainer}>
+      <Carousel></Carousel>
 
-        {showList()}
+      <div style={{ width: "100%" }}>
+        <Header>Welcome to Movie Finder</Header>
+        <Paragraph>Discover and watch</Paragraph>
       </div>
+      <Options />
+
+      {showList() || <div>Loading</div>}
     </div>
   );
 };

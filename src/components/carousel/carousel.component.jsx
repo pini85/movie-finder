@@ -7,8 +7,6 @@ import { connect } from "react-redux";
 import Slider from "react-slick";
 import MovieSlider from "../movieSLider/MovieSlider.component";
 const Carousel = props => {
-  console.log("CAROUSEL", props);
-
   const optsYouTube = {
     height: "390",
     width: "640",
@@ -42,7 +40,8 @@ const Carousel = props => {
     autoplay: false,
     autoplaySpeed: 4000,
     fade: true,
-    pauseOnHover: true
+    pauseOnHover: true,
+    lazyLoad: true
   };
   const styleContainer = {
     display: "flex",
@@ -69,6 +68,7 @@ const Carousel = props => {
             })
           : props.movies &&
             props.movies.map(movie => {
+              // debugger;
               return (
                 <div key={movie.id}>
                   <MovieSlider movie={movie}></MovieSlider>

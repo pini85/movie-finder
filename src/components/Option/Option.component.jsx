@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { optionActive } from "../../redux/actions";
 
@@ -36,9 +36,11 @@ const Option = ({ title, optionActive, optionActiveData, dataType }) => {
     </Container>
   );
 };
+const mapStateToDispatch = {
+  optionActive: optionActive
+};
 const mapStateToProps = state => ({
   optionActiveData: state.optionActive
 });
-export default connect(mapStateToProps, {
-  optionActive: optionActive
-})(Option);
+
+export default connect(mapStateToProps, mapStateToDispatch)(Option);

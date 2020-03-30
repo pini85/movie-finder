@@ -8,29 +8,31 @@ import { tmdbQueryApi } from "../../apis/tmdbApi";
 import Suggestions from "../Suggestions/Suggestions.component";
 import Button from "../Button/Button";
 
-const Input = props => {
+const Search = props => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSending, setIsSending] = useState(false);
 
   useEffect(() => {
     const asyncFunc = async () => {
-      props.search(searchQuery);
-      if (searchQuery.length > 0) {
-        const data = await tmdbQueryApi(1, searchQuery);
-
-        props.movieSuggestions(data);
-      } else {
-        props.movieSuggestions(false);
-      }
+      // BUGGY: might got incorrect order of results!
+      // if (searchQuery.length > 0) {
+      //   const data = await tmdbQueryApi(1, searchQuery);
+      //   props.movieSuggestions(data);
+      // } else {
+      //   props.movieSuggestions(false);
+      // }
+      const data = !!searchQuery.length && (await tmdbQueryApi(1, searchQuery));
+      props.movieSuggestions(data);
     };
     asyncFunc();
   }, [searchQuery]);
 
   const handleClick = () => {
-    setIsSending(true);
+    // setIsSending(true);
+    props.search(searchQuery);
     props.fetchMovies(1);
     setSearchQuery("");
-    setIsSending(false);
+    // setIsSending(false);
     props.history.push("/show-list");
   };
 
@@ -58,7 +60,7 @@ const Input = props => {
       <Button
         search={true}
         title={"search"}
-        disabled={isSending}
+        // disabled={isSending}
         handleClick={handleClick}
       ></Button>
 
@@ -82,4 +84,4 @@ export default compose(
     fetchMovies: page => fetchMovies(page),
     movieSuggestions: movieSuggestions
   })
-)(Input);
+)(Search);

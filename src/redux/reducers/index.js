@@ -96,16 +96,12 @@ const fetchTrailersReducer = (trailers = null, action) => {
 };
 
 const fetchTorrentsReducer = (torrents = null, action) => {
-  console.log("REDUCER");
-
   if (action.type === "FETCH_TORRENTS") {
     return action.payload;
   }
   return torrents;
 };
 const fetchSubtitlesReducer = (subtitle = null, action) => {
-  console.log("REDUCER");
-
   if (action.type === "FETCH_SUBTITLES") {
     return action.payload;
   }

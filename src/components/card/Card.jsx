@@ -14,6 +14,7 @@ const Card = props => {
 
     props.selectedMovieId(props.movie.id);
     props.selectedMovie(props.movie);
+
     props.history.push(`/show-movie/${props.movie.id}`);
   };
   //   const styleCard = {

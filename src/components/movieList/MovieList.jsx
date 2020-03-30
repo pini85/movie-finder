@@ -10,6 +10,8 @@ import { tmdbQueryApi } from "../../apis/tmdbApi";
 
 import Card from "../card/Card";
 const MovieList = props => {
+  console.log(props);
+
   const styleDiv = {
     display: "flex",
     flexdirection: "column",
@@ -29,12 +31,12 @@ const MovieList = props => {
           background: "var(--secondary-color)"
         }}
       >
-        {usePagination(
+        {/* {usePagination(
           [props.fetchMovies, props.fetchMoviesData],
           props.currentPageData,
           props.currentPage,
           props.optionActive
-        )}
+        )} */}
       </div>
       <div style={styleDiv}>
         {props.fetchMoviesData &&

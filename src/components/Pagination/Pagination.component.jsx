@@ -60,7 +60,7 @@ const Pagination = props => {
       {buttons && buttons.length > amount
         ? buttons.slice(0, amount).map(page => {
             return (
-              <div className="hiiii" style={{ ovderflow: "hidden" }}>
+              <div key={page} className="hiiii" style={{ ovderflow: "hidden" }}>
                 <ButtonContainer
                   style={bold(page)}
                   onClick={() => {

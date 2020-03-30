@@ -8,11 +8,7 @@ const Suggestions = props => {
     <Container>
       {props.userSuggestions &&
         props.userSuggestions.results.splice(0, 6).map(suggestion => {
-          return (
-            <div>
-              <Suggestion item={suggestion} />
-            </div>
-          );
+          return <Suggestion key={suggestion.id} item={suggestion} />;
         })}
     </Container>
   );

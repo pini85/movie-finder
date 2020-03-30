@@ -16,12 +16,13 @@ const ShowMovie = props => {
 
   useEffect(() => {
     props.displayMovie();
+    console.log(props.item);
   }, [props.id]);
 
   const ratings = () => {
     return (
       <div>
-        {props.item
+        {props.item.ratings
           ? props.item.ratings.map(item => {
               return (
                 <div>
@@ -36,18 +37,18 @@ const ShowMovie = props => {
     );
   };
 
-  // const magnets = () => {
-  //   return (
-  //     props.item &&
-  //     props.item.magnets.map(magnet => {
-  //       return (
-  //         <div>
-  //           <a href={magnet}>magnet</a>
-  //         </div>
-  //       );
-  //     })
-  //   );
-  // };
+  const magnets = () => {
+    return (
+      props.item &&
+      props.item.magnets.map(magnet => {
+        return (
+          <div>
+            <a href={magnet}>magnet</a>
+          </div>
+        );
+      })
+    );
+  };
 
   const imageTarget = () => {
     return `http://image.tmdb.org/t/p/w185//${props.item.poster_path}`;
@@ -60,12 +61,12 @@ const ShowMovie = props => {
   // }
 
   const colors = {
-    vibrant: props.item.colors[0],
-    vibrantDark: props.item.colors[1],
-    vibrantLight: props.item.colors[2],
-    muted: props.item.colors[3],
-    mutedDark: props.item.colors[4],
-    mutedLight: props.item.colors[5]
+    vibrant: props.item ? props.item.colors[0] : "white",
+    vibrantDark: props.item ? props.item.colors[1] : "white",
+    vibrantLight: props.item ? props.item.colors[2] : "white",
+    muted: props.item ? props.item.colors[3] : "white",
+    mutedDark: props.item ? props.item.colors[4] : "white",
+    mutedLight: props.item ? props.item.colors[5] : "white"
   };
 
   const VibrantC = styled.div`
@@ -153,54 +154,57 @@ const ShowMovie = props => {
 
   return (
     <div>
-      <Container>
-        <MovieCard>
-          <HeroContainer>
-            <TopContainer>
-              <ShowMovieInfo
-                color={colors.mutedLight}
-                title={props.item.title}
-                year={props.item.year}
+      {props.item && (
+        <Container>
+          <MovieCard>
+            <HeroContainer>
+              <TopContainer>
+                <ShowMovieInfo
+                  color={colors.mutedLight}
+                  title={props.item.title}
+                  year={props.item.year}
+                />
+              </TopContainer>
+              <Trailer
+                poster={props.item.poster}
+                vibrant={colors.vibrant}
+                vibrantDark={colors.vibrantDark}
               />
-            </TopContainer>
-            <Trailer
-              poster={props.item.poster}
-              vibrant={colors.vibrant}
-              vibrantDark={colors.vibrantDark}
-            />
-          </HeroContainer>
-          <ShowMovieOption title="TORRENT" type="torrent" />
-          <ShowMovieOption title="SUBTITLES" type="subtitle" />
-          <ShowMovieOption title="MAGNETS" type="magnets" />
-        </MovieCard>
-        <div style={{ display: "flex" }}>
-          <DarkVibrant></DarkVibrant>
-          <VibrantC></VibrantC>
-          <LightVibrant></LightVibrant>
-        </div>
-        <div style={{ display: "flex" }}>
-          <DarkMuted></DarkMuted>
-          <Muted></Muted>
-          <LightMuted></LightMuted>
-        </div>
-        <div>
-          {ratings()}
-          {props.item ? (
-            <>
-              <div>Year: {props.item.year}</div>
-              <div>Genre: {props.item.genre}</div>
-              <div>Actors: {props.item.actors}</div>
-              <div>Director: {props.item.director}</div>
-              <div>Writer: {props.item.writer}</div>
-              <div>Runtime: {props.item.runTime}</div>
-              <div>plot: {props.item.plot}</div>
-              <div>tagline: {props.item.tagLine}</div>
-              <div>language: {props.item.language}</div>
-            </>
-          ) : null}
-        </div>
-        )}
-      </Container>
+            </HeroContainer>
+            <ShowMovieOption title="TORRENT" type="torrent" />
+            <ShowMovieOption title="SUBTITLES" type="subtitle" />
+            <ShowMovieOption title="MAGNETS" type="magnets" />
+          </MovieCard>
+          <div style={{ display: "flex" }}>
+            <DarkVibrant></DarkVibrant>
+            <VibrantC></VibrantC>
+            <LightVibrant></LightVibrant>
+          </div>
+          <div style={{ display: "flex" }}>
+            <DarkMuted></DarkMuted>
+            <Muted></Muted>
+            <LightMuted></LightMuted>
+          </div>
+          <div>
+            {ratings()}
+            {props.item ? (
+              <>
+                <div>Year: {props.item.year}</div>
+                <div>Genre: {props.item.genre}</div>
+                <div>Actors: {props.item.actors}</div>
+                <div>Director: {props.item.director}</div>
+                <div>Writer: {props.item.writer}</div>
+                <div>Runtime: {props.item.runTime}</div>
+                <div>plot: {props.item.plot}</div>
+                <div>tagline: {props.item.tagLine}</div>
+                <div>language: {props.item.language}</div>
+                {magnets()}
+              </>
+            ) : null}
+          </div>
+          )}
+        </Container>
+      )}
     </div>
   );
 };

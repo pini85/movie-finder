@@ -23,7 +23,7 @@ const Suggestion = props => {
     <a onClick={handleClick}>
       <Container>
         <Img
-          src={`http://image.tmdb.org/t/p/w92//${props.item.poster_path}`}
+          src={`http://image.tmdb.org/t/p/w92/${props.item.poster_path}`}
           alt=""
         />
 
