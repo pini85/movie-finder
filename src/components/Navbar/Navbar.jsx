@@ -23,7 +23,7 @@ const image = {
 const Navbar = props => {
   return (
     <div style={styleContainer}>
-      {/* <Link to="/">
+      <Link to="/">
         <div className="hi">
           <img
             style={image}
@@ -34,7 +34,7 @@ const Navbar = props => {
         </div>
       </Link>
 
-      <Search /> */}
+      <Search />
     </div>
   );
 };

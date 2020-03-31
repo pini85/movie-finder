@@ -11,26 +11,11 @@ const persistConfig = {
   storage,
   blacklist: ["movieSuggestions", "optionActive", "movieSlider"]
 };
-// fetchMovies: fetchMoviesReducer,
-// selectedMovie: selectedMovieReducer,
-// movieSuggestions: movieSuggestionsReducer,
-// search: searchQueryReducer,
-// isSending: isSendingReducer,
-// selectedMovieId: selectedMovieIdReducer,
-// movieSlider: movieSliderReducer,
-// newestMovies: newestMoviesReducer,
-// highestRatedMovies: highestRatedReducer,
-// optionActive: optionActiveReducer,
-// currentPage: currentPageReducer,
-// displayMovie: displayMovieReducer,
-// trailers: fetchTrailersReducer,
-// fetchTorrents: fetchTorrentsReducer,
-// fetchSubtitles: fetchSubtitlesReducer
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 
 export let store = createStore(
-  reducers,
+  persistedReducer,
   composeWithDevTools(applyMiddleware(...middleWares))
 );
 export let persistor = persistStore(store);

@@ -16,24 +16,7 @@ import MovieListHome from "../MovieListHome/MoveListHome.component";
 const Home = props => {
   useEffect(() => {
     props.movieSlider();
-    // props.newestMovies(1);
-    // props.highestRatedMovies(1);
   }, []);
-  // useEffect(() => {
-  //   switch (props.optionActive) {
-  //     case "1":
-  //       props.newestMovies(1);
-
-  //       // setCurrentPage(1);
-
-  //       break;
-  //     case "2":
-  //       props.highestRatedMovies(1);
-  //       props.currentPage(1);
-
-  //     case "3":
-  //   }
-  // }, []);
 
   const showList = () => {
     switch (props.optionActive) {

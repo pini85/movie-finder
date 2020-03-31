@@ -31,8 +31,6 @@ export const selectedMovies = movies => {
   };
 };
 export const movieSuggestions = movies => {
-  debugger;
-
   return {
     type: "MOVIE_SUGGESTIONS",
     payload: movies
@@ -187,6 +185,7 @@ export const fetchSubtitles = () => async (dispatch, getState) => {
   const id = getState().selectedMovieId;
   const tmdbData = await tmdbIdApi(id);
   const subtitle = await subtitlesApi(tmdbData.imdb_id);
+  console.log(subtitle);
 
   dispatch({ type: "FETCH_SUBTITLES", payload: subtitle });
 };

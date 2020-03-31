@@ -13,36 +13,17 @@ import Card from "../card/Card";
 const MovieList = props => {
   console.log("movieList", props);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      switch (props.optionActive) {
-        case "1":
-          props.newestMovies(1);
-          props.currentPage(1);
+  // const currentData = () => {
+  //   switch (props.optionActive) {
+  //     case "1":
+  //       return [props.newestMovies, props.newestMoviesData];
 
-          break;
-        case "2":
-          props.highestRatedMovies(1);
-          props.currentPage(1);
-
-        case "3":
-      }
-    };
-
-    fetchData();
-  }, [props.optionActive]);
-
-  const currentData = () => {
-    switch (props.optionActive) {
-      case "1":
-        return [props.newestMovies, props.newestMoviesData];
-
-      case "2":
-        return [props.highestRatedMovies, props.highestRatedMoviesData];
-      case "3":
-        return "Coming soon";
-    }
-  };
+  //     case "2":
+  //       return [props.highestRatedMovies, props.highestRatedMoviesData];
+  //     case "3":
+  //       return "Coming soon";
+  //   }
+  // };
 
   const styleDiv = {
     display: "flex",

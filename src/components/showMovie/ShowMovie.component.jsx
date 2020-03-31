@@ -4,15 +4,14 @@ import { connect } from "react-redux";
 import styled from "styled-components";
 import Skeleton from "react-loading-skeleton";
 import { selectedMovie, displayMovie } from "../../redux/actions/index";
-import YouTube from "react-youtube";
 import Test from "../skeletons/test";
 import ShowMovieInfo from "../showMovieInfo/ShowMovieInfo.component";
 import Trailer from "../Trailer/Trailer.component";
 import ShowMovieOption from "../ShowMovieOption/ShowMovieOption.component";
+import { BottomContainer, OptionsContainer } from "./ShowMovie.styles";
 
 const ShowMovie = props => {
   const [isLoading, setIsLoading] = useState(false);
-  const [isModalTorrents, setModalTorrents] = useState(false);
 
   useEffect(() => {
     props.displayMovie();
@@ -171,9 +170,28 @@ const ShowMovie = props => {
                 vibrantDark={colors.vibrantDark}
               />
             </HeroContainer>
-            <ShowMovieOption title="TORRENT" type="torrent" />
-            <ShowMovieOption title="SUBTITLES" type="subtitle" />
-            <ShowMovieOption title="MAGNETS" type="magnets" />
+            <BottomContainer>
+              <OptionsContainer>
+                <ShowMovieOption
+                  color={colors.vibrantDark}
+                  colorHover={colors.vibrant}
+                  title="TORRENTs"
+                  type="torrent"
+                />
+                <ShowMovieOption
+                  color={colors.muted}
+                  colorHover={colors.mutedLight}
+                  title="SUBTITLES"
+                  type="subtitle"
+                />
+                <ShowMovieOption
+                  color={colors.muted}
+                  colorHover={colors.mutedLight}
+                  title="MAGNETS"
+                  type="magnets"
+                />
+              </OptionsContainer>
+            </BottomContainer>
           </MovieCard>
           <div style={{ display: "flex" }}>
             <DarkVibrant></DarkVibrant>
