@@ -1,22 +1,20 @@
-import React, { useEffect, useState, useRef } from "react";
-import framer from "framer-motion";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import Skeleton from "react-loading-skeleton";
-import { selectedMovie, displayMovie } from "../../redux/actions/index";
-import Test from "../skeletons/test";
+import { goToMovie, selectedMovie } from "../../redux/actions/index";
 import ShowMovieInfo from "../showMovieInfo/ShowMovieInfo.component";
-import Trailer from "../Trailer/Trailer.component";
 import ShowMovieOption from "../ShowMovieOption/ShowMovieOption.component";
+import Trailer from "../Trailer/Trailer.component";
 import { BottomContainer, OptionsContainer } from "./ShowMovie.styles";
 
 const ShowMovie = props => {
   const [isLoading, setIsLoading] = useState(false);
+  const { id } = useParams();
 
   useEffect(() => {
-    props.displayMovie();
-    console.log(props.item);
-  }, [props.id]);
+    props.goToMovie(id);
+  }, [id]);
 
   const ratings = () => {
     return (
@@ -47,10 +45,6 @@ const ShowMovie = props => {
         );
       })
     );
-  };
-
-  const imageTarget = () => {
-    return `http://image.tmdb.org/t/p/w185//${props.item.poster_path}`;
   };
 
   // const colors = () => {
@@ -177,18 +171,21 @@ const ShowMovie = props => {
                   colorHover={colors.vibrant}
                   title="TORRENTs"
                   type="torrent"
+                  left={true}
                 />
                 <ShowMovieOption
                   color={colors.muted}
                   colorHover={colors.mutedLight}
                   title="SUBTITLES"
                   type="subtitle"
+                  right={true}
                 />
                 <ShowMovieOption
                   color={colors.muted}
                   colorHover={colors.mutedLight}
                   title="MAGNETS"
                   type="magnets"
+                  left={true}
                 />
               </OptionsContainer>
             </BottomContainer>
@@ -205,20 +202,19 @@ const ShowMovie = props => {
           </div>
           <div>
             {ratings()}
-            {props.item ? (
-              <>
-                <div>Year: {props.item.year}</div>
-                <div>Genre: {props.item.genre}</div>
-                <div>Actors: {props.item.actors}</div>
-                <div>Director: {props.item.director}</div>
-                <div>Writer: {props.item.writer}</div>
-                <div>Runtime: {props.item.runTime}</div>
-                <div>plot: {props.item.plot}</div>
-                <div>tagline: {props.item.tagLine}</div>
-                <div>language: {props.item.language}</div>
-                {magnets()}
-              </>
-            ) : null}
+
+            <>
+              <div>Year: {props.item.year}</div>
+              <div>Genre: {props.item.genre}</div>
+              <div>Actors: {props.item.actors}</div>
+              <div>Director: {props.item.director}</div>
+              <div>Writer: {props.item.writer}</div>
+              <div>Runtime: {props.item.runTime}</div>
+              <div>plot: {props.item.plot}</div>
+              <div>tagline: {props.item.tagLine}</div>
+              <div>language: {props.item.language}</div>
+              {magnets()}
+            </>
           </div>
           )}
         </Container>
@@ -236,5 +232,5 @@ const mapStateToProps = state => {
 };
 export default connect(mapStateToProps, {
   selectedMovie: selectedMovie,
-  displayMovie: displayMovie
+  goToMovie: goToMovie
 })(ShowMovie);

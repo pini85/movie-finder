@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -7,13 +7,14 @@ import { search, fetchMovies, movieSuggestions } from "../../redux/actions";
 import { tmdbQueryApi } from "../../apis/tmdbApi";
 import Suggestions from "../Suggestions/Suggestions.component";
 import Button from "../Button/Button";
+import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
 
 const Search = props => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSending, setIsSending] = useState(false);
 
-  useEffect(() => {
-    const asyncFunc = async () => {
+  useDidUpdateEffect(() => {
+    const fetchData = async () => {
       // BUGGY: might got incorrect order of results!
       // if (searchQuery.length > 0) {
       //   const data = await tmdbQueryApi(1, searchQuery);
@@ -24,7 +25,7 @@ const Search = props => {
       const data = !!searchQuery.length && (await tmdbQueryApi(1, searchQuery));
       props.movieSuggestions(data);
     };
-    asyncFunc();
+    fetchData();
   }, [searchQuery]);
 
   const handleClick = () => {

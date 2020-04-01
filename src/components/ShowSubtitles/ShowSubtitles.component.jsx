@@ -9,6 +9,8 @@ const ShowSubtitles = props => {
   const [isLoading, setLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
+      console.log("hellooooo");
+
       await props.fetchSubtitles();
       setLoading(false);
     };

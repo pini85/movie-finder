@@ -23,7 +23,12 @@ const ShowMovieOption = props => {
   };
 
   return (
-    <Container color={props.color} colorHover={props.colorHover}>
+    <Container
+      left={props.left}
+      right={props.right}
+      color={props.color}
+      colorHover={props.colorHover}
+    >
       <div onClick={() => setToggled(true)}>{props.title}</div>
       <Modal isToggled={isToggled} setToggled={setToggled}>
         <ModalContainer>{isToggled && showOption()}</ModalContainer>

@@ -12,6 +12,14 @@ import torrentApi from "../../apis/torrentApi";
 import subtitlesApi from "../../apis/subtitlesApi";
 import magnet from "../../apis/magnet";
 import * as Vibrant from "node-vibrant";
+
+export const currentPage = page => {
+  return {
+    type: "CURRENT_PAGE",
+    payload: page
+  };
+};
+
 export const selectedMovie = movie => {
   return {
     type: "MOVIE_SELECTED",
@@ -40,7 +48,6 @@ export const fetchMovies = page => async (dispatch, getState) => {
   const state = getState();
   if (state.search.length > 0) {
     const response = await tmdbQueryApi(page, state.search);
-    console.log("action", response);
 
     dispatch({ type: "FETCH_MOVIES", payload: response });
   }
@@ -59,32 +66,6 @@ export const search = query => {
   };
 };
 
-//REFACTOR TO UDIS LOGIC
-
-// export const fetchMovies = (page, query) => async (dispatch, getState) => {
-//   const state = getState();
-//   if (state.search.length > 0) {
-//     const response = await tmdbQueryApi(page, query);
-
-//     dispatch({ type: "FETCH_MOVIES", payload: response });
-//   }
-// };
-
-// export const fetchNewestMovies = page => async (dispatch, getState) => {
-//   const response = await tmdbNewestTodayApi(page);
-
-//   dispatch({ type: "FETCH_NEWEST_MOVIES", payload: response });
-// };
-
-// export const search = query => {
-//   fetchMovies(1, query);
-
-//   return {
-//     type: "SEARCH_QUERY",
-//     payload: query
-//   };
-// };
-
 export const fetchMovieSlider = () => async dispatch => {
   const data = await tmdbMovieSliderApi();
   const popularMoviesData = await Promise.all(
@@ -100,8 +81,14 @@ export const fetchHighestRatedMovies = page => async dispatch => {
   dispatch({ type: "FETCH_HIGHEST_RATED_MOVIES", payload: data });
 };
 
-export const displayMovie = page => async (dispatch, getState) => {
+export const goToMovie = id => (dispatch, getState) => {
+  dispatch(selectedMovieId(id));
+  return dispatch(fetchMovie);
+};
+
+const fetchMovie = async (dispatch, getState) => {
   const id = getState().selectedMovieId;
+
   const tmdbData = await tmdbIdApi(id);
   const omdbData = await omdbApi(tmdbData.imdb_id);
 
@@ -161,6 +148,7 @@ export const displayMovie = page => async (dispatch, getState) => {
     colors: [vibrant, darkVibrant, lightVibrant, muted, darkMuted, lightMuted]
   };
 
+  // ACTION2: FETCH_MOVIE ===> movie ==> state.movie = movie
   dispatch({ type: "DISPLAY_MOVIE", payload: item });
 };
 
@@ -180,12 +168,9 @@ export const fetchTorrents = () => async (dispatch, getState) => {
 };
 
 export const fetchSubtitles = () => async (dispatch, getState) => {
-  console.log("INVOKED");
-
   const id = getState().selectedMovieId;
   const tmdbData = await tmdbIdApi(id);
   const subtitle = await subtitlesApi(tmdbData.imdb_id);
-  console.log(subtitle);
 
   dispatch({ type: "FETCH_SUBTITLES", payload: subtitle });
 };
@@ -242,12 +227,5 @@ export const isSending = bool => {
   return {
     type: "IS_SENDING",
     payload: bool
-  };
-};
-
-export const currentPage = page => {
-  return {
-    type: "CURRENT_PAGE",
-    payload: page
   };
 };
