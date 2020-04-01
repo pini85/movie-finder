@@ -6,7 +6,11 @@ import { goToMovie, selectedMovie } from "../../redux/actions/index";
 import ShowMovieInfo from "../showMovieInfo/ShowMovieInfo.component";
 import ShowMovieOption from "../ShowMovieOption/ShowMovieOption.component";
 import Trailer from "../Trailer/Trailer.component";
-import { BottomContainer, OptionsContainer } from "./ShowMovie.styles";
+import {
+  BottomContainer,
+  OptionsContainer,
+  PlotContainer
+} from "./ShowMovie.styles";
 
 const ShowMovie = props => {
   const [isLoading, setIsLoading] = useState(false);
@@ -141,7 +145,6 @@ const ShowMovie = props => {
 
   const MovieCard = styled.div`
     background: ${colors.vibrantLight};
-    height: calc(100vh - 7vh);
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
   `;
 
@@ -165,25 +168,32 @@ const ShowMovie = props => {
               />
             </HeroContainer>
             <BottomContainer>
+              <PlotContainer color={colors.vibrantDark}>
+                <div>{props.item.plot}</div>
+              </PlotContainer>
+
               <OptionsContainer>
                 <ShowMovieOption
-                  color={colors.vibrantDark}
-                  colorHover={colors.vibrant}
-                  title="TORRENTs"
+                  color1={colors.vibrantDark}
+                  color2={colors.vibrant}
+                  textLight={colors.vibrantLight}
+                  title="torrents"
                   type="torrent"
                   left={true}
                 />
                 <ShowMovieOption
-                  color={colors.muted}
-                  colorHover={colors.mutedLight}
-                  title="SUBTITLES"
+                  color1={colors.vibrantDark}
+                  color2={colors.vibrant}
+                  textLight={colors.vibrantLight}
+                  title="subtitles"
                   type="subtitle"
                   right={true}
                 />
                 <ShowMovieOption
-                  color={colors.muted}
-                  colorHover={colors.mutedLight}
-                  title="MAGNETS"
+                  color1={colors.vibrantDark}
+                  color2={colors.vibrant}
+                  textLight={colors.vibrantLight}
+                  title="magnets"
                   type="magnets"
                   left={true}
                 />
@@ -210,7 +220,7 @@ const ShowMovie = props => {
               <div>Director: {props.item.director}</div>
               <div>Writer: {props.item.writer}</div>
               <div>Runtime: {props.item.runTime}</div>
-              <div>plot: {props.item.plot}</div>
+
               <div>tagline: {props.item.tagLine}</div>
               <div>language: {props.item.language}</div>
               {magnets()}

@@ -27,8 +27,10 @@ const Image = styled.img`
 const ShowMovieInfo = props => {
   return (
     <Container style={{ color: props.color }}>
-      <div>{props.title}</div>
-      <YearContainer>{props.year}</YearContainer>
+      <div>
+        {props.title} ({props.year})
+      </div>
+
       <ReviewContainer>
         <div>
           <Image src={require("../../images/imdb.png")} alt="" />

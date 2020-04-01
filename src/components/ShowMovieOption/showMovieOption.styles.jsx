@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { getColorDiffStatus } from "node-vibrant/lib/util";
 
 export const ModalContainer = styled.div`
   background: white;
@@ -30,17 +31,45 @@ export const Container = styled.div`
   border-radius: 0.5em;
   margin: 0.5em;
   box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
-  color: white;
-  text-transform: capitalize;
+  color: ${props => props.textLight};
+  text-transform: uppercase;
   line-height: 3em;
-  transition: 0.3s;
+  font-weight: 700;
+
+  transition: all 0.3s;
   cursor: pointer;
-  background: linear-gradient(to right, orange, tomato);
-  text-align: left;
-  padding-left: 10%;
-  transform: perspective(500px) rotateY(45deg);
+  ${props =>
+    props.left
+      ? `background:linear-gradient(to right, ${props.color2}, ${props.color1}); text-align: left; padding-left: 10%;  transform: perspective(500px) rotateY(45deg); `
+      : `background:linear-gradient(to left, ${props.color2}, ${props.color1});  text-align: right; padding-right: 10%; transform: perspective(500px) rotateY(-45deg);`};
+  z-index: 1;
+
+  &::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 0.5em;
+
+    background: ${props =>
+      props.left
+        ? `linear-gradient(to right, ${props.color1}, ${props.color2})`
+        : `linear-gradient(to right, ${props.color2}, ${props.color1})`};
+    z-index: -1;
+    transition: opacity 0.3s;
+    opacity: 0;
+  }
+
+  &:hover::before {
+    opacity: 1;
+  }
+
   &:hover {
-    transform: perspective(200px) rotateY(45deg);
-    padding-left: 5%;
+    ${props =>
+      props.left
+        ? `transform: perspective(200px) rotateY(45deg);padding-left: 5%;`
+        : `transform: perspective(200px) rotateY(-45deg);padding-right: 5%; background:linear-gradient(to right, ${props.color2}, ${props.color1});`};
   }
 `;

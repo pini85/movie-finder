@@ -7,11 +7,11 @@ export const Container = styled.div`
   z-index: 999;
   display: flex;
   justify-content: center;
-
   padding-top: 8rem;
   background: rgba(0, 0, 0, 0.5);
 
-  /* transform: translate(-50%, -25%) skewY(-2.5deg); */
+  transform: perspective(0px) rotateY(0deg);
+  padding: 0%, 0%;
   height: 100vh;
   width: 100vw;
 `;
