@@ -3,17 +3,34 @@ import styled from "styled-components";
 const Container = styled.div`
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
   text-align: center;
-  font-size: var(--heading-secondary);
   width: fit-content;
   height: fit-content;
   margin-top: 3rem;
   border-radius: 8px;
   padding: 2rem 4rem;
-  font-weight: 700;
+
   color: ${props => props.color};
+`;
+
+const TitleContainer = styled.div`
+  font-weight: 700;
+  font-size: var(--heading-secondary);
+`;
+
+const GenreContainer = styled.div`
+  font-size: 1.7rem;
 `;
 const YearContainer = styled.div`
   font-size: var(--paragraph);
+`;
+
+const ImageContainer = styled.div`
+  display: inline-block;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.65) 100%
+  );
 `;
 
 const ReviewContainer = styled.div`
@@ -23,18 +40,26 @@ const ReviewContainer = styled.div`
 const Image = styled.img`
   height: 2rem;
   width: 3rem;
+  position: relative;
+  z-index: -1;
+  display: block;
 `;
-const ShowMovieInfo = props => {
+const ShowMovieInfo = ({ color, title, year, genre, runTime }) => {
   return (
-    <Container style={{ color: props.color }}>
-      <div>
-        {props.title} ({props.year})
-      </div>
+    <Container style={{ color: color }}>
+      <TitleContainer>
+        {title} ({year})
+      </TitleContainer>
+      <GenreContainer>
+        {genre}
+        &nbsp;<span>&#124;</span>&nbsp;
+        {runTime}min
+      </GenreContainer>
 
       <ReviewContainer>
-        <div>
+        <ImageContainer>
           <Image src={require("../../images/imdb.png")} alt="" />
-        </div>
+        </ImageContainer>
         <div>
           <Image src={require("../../images/tomato.png")} alt="" />
         </div>

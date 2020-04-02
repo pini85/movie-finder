@@ -12,18 +12,18 @@ import { OptionsContainer } from "./Options.styles";
 
 const Options = props => {
   useEffect(() => {
-    // debugger;
+    debugger;
 
     switch (props.optionActiveData) {
       case "1":
         props.newestMovies(1);
-        props.currentPage(1);
-        console.log("called");
+        if (props.currentPageData !== 1) props.currentPage(1);
+
         break;
 
       case "2":
         props.highestRatedMovies(1);
-        props.currentPage(1);
+        if (props.currentPageData !== 1) props.currentPage(1);
         break;
     }
   }, [props.optionActiveData]);
@@ -46,7 +46,8 @@ const mapStateToDispatch = {
 const mapStateToProps = state => ({
   newestMoviesData: state.newestMovies,
   highestRatedData: state.highestRated,
-  optionActiveData: state.optionActive
+  optionActiveData: state.optionActive,
+  currentPageData: state.currentPage
 });
 
 export default connect(mapStateToProps, mapStateToDispatch)(Options);

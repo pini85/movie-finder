@@ -159,6 +159,8 @@ const ShowMovie = props => {
                   color={colors.mutedLight}
                   title={props.item.title}
                   year={props.item.year}
+                  genre={props.item.genre}
+                  runTime={props.item.runTime}
                 />
               </TopContainer>
               <Trailer
