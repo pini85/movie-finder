@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+
 import { goToMovie, selectedMovie } from "../../redux/actions/index";
 import ShowMovieInfo from "../showMovieInfo/ShowMovieInfo.component";
 import ShowMovieOption from "../ShowMovieOption/ShowMovieOption.component";
@@ -156,11 +157,9 @@ const ShowMovie = props => {
             <HeroContainer>
               <TopContainer>
                 <ShowMovieInfo
-                  color={colors.mutedLight}
-                  title={props.item.title}
-                  year={props.item.year}
-                  genre={props.item.genre}
-                  runTime={props.item.runTime}
+                  vibrant={colors.vibrant}
+                  vibrantLight={colors.vibrantLight}
+                  vibrantDark={colors.vibrantDark}
                 />
               </TopContainer>
               <Trailer
@@ -216,12 +215,9 @@ const ShowMovie = props => {
             {ratings()}
 
             <>
-              <div>Year: {props.item.year}</div>
-              <div>Genre: {props.item.genre}</div>
               <div>Actors: {props.item.actors}</div>
               <div>Director: {props.item.director}</div>
               <div>Writer: {props.item.writer}</div>
-              <div>Runtime: {props.item.runTime}</div>
 
               <div>tagline: {props.item.tagLine}</div>
               <div>language: {props.item.language}</div>

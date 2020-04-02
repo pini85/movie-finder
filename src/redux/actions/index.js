@@ -90,6 +90,8 @@ const fetchMovie = async (dispatch, getState) => {
   const id = getState().selectedMovieId;
 
   const tmdbData = await tmdbIdApi(id);
+  console.log(tmdbData);
+
   const omdbData = await omdbApi(tmdbData.imdb_id);
 
   const torrentData = await torrentApi(tmdbData.imdb_id);
@@ -130,10 +132,50 @@ const fetchMovie = async (dispatch, getState) => {
     });
   }
 
+  const ratings = () => {
+    switch (omdbData.Ratings.length) {
+      case 1:
+        return [
+          {
+            imdb: omdbData.Ratings[0],
+            img: "https://i.ibb.co/dth8xgq/imdb.png"
+          }
+        ];
+
+      case 2:
+        return [
+          {
+            rating: omdbData.Ratings[0],
+            img: "https://i.ibb.co/dth8xgq/imdb.png"
+          },
+          {
+            rating: omdbData.Ratings[1],
+            img: "https://i.ibb.co/BCy3STv/tomato.png"
+          }
+        ];
+      case 3:
+        return [
+          {
+            rating: omdbData.Ratings[0],
+            img: "https://i.ibb.co/dth8xgq/imdb.png"
+          },
+          {
+            rating: omdbData.Ratings[1],
+            img: "https://i.ibb.co/BCy3STv/tomato.png"
+          },
+          {
+            rating: omdbData.Ratings[2],
+            img: "https://i.ibb.co/5jVT2rK/meta-critic.png"
+          }
+        ];
+    }
+  };
+
   const item = {
     title: omdbData.Title,
     year: omdbData.Year,
-    ratings: omdbData.Ratings,
+    tmdbRating: tmdbData.vote_average,
+    ratings: ratings(),
     genre: omdbData.Genre,
     director: omdbData.Director,
     writer: omdbData.Writer,

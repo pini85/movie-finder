@@ -1,6 +1,12 @@
 import React from "react";
+import { connect } from "react-redux";
+import "./styles.css";
+import CirclePercentage from "../CirclePercentage/CirclePercentage.component";
+
 import styled from "styled-components";
+
 const Container = styled.div`
+  color: ${props => props.color};
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
   text-align: center;
   width: fit-content;
@@ -24,51 +30,89 @@ const YearContainer = styled.div`
   font-size: var(--paragraph);
 `;
 
-const ImageContainer = styled.div`
-  display: inline-block;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.65) 100%
-  );
-`;
-
 const ReviewContainer = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+`;
+
+const ReviewItem = styled.div`
+  margin: 0.5rem 1rem 0rem 1rem;
+  color: ${props => props.color};
+  font-weight: 700;
 `;
 
 const Image = styled.img`
   height: 2rem;
   width: 3rem;
-  position: relative;
-  z-index: -1;
-  display: block;
+  filter: opacity(0.5);
 `;
-const ShowMovieInfo = ({ color, title, year, genre, runTime }) => {
+
+const CircleRating = styled.div`
+  position: relative;
+  background: yellow;
+  height: 5rem;
+  width: 5rem;
+  border-radius: 50%;
+  z-index: 2;
+  &::before {
+    position: absolute;
+    content: "";
+    top: 5%;
+    left: 5%;
+    height: 200%;
+    width: 200%;
+    z-index: 1;
+
+    background: red;
+  }
+`;
+const ShowMovieInfo = ({
+  color,
+  vibrant,
+  vibrantDark,
+  vibrantLight,
+  movie
+}) => {
+  console.log(movie);
+
   return (
-    <Container style={{ color: color }}>
+    <Container color={vibrantLight}>
       <TitleContainer>
-        {title} ({year})
+        {movie.title} ({movie.year})
       </TitleContainer>
       <GenreContainer>
-        {genre}
+        {movie.genre}
         &nbsp;<span>&#124;</span>&nbsp;
-        {runTime}min
+        {movie.runTime}min <span>&#124;</span>&nbsp;
+        {movie.language}
       </GenreContainer>
 
-      <ReviewContainer>
-        <ImageContainer>
-          <Image src={require("../../images/imdb.png")} alt="" />
-        </ImageContainer>
-        <div>
-          <Image src={require("../../images/tomato.png")} alt="" />
-        </div>
-        <div>
-          <Image src={require("../../images/meta-critic.png")} alt="" />
-        </div>
+      <ReviewContainer color={vibrant}>
+        {movie.ratings &&
+          movie.ratings.map(rate => {
+            return (
+              <ReviewItem color={vibrant}>
+                <Image src={rate.img} alt="" />
+                <div style={{ fontSize: "1.5rem" }}>{rate.rating.Value}</div>
+              </ReviewItem>
+            );
+          })}
+        <CirclePercentage
+          color1={vibrant}
+          color2={vibrantDark}
+          color3={vibrantLight}
+          rating={movie.tmdbRating * 10}
+        />
       </ReviewContainer>
     </Container>
   );
 };
 
-export default ShowMovieInfo;
+const mapsTateToProps = state => ({
+  movie: state.displayMovie
+});
+
+export default connect(mapsTateToProps)(ShowMovieInfo);
