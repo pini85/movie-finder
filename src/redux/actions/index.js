@@ -203,7 +203,7 @@ const fetchMovie = async (dispatch, getState) => {
     director: omdbData.Director,
     writer: omdbData.Writer,
     actors: await actorsList(),
-    cast: movieCredits.cast.slice(0, 10),
+    cast: movieCredits.cast,
     runTime: tmdbData.runtime,
     magnets: magnets,
     plot: tmdbData.overview,

@@ -81,52 +81,10 @@ export const PlotContainer = styled.div`
   font-size: var(--paragraph);
 `;
 
-// const VibrantC = styled.div`
-//   height: 5rem;
-//   width: 5rem;
-//   background: ${props.item.colors
-//     ? props.colors.vibrant
-//     : "var(primary-color)"};
-// `;
-// const DarkVibrant = styled.div`
-//   height: 5rem;
-//   width: 5rem;
-//   background: ${props.item ? props.colors.vibrantDark : "var(primary-color)"};
-// `;
-// const LightVibrant = styled.div`
-//   height: 5rem;
-//   width: 5rem;
-//   background: ${props.item
-//     ? props.colors.vibrantLight
-//     : "var(primary-color-light)"};
-// `;
-// const Muted = styled.div`
-//   height: 5rem;
-//   width: 5rem;
-//   background: ${props.item ? props.colors.muted : "var(secondary-color)"};
-// `;
-// const DarkMuted = styled.div`
-//   height: 5rem;
-//   width: 5rem;
-//   background: ${props.item ? props.colors.mutedDark : "var(secondary-color"};
-// `;
-// const LightMuted = styled.div`
-//   height: 5rem;
-//   width: 5rem;
-//   background: ${props.item
-//     ? props.colors.mutedLight
-//     : "var(secondary-color-light)"};
-// `;
-
-{
-  /* <div style={{ display: "flex" }}>
-            <DarkVibrant></DarkVibrant>
-            <VibrantC></VibrantC>
-            <LightVibrant></LightVibrant>
-          </div>
-          <div style={{ display: "flex" }}>
-            <DarkMuted></DarkMuted>
-            <Muted></Muted>
-            <LightMuted></LightMuted>
-          </div> */
-}
+export const MovieCastContainer = styled.div`
+  margin: 4rem -4rem;
+  padding: 3rem 0;
+  border-radius: 5px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  background: ${props => props.color};
+`;

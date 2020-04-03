@@ -106,5 +106,6 @@ export const tmdbMovieCreditsApi = async id => {
     `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${ApiKey}`
   );
   const data = await response.json();
+
   return data;
 };

@@ -1,5 +1,5 @@
 .slick-slider {
-  width: 100vw;
+  width: 98vw;
 }
 .slick-dots li button:before {
   color: white;
@@ -27,4 +27,11 @@
   color: var(--primary-color);
   font-size: 4vw;
   margin-left: -4vw;
+}
+
+.slick-dots {
+  width: 71vw;
+}
+.slick-slider.slick-initialized {
+  padding: 0 14vw;
 }

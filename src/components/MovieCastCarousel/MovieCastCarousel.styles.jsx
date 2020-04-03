@@ -1,21 +1,40 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-position: relative;
-    overflow: hidden;
-    max-width:17rem;
-  
-    color: #141414;
-    text-align: left;
-    line-height: 1.4em;
-    font-size: 16px;
-   background:${props => props.color}
-}
+  position: relative;
+  color: ${props => props.fontColor};
+  font-weight: 700;
+  border-radius: 10px;
+  padding: 5px;
+  height: 29rem;
+  max-width: 18rem;
+  margin: 0 1rem;
+  margin-bottom: 2rem;
+  text-align: left;
+
+  font-size: 16px;
+  background: ${props => props.color};
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+  /* border-top-left-radius: 120px;
+  border-top-right-radius: 120px; */
 `;
 
 export const Img = styled.img`
-  max-width: 100%;
-  vertical-align: top;
-  margin: 0 auto;
-  box-shadow: 0 0 5px 10px #555;
+  width: 100%;
+  height: 18rem;
+  border-radius: 10px;
+`;
+
+export const BottomContainer = styled.div`
+  padding: 1rem;
+`;
+
+export const NameContainer = styled.div`
+  font-weight: 700;
+  font-size: 1.5rem;
+`;
+
+export const CharacterContainer = styled.div`
+  font-weight: 300;
+  font-size: 1.4rem;
 `;

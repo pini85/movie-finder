@@ -19,11 +19,11 @@ const Carousel = props => {
   const settings = {
     dots: true,
     infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+    slidesToShow: 6,
+    slidesToScroll: 6,
     autoplay: false,
     autoplaySpeed: 4000,
-    fade: true,
+    // fade: true,
     pauseOnHover: true,
     lazyLoad: true
   };
