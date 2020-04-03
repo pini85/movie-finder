@@ -5,7 +5,9 @@ import {
   tmdbNewestTodayApi,
   tmdbMovieSliderApi,
   tmdbHighestRatedApi,
-  tmdbTrailersApi
+  tmdbTrailersApi,
+  tmdbActorsApi,
+  tmdbMovieCreditsApi
 } from "../../apis/tmdbApi";
 import omdbApi from "../../apis/omdbApi";
 import torrentApi from "../../apis/torrentApi";
@@ -90,11 +92,32 @@ const fetchMovie = async (dispatch, getState) => {
   const id = getState().selectedMovieId;
 
   const tmdbData = await tmdbIdApi(id);
-  console.log(tmdbData);
-
   const omdbData = await omdbApi(tmdbData.imdb_id);
-
   const torrentData = await torrentApi(tmdbData.imdb_id);
+  const movieCredits = await tmdbMovieCreditsApi(id);
+
+  // export const fetchMovieSlider = () => async dispatch => {
+  //   const data = await tmdbMovieSliderApi();
+  //   const popularMoviesData = await Promise.all(
+  //     data.map(movie => tmdbIdApi(movie.id))
+  //   );
+
+  const actorsList = async () => {
+    const actors = omdbData.Actors.trim().split(",");
+    const fetchActors = await Promise.all(
+      actors.map(async actor => await tmdbActorsApi(actor))
+    );
+
+    const x = fetchActors.map(page => {
+      return page.results.slice(0, 1).map(actor => {
+        return {
+          name: actor.name,
+          profile: actor.profile_path
+        };
+      });
+    });
+    return x;
+  };
 
   const imageTarget = () => {
     return tmdbData.backdrop_path
@@ -179,7 +202,8 @@ const fetchMovie = async (dispatch, getState) => {
     genre: omdbData.Genre,
     director: omdbData.Director,
     writer: omdbData.Writer,
-    actors: omdbData.Actors,
+    actors: await actorsList(),
+    cast: movieCredits.cast.slice(0, 10),
     runTime: tmdbData.runtime,
     magnets: magnets,
     plot: tmdbData.overview,
@@ -187,7 +211,14 @@ const fetchMovie = async (dispatch, getState) => {
     language: omdbData.Language,
     poster: tmdbData.poster_path,
     backdrop: tmdbData.backdrop_path,
-    colors: [vibrant, darkVibrant, lightVibrant, muted, darkMuted, lightMuted]
+    colors: {
+      vibrant: vibrant,
+      darkVibrant: darkVibrant,
+      lightVibrant: lightVibrant,
+      muted: muted,
+      darkMuted: darkMuted,
+      lightMuted: lightMuted
+    }
   };
 
   // ACTION2: FETCH_MOVIE ===> movie ==> state.movie = movie
@@ -216,34 +247,18 @@ export const fetchSubtitles = () => async (dispatch, getState) => {
 
   dispatch({ type: "FETCH_SUBTITLES", payload: subtitle });
 };
+
 export const fetchMagnets = () => async (dispatch, getState) => {
   const id = getState().selectedMovieId;
   const tmdbData = await tmdbIdApi(id);
+
   const torrentData = await torrentApi(tmdbData.imdb_id);
 
-  // let torrents;
-  // let magnets;
-  // if (!torrentData) {
-  //   torrents = [];
-  //   magnets = [];
-  // } else {
-  //   torrents = torrentData.map(torrent => {
-  //     const obj = {
-  //       url: torrent.url,
-  //       quality: torrent.quality,
-  //       type: torrent.type,
-  //       seeds: torrent.seeds,
-  //       peers: torrent.peers,
-  //       size: torrent.size
-  //     };
-  //     return obj;
-  //   });
-  //   magnets = torrentData.map(torrent => {
-  //     return magnet(omdbData.Title, torrent.hash, torrent.url);
-  //   });
-  // }
+  const magnets = torrentData.map(torrent => {
+    return magnet(tmdbData.Title, torrent.hash, torrent.url);
+  });
 
-  dispatch({ type: "FETCH_MAGNETS", payload: torrentData });
+  dispatch({ type: "FETCH_MAGNETS", payload: magnets });
 };
 
 export const optionActive = e => {

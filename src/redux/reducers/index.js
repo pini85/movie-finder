@@ -108,6 +108,13 @@ const fetchSubtitlesReducer = (subtitle = null, action) => {
   return subtitle;
 };
 
+const fetchMagnetsReducer = (magnets = null, action) => {
+  if (action.type === "FETCH_MAGNETS") {
+    return action.payload;
+  }
+  return magnets;
+};
+
 export default combineReducers({
   fetchMovies: fetchMoviesReducer,
   selectedMovie: selectedMovieReducer,
@@ -123,5 +130,6 @@ export default combineReducers({
   displayMovie: displayMovieReducer,
   trailers: fetchTrailersReducer,
   fetchTorrents: fetchTorrentsReducer,
-  fetchSubtitles: fetchSubtitlesReducer
+  fetchSubtitles: fetchSubtitlesReducer,
+  fetchMagnets: fetchMagnetsReducer
 });

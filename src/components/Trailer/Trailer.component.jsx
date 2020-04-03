@@ -8,14 +8,14 @@ import { faFilm } from "@fortawesome/free-solid-svg-icons";
 import Modal from "../Modal/Modal.component";
 import Carousel from "../carousel/carousel.component";
 
-const Trailer = ({ poster, vibrant, vibrantDark, ...props }) => {
+const Trailer = ({ poster, fetchTrailers, trailers, colors }) => {
   const [isToggled, setToggled] = useState(false);
   const [isLoading, setLoading] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       if (isToggled) {
         setLoading(true);
-        await props.fetchTrailers();
+        await fetchTrailers();
         setLoading(false);
       }
     };
@@ -34,8 +34,8 @@ const Trailer = ({ poster, vibrant, vibrantDark, ...props }) => {
       event.target.pauseVideo();
     };
     return (
-      props.trailers &&
-      props.trailers.map(trailer => {
+      trailers &&
+      trailers.map(trailer => {
         return (
           <>
             <YouTube
@@ -80,13 +80,13 @@ const Trailer = ({ poster, vibrant, vibrantDark, ...props }) => {
     transition: all 0.3s;
 
     &:hover:after {
-      color: ${vibrantDark};
+      color: ${colors.darkVibrant};
     }
     &:after {
       content: "\\0025BA";
       position: absolute;
       font-size: 4rem;
-      color: ${vibrant};
+      color: ${colors.vibrant};
       top: 50%;
       left: 53%;
       transform: translate(-50%, -50%);
@@ -112,7 +112,8 @@ const Trailer = ({ poster, vibrant, vibrantDark, ...props }) => {
 };
 
 const mapStateToProps = state => ({
-  trailers: state.trailers
+  trailers: state.trailers,
+  colors: state.displayMovie.colors
 });
 
 export default connect(mapStateToProps, {

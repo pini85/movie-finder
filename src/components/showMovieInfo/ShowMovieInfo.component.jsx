@@ -69,17 +69,11 @@ const CircleRating = styled.div`
     background: red;
   }
 `;
-const ShowMovieInfo = ({
-  color,
-  vibrant,
-  vibrantDark,
-  vibrantLight,
-  movie
-}) => {
-  console.log(movie);
+const ShowMovieInfo = ({ colors, movie }) => {
+  console.log(colors);
 
   return (
-    <Container color={vibrantLight}>
+    <Container color={colors.lightVibrant}>
       <TitleContainer>
         {movie.title} ({movie.year})
       </TitleContainer>
@@ -90,29 +84,25 @@ const ShowMovieInfo = ({
         {movie.language}
       </GenreContainer>
 
-      <ReviewContainer color={vibrant}>
+      <ReviewContainer color={colors.vibrant}>
         {movie.ratings &&
           movie.ratings.map(rate => {
             return (
-              <ReviewItem color={vibrant}>
+              <ReviewItem color={colors.vibrant}>
                 <Image src={rate.img} alt="" />
                 <div style={{ fontSize: "1.5rem" }}>{rate.rating.Value}</div>
               </ReviewItem>
             );
           })}
-        <CirclePercentage
-          color1={vibrant}
-          color2={vibrantDark}
-          color3={vibrantLight}
-          rating={movie.tmdbRating * 10}
-        />
+        <CirclePercentage rating={movie.tmdbRating * 10} />
       </ReviewContainer>
     </Container>
   );
 };
 
 const mapsTateToProps = state => ({
-  movie: state.displayMovie
+  movie: state.displayMovie,
+  colors: state.displayMovie.colors
 });
 
 export default connect(mapsTateToProps)(ShowMovieInfo);

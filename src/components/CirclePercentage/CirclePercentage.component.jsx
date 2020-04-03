@@ -1,25 +1,38 @@
 import React from "react";
+import { connect } from "react-redux";
+
 import "./styles.css";
 
-const CirclePercentage = ({ color1, color2, color3, rating }) => {
+const CirclePercentage = ({ colors, rating }) => {
+  console.log(colors);
+
   return (
     <div
-      style={{ backgroundColor: color2, color: color2 }}
+      style={{
+        backgroundColor: colors.darkVibrant,
+        color: colors.darkVibrant
+      }}
       className="circle-wrap"
     >
       <div className="circle">
         <div className="mask full">
-          <div style={{ backgroundColor: color1 }} className="fill"></div>
+          <div
+            style={{ backgroundColor: colors.vibrant }}
+            className="fill"
+          ></div>
         </div>
 
         <div className="mask half">
-          <div style={{ backgroundColor: color1 }} className="fill"></div>
+          <div
+            style={{ backgroundColor: colors.vibrant }}
+            className="fill"
+          ></div>
         </div>
 
         <div className="inside-circle">
           {rating}%
           <div
-            style={{ backgroundColor: color3 }}
+            style={{ backgroundColor: colors.lightVibrant }}
             className="inside-circle-background"
           ></div>
         </div>
@@ -27,5 +40,7 @@ const CirclePercentage = ({ color1, color2, color3, rating }) => {
     </div>
   );
 };
-
-export default CirclePercentage;
+const mapStateToProps = state => ({
+  colors: state.displayMovie.colors
+});
+export default connect(mapStateToProps)(CirclePercentage);

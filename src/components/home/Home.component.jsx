@@ -48,7 +48,7 @@ const Home = props => {
   };
   return (
     <div style={styleContainer}>
-      <Carousel></Carousel>
+      <Carousel type="movieSlider"></Carousel>
 
       <div style={{ width: "100%" }}>
         <Header>Welcome to Movie Finder</Header>

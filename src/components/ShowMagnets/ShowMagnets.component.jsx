@@ -1,3 +1,35 @@
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { fetchMagnets } from "../../redux/actions";
+
+const ShowMagnets = ({ fetchMagnets, magnets }) => {
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchMagnets();
+    };
+    fetchData();
+  }, []);
+
+  return (
+    <div>
+      {magnets &&
+        magnets.map(magnet => {
+          console.log(magnet);
+
+          return <a href={magnet}>MAGNET</a>;
+        })}
+    </div>
+  );
+};
+
+const mapStateToProps = state => ({
+  magnets: state.fetchMagnets
+});
+
+export default connect(mapStateToProps, {
+  fetchMagnets: fetchMagnets
+})(ShowMagnets);
+
 // import React, { useEffect, useState } from "react";
 // import { connect } from "react-redux";
 // import { fetchMagnets } from "../../redux/actions";

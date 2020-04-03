@@ -12,8 +12,6 @@ import { OptionsContainer } from "./Options.styles";
 
 const Options = props => {
   useEffect(() => {
-    debugger;
-
     switch (props.optionActiveData) {
       case "1":
         props.newestMovies(1);

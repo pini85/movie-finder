@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+
 import Modal from "../Modal/Modal.component";
 import ShowTorrents from "../ShowTorrents/ShowTorrents.component";
 import ShowSubtitles from "../ShowSubtitles/ShowSubtitles.component";
@@ -6,16 +8,14 @@ import ShowMagnets from "../ShowMagnets/ShowMagnets.component";
 import { Container, ModalContainer } from "./showMovieOption.styles";
 import styled from "styled-components";
 
-const ShowMovieOption = props => {
-  console.log(props);
-
+const ShowMovieOption = ({ colors, title, type, left, right }) => {
   const [isToggled, setToggled] = useState(false);
 
   const showOption = () => {
-    switch (props.type) {
+    switch (type) {
       case "torrent":
         return <ShowTorrents></ShowTorrents>;
-      case "subtitle":
+      case "sub":
         return <ShowSubtitles></ShowSubtitles>;
       case "magnets":
         return <ShowMagnets></ShowMagnets>;
@@ -25,19 +25,22 @@ const ShowMovieOption = props => {
   return (
     <>
       <Container
-        left={props.left}
-        right={props.right}
-        color1={props.color1}
-        color2={props.color2}
-        textLight={props.textLight}
+        left={left}
+        right={right}
+        color1={colors.darkVibrant}
+        color2={colors.vibrant}
+        textLight={colors.lightVibrant}
       >
-        <div onClick={() => setToggled(true)}>{props.title}</div>
+        <div onClick={() => setToggled(true)}>{title}</div>
       </Container>
+
       <Modal isToggled={isToggled} setToggled={setToggled}>
         <ModalContainer>{isToggled && showOption()}</ModalContainer>
       </Modal>
     </>
   );
 };
-
-export default ShowMovieOption;
+const mapStateToProps = state => ({
+  colors: state.displayMovie.colors
+});
+export default connect(mapStateToProps)(ShowMovieOption);

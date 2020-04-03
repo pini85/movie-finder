@@ -62,7 +62,6 @@ export const tmdbTrailersApi = async id => {
 
   const sliced =
     data.results.length > 3 ? data.results.slice(0, 3) : data.results;
-  console.log(sliced);
 
   return sliced;
 };
@@ -90,6 +89,22 @@ export const tmdbNewestTodayApi = async page => {
 export const tmdbHighestRatedApi = async page => {
   const response = await fetch(`
   https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&sort_by=vote_count.desc&vote_average.desc&include_adult=false&include_video=false&page=${page}`);
+  const data = await response.json();
+  return data;
+};
+
+export const tmdbActorsApi = async name => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/search/person?api_key=${ApiKey}&language=en-US&query=${name}&page=1&include_adult=false`
+  );
+  const data = await response.json();
+  return data;
+};
+
+export const tmdbMovieCreditsApi = async id => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${ApiKey}`
+  );
   const data = await response.json();
   return data;
 };

@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 
 import Slider from "react-slick";
 import MovieSlider from "../movieSLider/MovieSlider.component";
+import MovieCastCarousel from "../MovieCastCarousel/MovieCastCarousel.component";
 const Carousel = props => {
   const optsYouTube = {
     height: "390",
@@ -15,23 +16,6 @@ const Carousel = props => {
     }
   };
 
-  // const trailersYouTube = () => {
-
-  //   return (
-  //     props.trailers &&
-  //     props.trailers.map(trailer => {
-  //       return (
-  //         <>
-  //           <YouTube
-  //             videoId={trailer.key}
-  //             opts={optsYouTube}
-  //             // onReady={_onReadyYouTube}
-  //           />
-  //         </>
-  //       );
-  //     })
-  //   );
-  // };
   const settings = {
     dots: true,
     infinite: true,
@@ -48,44 +32,56 @@ const Carousel = props => {
     justifyContent: "center"
   };
 
-  return (
-    <div style={styleContainer}>
-      <Slider {...settings}>
-        {props.type === "trailers"
-          ? props.trailers &&
-            props.trailers.map(trailer => {
-              return (
-                <div className="test">
-                  <TrailerContainer>
-                    <YouTube
-                      videoId={trailer.key}
-                      opts={optsYouTube}
-                      // onReady={_onReadyYouTube}
-                    />
-                  </TrailerContainer>
-                </div>
-              );
-            })
-          : props.movies &&
-            props.movies.map(movie => {
-              // debugger;
-              return (
-                <div key={movie.id}>
-                  <MovieSlider movie={movie}></MovieSlider>
-                </div>
-              );
-            })}
-
-        {/*        
-        {props.movies &&
+  const category = () => {
+    switch (props.type) {
+      case "trailers":
+        return (
+          props.trailers &&
+          props.trailers.map(trailer => {
+            return (
+              <div className="test">
+                <TrailerContainer>
+                  <YouTube
+                    videoId={trailer.key}
+                    opts={optsYouTube}
+                    // onReady={_onReadyYouTube}
+                  />
+                </TrailerContainer>
+              </div>
+            );
+          })
+        );
+      case "movieSlider":
+        return (
+          props.movies &&
           props.movies.map(movie => {
+            // debugger;
             return (
               <div key={movie.id}>
                 <MovieSlider movie={movie}></MovieSlider>
               </div>
             );
-          })} */}
-      </Slider>
+          })
+        );
+      case "movieCast":
+        return (
+          props.movieCast &&
+          props.movieCast.map(cast => {
+            return (
+              <MovieCastCarousel
+                name={cast.name}
+                profile={cast.profile_path}
+                character={cast.character}
+              />
+            );
+          })
+        );
+    }
+  };
+
+  return (
+    <div style={styleContainer}>
+      <Slider {...settings}>{category()}</Slider>
     </div>
   );
 };
