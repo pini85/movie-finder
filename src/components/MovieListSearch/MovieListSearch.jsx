@@ -1,15 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-  selectedMovie,
-  fetchMovies,
-  currentPage
-} from "../../redux/actions/index";
-import usePagination from "../../hooks/usePagination.hook";
+import { selectedMovie, fetchMovies } from "../../redux/actions/index";
+import Pagination from "../Pagination/Pagination.component";
+
 import { tmdbQueryApi } from "../../apis/tmdbApi";
 
 import Card from "../card/Card";
-const MovieList = props => {
+const MovieListSearch = (props) => {
   console.log(props);
 
   const styleDiv = {
@@ -19,7 +16,7 @@ const MovieList = props => {
     flexWrap: "wrap",
     justifyContent: "center",
     alignContent: "center",
-    background: "var(--secondary-color)"
+    background: "var(--secondary-color)",
   };
 
   return (
@@ -28,19 +25,13 @@ const MovieList = props => {
         style={{
           display: "flex",
           justifyContent: "center",
-          background: "var(--secondary-color)"
+          background: "var(--secondary-color)",
         }}
-      >
-        {/* {usePagination(
-          [props.fetchMovies, props.fetchMoviesData],
-          props.currentPageData,
-          props.currentPage,
-          props.optionActive
-        )} */}
-      </div>
+      ></div>
+      <Pagination api={props.fetchMovies} data={props.fetchMoviesData} />
       <div style={styleDiv}>
         {props.fetchMoviesData &&
-          props.fetchMoviesData.results.map(movie => {
+          props.fetchMoviesData.results.map((movie) => {
             if (movie === null) return;
             //
 
@@ -55,12 +46,10 @@ const MovieList = props => {
     //
   );
 };
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   fetchMoviesData: state.fetchMovies,
-  currentPageData: state.currentPage
 });
 export default connect(mapStateToProps, {
   selectedMovie: selectedMovie,
-  fetchMovies: page => fetchMovies(page),
-  currentPage: currentPage
-})(MovieList);
+  fetchMovies: (page) => fetchMovies(page),
+})(MovieListSearch);

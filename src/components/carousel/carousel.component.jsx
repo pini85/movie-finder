@@ -7,37 +7,46 @@ import { connect } from "react-redux";
 import Slider from "react-slick";
 import MovieSlider from "../movieSLider/MovieSlider.component";
 import MovieCastCarousel from "../MovieCastCarousel/MovieCastCarousel.component";
-const Carousel = props => {
+const Carousel = ({
+  type,
+  trailers,
+  movies,
+  movieCast,
+  slidesToShow,
+  slidesToScroll,
+  autoplay,
+  fade,
+}) => {
   const optsYouTube = {
     height: "390",
     width: "640",
     playerVars: {
-      autoplay: 0
-    }
+      autoplay: 0,
+    },
   };
 
   const settings = {
     dots: true,
     infinite: true,
-    slidesToShow: 6,
-    slidesToScroll: 6,
-    autoplay: false,
+    slidesToShow: slidesToShow,
+    slidesToScroll: slidesToScroll,
+    autoplay: autoplay,
     autoplaySpeed: 4000,
-    // fade: true,
+    fade: fade,
     pauseOnHover: true,
-    lazyLoad: true
+    lazyLoad: true,
   };
   const styleContainer = {
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
   };
 
   const category = () => {
-    switch (props.type) {
+    switch (type) {
       case "trailers":
         return (
-          props.trailers &&
-          props.trailers.map(trailer => {
+          trailers &&
+          trailers.map((trailer) => {
             return (
               <div className="test">
                 <TrailerContainer>
@@ -53,8 +62,8 @@ const Carousel = props => {
         );
       case "movieSlider":
         return (
-          props.movies &&
-          props.movies.map(movie => {
+          movies &&
+          movies.map((movie) => {
             // debugger;
             return (
               <div key={movie.id}>
@@ -65,8 +74,8 @@ const Carousel = props => {
         );
       case "movieCast":
         return (
-          props.movieCast &&
-          props.movieCast.map(cast => {
+          movieCast &&
+          movieCast.map((cast) => {
             return (
               <MovieCastCarousel
                 name={cast.name}
@@ -85,9 +94,9 @@ const Carousel = props => {
     </div>
   );
 };
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   movies: state.movieSlider,
-  trailers: state.trailers
+  trailers: state.trailers,
 });
 
 export default connect(mapStateToProps)(Carousel);

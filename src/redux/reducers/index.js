@@ -68,15 +68,15 @@ const isSendingReducer = (sending = false, action) => {
   return sending;
 };
 
-const optionActiveReducer = (active = "1", action) => {
+const optionActiveReducer = (active = 1, action) => {
   if (action.type === "OPTION_ACTIVE") {
     return action.payload;
   }
   return active;
 };
 
-const currentPageReducer = (page = 1, action) => {
-  if (action.type === "CURRENT_PAGE") {
+const displayPageReducer = (page = 1, action) => {
+  if (action.type === "DISPLAY_PAGE") {
     return action.payload;
   }
   return page;
@@ -126,10 +126,10 @@ export default combineReducers({
   newestMovies: newestMoviesReducer,
   highestRatedMovies: highestRatedReducer,
   optionActive: optionActiveReducer,
-  currentPage: currentPageReducer,
+  displayPage: displayPageReducer,
   displayMovie: displayMovieReducer,
   trailers: fetchTrailersReducer,
   fetchTorrents: fetchTorrentsReducer,
   fetchSubtitles: fetchSubtitlesReducer,
-  fetchMagnets: fetchMagnetsReducer
+  fetchMagnets: fetchMagnetsReducer,
 });

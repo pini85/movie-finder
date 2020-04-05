@@ -7,13 +7,13 @@ import {
   Container,
   DetailContainer,
   Header,
-  Plot
+  Plot,
 } from "./MoveSliderInfo.styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import Button from "../Button/Button";
 
-const MovieSliderInfo = props => {
+const MovieSliderInfo = (props) => {
   console.log("MOVIESLIDERINFO", props);
 
   const handleClick = () => {
@@ -22,9 +22,9 @@ const MovieSliderInfo = props => {
     props.selectedMovieId(props.movie.id);
     console.log(props.movie.title);
 
-    props.history.push(`/show-movie/${props.movie.id}`);
+    props.history.push(`/movie/${props.movie.id}`);
   };
-  const plotDetails = plot => {
+  const plotDetails = (plot) => {
     if (plot.length > 200) {
       return plot.slice(0, 200) + "...";
     }
@@ -51,7 +51,7 @@ const MovieSliderInfo = props => {
             style={{
               fontSize: "1.4rem",
               marginRight: "0.5rem",
-              color: "orange"
+              color: "orange",
             }}
           >
             <FontAwesomeIcon icon={faStar} />
@@ -66,7 +66,7 @@ const MovieSliderInfo = props => {
 export default compose(
   withRouter,
   connect(null, {
-    selectedMovieId: id => selectedMovieId(id),
-    selectedMovie: movie => selectedMovie(movie)
+    selectedMovieId: (id) => selectedMovieId(id),
+    selectedMovie: (movie) => selectedMovie(movie),
   })
 )(MovieSliderInfo);

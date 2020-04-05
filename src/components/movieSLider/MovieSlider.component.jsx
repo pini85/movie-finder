@@ -4,14 +4,10 @@ import MovieSliderInfo from "../movie-slider-info/MovieSliderInfo.component";
 
 import styled from "styled-components";
 
-const movieSlider = props => {
+const movieSlider = (props) => {
   // debugger;
-  console.log("MOVIESLIDER", props);
 
-  const test = () => {
-    console.log("IN TEST");
-    console.log(props.movie);
-  };
+  const test = () => {};
 
   const Container = styled.div`
     height: 48rem;

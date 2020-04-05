@@ -6,17 +6,16 @@ import { compose } from "redux";
 import {
   selectedMovieId,
   movieSuggestions,
-  search
+  search,
 } from "../../redux/actions/index";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilm, faStar } from "@fortawesome/free-solid-svg-icons";
 
-const Suggestion = props => {
+const Suggestion = (props) => {
   const handleClick = () => {
     props.selectedMovieId(props.item.id);
     props.movieSuggestions(false);
     props.search("");
-    props.history.push(`/show-movie/${props.item.id}`);
   };
 
   return (
@@ -55,6 +54,6 @@ export default compose(
   connect(null, {
     selectedMovieId: selectedMovieId,
     search: search,
-    movieSuggestions: movieSuggestions
+    movieSuggestions: movieSuggestions,
   })
 )(Suggestion);

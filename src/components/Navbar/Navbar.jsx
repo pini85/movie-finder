@@ -1,9 +1,9 @@
 import React from "react";
 import Search from "../Search/Search.component";
 import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { movieSuggestions } from "../../redux/actions/index";
-import { logo } from "../../images/logo.png";
+import NavbarItem from "../NavbarItem/NavbarItem.component";
+import { NavbarItemContainer } from "./Navbar.styles";
+
 const styleContainer = {
   display: "flex",
   justifyContent: "space-between",
@@ -13,34 +13,28 @@ const styleContainer = {
   height: "7vh",
   padding: "3rem",
   zIndex: "2",
-  position: "relative"
+  position: "relative",
 };
 const image = {
   height: "6rem",
   width: "23rem",
-  marginTop: "1rem"
+  marginTop: "1rem",
 };
-const Navbar = props => {
+const Navbar = (props) => {
   return (
     <div style={styleContainer}>
       <Link to="/">
-        <div className="hi">
-          <img
-            style={image}
-            className="YUP"
-            src={require("../../images/logo.png")}
-            alt=""
-          />
+        <div>
+          <img style={image} src={require("../../images/logo.png")} alt="" />
         </div>
       </Link>
+      <NavbarItemContainer>
+        <NavbarItem link="/movies/latest/page/1" title="movies"></NavbarItem>
+      </NavbarItemContainer>
 
       <Search />
     </div>
   );
 };
-const mapStateToProps = state => ({
-  userSuggestions: state.movieSuggestions
-});
-export default connect(mapStateToProps, {
-  movieSuggestions: movieSuggestions
-})(Navbar);
+
+export default Navbar;

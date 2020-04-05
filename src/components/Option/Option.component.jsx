@@ -1,46 +1,62 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { connect } from "react-redux";
+import { history, withRouter } from "react-router-dom";
+import { compose } from "redux";
 import { optionActive } from "../../redux/actions";
 
 import { Container } from "./Option.styles";
 
-const Option = ({ title, optionActive, optionActiveData, dataType }) => {
+const Option = ({
+  history,
+  title,
+  optionActive,
+  optionActiveData,
+  dataType,
+  changeUrl,
+  changeUrlName,
+}) => {
   const activeEl = () => {
-    if (optionActiveData === "1" && dataType === "1") {
+    if (optionActiveData === 1 && dataType === 1) {
       return {
         background: "var(--primary-color",
-        color: "var(--color-dark)"
+        color: "var(--color-dark)",
       };
     }
-    if (optionActiveData === "2" && dataType === "2") {
+    if (optionActiveData === 2 && dataType === 2) {
       return {
         background: "var(--primary-color",
-        color: "var(--color-dark)"
+        color: "var(--color-dark)",
       };
     }
-    if (optionActiveData === "3" && dataType === "3") {
+    if (optionActiveData === 3 && dataType === 3) {
       return {
         background: "var(--primary-color",
-        color: "var(--color-dark)"
+        color: "var(--color-dark)",
       };
     }
   };
 
+  const handleClick = (e) => {
+    optionActive(e);
+    if (changeUrl) {
+      history.push(`/movies/${changeUrlName}/page/1`);
+    }
+  };
+
   return (
-    <Container
-      onClick={e => optionActive(e)}
-      style={activeEl()}
-      data-type={dataType}
-    >
+    <Container onClick={handleClick} style={activeEl()} data-type={dataType}>
       {title}
     </Container>
   );
 };
 const mapStateToDispatch = {
-  optionActive: optionActive
+  optionActive: optionActive,
 };
-const mapStateToProps = state => ({
-  optionActiveData: state.optionActive
+const mapStateToProps = (state) => ({
+  optionActiveData: state.optionActive,
 });
 
-export default connect(mapStateToProps, mapStateToDispatch)(Option);
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapStateToDispatch)
+)(Option);

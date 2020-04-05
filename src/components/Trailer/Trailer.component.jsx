@@ -26,16 +26,16 @@ const Trailer = ({ poster, fetchTrailers, trailers, colors }) => {
       height: "390",
       width: "640",
       playerVars: {
-        autoplay: 0
-      }
+        autoplay: 0,
+      },
     };
-    const _onReadyYouTube = event => {
+    const _onReadyYouTube = (event) => {
       // access to player in all event handlers via event.target
       event.target.pauseVideo();
     };
     return (
       trailers &&
-      trailers.map(trailer => {
+      trailers.map((trailer) => {
         return (
           <>
             <YouTube
@@ -99,7 +99,14 @@ const Trailer = ({ poster, fetchTrailers, trailers, colors }) => {
         <TrailerPlay onClick={() => setToggled(true)} />
       </TrailerContainer>
       <Modal skew={true} isToggled={isToggled} setToggled={setToggled}>
-        <Carousel items={trailersYouTube()} type="trailers"></Carousel>
+        <Carousel
+          items={trailersYouTube()}
+          type="trailers"
+          slidesToShow={1}
+          slidesToScroll={1}
+          autoPlay={false}
+          fade={true}
+        ></Carousel>
         {isLoading ? (
           <FontAwesomeIcon
             icon={faFilm}
@@ -111,11 +118,11 @@ const Trailer = ({ poster, fetchTrailers, trailers, colors }) => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   trailers: state.trailers,
-  colors: state.displayMovie.colors
+  colors: state.displayMovie.colors,
 });
 
 export default connect(mapStateToProps, {
-  fetchTrailers: fetchTrailers
+  fetchTrailers: fetchTrailers,
 })(Trailer);

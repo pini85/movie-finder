@@ -16,7 +16,7 @@ const MovieCastCarousel = ({ colors, name, character, profile }) => {
       : "https://i.ibb.co/nLjmy5r/empty-Profile.png";
   };
   return (
-    <Container fontColor={colors.lightMuted} color={colors.vibrant}>
+    <Container fontColor={colors.darktMuted} color={colors.vibrant}>
       <Img borderColor={colors.darkMuted} src={profileImage()} alt="" />
       <BottomContainer>
         <NameContainer>{name}</NameContainer>

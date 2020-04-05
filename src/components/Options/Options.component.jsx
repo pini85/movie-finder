@@ -4,48 +4,30 @@ import {
   optionActive,
   fetchNewestMovies,
   fetchHighestRatedMovies,
-  currentPage
 } from "../../redux/actions";
 
 import Option from "../Option/Option.component";
 import { OptionsContainer } from "./Options.styles";
 
-const Options = props => {
-  useEffect(() => {
-    switch (props.optionActiveData) {
-      case "1":
-        props.newestMovies(1);
-        if (props.currentPageData !== 1) props.currentPage(1);
-
-        break;
-
-      case "2":
-        props.highestRatedMovies(1);
-        if (props.currentPageData !== 1) props.currentPage(1);
-        break;
-    }
-  }, [props.optionActiveData]);
-
+const Options = (props) => {
   return (
     <OptionsContainer>
-      <Option title="Newest Movies" dataType="1"></Option>
-      <Option title="Highest Rating" dataType="2"></Option>
-      <Option title="Recommended To You" dataType="3"></Option>
+      <Option title="newest movies" dataType={1}></Option>
+      <Option title="highest rating" dataType={2}></Option>
+      <Option title="recommended to you" dataType={3}></Option>
     </OptionsContainer>
   );
 };
 
 const mapStateToDispatch = {
-  newestMovies: page => fetchNewestMovies(page),
-  highestRatedMovies: page => fetchHighestRatedMovies(page),
+  newestMovies: (page) => fetchNewestMovies(page),
+  highestRatedMovies: (page) => fetchHighestRatedMovies(page),
   optionActive: optionActive,
-  currentPage: currentPage
 };
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   newestMoviesData: state.newestMovies,
   highestRatedData: state.highestRated,
   optionActiveData: state.optionActive,
-  currentPageData: state.currentPage
 });
 
 export default connect(mapStateToProps, mapStateToDispatch)(Options);

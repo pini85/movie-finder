@@ -9,23 +9,15 @@ import Suggestions from "../Suggestions/Suggestions.component";
 import Button from "../Button/Button";
 import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
 
-const Search = props => {
+const Search = (props) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSending, setIsSending] = useState(false);
 
   useDidUpdateEffect(() => {
-    const fetchData = async () => {
-      // BUGGY: might got incorrect order of results!
-      // if (searchQuery.length > 0) {
-      //   const data = await tmdbQueryApi(1, searchQuery);
-      //   props.movieSuggestions(data);
-      // } else {
-      //   props.movieSuggestions(false);
-      // }
+    setTimeout(async () => {
       const data = !!searchQuery.length && (await tmdbQueryApi(1, searchQuery));
       props.movieSuggestions(data);
-    };
-    fetchData();
+    }, 150);
   }, [searchQuery]);
 
   const handleClick = () => {
@@ -34,12 +26,12 @@ const Search = props => {
     props.fetchMovies(1);
     setSearchQuery("");
     // setIsSending(false);
-    props.history.push("/show-list");
+    props.history.push(`/search/q=${searchQuery}/page/1`);
   };
 
   const container = {
     display: "flex",
-    alignItems: "center"
+    alignItems: "center",
   };
 
   const styleInput = {
@@ -47,7 +39,7 @@ const Search = props => {
     height: "2.5rem",
     padding: "1.5rem",
     marginRight: "1rem",
-    border: "2px solid var(--primary-color)"
+    border: "2px solid var(--primary-color)",
   };
 
   return (
@@ -55,7 +47,7 @@ const Search = props => {
       <input
         style={styleInput}
         value={searchQuery}
-        onChange={e => setSearchQuery(e.target.value)}
+        onChange={(e) => setSearchQuery(e.target.value)}
         type="text"
       />
       <Button
@@ -70,19 +62,19 @@ const Search = props => {
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isSending: state.isSending,
   // fetchMoves: state.fetchMovies,
   selectedMovies: state.selectedMovies,
   userSuggestions: state.movieSuggestions,
-  query: state.search
+  query: state.search,
 });
 
 export default compose(
   withRouter,
   connect(mapStateToProps, {
     search: search,
-    fetchMovies: page => fetchMovies(page),
-    movieSuggestions: movieSuggestions
+    fetchMovies: (page) => fetchMovies(page),
+    movieSuggestions: movieSuggestions,
   })
 )(Search);

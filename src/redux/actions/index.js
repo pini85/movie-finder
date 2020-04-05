@@ -7,7 +7,7 @@ import {
   tmdbHighestRatedApi,
   tmdbTrailersApi,
   tmdbActorsApi,
-  tmdbMovieCreditsApi
+  tmdbMovieCreditsApi,
 } from "../../apis/tmdbApi";
 import omdbApi from "../../apis/omdbApi";
 import torrentApi from "../../apis/torrentApi";
@@ -15,38 +15,38 @@ import subtitlesApi from "../../apis/subtitlesApi";
 import magnet from "../../apis/magnet";
 import * as Vibrant from "node-vibrant";
 
-export const currentPage = page => {
+export const displayPage = (page) => {
   return {
-    type: "CURRENT_PAGE",
-    payload: page
+    type: "DISPLAY_PAGE",
+    payload: page,
   };
 };
 
-export const selectedMovie = movie => {
+export const selectedMovie = (movie) => {
   return {
     type: "MOVIE_SELECTED",
-    payload: movie
+    payload: movie,
   };
 };
-export const selectedMovieId = id => {
+export const selectedMovieId = (id) => {
   return {
     type: "MOVIE_ID_SELECTED",
-    payload: id
+    payload: id,
   };
 };
-export const selectedMovies = movies => {
+export const selectedMovies = (movies) => {
   return {
     type: "MOVIES_SELECTED",
-    payload: movies
+    payload: movies,
   };
 };
-export const movieSuggestions = movies => {
+export const movieSuggestions = (movies) => {
   return {
     type: "MOVIE_SUGGESTIONS",
-    payload: movies
+    payload: movies,
   };
 };
-export const fetchMovies = page => async (dispatch, getState) => {
+export const fetchMovies = (page) => async (dispatch, getState) => {
   const state = getState();
   if (state.search.length > 0) {
     const response = await tmdbQueryApi(page, state.search);
@@ -55,35 +55,35 @@ export const fetchMovies = page => async (dispatch, getState) => {
   }
 };
 
-export const fetchNewestMovies = page => async (dispatch, getState) => {
+export const fetchNewestMovies = (page) => async (dispatch, getState) => {
   const response = await tmdbNewestTodayApi(page);
 
   dispatch({ type: "FETCH_NEWEST_MOVIES", payload: response });
 };
 
-export const search = query => {
+export const search = (query) => {
   return {
     type: "SEARCH_QUERY",
-    payload: query
+    payload: query,
   };
 };
 
-export const fetchMovieSlider = () => async dispatch => {
+export const fetchMovieSlider = () => async (dispatch) => {
   const data = await tmdbMovieSliderApi();
   const popularMoviesData = await Promise.all(
-    data.map(movie => tmdbIdApi(movie.id))
+    data.map((movie) => tmdbIdApi(movie.id))
   );
 
   dispatch({ type: "FETCH_MOVIE_SLIDER", payload: popularMoviesData });
 };
 
-export const fetchHighestRatedMovies = page => async dispatch => {
+export const fetchHighestRatedMovies = (page) => async (dispatch) => {
   const data = await tmdbHighestRatedApi(page);
 
   dispatch({ type: "FETCH_HIGHEST_RATED_MOVIES", payload: data });
 };
 
-export const goToMovie = id => (dispatch, getState) => {
+export const goToMovie = (id) => (dispatch, getState) => {
   dispatch(selectedMovieId(id));
   return dispatch(fetchMovie);
 };
@@ -105,14 +105,14 @@ const fetchMovie = async (dispatch, getState) => {
   const actorsList = async () => {
     const actors = omdbData.Actors.trim().split(",");
     const fetchActors = await Promise.all(
-      actors.map(async actor => await tmdbActorsApi(actor))
+      actors.map(async (actor) => await tmdbActorsApi(actor))
     );
 
-    const x = fetchActors.map(page => {
-      return page.results.slice(0, 1).map(actor => {
+    const x = fetchActors.map((page) => {
+      return page.results.slice(0, 1).map((actor) => {
         return {
           name: actor.name,
-          profile: actor.profile_path
+          profile: actor.profile_path,
         };
       });
     });
@@ -139,18 +139,18 @@ const fetchMovie = async (dispatch, getState) => {
     torrents = [];
     magnets = [];
   } else {
-    torrents = torrentData.map(torrent => {
+    torrents = torrentData.map((torrent) => {
       const obj = {
         url: torrent.url,
         quality: torrent.quality,
         type: torrent.type,
         seeds: torrent.seeds,
         peers: torrent.peers,
-        size: torrent.size
+        size: torrent.size,
       };
       return obj;
     });
-    magnets = torrentData.map(torrent => {
+    magnets = torrentData.map((torrent) => {
       return magnet(omdbData.Title, torrent.hash, torrent.url);
     });
   }
@@ -161,35 +161,35 @@ const fetchMovie = async (dispatch, getState) => {
         return [
           {
             imdb: omdbData.Ratings[0],
-            img: "https://i.ibb.co/dth8xgq/imdb.png"
-          }
+            img: "https://i.ibb.co/dth8xgq/imdb.png",
+          },
         ];
 
       case 2:
         return [
           {
             rating: omdbData.Ratings[0],
-            img: "https://i.ibb.co/dth8xgq/imdb.png"
+            img: "https://i.ibb.co/dth8xgq/imdb.png",
           },
           {
             rating: omdbData.Ratings[1],
-            img: "https://i.ibb.co/BCy3STv/tomato.png"
-          }
+            img: "https://i.ibb.co/BCy3STv/tomato.png",
+          },
         ];
       case 3:
         return [
           {
             rating: omdbData.Ratings[0],
-            img: "https://i.ibb.co/dth8xgq/imdb.png"
+            img: "https://i.ibb.co/dth8xgq/imdb.png",
           },
           {
             rating: omdbData.Ratings[1],
-            img: "https://i.ibb.co/BCy3STv/tomato.png"
+            img: "https://i.ibb.co/BCy3STv/tomato.png",
           },
           {
             rating: omdbData.Ratings[2],
-            img: "https://i.ibb.co/5jVT2rK/meta-critic.png"
-          }
+            img: "https://i.ibb.co/5jVT2rK/meta-critic.png",
+          },
         ];
     }
   };
@@ -217,8 +217,8 @@ const fetchMovie = async (dispatch, getState) => {
       lightVibrant: lightVibrant,
       muted: muted,
       darkMuted: darkMuted,
-      lightMuted: lightMuted
-    }
+      lightMuted: lightMuted,
+    },
   };
 
   // ACTION2: FETCH_MOVIE ===> movie ==> state.movie = movie
@@ -254,17 +254,17 @@ export const fetchMagnets = () => async (dispatch, getState) => {
 
   const torrentData = await torrentApi(tmdbData.imdb_id);
 
-  const magnets = torrentData.map(torrent => {
+  const magnets = torrentData.map((torrent) => {
     return magnet(tmdbData.Title, torrent.hash, torrent.url);
   });
 
   dispatch({ type: "FETCH_MAGNETS", payload: magnets });
 };
 
-export const optionActive = e => {
+export const optionActive = (e) => {
   return {
     type: "OPTION_ACTIVE",
-    payload: e.target.getAttribute("data-type")
+    payload: parseInt(e.target.getAttribute("data-type")),
   };
 };
 
@@ -280,9 +280,9 @@ export const optionActive = e => {
 //       props.popularMovies(popularMoviesData);
 //     };
 
-export const isSending = bool => {
+export const isSending = (bool) => {
   return {
     type: "IS_SENDING",
-    payload: bool
+    payload: bool,
   };
 };

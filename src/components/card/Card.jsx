@@ -8,14 +8,14 @@ import Button from "../Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
-const Card = props => {
+const Card = (props) => {
   const handleClick = () => {
     console.log(props.movie);
 
     props.selectedMovieId(props.movie.id);
     props.selectedMovie(props.movie);
 
-    props.history.push(`/show-movie/${props.movie.id}`);
+    props.history.push(`/movie/${props.movie.id}`);
   };
   //   const styleCard = {
   //     backgroundColor: "transparent",
@@ -45,7 +45,7 @@ const Card = props => {
     // height: "100%",
     // backfaceVisibility: "hidden",
     background: `url(${image()})no-repeat center center`,
-    backgroundSize: "cover"
+    backgroundSize: "cover",
     // color: "white"
   };
   const styleYear = {
@@ -54,7 +54,7 @@ const Card = props => {
     left: "5px",
     backgroundColor: "var(--primary-color)",
     borderRadius: "5px",
-    padding: "0 5px"
+    padding: "0 5px",
   };
   const styleRating = {
     display: "flex",
@@ -63,7 +63,7 @@ const Card = props => {
     right: "5px",
     backgroundColor: "var(--primary-color)",
     borderRadius: "5px",
-    padding: "0 5px"
+    padding: "0 5px",
   };
 
   const styleBackCard = {
@@ -72,7 +72,7 @@ const Card = props => {
     justifyContent: "space-between",
     background:
       "linear-gradient(to bottom, var(--primary-color),var(--primary-color-dark))",
-    color: "white"
+    color: "white",
   };
 
   const styleTitle = {
@@ -81,15 +81,15 @@ const Card = props => {
     width: "100%",
     backgroundColor: "var(--primary-color)",
     color: "var(--text-dark)",
-    padding: "0 5px"
+    padding: "0 5px",
   };
   const styleBackTitle = {
     width: "100%",
     backgroundColor: "var(--primary-color)",
     color: "var(--text-dark)",
-    padding: "0 5px"
+    padding: "0 5px",
   };
-  const title = name => {
+  const title = (name) => {
     if (name.length > 17) {
       return name.slice(0, 17) + "...";
     }
@@ -127,6 +127,6 @@ export default compose(
   withRouter,
   connect(null, {
     selectedMovieId: selectedMovieId,
-    selectedMovie: movie => selectedMovie(movie)
+    selectedMovie: (movie) => selectedMovie(movie),
   })
 )(Card);

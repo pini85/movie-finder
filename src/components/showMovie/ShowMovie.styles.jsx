@@ -82,8 +82,9 @@ export const PlotContainer = styled.div`
 `;
 
 export const MovieCastContainer = styled.div`
-  margin: 4rem -4rem;
-  padding: 3rem 0;
+  margin: 4rem 0;
+  padding-top: 2.5rem;
+  padding-bottom: 3rem;
   border-radius: 5px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   background: ${props => props.color};

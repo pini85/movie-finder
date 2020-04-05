@@ -6,13 +6,20 @@ import Carousel from "../carousel/carousel.component";
 const MovieCast = ({ cast }) => {
   return (
     <>
-      <Carousel movieCast={cast} type="movieCast"></Carousel>
+      <Carousel
+        movieCast={cast}
+        type="movieCast"
+        slidesToShow={5}
+        slidesToScroll={5}
+        autoPlay={false}
+        fade={false}
+      ></Carousel>
     </>
   );
 };
 
-const mapStateToProps = state => ({
-  cast: state.displayMovie.cast
+const mapStateToProps = (state) => ({
+  cast: state.displayMovie.cast,
 });
 
 export default connect(mapStateToProps)(MovieCast);

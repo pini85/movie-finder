@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  width: 70rem;
   justify-content: center;
-  padding-bottom: 4rem;
+  padding: 0 11rem 4rem 11rem;
+
   background: var(--secondary-color);
 `;
 export const ButtonContainer = styled.button`
