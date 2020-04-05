@@ -6,11 +6,12 @@ import {
   fetchHighestRatedMovies,
 } from "../../redux/actions";
 import CategoryTitle from "../CategoryTitle/CategoryTitle.component";
-import MovieListHome from "../MovieListCategory/MovieListCategory.component";
+import MovieListCategory from "../MovieListCategory/MovieListCategory.component";
 import Option from "../Option/Option.component";
 import Pagination from "../Pagination/Pagination.component";
 import { Container, OptionContainer } from "./Category.styles";
 const Category = ({
+  movies,
   title,
   options,
   optionActive,
@@ -19,14 +20,13 @@ const Category = ({
   highestRatedMovies,
   newestMovies,
 }) => {
-  const showList = () => {
+  const showMovieList = () => {
     switch (optionActive) {
       case 1:
         return (
           <>
             <Pagination api={fetchNewestMovies} data={newestMovies} />
-            <MovieListHome category="newest movies" />
-            {/* <Pagination api={fetchNewestMovies} data={newestMovies} /> */}
+            <MovieListCategory category="newest movies" />
           </>
         );
 
@@ -37,7 +37,7 @@ const Category = ({
               api={fetchHighestRatedMovies}
               data={highestRatedMovies}
             />
-            <MovieListHome category="highest rating" />
+            <MovieListCategory category="highest rating" />
             <Pagination
               api={fetchHighestRatedMovies}
               data={highestRatedMovies}
@@ -45,6 +45,16 @@ const Category = ({
           </>
         );
     }
+  };
+
+  const showTvList = () => {
+    console.log("im invoked");
+
+    return (
+      <h1 style={{ color: "white", textAlign: "center", fontWeight: "700" }}>
+        COMING SOON
+      </h1>
+    );
   };
   return (
     <Container>
@@ -62,8 +72,7 @@ const Category = ({
           );
         })}
       </OptionContainer>
-
-      {showList()}
+      {movies ? showMovieList() : showTvList()}
     </Container>
   );
 };

@@ -25,7 +25,13 @@ const Home = (props) => {
       case 2:
         return <MovieListHome category="highest rating" />;
       case 3:
-        return "Coming soon";
+        return (
+          <h1
+            style={{ color: "white", textAlign: "center", fontWeight: "700" }}
+          >
+            COMING SOON
+          </h1>
+        );
     }
   };
 

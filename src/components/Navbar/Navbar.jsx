@@ -30,6 +30,7 @@ const Navbar = (props) => {
       </Link>
       <NavbarItemContainer>
         <NavbarItem link="/movies/latest/page/1" title="movies"></NavbarItem>
+        <NavbarItem link="/tv/latest/page/1" title="tv shows"></NavbarItem>
       </NavbarItemContainer>
 
       <Search />

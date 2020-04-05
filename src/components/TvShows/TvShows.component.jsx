@@ -1,12 +1,9 @@
 import React from "react";
-import { connect } from "react-redux";
-
 import Category from "../Category/Category.component";
-
-const Movies = () => {
+const TvShows = () => {
   const options = [
     {
-      title: "latest movies",
+      title: "latest tv shows",
       dataType: 1,
       url: "latest",
     },
@@ -18,9 +15,8 @@ const Movies = () => {
   ];
   return (
     <>
-      <Category title="movies" options={options} movies={true} />
+      <Category title="tv shows" options={options} />
     </>
   );
 };
-
-export default Movies;
+export default TvShows;

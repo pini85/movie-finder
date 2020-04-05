@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const Container = styled.li`
   position: relative;
   font-size: 2rem;
+  margin-right: 2.5rem;
 
   color: var(--text-white);
   text-transform: uppercase;

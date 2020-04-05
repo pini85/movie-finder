@@ -7,6 +7,7 @@ import Search from "./components/Search/Search.component";
 import Movies from "./components/Movies/Movies.component";
 import ShowMovie from "./components/showMovie/ShowMovie.component";
 import MovieListSearch from "./components/MovieListSearch/MovieListSearch";
+import TvShows from "./components/TvShows/TvShows.component";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/movies/:category/page/:page" component={Movies} />
+        <Route exact path="/tv/:category/page/:page" component={TvShows} />
         <Route path="/search/:query/page/:page" component={MovieListSearch} />
         <Route path="/movie/:id" component={ShowMovie} />
       </Switch>
