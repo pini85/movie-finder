@@ -15,7 +15,7 @@ import {
   BottomContainer,
   OptionsContainer,
   PlotContainer,
-  MovieCastContainer
+  MovieCastContainer,
 } from "./ShowMovie.styles";
 import styled from "styled-components";
 
@@ -86,7 +86,7 @@ const ShowMovie = ({ item, colors, goToMovie }) => {
                 <ShowMovieOption title="magnets" type="magnets" left={true} />
               </OptionsContainer>
             </BottomContainer>
-
+            {/* 
             <div style={{ display: "flex" }}>
               <DarkVibrant></DarkVibrant>
               <VibrantC></VibrantC>
@@ -96,27 +96,27 @@ const ShowMovie = ({ item, colors, goToMovie }) => {
               <DarkMuted></DarkMuted>
               <Muted></Muted>
               <LightMuted></LightMuted>
-            </div>
+            </div> */}
+            <MovieCastContainer color={colors.lightVibrant}>
+              <MovieCast />
+            </MovieCastContainer>
           </MovieCard>
-          <MovieCastContainer color={colors.lightVibrant}>
-            <MovieCast />
-          </MovieCastContainer>
         </Container>
       )}
     </div>
   );
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   if (state.displayMovie) {
     return {
       item: state.displayMovie,
-      colors: state.displayMovie.colors
+      colors: state.displayMovie.colors,
     };
   } else {
     return {};
   }
 };
 export default connect(mapStateToProps, {
-  goToMovie: goToMovie
+  goToMovie: goToMovie,
 })(ShowMovie);

@@ -9,8 +9,8 @@ const MovieCast = ({ cast }) => {
       <Carousel
         movieCast={cast}
         type="movieCast"
-        slidesToShow={5}
-        slidesToScroll={5}
+        slidesToShow={6}
+        slidesToScroll={6}
         autoPlay={false}
         fade={false}
       ></Carousel>

@@ -5,6 +5,8 @@ import NavbarItem from "../NavbarItem/NavbarItem.component";
 import { NavbarItemContainer } from "./Navbar.styles";
 
 const styleContainer = {
+  position: "sticky",
+  top: "0",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
@@ -13,7 +15,6 @@ const styleContainer = {
   height: "7vh",
   padding: "3rem",
   zIndex: "2",
-  position: "relative",
 };
 const image = {
   height: "6rem",

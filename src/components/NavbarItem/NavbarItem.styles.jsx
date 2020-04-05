@@ -19,9 +19,7 @@ export const Container = styled.li`
     background: var(--primary-color);
     transition: all 0.3s;
   }
-  &:hover {
-    transform: scaleX(1.1);
-  }
+
   &:hover::before {
     transform: scale(1);
   }

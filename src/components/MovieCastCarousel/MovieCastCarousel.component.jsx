@@ -6,18 +6,24 @@ import {
   Img,
   BottomContainer,
   NameContainer,
-  CharacterContainer
+  CharacterContainer,
 } from "./MovieCastCarousel.styles";
 
 const MovieCastCarousel = ({ colors, name, character, profile }) => {
   const profileImage = () => {
     return profile
-      ? `http://image.tmdb.org/t/p/w92/${profile}`
+      ? `http://image.tmdb.org/t/p/w138_and_h175_face/${profile}`
       : "https://i.ibb.co/nLjmy5r/empty-Profile.png";
   };
+
   return (
     <Container fontColor={colors.darktMuted} color={colors.vibrant}>
-      <Img borderColor={colors.darkMuted} src={profileImage()} alt="" />
+      <Img
+        profile={profile}
+        borderColor={colors.darkMuted}
+        src={profileImage()}
+        alt=""
+      />
       <BottomContainer>
         <NameContainer>{name}</NameContainer>
         <CharacterContainer>{character}</CharacterContainer>
@@ -26,7 +32,7 @@ const MovieCastCarousel = ({ colors, name, character, profile }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  colors: state.displayMovie.colors
+const mapStateToProps = (state) => ({
+  colors: state.displayMovie.colors,
 });
 export default connect(mapStateToProps)(MovieCastCarousel);
