@@ -6,7 +6,7 @@ export const Container = styled.div`
   font-weight: 700;
   border-radius: 10px;
   padding: 5px;
-  height: 28rem;
+  height: 30rem;
   max-width: 18rem;
   margin: 0 1rem;
   margin-bottom: 2rem;
