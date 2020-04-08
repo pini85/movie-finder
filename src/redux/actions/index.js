@@ -8,6 +8,7 @@ import {
   tmdbTrailersApi,
   tmdbActorsApi,
   tmdbMovieCreditsApi,
+  tmdbGenresApi,
 } from "../../apis/tmdbApi";
 import omdbApi from "../../apis/omdbApi";
 import torrentApi from "../../apis/torrentApi";
@@ -259,6 +260,12 @@ export const fetchMagnets = () => async (dispatch, getState) => {
   });
 
   dispatch({ type: "FETCH_MAGNETS", payload: magnets });
+};
+
+export const fetchGenres = () => async (dispatch) => {
+  const genres = await tmdbGenresApi();
+
+  dispatch({ type: "FETCH_GENRES", payload: genres });
 };
 
 export const optionActive = (e) => {

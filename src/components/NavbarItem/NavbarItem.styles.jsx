@@ -8,6 +8,9 @@ export const Container = styled.li`
   color: var(--text-white);
   text-transform: uppercase;
   transition: all 0.3s;
+  &:visited {
+    color: var(--text-white);
+  }
   &::before {
     content: "";
     position: absolute;

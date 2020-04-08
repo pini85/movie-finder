@@ -9,8 +9,6 @@ import {
 
 import Carousel from "../carousel/carousel.component";
 import Options from "../Options/Options.component";
-import Pagination from "../Pagination/Pagination.component";
-
 import MovieListHome from "../MovieListCategory/MovieListCategory.component";
 
 const Home = (props) => {

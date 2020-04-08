@@ -28,7 +28,7 @@ export const tmdbQueryApi = async (page, query) => {
   const data = await response.json();
   return data;
 };
-export const tmdbIdApi = async id => {
+export const tmdbIdApi = async (id) => {
   const response = await fetch(
     `
     https://api.themoviedb.org/3/movie/${id}?api_key=${ApiKey}&language=en-US`
@@ -54,7 +54,7 @@ export const tmdbIdApi = async id => {
 //   }
 // };
 
-export const tmdbTrailersApi = async id => {
+export const tmdbTrailersApi = async (id) => {
   const response = await fetch(
     `https://api.themoviedb.org/3/movie/${id}/videos?api_key=3e296e6f6a1b142633468c58b584ab9b&language=en-US`
   );
@@ -75,7 +75,7 @@ export const tmdbLatestApi = async () => {
   return data;
 };
 
-export const tmdbNewestTodayApi = async page => {
+export const tmdbNewestTodayApi = async (page) => {
   const response = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&region=US&release_date.gte=${dateMonthsBack(
       3
@@ -86,14 +86,14 @@ export const tmdbNewestTodayApi = async page => {
   return data;
 };
 
-export const tmdbHighestRatedApi = async page => {
+export const tmdbHighestRatedApi = async (page) => {
   const response = await fetch(`
   https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&sort_by=vote_count.desc&vote_average.desc&include_adult=false&include_video=false&page=${page}`);
   const data = await response.json();
   return data;
 };
 
-export const tmdbActorsApi = async name => {
+export const tmdbActorsApi = async (name) => {
   const response = await fetch(
     `https://api.themoviedb.org/3/search/person?api_key=${ApiKey}&language=en-US&query=${name}&page=1&include_adult=false`
   );
@@ -101,11 +101,20 @@ export const tmdbActorsApi = async name => {
   return data;
 };
 
-export const tmdbMovieCreditsApi = async id => {
+export const tmdbMovieCreditsApi = async (id) => {
   const response = await fetch(
     `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${ApiKey}`
   );
   const data = await response.json();
 
   return data;
+};
+
+export const tmdbGenresApi = async () => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/genre/movie/list?api_key=${ApiKey}&language=en-US`
+  );
+  const data = await response.json();
+
+  return data.genres;
 };

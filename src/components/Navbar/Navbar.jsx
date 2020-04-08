@@ -14,7 +14,7 @@ const styleContainer = {
   background: "var(--secondary-color-light)",
   height: "7vh",
   padding: "3rem",
-  zIndex: "2",
+  zIndex: "5",
 };
 const image = {
   height: "6rem",
@@ -32,6 +32,10 @@ const Navbar = (props) => {
       <NavbarItemContainer>
         <NavbarItem link="/movies/latest/page/1" title="movies"></NavbarItem>
         <NavbarItem link="/tv/latest/page/1" title="tv shows"></NavbarItem>
+        <NavbarItem
+          link="/advanced-search/"
+          title="Advanced Search"
+        ></NavbarItem>
       </NavbarItemContainer>
 
       <Search />
