@@ -3,11 +3,13 @@ import { connect } from "react-redux";
 import { Container } from "./AdvancedSearch.styles";
 import { fetchGenres } from "../../redux/actions/index";
 import SelectInput from "../SelectInput/SelectInput.component";
+import Input from "../Input/Input.component";
 
 const AdvancedSearch = (props) => {
   const [years, setYears] = useState(null);
   const [rating, setRating] = useState(null);
   const [genres, setGenres] = useState(null);
+  const [runTime, setRunTime] = useState(null);
   const [voteCount, setVoteCount] = useState(null);
 
   const voteCounts = [
@@ -26,6 +28,7 @@ const AdvancedSearch = (props) => {
     500,
     100,
   ];
+  const runTimes = ["any", 1.5, 2, 3];
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,21 +37,30 @@ const AdvancedSearch = (props) => {
     fetchData();
 
     let years = [];
-
     for (let i = new Date().getFullYear(); i > 1902; i--) {
       years.push(<option value={i}>{i}</option>);
     }
     setYears(years);
+
     let rating = [];
     for (let i = 9; i >= 0; i--) {
       rating.push(<option value={i}>{i}</option>);
     }
-
     setRating(rating);
+
     let voteCount = [];
-    for (let i = 0; i > voteCounts.length; i--) {
+    for (let i = 0; i < voteCounts.length; i++) {
       voteCount.push(<option value={voteCounts[i]}>{voteCounts[i]}</option>);
     }
+    setVoteCount(voteCount);
+
+    let runTime = [];
+    for (let i = 0; i < runTimes.length; i++) {
+      runTime.push(
+        <option value={runTimes[i]}>{runTimes[i] + " " + "hours"}</option>
+      );
+    }
+    setRunTime(runTime);
   }, []);
 
   useEffect(() => {
@@ -65,11 +77,19 @@ const AdvancedSearch = (props) => {
 
   return (
     <Container>
-      <SelectInput title="from" data={years} />
-      <SelectInput title="to" data={years} />
-      <SelectInput title="rating" data={rating} />
-      <SelectInput title="vote count" data={voteCount} />
-      <SelectInput title="genres" data={genres} />
+      <div style={{ marginBottom: "2rem" }}>
+        <SelectInput title="from" data={years} />
+        <SelectInput title="to" data={years} />
+        <SelectInput title="rating" data={rating} />
+        <SelectInput title="vote count" data={voteCount} />
+        <SelectInput title="genres" data={genres} />
+        <SelectInput title="run time more than" data={runTime} />
+      </div>
+      <div>
+        <Input placeholder="actors" />
+        <Input placeholder="directors" />
+        <Input placeholder="writers" />
+      </div>
     </Container>
   );
 };

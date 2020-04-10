@@ -1,13 +1,13 @@
 import React from "react";
-import { Container } from "../AdvancedSearch/AdvancedSearch.styles";
+import { StyleSelect, StyleOptionDisabled } from "./SelectInput.styles";
 const SelectInput = ({ title, data }) => {
   return (
-    <Container>
-      <label htmlFor={title}>{title}</label>
-      <select name={title} id={title}>
-        {data}
-      </select>
-    </Container>
+    <StyleSelect name={title} id={title}>
+      <StyleOptionDisabled disabled selected value>
+        {title}
+      </StyleOptionDisabled>
+      {data}
+    </StyleSelect>
   );
 };
 export default SelectInput;

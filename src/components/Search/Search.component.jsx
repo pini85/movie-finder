@@ -7,6 +7,7 @@ import { search, fetchMovies, movieSuggestions } from "../../redux/actions";
 import { tmdbQueryApi } from "../../apis/tmdbApi";
 import Suggestions from "../Suggestions/Suggestions.component";
 import Button from "../Button/Button";
+import Input from "../Input/Input.component";
 import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
 
 const Search = (props) => {
@@ -34,21 +35,12 @@ const Search = (props) => {
     alignItems: "center",
   };
 
-  const styleInput = {
-    width: "18rem",
-    height: "2.5rem",
-    padding: "1.5rem",
-    marginRight: "1rem",
-    border: "2px solid var(--primary-color)",
-  };
-
   return (
     <div style={container}>
-      <input
-        style={styleInput}
+      <Input
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        type="text"
+        placeholder="The world is your oyster..."
       />
       <Button
         search={true}
