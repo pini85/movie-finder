@@ -77,9 +77,9 @@ export const tmdbLatestApi = async () => {
 
 export const tmdbNewestTodayApi = async (page) => {
   const response = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&region=US&release_date.gte=${dateMonthsBack(
-      3
-    )}&release_date.lte=${dateMonthsBack(2)}&page=${page}`
+    `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&region=US&sort_by=primary_release_date.desc&sort_by=vote_count.desc&release_date.gte=${dateMonthsBack(
+      2
+    )}&release_date.lte=${dateMonthsBack(1)}&page=${page}`
   );
   const data = await response.json();
 
@@ -117,4 +117,15 @@ export const tmdbGenresApi = async () => {
   const data = await response.json();
 
   return data.genres;
+};
+
+export const tmdbAdvancedMoviesApi = async (search) => {
+  console.log(search.fromYear, search.toYear);
+
+  const response = await fetch(
+    `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&include_adult=false&include_video=false&page=1&primary_release_date.gte=${search.editFromYear}&primary_release_date.lte=${search.editToYear}`
+  );
+  const data = await response.json();
+
+  console.log(data.results);
 };

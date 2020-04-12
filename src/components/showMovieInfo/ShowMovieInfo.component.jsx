@@ -6,7 +6,7 @@ import CirclePercentage from "../CirclePercentage/CirclePercentage.component";
 import styled from "styled-components";
 
 const Container = styled.div`
-  color: ${props => props.color};
+  color: ${(props) => props.color};
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
   text-align: center;
   width: fit-content;
@@ -15,7 +15,7 @@ const Container = styled.div`
   border-radius: 8px;
   padding: 2rem 4rem;
 
-  color: ${props => props.color};
+  color: ${(props) => props.color};
 `;
 
 const TitleContainer = styled.div`
@@ -40,7 +40,7 @@ const ReviewContainer = styled.div`
 
 const ReviewItem = styled.div`
   margin: 0.5rem 1rem 0rem 1rem;
-  color: ${props => props.color};
+  color: ${(props) => props.color};
   font-weight: 700;
 `;
 
@@ -86,7 +86,9 @@ const ShowMovieInfo = ({ colors, movie }) => {
 
       <ReviewContainer color={colors.vibrant}>
         {movie.ratings &&
-          movie.ratings.map(rate => {
+          movie.ratings.map((rate) => {
+            console.log(rate);
+
             return (
               <ReviewItem color={colors.vibrant}>
                 <Image src={rate.img} alt="" />
@@ -100,9 +102,9 @@ const ShowMovieInfo = ({ colors, movie }) => {
   );
 };
 
-const mapsTateToProps = state => ({
+const mapsTateToProps = (state) => ({
   movie: state.displayMovie,
-  colors: state.displayMovie.colors
+  colors: state.displayMovie.colors,
 });
 
 export default connect(mapsTateToProps)(ShowMovieInfo);

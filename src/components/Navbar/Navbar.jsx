@@ -26,7 +26,11 @@ const Navbar = (props) => {
     <div style={styleContainer}>
       <Link to="/">
         <div>
-          <img style={image} src={require("../../images/logo.png")} alt="" />
+          <img
+            style={image}
+            src={require("../../assets/images/logo.png")}
+            alt=""
+          />
         </div>
       </Link>
       <NavbarItemContainer>

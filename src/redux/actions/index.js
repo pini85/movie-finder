@@ -9,6 +9,7 @@ import {
   tmdbActorsApi,
   tmdbMovieCreditsApi,
   tmdbGenresApi,
+  tmdbAdvancedMoviesApi,
 } from "../../apis/tmdbApi";
 import omdbApi from "../../apis/omdbApi";
 import torrentApi from "../../apis/torrentApi";
@@ -273,6 +274,20 @@ export const optionActive = (e) => {
     type: "OPTION_ACTIVE",
     payload: parseInt(e.target.getAttribute("data-type")),
   };
+};
+
+export const createAdvancedSearch = (obj) => {
+  return {
+    type: "CREATE_ADVANCED_SEARCH",
+    payload: obj,
+  };
+};
+
+export const fetchAdvancedSearch = () => async (dispatch, getState) => {
+  const search = getState().advancedSearch;
+  const movies = await tmdbAdvancedMoviesApi(search);
+
+  dispatch({ type: "FETCH_ADVANCED_MOVIES", payload: movies });
 };
 
 // const popularMoviesData = [];

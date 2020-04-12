@@ -1,12 +1,14 @@
 import React from "react";
 import { StyledInput } from "./Input.styles";
-const Input = ({ value, onChange, placeholder }) => {
+const Input = ({ value, handleOnChange, placeholder, name }) => {
   return (
     <StyledInput
+      value={value}
+      data-tag={name}
       placeholder={placeholder}
       type="text"
       value={value}
-      onChange={onChange}
+      onChange={handleOnChange}
     />
   );
 };

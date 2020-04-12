@@ -1,6 +1,6 @@
 import styled from "styled-components";
-
-export const Container = styled.div`
+export const Container = styled.div``;
+export const SearchContainer = styled.div`
   display: flex;
   color: var(--text-white);
   margin: 3rem 0;
@@ -9,3 +9,5 @@ export const Container = styled.div`
   align-items: center;
   flex-direction: column;
 `;
+
+export const DisplaySearchContainer = styled.div``;
