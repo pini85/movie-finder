@@ -285,6 +285,7 @@ export const createAdvancedSearch = (obj) => {
 
 export const fetchAdvancedSearch = () => async (dispatch, getState) => {
   const search = getState().advancedSearch;
+
   const movies = await tmdbAdvancedMoviesApi(search);
 
   dispatch({ type: "FETCH_ADVANCED_MOVIES", payload: movies });

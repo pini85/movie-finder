@@ -55,9 +55,24 @@ const AdvancedSearch = (props) => {
     setCreateVoteCount(voteCount);
 
     let runTime = [];
+    const modifyRunTimeText = (runTimes) => {
+      switch (runTimes) {
+        case "Any run time":
+          return runTimes;
+        case 1:
+          return `${runTimes} hour - 1.5 hours`;
+        case 1.5:
+          return `${runTimes} hours - ${runTimes + 0.5} hours`;
+        case 2:
+          return `${runTimes} hours - ${runTimes + 1} hours`;
+        case 3:
+          return `more than ${runTimes} hours`;
+      }
+    };
+
     for (let i = 0; i < runTimes.length; i++) {
       runTime.push(
-        <option value={runTimes[i]}>{`${runTimes[i]} hours >`}</option>
+        <option value={runTimes[i]}>{modifyRunTimeText(runTimes[i])}</option>
       );
     }
     setCreateRunTime(runTime);
@@ -90,7 +105,7 @@ const AdvancedSearch = (props) => {
     500,
     100,
   ];
-  const runTimes = ["any", 1, 1.5, 2, 3];
+  const runTimes = ["Any run time", 1, 1.5, 2, 3];
 
   const handleOnChange = (e) => {
     const type = e.target.getAttribute("data-tag");
@@ -113,7 +128,7 @@ const AdvancedSearch = (props) => {
         setGenres(value);
         break;
       case "run-time":
-        setRunTime(parseInt(value) * 60);
+        setRunTime(isNaN(value * 60) ? value : parseFloat(value) * 60);
         break;
       case "actors":
         setActors(value);

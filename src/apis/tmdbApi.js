@@ -119,11 +119,37 @@ export const tmdbGenresApi = async () => {
   return data.genres;
 };
 
-export const tmdbAdvancedMoviesApi = async (search) => {
-  console.log(search.fromYear, search.toYear);
+export const tmdbAdvancedMoviesApi = async ({
+  fromYear,
+  toYear,
+  rating,
+  voteCount,
+  genres,
+  runTime,
+  actors,
+  directors,
+  writers,
+}) => {
+  console.log(runTime);
+
+  const editRunTime = () => {
+    switch (runTime) {
+      case 60:
+        return "with_runtime.lte=90";
+      case 90:
+        return "with_runtime.gte=90&with_runtime.lte=120";
+      case 120:
+        return "with_runtime.gte=120&with_runtime.lte=180";
+      case 180:
+        return "with_runtime.gte=180";
+      default:
+        return "";
+    }
+  };
+  console.log(editRunTime());
 
   const response = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&include_adult=false&include_video=false&page=1&primary_release_date.gte=${search.editFromYear}&primary_release_date.lte=${search.editToYear}`
+    `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&include_adult=false&include_video=false&page=1&primary_release_date.gte=${fromYear}&primary_release_date.lte=${toYear}&${editRunTime()}`
   );
   const data = await response.json();
 
