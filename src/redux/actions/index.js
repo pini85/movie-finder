@@ -10,6 +10,8 @@ import {
   tmdbMovieCreditsApi,
   tmdbGenresApi,
   tmdbAdvancedMoviesApi,
+  tmdbCastId,
+  tmdbCastInfoApi,
 } from "../../apis/tmdbApi";
 import omdbApi from "../../apis/omdbApi";
 import torrentApi from "../../apis/torrentApi";
@@ -302,6 +304,30 @@ export const fetchAdvancedSearch = () => async (dispatch, getState) => {
 //       );
 //       props.popularMovies(popularMoviesData);
 //     };
+
+export const fetchCastSuggestion = (type, query) => async (dispatch) => {
+  const fetchIds = await tmdbCastId(query);
+
+  const ids = fetchIds.results;
+
+  if (ids) {
+    let idsType;
+    console.log(ids);
+
+    if (type === "Acting") {
+      const idsType = ids.filter((cast) => {
+        return type === cast.known_for_department;
+      });
+    }
+
+    const castSuggestions = await Promise.all(
+      ids.map((cast) => tmdbCastInfoApi(cast.id))
+    );
+    dispatch({ type: "FETCH_CAST_SUGGESTIONS", payload: castSuggestions });
+  } else {
+    dispatch({ type: "FETCH_CAST_SUGGESTIONS", payload: query });
+  }
+};
 
 export const isSending = (bool) => {
   return {

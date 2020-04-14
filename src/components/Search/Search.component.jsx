@@ -17,6 +17,8 @@ const Search = (props) => {
   useDidUpdateEffect(() => {
     setTimeout(async () => {
       const data = !!searchQuery.length && (await tmdbQueryApi(1, searchQuery));
+      console.log("search", data);
+
       props.movieSuggestions(data);
     }, 150);
   }, [searchQuery]);
@@ -34,12 +36,15 @@ const Search = (props) => {
     display: "flex",
     alignItems: "center",
   };
+  const handleChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
 
   return (
     <div style={container}>
       <Input
         value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
+        handleOnChange={handleChange}
         placeholder="The world is your oyster..."
       />
       <Button

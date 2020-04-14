@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import {
   Container,
-  SearchContainer,
+  TopSearchContainer,
+  BottomSearchContainer,
   DisplaySearchContainer,
 } from "./AdvancedSearch.styles";
 import {
@@ -10,6 +11,7 @@ import {
   createAdvancedSearch,
   fetchAdvancedSearch,
 } from "../../redux/actions/index";
+import Cast from "../Cast/Cast.component";
 import SelectInput from "../SelectInput/SelectInput.component";
 import Input from "../Input/Input.component";
 import Button from "../Button/Button";
@@ -83,7 +85,7 @@ const AdvancedSearch = (props) => {
     if (props.genres) {
       for (let i = 0; i < props.genres.length; i++) {
         genres.push(
-          <option value={props.genres[i].name}>{props.genres[i].name}</option>
+          <option value={props.genres[i].id}>{props.genres[i].name}</option>
         );
         setCreateGenres(genres);
       }
@@ -119,10 +121,10 @@ const AdvancedSearch = (props) => {
         setToYear(value);
         break;
       case "rating":
-        setRating(value);
+        setRating(parseInt(value));
         break;
       case "vote-count":
-        setVoteCount(value);
+        setVoteCount(parseInt(value));
         break;
       case "genres":
         setGenres(value);
@@ -159,76 +161,83 @@ const AdvancedSearch = (props) => {
     props.createAdvancedSearch(searchObj);
     props.fetchAdvancedSearch();
   };
+  console.log(actors);
 
   return (
     <Container>
-      <SearchContainer>
-        <div style={{ marginBottom: "2rem" }}>
-          <SelectInput
-            value={fromYear}
-            name="from-year"
-            title="From"
-            data={createYears}
-            handleOnChange={handleOnChange}
-          />
-          <SelectInput
-            value={toYear}
-            name="to-year"
-            title="To"
-            data={createYears}
-            handleOnChange={handleOnChange}
-          />
-          <SelectInput
-            value={rating}
-            name="rating"
-            title="Minimum Rating"
-            data={createRating}
-            handleOnChange={handleOnChange}
-          />
-          <SelectInput
-            value={voteCount}
-            name="vote-count"
-            title="Minimum Votes"
-            data={createVoteCount}
-            handleOnChange={handleOnChange}
-          />
-          <SelectInput
-            value={genres}
-            name="genres"
-            title="Genres"
-            data={createGenres}
-            handleOnChange={handleOnChange}
-          />
-          <SelectInput
-            value={runTime}
-            name="run-time"
-            title="Minimum Runtime"
-            data={createRunTime}
-            handleOnChange={handleOnChange}
-          />
-        </div>
-        <div>
-          <Input
-            handleOnChange={handleOnChange}
-            value={actors}
-            name="actors"
-            placeholder="actors"
-          />
-          <Input
-            handleOnChange={handleOnChange}
-            value={directors}
-            name="directors"
-            placeholder="directors"
-          />
-          <Input
-            handleOnChange={handleOnChange}
-            value={writers}
-            name="writers"
-            placeholder="writers"
-          />
-        </div>
-        <Button handleClick={handleSubmit} title="search"></Button>
-      </SearchContainer>
+      <TopSearchContainer>
+        <SelectInput
+          value={fromYear}
+          name="from-year"
+          title="From"
+          data={createYears}
+          handleOnChange={handleOnChange}
+        />
+        <SelectInput
+          value={toYear}
+          name="to-year"
+          title="To"
+          data={createYears}
+          handleOnChange={handleOnChange}
+        />
+        <SelectInput
+          value={rating}
+          name="rating"
+          title="Minimum Rating"
+          data={createRating}
+          handleOnChange={handleOnChange}
+        />
+        <SelectInput
+          value={voteCount}
+          name="vote-count"
+          title="Minimum Votes"
+          data={createVoteCount}
+          handleOnChange={handleOnChange}
+        />
+        <SelectInput
+          value={genres}
+          name="genres"
+          title="Genres"
+          data={createGenres}
+          handleOnChange={handleOnChange}
+        />
+        <SelectInput
+          value={runTime}
+          name="run-time"
+          title="Minimum Runtime"
+          data={createRunTime}
+          handleOnChange={handleOnChange}
+        />
+      </TopSearchContainer>
+      <BottomSearchContainer>
+        <Cast
+          type="Acting"
+          placeholder="actors"
+          advancedSearchValue={actors}
+          advancedSearchSetValue={setActors}
+        ></Cast>
+        <Cast
+          type="Directing"
+          placeholder="directors"
+          advancedSearchValue={directors}
+          advancedSearchSetValue={setDirectors}
+        ></Cast>
+        {/* 
+        <Input
+          handleOnChange={handleOnChange}
+          value={directors}
+          name="directors"
+          placeholder="directors"
+        /> */}
+        <Input
+          handleOnChange={handleOnChange}
+          value={writers}
+          name="writers"
+          placeholder="writers"
+        />
+      </BottomSearchContainer>
+      {/* <Button handleClick={handleSubmit} title="search"></Button> */}
+
       <DisplaySearchContainer></DisplaySearchContainer>
     </Container>
   );

@@ -70,8 +70,6 @@ const CircleRating = styled.div`
   }
 `;
 const ShowMovieInfo = ({ colors, movie }) => {
-  console.log(colors);
-
   return (
     <Container color={colors.lightVibrant}>
       <TitleContainer>

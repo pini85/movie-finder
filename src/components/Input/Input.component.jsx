@@ -1,6 +1,6 @@
 import React from "react";
 import { StyledInput } from "./Input.styles";
-const Input = ({ value, handleOnChange, placeholder, name }) => {
+const Input = ({ value, placeholder, handleOnChange, name }) => {
   return (
     <StyledInput
       value={value}

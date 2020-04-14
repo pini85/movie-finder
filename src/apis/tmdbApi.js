@@ -1,5 +1,11 @@
 import shuffle from "lodash/shuffle";
 import { dateMonthsBack } from "../utlis/date";
+import {
+  advancedSearchRunTime,
+  advancedSearchRating,
+  advancedSearchVotes,
+  advancedSearchGenres,
+} from "../utlis/advancedSearchConfiguration";
 const ApiKey = "3e296e6f6a1b142633468c58b584ab9b";
 
 export const tmdbApiDiscover = async () => {
@@ -77,7 +83,7 @@ export const tmdbLatestApi = async () => {
 
 export const tmdbNewestTodayApi = async (page) => {
   const response = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&region=US&sort_by=primary_release_date.desc&sort_by=vote_count.desc&release_date.gte=${dateMonthsBack(
+    `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&region=US&&language=en-US&sort_by=primary_release_date.desc&sort_by=vote_count.desc&release_date.gte=${dateMonthsBack(
       2
     )}&release_date.lte=${dateMonthsBack(1)}&page=${page}`
   );
@@ -119,6 +125,23 @@ export const tmdbGenresApi = async () => {
   return data.genres;
 };
 
+export const tmdbCastId = async (query) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/search/person?api_key=${ApiKey}&query=${query}`
+  );
+  const data = response.json();
+  return data;
+};
+
+export const tmdbCastInfoApi = async (id) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/person/${id}?api_key=${ApiKey}&language=en-US`
+  );
+
+  const data = await response.json();
+  return data;
+};
+
 export const tmdbAdvancedMoviesApi = async ({
   fromYear,
   toYear,
@@ -130,28 +153,32 @@ export const tmdbAdvancedMoviesApi = async ({
   directors,
   writers,
 }) => {
-  console.log(runTime);
-
-  const editRunTime = () => {
-    switch (runTime) {
-      case 60:
-        return "with_runtime.lte=90";
-      case 90:
-        return "with_runtime.gte=90&with_runtime.lte=120";
-      case 120:
-        return "with_runtime.gte=120&with_runtime.lte=180";
-      case 180:
-        return "with_runtime.gte=180";
-      default:
-        return "";
-    }
-  };
-  console.log(editRunTime());
+  console.log(genres);
 
   const response = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&include_adult=false&include_video=false&page=1&primary_release_date.gte=${fromYear}&primary_release_date.lte=${toYear}&${editRunTime()}`
+    `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&include_adult=false&include_video=false&page=1&primary_release_date.gte=${fromYear}&primary_release_date.lte=${toYear}&${advancedSearchRating(
+      rating
+    )}&${advancedSearchVotes(
+      voteCount
+    )}&with_genres=${genres}&${advancedSearchRunTime(runTime)}`
   );
   const data = await response.json();
+  const x = await fetch(
+    `https://api.themoviedb.org/3/discover/movie?api_key=3e296e6f6a1b142633468c58b584ab9b&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_cast=488`
+  );
+  const y = await x.json();
+  console.log(y);
 
   console.log(data.results);
 };
+
+/*
+to fetch actors,directors and writers in the movie you need to do the following:
+ user queries bruce willis
+ https://api.themoviedb.org/3/search/person?api_key=###&query=bruce+willis
+
+ you can then get their id which is 62
+ and then query with it:
+ https://api.themoviedb.org/3/discover/movie?api_key=3e296e6f6a1b142633468c58b584ab9b&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_cast=62
+
+*/
