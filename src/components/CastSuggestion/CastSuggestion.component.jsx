@@ -6,9 +6,14 @@ const CastSuggestion = ({
   image,
   advancedSearchValue,
   advancedSearchSetValue,
+  focus,
 }) => {
+  const handleClick = (e) => {
+    advancedSearchSetValue(e.target.innerText);
+    focus(false);
+  };
   return (
-    <Container onClick={(e) => advancedSearchSetValue(e.target.innerText)}>
+    <Container onClick={handleClick}>
       <div> {name}</div>
     </Container>
   );
