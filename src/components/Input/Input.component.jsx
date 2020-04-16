@@ -1,9 +1,10 @@
 import React from "react";
 import { StyledInput } from "./Input.styles";
-const Input = ({ value, placeholder, handleOnChange, name, focus }) => {
+const Input = ({ value, placeholder, handleOnChange, name, focus, blur }) => {
   return (
     <StyledInput
       onFocus={focus}
+      onBlur={blur}
       data-tag={name}
       placeholder={placeholder}
       type="text"

@@ -153,8 +153,6 @@ export const tmdbAdvancedMoviesApi = async ({
   directors,
   writers,
 }) => {
-  console.log(genres);
-
   const response = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&include_adult=false&include_video=false&page=1&primary_release_date.gte=${fromYear}&primary_release_date.lte=${toYear}&${advancedSearchRating(
       rating
@@ -167,9 +165,6 @@ export const tmdbAdvancedMoviesApi = async ({
     `https://api.themoviedb.org/3/discover/movie?api_key=3e296e6f6a1b142633468c58b584ab9b&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_cast=488`
   );
   const y = await x.json();
-  console.log(y);
-
-  console.log(data.results);
 };
 
 /*

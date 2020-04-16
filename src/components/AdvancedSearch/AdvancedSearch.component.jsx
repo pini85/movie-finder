@@ -13,7 +13,8 @@ import {
 } from "../../redux/actions/index";
 import Cast from "../Cast/Cast.component";
 import SelectInput from "../SelectInput/SelectInput.component";
-import Input from "../Input/Input.component";
+import AdvancedSearchResult from "../advancedSearchResult/AdvancedSearchResult.component";
+
 import Button from "../Button/Button";
 
 const AdvancedSearch = (props) => {
@@ -29,8 +30,11 @@ const AdvancedSearch = (props) => {
   const [genres, setGenres] = useState("");
   const [runTime, setRunTime] = useState("");
   const [actors, setActors] = useState("");
+  const [actorsArray, setActorsArray] = useState([]);
   const [directors, setDirectors] = useState("");
+  const [directorsArray, setDirectorsArray] = useState([]);
   const [writers, setWriters] = useState("");
+  const [writersArray, setWritersArray] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -154,14 +158,25 @@ const AdvancedSearch = (props) => {
       voteCount,
       genres,
       runTime,
-      actors,
-      directors,
-      writers,
+      actorsArray,
+      directorsArray,
+      writersArray,
     };
     props.createAdvancedSearch(searchObj);
     props.fetchAdvancedSearch();
   };
-  console.log(actors);
+
+  const resetSearch = () => {
+    setFromYear(null);
+    setToYear(null);
+    setRating(null);
+    setVoteCount(null);
+    setGenres(null);
+    setRunTime(null);
+    setActorsArray([]);
+    setDirectorsArray([]);
+    setWritersArray([]);
+  };
 
   return (
     <Container>
@@ -215,37 +230,46 @@ const AdvancedSearch = (props) => {
           placeholder="actors"
           advancedSearchValue={actors}
           advancedSearchSetValue={setActors}
+          itemArray={setActorsArray}
         ></Cast>
         <Cast
           type="Directing"
           placeholder="directors"
           advancedSearchValue={directors}
           advancedSearchSetValue={setDirectors}
+          itemArray={setDirectorsArray}
         ></Cast>
-        {/* 
-        <Input
-          handleOnChange={handleOnChange}
-          value={directors}
-          name="directors"
-          placeholder="directors"
-        /> */}
-        <Input
-          handleOnChange={handleOnChange}
-          value={writers}
-          name="writers"
+        <Cast
+          type="Writing"
           placeholder="writers"
-        />
+          advancedSearchValue={writers}
+          advancedSearchSetValue={setWriters}
+          itemArray={setWritersArray}
+        ></Cast>
       </BottomSearchContainer>
-      {/* <Button handleClick={handleSubmit} title="search"></Button> */}
+      <Button handleClick={resetSearch} title="reset"></Button>
+      <Button handleClick={handleSubmit} title="search"></Button>
 
-      <DisplaySearchContainer></DisplaySearchContainer>
+      {
+        <AdvancedSearchResult
+          fromYear={fromYear}
+          toYear={toYear}
+          rating={rating}
+          voteCount={voteCount}
+          runTime={runTime}
+          genres={genres}
+          actors={actorsArray}
+          directors={directorsArray}
+          writers={writersArray}
+        />
+      }
     </Container>
   );
 };
 
 const mapStateToProps = (state) => ({
   genres: state.genres,
-  search: state.advancedSearch,
+  advancedSearch: state.advancedSearch,
 });
 
 const mapStateToDispatch = {

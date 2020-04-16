@@ -1,15 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Container, Img } from "./CastSuggestion.styles";
-const CastSuggestion = ({
-  name,
-  image,
-  advancedSearchValue,
-  advancedSearchSetValue,
-  focus,
-}) => {
+const CastSuggestion = ({ name, advancedSearchSetValue, focus }) => {
   const handleClick = (e) => {
     advancedSearchSetValue(e.target.innerText);
+    e.target.blur();
     focus(false);
   };
   return (

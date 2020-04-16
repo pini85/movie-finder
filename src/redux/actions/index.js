@@ -306,22 +306,24 @@ export const fetchAdvancedSearch = () => async (dispatch, getState) => {
 //     };
 
 export const fetchCastSuggestion = (type, query) => async (dispatch) => {
-  const fetchIds = await tmdbCastId(query);
-
-  const ids = fetchIds.results;
+  let fetchIds;
+  let ids;
+  let idsType;
+  if (query.length > 0) {
+    fetchIds = await tmdbCastId(query);
+    ids = fetchIds.results;
+  }
 
   if (ids) {
-    let idsType;
-    console.log(ids);
+    console.log("before filter", ids);
 
-    if (type === "Acting") {
-      const idsType = ids.filter((cast) => {
-        return type === cast.known_for_department;
-      });
-    }
+    idsType = ids.filter((cast) => {
+      return type === cast.known_for_department;
+    });
+    console.log("after filter", idsType);
 
     const castSuggestions = await Promise.all(
-      ids.map((cast) => tmdbCastInfoApi(cast.id))
+      idsType.map((cast) => tmdbCastInfoApi(cast.id))
     );
     dispatch({ type: "FETCH_CAST_SUGGESTIONS", payload: castSuggestions });
   } else {

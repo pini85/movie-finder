@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
 import { fetchCastSuggestion } from "../../redux/actions/index";
@@ -13,22 +13,15 @@ const Cast = ({
   castSuggestions,
   advancedSearchValue,
   advancedSearchSetValue,
+  itemArray,
 }) => {
-  const [isInput, setInput] = useState(false);
   const [isFocused, setFocused] = useState(false);
+
   useDidUpdateEffect(() => {
     setTimeout(() => {
       fetchCastSuggestion(type, advancedSearchValue);
     }, 150);
-
-    if (advancedSearchValue.length > 0 && isFocused) {
-      setInput(true);
-    } else {
-      setInput(false);
-      setFocused(false);
-    }
   }, [advancedSearchValue]);
-  const inputRef = useRef(null);
 
   const handleOnChange = (e) => {
     advancedSearchSetValue(e.target.value);
@@ -37,30 +30,30 @@ const Cast = ({
   const handleFocus = () => {
     setFocused(true);
   };
+  const handleBlur = (e) => {
+    setTimeout(() => {
+      setFocused(false);
+    }, 100);
+  };
 
-  const handleSubmit = () => {};
-  console.log(isFocused);
+  const handleSubmit = () => {
+    itemArray((value) => [...value, advancedSearchValue]);
+    advancedSearchSetValue("");
+  };
 
   return (
     <div>
-      {/* <input
-        onFocus={() => setFocused(true)}
-        // onBlur={() => setFocused(false)}
-        ref={inputRef}
-        type="text"
-        value={advancedSearchValue}
-        onChange={handleOnChange}
-      /> */}
       <Input
         focus={handleFocus}
+        blur={handleBlur}
         handleOnChange={handleOnChange}
         value={advancedSearchValue}
         placeholder={placeholder}
       ></Input>
       <Button handleClick={handleSubmit} title="add"></Button>
 
-      {isInput &&
-        isFocused &&
+      {isFocused &&
+        advancedSearchValue.length > 0 &&
         castSuggestions &&
         castSuggestions.slice(0, 6).map((cast) => {
           return (
@@ -70,7 +63,7 @@ const Cast = ({
                   name={cast.name}
                   advancedSearchValue={advancedSearchValue}
                   advancedSearchSetValue={advancedSearchSetValue}
-                  focus={setFocused}
+                  focus={handleFocus}
                 />
               }
             </div>
