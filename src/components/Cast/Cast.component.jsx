@@ -5,6 +5,7 @@ import { fetchCastSuggestion } from "../../redux/actions/index";
 import CastSuggestion from "../CastSuggestion/CastSuggestion.component";
 import Input from "../Input/Input.component";
 import Button from "../Button/Button";
+import { Container } from "./Cast.styles";
 
 const Cast = ({
   type,
@@ -13,7 +14,7 @@ const Cast = ({
   castSuggestions,
   advancedSearchValue,
   advancedSearchSetValue,
-  itemArray,
+  setCastArray,
 }) => {
   const [isFocused, setFocused] = useState(false);
 
@@ -37,12 +38,12 @@ const Cast = ({
   };
 
   const handleSubmit = () => {
-    itemArray((value) => [...value, advancedSearchValue]);
+    setCastArray((value) => [...value, advancedSearchValue]);
     advancedSearchSetValue("");
   };
 
   return (
-    <div>
+    <Container>
       <Input
         focus={handleFocus}
         blur={handleBlur}
@@ -50,26 +51,31 @@ const Cast = ({
         value={advancedSearchValue}
         placeholder={placeholder}
       ></Input>
-      <Button handleClick={handleSubmit} title="add"></Button>
-
-      {isFocused &&
-        advancedSearchValue.length > 0 &&
-        castSuggestions &&
-        castSuggestions.slice(0, 6).map((cast) => {
-          return (
-            <div key={cast.id}>
-              {
-                <CastSuggestion
-                  name={cast.name}
-                  advancedSearchValue={advancedSearchValue}
-                  advancedSearchSetValue={advancedSearchSetValue}
-                  focus={handleFocus}
-                />
-              }
-            </div>
-          );
-        })}
-    </div>
+      <Button
+        handleClick={handleSubmit}
+        padding="0.5rem 1rem"
+        title="&#43;"
+      ></Button>
+      <div style={{ position: "absolute", zIndex: "5" }}>
+        {isFocused &&
+          advancedSearchValue.length > 0 &&
+          castSuggestions &&
+          castSuggestions.slice(0, 6).map((cast) => {
+            return (
+              <div key={cast.id}>
+                {
+                  <CastSuggestion
+                    name={cast.name}
+                    advancedSearchValue={advancedSearchValue}
+                    advancedSearchSetValue={advancedSearchSetValue}
+                    focus={handleFocus}
+                  />
+                }
+              </div>
+            );
+          })}
+      </div>
+    </Container>
   );
 };
 

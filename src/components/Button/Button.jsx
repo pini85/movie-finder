@@ -3,9 +3,13 @@ import { ButtonContainer } from "./button.styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-const Button = props => {
+const Button = (props) => {
   return (
-    <ButtonContainer disabled={props.disabled} onClick={props.handleClick}>
+    <ButtonContainer
+      padding={props.padding}
+      disabled={props.disabled}
+      onClick={props.handleClick}
+    >
       {props.search ? (
         <FontAwesomeIcon icon={faSearch} style={{ marginRight: "5px" }} />
       ) : null}

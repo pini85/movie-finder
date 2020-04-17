@@ -1,7 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { Container } from "./AdvancedSearchResult.styles";
+import {
+  Container,
+  Title,
+  Result,
+  ResultSpan,
+  ButtonContainer,
+} from "./AdvancedSearchResult.styles";
+import Button from "../Button/Button";
 
 const AdvancedSearchResult = ({
   fromYear,
@@ -13,33 +20,65 @@ const AdvancedSearchResult = ({
   actors,
   directors,
   writers,
+  handleClick,
 }) => {
   const na = (query) => {
-    console.log(query.length);
-
-    if (query.length === 0) {
-      return "N/A";
+    if (!query) {
+      return <ResultSpan>N/A</ResultSpan>;
     }
     return query;
   };
+
+  const cast = (cast) => {};
+
   return (
     <Container>
-      <div>From Year: {na(fromYear)}</div>
-      <div>To Year: {na(toYear)}</div>
-      <div>Minimum Rating: {na(rating)}</div>
-      <div>Minimum Votes: {na(voteCount)}</div>
-      <div>Run time: {na(runTime)}</div>
-      <div>Genres: {na(genres)}</div>
+      <Title>Search Information</Title>
+      <div>
+        From Year:<ResultSpan>{na(fromYear)}</ResultSpan>
+      </div>
+      <div>
+        To Year:<ResultSpan>{na(toYear)}</ResultSpan>
+      </div>
+      <div>
+        Minimum Rating:<ResultSpan>{na(rating)}</ResultSpan>
+      </div>
+      <div>
+        Minimum Votes: <ResultSpan>{na(voteCount)}</ResultSpan>
+      </div>
+      <div>
+        Run time: <ResultSpan>{na(runTime)}</ResultSpan>
+      </div>
+      <div>
+        Genres: <ResultSpan>{na(genres)}</ResultSpan>
+      </div>
       <div>
         Actors:
-        {na(actors.map((actor) => <span> {actor}, </span>))}
+        {actors.length > 0 ? (
+          actors.map((actor) => <Result>{actor}, </Result>)
+        ) : (
+          <ResultSpan>N/A</ResultSpan>
+        )}
       </div>
       <div>
-        Directors: {na(directors.map((director) => <span> {director}, </span>))}
+        Directors:
+        {directors.length > 0 ? (
+          directors.map((director) => <Result> {director}, </Result>)
+        ) : (
+          <ResultSpan>N/A</ResultSpan>
+        )}
       </div>
       <div>
-        Writers: {na(writers.map((writer) => <span> {writer}, </span>))}
+        Writers:
+        {writers.length > 0 ? (
+          writers.map((writer) => <Result> {writer}, </Result>)
+        ) : (
+          <ResultSpan>N/A</ResultSpan>
+        )}
       </div>
+      <ButtonContainer>
+        <Button handleClick={handleClick} title="reset"></Button>
+      </ButtonContainer>
     </Container>
   );
 };

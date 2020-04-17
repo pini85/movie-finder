@@ -4,7 +4,10 @@ import {
   Container,
   TopSearchContainer,
   BottomSearchContainer,
-  DisplaySearchContainer,
+  SearchContainer,
+  AdvancedSearchResultContainer,
+  ButtonContainer,
+  Divider,
 } from "./AdvancedSearch.styles";
 import {
   fetchGenres,
@@ -14,6 +17,8 @@ import {
 import Cast from "../Cast/Cast.component";
 import SelectInput from "../SelectInput/SelectInput.component";
 import AdvancedSearchResult from "../advancedSearchResult/AdvancedSearchResult.component";
+import AdvancedSearchSaved from "../AdvancedSearchSaved/AdvancedSearchSaved.component";
+import CategoryTitle from "../CategoryTitle/CategoryTitle.component";
 
 import Button from "../Button/Button";
 
@@ -180,77 +185,81 @@ const AdvancedSearch = (props) => {
 
   return (
     <Container>
-      <TopSearchContainer>
-        <SelectInput
-          value={fromYear}
-          name="from-year"
-          title="From"
-          data={createYears}
-          handleOnChange={handleOnChange}
-        />
-        <SelectInput
-          value={toYear}
-          name="to-year"
-          title="To"
-          data={createYears}
-          handleOnChange={handleOnChange}
-        />
-        <SelectInput
-          value={rating}
-          name="rating"
-          title="Minimum Rating"
-          data={createRating}
-          handleOnChange={handleOnChange}
-        />
-        <SelectInput
-          value={voteCount}
-          name="vote-count"
-          title="Minimum Votes"
-          data={createVoteCount}
-          handleOnChange={handleOnChange}
-        />
-        <SelectInput
-          value={genres}
-          name="genres"
-          title="Genres"
-          data={createGenres}
-          handleOnChange={handleOnChange}
-        />
-        <SelectInput
-          value={runTime}
-          name="run-time"
-          title="Minimum Runtime"
-          data={createRunTime}
-          handleOnChange={handleOnChange}
-        />
-      </TopSearchContainer>
-      <BottomSearchContainer>
-        <Cast
-          type="Acting"
-          placeholder="actors"
-          advancedSearchValue={actors}
-          advancedSearchSetValue={setActors}
-          itemArray={setActorsArray}
-        ></Cast>
-        <Cast
-          type="Directing"
-          placeholder="directors"
-          advancedSearchValue={directors}
-          advancedSearchSetValue={setDirectors}
-          itemArray={setDirectorsArray}
-        ></Cast>
-        <Cast
-          type="Writing"
-          placeholder="writers"
-          advancedSearchValue={writers}
-          advancedSearchSetValue={setWriters}
-          itemArray={setWritersArray}
-        ></Cast>
-      </BottomSearchContainer>
-      <Button handleClick={resetSearch} title="reset"></Button>
-      <Button handleClick={handleSubmit} title="search"></Button>
+      <CategoryTitle title="advanced search" />
+      <SearchContainer>
+        <TopSearchContainer>
+          <SelectInput
+            value={fromYear}
+            name="from-year"
+            title="From"
+            data={createYears}
+            handleOnChange={handleOnChange}
+          />
+          <SelectInput
+            value={toYear}
+            name="to-year"
+            title="To"
+            data={createYears}
+            handleOnChange={handleOnChange}
+          />
+          <SelectInput
+            value={rating}
+            name="rating"
+            title="Minimum Rating"
+            data={createRating}
+            handleOnChange={handleOnChange}
+          />
+          <SelectInput
+            value={voteCount}
+            name="vote-count"
+            title="Minimum Votes"
+            data={createVoteCount}
+            handleOnChange={handleOnChange}
+          />
+          <SelectInput
+            value={genres}
+            name="genres"
+            title="Genres"
+            data={createGenres}
+            handleOnChange={handleOnChange}
+          />
+          <SelectInput
+            value={runTime}
+            name="run-time"
+            title="Minimum Runtime"
+            data={createRunTime}
+            handleOnChange={handleOnChange}
+          />
+        </TopSearchContainer>
+        <BottomSearchContainer>
+          <Cast
+            type="Acting"
+            placeholder="actors"
+            advancedSearchValue={actors}
+            advancedSearchSetValue={setActors}
+            setCastArray={setActorsArray}
+          ></Cast>
+          <Cast
+            type="Directing"
+            placeholder="directors"
+            advancedSearchValue={directors}
+            advancedSearchSetValue={setDirectors}
+            setCastArray={setDirectorsArray}
+          ></Cast>
+          <Cast
+            type="Writing"
+            placeholder="writers"
+            advancedSearchValue={writers}
+            advancedSearchSetValue={setWriters}
+            setCastArray={setWritersArray}
+          ></Cast>
+        </BottomSearchContainer>
+      </SearchContainer>
+      <ButtonContainer>
+        <Button handleClick={handleSubmit} title="search"></Button>
+      </ButtonContainer>
 
-      {
+      <AdvancedSearchResultContainer>
         <AdvancedSearchResult
           fromYear={fromYear}
           toYear={toYear}
@@ -261,8 +270,11 @@ const AdvancedSearch = (props) => {
           actors={actorsArray}
           directors={directorsArray}
           writers={writersArray}
+          handleClick={resetSearch}
         />
-      }
+        <Divider></Divider>
+        <AdvancedSearchSaved></AdvancedSearchSaved>
+      </AdvancedSearchResultContainer>
     </Container>
   );
 };

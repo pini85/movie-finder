@@ -1,14 +1,12 @@
 import styled from "styled-components";
-
 export const Container = styled.div`
   margin-top: 5rem;
+  text-align: center;
   width: 50%;
   color: var(--text-white);
   font-size: 2rem;
-  text-align: center;
   padding: 0 5rem;
 `;
-
 export const Title = styled.div`
   display: inline-block;
   position: relative;
@@ -26,31 +24,4 @@ export const Title = styled.div`
     background: white;
     transform: translate(-50%, -50%);
   }
-`;
-
-export const ButtonContainer = styled.div`
-  margin-top: 2rem;
-`;
-
-export const ResultContainer = styled.div`
-  margin: 1rem 0;
-  width: 50%;
-`;
-
-export const ResultContainerTop = styled.div`
-  display: flex;
-`;
-
-export const ResultContainerBottom = styled.div`
-  display: flex;
-`;
-
-export const Result = styled.div`
-  color: var(--primary-color);
-`;
-
-export const ResultSpan = styled.div`
-  display: inline-block;
-  margin-left: 5px;
-  color: var(--primary-color);
 `;
