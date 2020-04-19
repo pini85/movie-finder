@@ -7,7 +7,48 @@ import { tmdbQueryApi } from "../../apis/tmdbApi";
 
 import Card from "../card/Card";
 const MovieListSearch = (props) => {
-  console.log(props);
+  console.log("movieList", props);
+
+  const movies = () => {
+    if (props.fetchMoviesData) {
+      return (
+        <>
+          <Pagination api={props.fetchMovies} data={props.fetchMoviesData} />
+          <div style={styleDiv}>
+            {props.fetchMoviesData &&
+              props.fetchMoviesData.results.map((movie) => {
+                if (movie === null) return;
+                //
+
+                return (
+                  <div key={movie.id}>
+                    <Card movie={movie}></Card>
+                  </div>
+                );
+              })}
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Pagination api={props.fetchMovies} data={props.fetchMoviesData} />
+          <div style={styleDiv}>
+            {props.fetchMoviesData &&
+              props.fetchMoviesData.results.map((movie) => {
+                if (movie === null) return;
+
+                return (
+                  <div key={movie.id}>
+                    <Card movie={movie}></Card>
+                  </div>
+                );
+              })}
+          </div>
+        </>
+      );
+    }
+  };
 
   const styleDiv = {
     display: "flex",
@@ -28,26 +69,14 @@ const MovieListSearch = (props) => {
           background: "var(--secondary-color)",
         }}
       ></div>
-      <Pagination api={props.fetchMovies} data={props.fetchMoviesData} />
-      <div style={styleDiv}>
-        {props.fetchMoviesData &&
-          props.fetchMoviesData.results.map((movie) => {
-            if (movie === null) return;
-            //
-
-            return (
-              <div key={movie.id}>
-                <Card movie={movie}></Card>
-              </div>
-            );
-          })}
-      </div>
+      {props.advancedSearchMovies && movies()}
     </>
     //
   );
 };
 const mapStateToProps = (state) => ({
   fetchMoviesData: state.fetchMovies,
+  advancedSearchMovies: state.fetchAdvancedSearch,
 });
 export default connect(mapStateToProps, {
   selectedMovie: selectedMovie,

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
+import { withRouter } from "react-router-dom";
 import {
   Container,
   TopSearchContainer,
@@ -14,6 +16,8 @@ import {
   createAdvancedSearch,
   fetchAdvancedSearch,
 } from "../../redux/actions/index";
+import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
+import findGenreWithId from "../../utlis/findGenreWithId";
 import Cast from "../Cast/Cast.component";
 import SelectInput from "../SelectInput/SelectInput.component";
 import AdvancedSearchResult from "../advancedSearchResult/AdvancedSearchResult.component";
@@ -33,6 +37,7 @@ const AdvancedSearch = (props) => {
   const [rating, setRating] = useState("");
   const [voteCount, setVoteCount] = useState("");
   const [genres, setGenres] = useState("");
+  const [displayGenre, setDisplayGenre] = useState("");
   const [runTime, setRunTime] = useState("");
   const [actors, setActors] = useState("");
   const [actorsArray, setActorsArray] = useState([]);
@@ -49,19 +54,31 @@ const AdvancedSearch = (props) => {
 
     let years = [];
     for (let i = new Date().getFullYear(); i > 1902; i--) {
-      years.push(<option value={i}>{i}</option>);
+      years.push(
+        <option key={i} value={i}>
+          {i}
+        </option>
+      );
     }
     setCreateYears(years);
 
     let rating = [];
     for (let i = 9; i >= 0; i--) {
-      rating.push(<option value={i}>{i}</option>);
+      rating.push(
+        <option key={i} value={i}>
+          {i}
+        </option>
+      );
     }
     setCreateRating(rating);
 
     let voteCount = [];
     for (let i = 0; i < voteCounts.length; i++) {
-      voteCount.push(<option value={voteCounts[i]}>{voteCounts[i]}</option>);
+      voteCount.push(
+        <option key={i} value={voteCounts[i]}>
+          {voteCounts[i]}
+        </option>
+      );
     }
     setCreateVoteCount(voteCount);
 
@@ -83,18 +100,27 @@ const AdvancedSearch = (props) => {
 
     for (let i = 0; i < runTimes.length; i++) {
       runTime.push(
-        <option value={runTimes[i]}>{modifyRunTimeText(runTimes[i])}</option>
+        <option key={i} value={runTimes[i]}>
+          {modifyRunTimeText(runTimes[i])}
+        </option>
       );
     }
     setCreateRunTime(runTime);
   }, []);
+
+  useDidUpdateEffect(() => {
+    const type = findGenreWithId(props.genres, genres);
+    setDisplayGenre(type);
+  }, [genres]);
 
   useEffect(() => {
     let genres = [];
     if (props.genres) {
       for (let i = 0; i < props.genres.length; i++) {
         genres.push(
-          <option value={props.genres[i].id}>{props.genres[i].name}</option>
+          <option key={i} value={props.genres[i].id}>
+            {props.genres[i].name}
+          </option>
         );
         setCreateGenres(genres);
       }
@@ -121,6 +147,7 @@ const AdvancedSearch = (props) => {
   const handleOnChange = (e) => {
     const type = e.target.getAttribute("data-tag");
     const value = e.target.value;
+    console.log(type, value);
 
     switch (type) {
       case "from-year":
@@ -154,6 +181,8 @@ const AdvancedSearch = (props) => {
   };
 
   const handleSubmit = () => {
+    console.log("rating", rating);
+
     const editFromYear = `${fromYear}-01-01`;
     const editToYear = `${toYear}-01-01`;
     const searchObj = {
@@ -168,7 +197,8 @@ const AdvancedSearch = (props) => {
       writersArray,
     };
     props.createAdvancedSearch(searchObj);
-    props.fetchAdvancedSearch();
+    props.fetchAdvancedSearch(1);
+    console.log(props.history.push("/advanced-search/fggf/page/1"));
   };
 
   const resetSearch = () => {
@@ -266,7 +296,7 @@ const AdvancedSearch = (props) => {
           rating={rating}
           voteCount={voteCount}
           runTime={runTime}
-          genres={genres}
+          genres={displayGenre}
           actors={actorsArray}
           directors={directorsArray}
           writers={writersArray}
@@ -290,4 +320,7 @@ const mapStateToDispatch = {
   fetchAdvancedSearch: fetchAdvancedSearch,
 };
 
-export default connect(mapStateToProps, mapStateToDispatch)(AdvancedSearch);
+export default compose(
+  withRouter,
+  connect(mapStateToProps, mapStateToDispatch)
+)(AdvancedSearch);

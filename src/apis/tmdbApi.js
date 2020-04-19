@@ -5,6 +5,7 @@ import {
   advancedSearchRating,
   advancedSearchVotes,
   advancedSearchGenres,
+  advancedSearchCast,
 } from "../utlis/advancedSearchConfiguration";
 const ApiKey = "3e296e6f6a1b142633468c58b584ab9b";
 
@@ -129,7 +130,8 @@ export const tmdbCastId = async (query) => {
   const response = await fetch(
     `https://api.themoviedb.org/3/search/person?api_key=${ApiKey}&query=${query}`
   );
-  const data = response.json();
+  const data = await response.json();
+
   return data;
 };
 
@@ -143,10 +145,11 @@ export const tmdbCastInfoApi = async (id) => {
 };
 
 export const tmdbAdvancedMoviesApi = async ({
+  page,
   fromYear,
   toYear,
   rating,
-  voteCount,
+  votes,
   genres,
   runTime,
   actors,
@@ -157,14 +160,22 @@ export const tmdbAdvancedMoviesApi = async ({
     `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&include_adult=false&include_video=false&page=1&primary_release_date.gte=${fromYear}&primary_release_date.lte=${toYear}&${advancedSearchRating(
       rating
     )}&${advancedSearchVotes(
-      voteCount
-    )}&with_genres=${genres}&${advancedSearchRunTime(runTime)}`
+      votes
+    )}&with_genres=${genres}&${advancedSearchRunTime(
+      runTime
+    )}${advancedSearchVotes(
+      votes
+    )}&with_genres=${genres}${advancedSearchRunTime(
+      runTime
+    )}&${advancedSearchCast(actors).map((cast) => cast)}&${advancedSearchCast(
+      directors
+    ).map((cast) => cast)}&${advancedSearchCast(writers).map(
+      (cast) => cast
+    )}&page=${page}`
   );
+
   const data = await response.json();
-  const x = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=3e296e6f6a1b142633468c58b584ab9b&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_cast=488`
-  );
-  const y = await x.json();
+  return data;
 };
 
 /*

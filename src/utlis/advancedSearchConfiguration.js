@@ -77,3 +77,17 @@ export const advancedSearchGenres = (genres) => {
       return "with_genres=28";
   }
 };
+
+export const advancedSearchCast = (type) => {
+  if (type.length === 1) {
+    return `with_cast=${type[0]}`;
+  } else {
+    const x = type.map((cast) => {
+      if (type[type.length - 1] === cast) {
+        return cast;
+      }
+      return `with_cast=${cast}%2C`;
+    });
+    return x;
+  }
+};

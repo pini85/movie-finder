@@ -285,10 +285,43 @@ export const createAdvancedSearch = (obj) => {
   };
 };
 
-export const fetchAdvancedSearch = () => async (dispatch, getState) => {
+export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
   const search = getState().advancedSearch;
+  let actorsArray = [];
+  let directorsArray = [];
+  let writersArray = [];
 
-  const movies = await tmdbAdvancedMoviesApi(search);
+  const fetchCastIds = async (castType, arrayType) => {
+    const fetch = await Promise.all(
+      castType.map(async (cast) => {
+        const castDetails = await tmdbCastId(cast);
+        //
+
+        return castDetails.results[0].id;
+      })
+    );
+    return arrayType.push(fetch);
+  };
+
+  await fetchCastIds(search.actorsArray, actorsArray);
+  await fetchCastIds(search.directorsArray, directorsArray);
+  await fetchCastIds(search.writersArray, writersArray);
+
+  const obj = {
+    page: page,
+    fromYear: search.fromYear,
+    toYear: search.toYear,
+    rating: search.rating,
+    votes: search.voteCount,
+    genres: search.genres,
+    runTime: search.runTime,
+    actors: actorsArray[0],
+    directors: directorsArray[0],
+    writers: writersArray[0],
+  };
+
+  const movies = await tmdbAdvancedMoviesApi(obj);
+  console.log("movies", movies);
 
   dispatch({ type: "FETCH_ADVANCED_MOVIES", payload: movies });
 };
@@ -315,12 +348,9 @@ export const fetchCastSuggestion = (type, query) => async (dispatch) => {
   }
 
   if (ids) {
-    console.log("before filter", ids);
-
     idsType = ids.filter((cast) => {
       return type === cast.known_for_department;
     });
-    console.log("after filter", idsType);
 
     const castSuggestions = await Promise.all(
       idsType.map((cast) => tmdbCastInfoApi(cast.id))
@@ -330,6 +360,17 @@ export const fetchCastSuggestion = (type, query) => async (dispatch) => {
     dispatch({ type: "FETCH_CAST_SUGGESTIONS", payload: query });
   }
 };
+
+// export const fetchCastId = (query) => async (dispatch,getState) => {
+//   const cast = getState().advancedSearch.
+//   const fetchIds = await Promise.all(
+//     cast.map((id) => {
+//       tmdbCastId(query);
+//     })
+//   );
+//
+// };
+//once submit in cast.jsx fetch the ids to put in our object
 
 export const isSending = (bool) => {
   return {

@@ -18,7 +18,16 @@ const App = () => {
         <Route exact path="/" component={Home} />
         <Route exact path="/movies/:category/page/:page" component={Movies} />
         <Route exact path="/tv/:category/page/:page" component={TvShows} />
-        <Route path="/search/:query/page/:page" component={MovieListSearch} />
+        {/* <Route
+          exact
+          path="/search/:query/page/:page"
+          component={MovieListSearch}
+        /> */}
+        <Route
+          exact
+          path="/advanced-search/:query/page/:page"
+          component={MovieListSearch}
+        />
         <Route path="/movie/:id" component={ShowMovie} />
         <Route path="/advanced-search" component={AdvancedSearch} />
       </Switch>

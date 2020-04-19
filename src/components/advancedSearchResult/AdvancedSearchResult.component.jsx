@@ -50,7 +50,7 @@ const AdvancedSearchResult = ({
         Run time: <ResultSpan>{na(runTime)}</ResultSpan>
       </div>
       <div>
-        Genres: <ResultSpan>{na(genres)}</ResultSpan>
+        Genre: <ResultSpan>{na(genres)}</ResultSpan>
       </div>
       <div>
         Actors:

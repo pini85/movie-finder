@@ -37,7 +37,7 @@ const Cast = ({
     }, 100);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setCastArray((value) => [...value, advancedSearchValue]);
     advancedSearchSetValue("");
   };
