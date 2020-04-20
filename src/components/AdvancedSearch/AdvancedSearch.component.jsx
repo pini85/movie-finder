@@ -15,6 +15,7 @@ import {
   fetchGenres,
   createAdvancedSearch,
   fetchAdvancedSearch,
+  history,
 } from "../../redux/actions/index";
 import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
 import findGenreWithId from "../../utlis/findGenreWithId";
@@ -147,7 +148,6 @@ const AdvancedSearch = (props) => {
   const handleOnChange = (e) => {
     const type = e.target.getAttribute("data-tag");
     const value = e.target.value;
-    console.log(type, value);
 
     switch (type) {
       case "from-year":
@@ -181,8 +181,6 @@ const AdvancedSearch = (props) => {
   };
 
   const handleSubmit = () => {
-    console.log("rating", rating);
-
     const editFromYear = `${fromYear}-01-01`;
     const editToYear = `${toYear}-01-01`;
     const searchObj = {
@@ -198,7 +196,7 @@ const AdvancedSearch = (props) => {
     };
     props.createAdvancedSearch(searchObj);
     props.fetchAdvancedSearch(1);
-    console.log(props.history.push("/advanced-search/fggf/page/1"));
+    props.history.push(`/advanced-search/dsfdsgg/page/1`);
   };
 
   const resetSearch = () => {

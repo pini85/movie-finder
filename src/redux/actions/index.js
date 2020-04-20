@@ -94,8 +94,9 @@ export const goToMovie = (id) => (dispatch, getState) => {
 
 const fetchMovie = async (dispatch, getState) => {
   const id = getState().selectedMovieId;
-
   const tmdbData = await tmdbIdApi(id);
+  console.log("tmdbData", tmdbData);
+
   const omdbData = await omdbApi(tmdbData.imdb_id);
   const torrentData = await torrentApi(tmdbData.imdb_id);
   const movieCredits = await tmdbMovieCreditsApi(id);
@@ -160,6 +161,8 @@ const fetchMovie = async (dispatch, getState) => {
   }
 
   const ratings = () => {
+    console.log(omdbData, "omdbdata");
+
     switch (omdbData.Ratings.length) {
       case 1:
         return [
@@ -321,7 +324,6 @@ export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
   };
 
   const movies = await tmdbAdvancedMoviesApi(obj);
-  console.log("movies", movies);
 
   dispatch({ type: "FETCH_ADVANCED_MOVIES", payload: movies });
 };

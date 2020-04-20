@@ -122,11 +122,11 @@ const fetchGenresReducer = (genres = null, action) => {
   return genres;
 };
 
-const createAdvancedSearchReducer = (advancedSearch = null, action) => {
+const createAdvancedSearchReducer = (createAdvancedSearch = null, action) => {
   if (action.type === "CREATE_ADVANCED_SEARCH") {
     return action.payload;
   }
-  return advancedSearch;
+  return createAdvancedSearch;
 };
 
 const fetchAdvancedSearchReducer = (advancedSearch = null, action) => {

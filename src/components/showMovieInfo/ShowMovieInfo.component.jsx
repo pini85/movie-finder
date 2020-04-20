@@ -85,12 +85,14 @@ const ShowMovieInfo = ({ colors, movie }) => {
       <ReviewContainer color={colors.vibrant}>
         {movie.ratings &&
           movie.ratings.map((rate) => {
-            console.log(rate);
+            console.log("rate", rate);
 
             return (
               <ReviewItem color={colors.vibrant}>
                 <Image src={rate.img} alt="" />
-                <div style={{ fontSize: "1.5rem" }}>{rate.rating.Value}</div>
+                <div style={{ fontSize: "1.5rem" }}>
+                  {rate.rating ? rate.rating.Value : rate.imdb.Value}
+                </div>
               </ReviewItem>
             );
           })}

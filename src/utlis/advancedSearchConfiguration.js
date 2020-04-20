@@ -80,7 +80,7 @@ export const advancedSearchGenres = (genres) => {
 
 export const advancedSearchCast = (type) => {
   if (type.length === 1) {
-    return `with_cast=${type[0]}`;
+    return [`with_cast=${type[0]}`];
   } else {
     const x = type.map((cast) => {
       if (type[type.length - 1] === cast) {
@@ -88,6 +88,7 @@ export const advancedSearchCast = (type) => {
       }
       return `with_cast=${cast}%2C`;
     });
+    console.log(x);
     return x;
   }
 };

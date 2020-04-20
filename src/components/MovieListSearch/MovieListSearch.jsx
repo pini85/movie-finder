@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { selectedMovie, fetchMovies } from "../../redux/actions/index";
+import {
+  selectedMovie,
+  fetchMovies,
+  fetchAdvancedSearch,
+} from "../../redux/actions/index";
+import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
 import Pagination from "../Pagination/Pagination.component";
-
-import { tmdbQueryApi } from "../../apis/tmdbApi";
 
 import Card from "../card/Card";
 const MovieListSearch = (props) => {
-  console.log("movieList", props);
+  const [filteredMovies, setFilteredMovies] = useState(null);
+  useDidUpdateEffect(() => {
+    const filtered = props.advancedSearchMovies.results.filter((movie) => {
+      return movie;
+    });
+  }, [props.advancedSearchMovies]);
 
   const movies = () => {
     if (props.fetchMoviesData) {
@@ -32,10 +40,13 @@ const MovieListSearch = (props) => {
     } else {
       return (
         <>
-          <Pagination api={props.fetchMovies} data={props.fetchMoviesData} />
+          <Pagination
+            api={props.fetchAdvancedSearch}
+            data={props.advancedSearchMovies}
+          />
           <div style={styleDiv}>
-            {props.fetchMoviesData &&
-              props.fetchMoviesData.results.map((movie) => {
+            {props.advancedSearchMovies &&
+              props.advancedSearchMovies.results.map((movie) => {
                 if (movie === null) return;
 
                 return (
@@ -69,7 +80,7 @@ const MovieListSearch = (props) => {
           background: "var(--secondary-color)",
         }}
       ></div>
-      {props.advancedSearchMovies && movies()}
+      {movies()}
     </>
     //
   );
@@ -81,4 +92,5 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   selectedMovie: selectedMovie,
   fetchMovies: (page) => fetchMovies(page),
+  fetchAdvancedSearch: (page) => fetchAdvancedSearch(page),
 })(MovieListSearch);
