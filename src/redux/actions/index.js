@@ -95,7 +95,6 @@ export const goToMovie = (id) => (dispatch, getState) => {
 const fetchMovie = async (dispatch, getState) => {
   const id = getState().selectedMovieId;
   const tmdbData = await tmdbIdApi(id);
-  console.log("tmdbData", tmdbData);
 
   const omdbData = await omdbApi(tmdbData.imdb_id);
   const torrentData = await torrentApi(tmdbData.imdb_id);
@@ -363,16 +362,9 @@ export const fetchCastSuggestion = (type, query) => async (dispatch) => {
   }
 };
 
-// export const fetchCastId = (query) => async (dispatch,getState) => {
-//   const cast = getState().advancedSearch.
-//   const fetchIds = await Promise.all(
-//     cast.map((id) => {
-//       tmdbCastId(query);
-//     })
-//   );
-//
-// };
-//once submit in cast.jsx fetch the ids to put in our object
+export const saveAdvancedSearch = (obj) => (dispatch) => {
+  dispatch({ type: "SAVE_ADVANCED_SEARCH", payload: obj });
+};
 
 export const isSending = (bool) => {
   return {

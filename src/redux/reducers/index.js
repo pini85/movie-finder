@@ -143,6 +143,13 @@ const fetchCastSuggestionsReducer = (suggestions = null, action) => {
   return suggestions;
 };
 
+const savedAdvancedSearchesReducer = (savedSearches = [], action) => {
+  if (action.type === "SAVE_ADVANCED_SEARCH") {
+    return [...savedSearches, action.payload];
+  }
+  return savedSearches;
+};
+
 export default combineReducers({
   fetchMovies: fetchMoviesReducer,
   selectedMovie: selectedMovieReducer,
@@ -164,4 +171,5 @@ export default combineReducers({
   advancedSearch: createAdvancedSearchReducer,
   fetchAdvancedSearch: fetchAdvancedSearchReducer,
   castSuggestions: fetchCastSuggestionsReducer,
+  savedAdvancedSearches: savedAdvancedSearchesReducer,
 });

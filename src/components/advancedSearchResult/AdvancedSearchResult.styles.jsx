@@ -29,6 +29,8 @@ export const Title = styled.div`
 `;
 
 export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
   margin-top: 2rem;
 `;
 
@@ -53,4 +55,15 @@ export const ResultSpan = styled.div`
   display: inline-block;
   margin-left: 5px;
   color: var(--primary-color);
+`;
+
+export const ModalContainer = styled.div`
+  background: var(--secondary-color);
+  height: 25vh;
+  width: 50vw;
+  padding: 2rem;
+`;
+
+export const ModalTitleContainer = styled.div`
+  margin-bottom: 6rem;
 `;

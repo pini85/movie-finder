@@ -159,7 +159,7 @@ export const tmdbAdvancedMoviesApi = async ({
   writers,
 }) => {
   const response = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&include_adult=false&include_video=false&sort_by=vote_count.desc&primary_release_date.gte=${fromYear}&primary_release_date.lte=${toYear}&${advancedSearchRating(
+    `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&include_adult=false&include_video=false&sort_by=popularity.desc&primary_release_date.gte=${fromYear}&primary_release_date.lte=${toYear}&${advancedSearchRating(
       rating
     )}&${advancedSearchVotes(
       votes
