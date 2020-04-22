@@ -180,6 +180,17 @@ export const tmdbAdvancedMoviesApi = async ({
   return filtered;
 };
 
+export const tmdbCastMoviesApi = async (id, page) => {
+  console.log(id);
+
+  const response = await fetch(
+    `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_cast=${id}`
+  );
+
+  const data = await response.json();
+  return data;
+};
+
 /*
 to fetch actors,directors and writers in the movie you need to do the following:
  user queries bruce willis

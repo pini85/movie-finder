@@ -12,6 +12,7 @@ import {
   tmdbAdvancedMoviesApi,
   tmdbCastId,
   tmdbCastInfoApi,
+  tmdbCastMoviesApi,
 } from "../../apis/tmdbApi";
 import omdbApi from "../../apis/omdbApi";
 import torrentApi from "../../apis/torrentApi";
@@ -160,8 +161,6 @@ const fetchMovie = async (dispatch, getState) => {
   }
 
   const ratings = () => {
-    console.log(omdbData, "omdbdata");
-
     switch (omdbData.Ratings.length) {
       case 1:
         return [
@@ -289,11 +288,14 @@ export const createAdvancedSearch = (obj) => {
 
 export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
   const search = getState().advancedSearch;
+  const savedSearch = getState().displayUserAdvancedSearch;
+
   let actorsArray = [];
   let directorsArray = [];
   let writersArray = [];
-
   const fetchCastIds = async (castType, arrayType) => {
+    console.log("castYpe", castType);
+
     const fetch = await Promise.all(
       castType.map(async (cast) => {
         const castDetails = await tmdbCastId(cast);
@@ -305,22 +307,56 @@ export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
     return arrayType.push(fetch);
   };
 
-  await fetchCastIds(search.actorsArray, actorsArray);
-  await fetchCastIds(search.directorsArray, directorsArray);
-  await fetchCastIds(search.writersArray, writersArray);
+  await fetchCastIds(
+    savedSearch && savedSearch.active
+      ? savedSearch.search.actors
+      : search.actorsArray,
+    actorsArray
+  );
+  await fetchCastIds(
+    savedSearch && savedSearch.active
+      ? savedSearch.search.directors
+      : search.directorsArray,
+    directorsArray
+  );
+  await fetchCastIds(
+    savedSearch && savedSearch.active
+      ? savedSearch.search.writers
+      : search.writersArray,
+    writersArray
+  );
 
   const obj = {
     page: page,
-    fromYear: search.fromYear,
-    toYear: search.toYear,
-    rating: search.rating,
-    votes: search.voteCount,
-    genres: search.genres,
-    runTime: search.runTime,
+    fromYear:
+      savedSearch && savedSearch.active
+        ? savedSearch.search.fromYear
+        : search.fromYear,
+    toYear:
+      savedSearch && savedSearch.active
+        ? savedSearch.search.toYear
+        : search.toYear,
+    rating:
+      savedSearch && savedSearch.active
+        ? savedSearch.search.rating
+        : search.rating,
+    votes:
+      savedSearch && savedSearch.active
+        ? savedSearch.search.voteCount
+        : search.voteCount,
+    genres:
+      savedSearch && savedSearch.active
+        ? savedSearch.search.genres
+        : search.genres,
+    runTime:
+      savedSearch && savedSearch.active
+        ? savedSearch.search.runTime
+        : search.runTime,
     actors: actorsArray[0],
     directors: directorsArray[0],
     writers: writersArray[0],
   };
+  console.log(obj);
 
   const movies = await tmdbAdvancedMoviesApi(obj);
 
@@ -362,8 +398,29 @@ export const fetchCastSuggestion = (type, query) => async (dispatch) => {
   }
 };
 
-export const saveAdvancedSearch = (obj) => (dispatch) => {
+export const saveUserAdvancedSearch = (obj) => (dispatch) => {
   dispatch({ type: "SAVE_ADVANCED_SEARCH", payload: obj });
+};
+
+export const removeUserAdvancedSearch = (obj) => {
+  return {
+    type: "REMOVE_ADVANCED_SEARCH",
+    payload: obj,
+  };
+};
+
+export const displayUserSearch = (search) => {
+  return {
+    type: "DISPLAY_SAVED_SEARCH",
+    payload: search,
+  };
+};
+
+export const fetchActorMovies = (name, page) => async (dispatch) => {
+  const fetchId = await tmdbCastId(name);
+  const id = fetchId.results[0].id;
+  const movies = await tmdbCastMoviesApi(id, page);
+  dispatch({ type: "FETCH_ACTOR_MOVIES", payload: movies });
 };
 
 export const isSending = (bool) => {

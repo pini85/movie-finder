@@ -10,19 +10,24 @@ const middleWares = [thunk];
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["movieSuggestions", "optionActive", "movieSlider"]
+  blacklist: [
+    "movieSuggestions",
+    "optionActive",
+    "movieSlider",
+    "displayUserAdvancedSearch",
+  ],
 };
 
-// const persistedReducer = persistReducer(persistConfig, reducers);
+const persistedReducer = persistReducer(persistConfig, reducers);
 const composeEnhancers = composeWithDevTools({
   actionCreators,
   trace: true,
-  traceLimit: 25
+  traceLimit: 25,
 });
 
 export let store = createStore(
-  reducers,
+  persistedReducer,
   composeEnhancers(applyMiddleware(...middleWares))
 );
 
-// export let persistor = persistStore(store);
+export let persistor = persistStore(store);

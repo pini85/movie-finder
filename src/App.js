@@ -9,6 +9,7 @@ import ShowMovie from "./components/showMovie/ShowMovie.component";
 import MovieListSearch from "./components/MovieListSearch/MovieListSearch";
 import TvShows from "./components/TvShows/TvShows.component";
 import AdvancedSearch from "./components/AdvancedSearch/AdvancedSearch.component";
+import ActorMovies from "./components/ActorMovies/ActorMovies.component";
 
 const App = () => {
   return (
@@ -16,20 +17,16 @@ const App = () => {
       <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/movies/:category/page/:page" component={Movies} />
-        <Route exact path="/tv/:category/page/:page" component={TvShows} />
+        <Route path="/movie/:id" component={ShowMovie} />
+        <Route path="/movies/:category/page/:page" component={Movies} />
+        <Route path="/tv/:category/page/:page" component={TvShows} />
+        <Route path="/search/:query/page/:page" component={MovieListSearch} />
+        <Route exact path="/advanced-search" component={AdvancedSearch} />
         <Route
-          exact
-          path="/search/:query/page/:page"
-          component={MovieListSearch}
-        />
-        <Route
-          exact
           path="/advanced-search/:query/page/:page"
           component={MovieListSearch}
         />
-        <Route path="/movie/:id" component={ShowMovie} />
-        <Route path="/advanced-search" component={AdvancedSearch} />
+        <Route path="/actors/:name/page/:page" component={ActorMovies} />
       </Switch>
     </Router>
   );

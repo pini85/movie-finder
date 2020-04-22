@@ -25,7 +25,7 @@ export const ButtonContainer = styled.div`
   align-items: center;
 `;
 export const Divider = styled.div`
-  margin-top: 13rem;
+  margin-top: 5rem;
   display: inline-block;
   height: 33rem;
   width: 2px;

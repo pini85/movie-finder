@@ -143,11 +143,32 @@ const fetchCastSuggestionsReducer = (suggestions = null, action) => {
   return suggestions;
 };
 
-const savedAdvancedSearchesReducer = (savedSearches = [], action) => {
-  if (action.type === "SAVE_ADVANCED_SEARCH") {
-    return [...savedSearches, action.payload];
+const userAdvancedSearchesReducer = (savedSearches = [], action) => {
+  switch (action.type) {
+    case "SAVE_ADVANCED_SEARCH":
+      return [...savedSearches, action.payload];
+    case "REMOVE_ADVANCED_SEARCH":
+      return [...savedSearches].filter((search) => {
+        return search !== action.payload;
+      });
+    default:
+      return savedSearches;
   }
-  return savedSearches;
+};
+
+const displayUserSavedSearchReducer = (displaySearch = null, action) => {
+  if (action.type === "DISPLAY_SAVED_SEARCH") {
+    return action.payload;
+  }
+  return displaySearch;
+};
+
+const fetchActorMoviesReducer = (movies = null, action) => {
+  if (action.type === "FETCH_ACTOR_MOVIES") {
+    console.log(action.payload);
+    return action.payload;
+  }
+  return movies;
 };
 
 export default combineReducers({
@@ -171,5 +192,7 @@ export default combineReducers({
   advancedSearch: createAdvancedSearchReducer,
   fetchAdvancedSearch: fetchAdvancedSearchReducer,
   castSuggestions: fetchCastSuggestionsReducer,
-  savedAdvancedSearches: savedAdvancedSearchesReducer,
+  userAdvancedSearches: userAdvancedSearchesReducer,
+  displayUserAdvancedSearch: displayUserSavedSearchReducer,
+  fetchActorMovies: fetchActorMoviesReducer,
 });

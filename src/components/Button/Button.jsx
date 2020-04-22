@@ -6,6 +6,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 const Button = (props) => {
   return (
     <ButtonContainer
+      width={props.width}
       padding={props.padding}
       disabled={props.disabled}
       onClick={props.handleClick}

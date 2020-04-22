@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { saveAdvancedSearch } from "../../redux/actions";
+import { saveUserAdvancedSearch, displayUserSearch } from "../../redux/actions";
 import Modal from "../Modal/Modal.component";
 import Input from "../Input/Input.component";
 
@@ -26,11 +26,12 @@ const AdvancedSearchResult = ({
   directors,
   writers,
   handleClick,
-  saveAdvancedSearch,
+  saveUserAdvancedSearch,
+  displayUserSavedAdvancedSearch,
+  displayUserSearch,
 }) => {
   const [isSaved, setSaved] = useState(false);
   const [savedName, setSavedName] = useState("");
-  console.log(isSaved);
 
   const na = (query) => {
     if (!query) {
@@ -39,68 +40,126 @@ const AdvancedSearchResult = ({
     return query;
   };
 
+  const displayResults = (type) => {
+    if (
+      displayUserSavedAdvancedSearch &&
+      displayUserSavedAdvancedSearch.active
+    ) {
+      switch (type) {
+        case "fromYear":
+          return na(displayUserSavedAdvancedSearch.search.fromYear);
+        case "toYear":
+          return na(displayUserSavedAdvancedSearch.search.toYear);
+        case "rating":
+          return na(displayUserSavedAdvancedSearch.search.rating);
+        case "voteCount":
+          return na(displayUserSavedAdvancedSearch.search.voteCount);
+        case "runTime":
+          return na(displayUserSavedAdvancedSearch.search.runTime);
+        case "genres":
+          return na(displayUserSavedAdvancedSearch.search.genres);
+        case "actors":
+          return displayUserSavedAdvancedSearch.search.actors;
+        case "directors":
+          return displayUserSavedAdvancedSearch.search.directors;
+        case "writers":
+          return displayUserSavedAdvancedSearch.search.writers;
+      }
+      console.log("yup");
+    } else {
+      switch (type) {
+        case "fromYear":
+          return na(fromYear);
+        case "toYear":
+          return na(toYear);
+        case "rating":
+          return na(rating);
+        case "voteCount":
+          return na(voteCount);
+        case "runTime":
+          return na(runTime);
+        case "genres":
+          return na(genres);
+        case "actors":
+          return actors;
+        case "directors":
+          return directors;
+        case "writers":
+          return writers;
+      }
+    }
+  };
+
   const handleSave = () => {
     setSaved(false);
     const obj = {
-      name: savedName,
-      fromYear,
-      toYear,
-      rating,
-      voteCount,
-      runTime,
-      genres,
-      actors,
-      directors,
-      writers,
+      active: true,
+      search: {
+        name: savedName,
+        fromYear,
+        toYear,
+        rating,
+        voteCount,
+        runTime,
+        genres,
+        actors,
+        directors,
+        writers,
+      },
     };
-    saveAdvancedSearch(obj);
+    saveUserAdvancedSearch(obj);
   };
 
   return (
     <Container>
       <Title>Search Information</Title>
       <div>
-        From Year:<ResultSpan>{na(fromYear)}</ResultSpan>
+        From Year:<ResultSpan>{displayResults("fromYear")}</ResultSpan>
       </div>
       <div>
-        To Year:<ResultSpan>{na(toYear)}</ResultSpan>
+        To Year:<ResultSpan>{displayResults("toYear")}</ResultSpan>
       </div>
       <div>
-        Minimum Rating:<ResultSpan>{na(rating)}</ResultSpan>
+        Minimum Rating:<ResultSpan>{displayResults("rating")}</ResultSpan>
       </div>
       <div>
-        Minimum Votes: <ResultSpan>{na(voteCount)}</ResultSpan>
+        Minimum Votes: <ResultSpan>{displayResults("voteCount")}</ResultSpan>
       </div>
       <div>
-        Run time: <ResultSpan>{na(runTime)}</ResultSpan>
+        Run time: <ResultSpan>{displayResults("runTime")}</ResultSpan>
       </div>
       <div>
-        Genre: <ResultSpan>{na(genres)}</ResultSpan>
+        Genre: <ResultSpan>{displayResults("genres")}</ResultSpan>
       </div>
       <div>
         Actors:
-        {actors.length > 0 ? (
-          actors.map((actor) => <Result>{actor}, </Result>)
+        {displayResults("actors").length > 0 ? (
+          displayResults("actors").map((actor) => <Result>{actor}, </Result>)
         ) : (
           <ResultSpan>N/A</ResultSpan>
         )}
       </div>
       <div>
         Directors:
-        {directors.length > 0 ? (
-          directors.map((director) => <Result> {director}, </Result>)
+        {displayResults("directors").length > 0 ? (
+          displayResults("directors").map((director) => (
+            <Result> {director}, </Result>
+          ))
         ) : (
           <ResultSpan>N/A</ResultSpan>
         )}
       </div>
       <div>
         Writers:
-        {writers.length > 0 ? (
-          writers.map((writer) => <Result> {writer}, </Result>)
+        {displayResults("writers").length > 0 ? (
+          displayResults("writers").map((writer) => (
+            <Result> {writer}, </Result>
+          ))
         ) : (
           <ResultSpan>N/A</ResultSpan>
         )}
       </div>
+
       <ButtonContainer>
         <Button handleClick={handleClick} title="reset"></Button>
         <div style={{ margin: "0 2rem" }}></div>
@@ -121,8 +180,11 @@ const AdvancedSearchResult = ({
   );
 };
 const mapStateToProps = (state) => ({
-  searchResult: state.advancedSearch,
+  searchResult: state.userAdvancedSearches,
+  savedSearches: state.savedAdvancedSearches,
+  displayUserSavedAdvancedSearch: state.displayUserAdvancedSearch,
 });
 export default connect(mapStateToProps, {
-  saveAdvancedSearch: (obj) => saveAdvancedSearch(obj),
+  saveUserAdvancedSearch: (obj) => saveUserAdvancedSearch(obj),
+  displayUserSearch: (search) => displayUserSearch(search),
 })(AdvancedSearchResult);

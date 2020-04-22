@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const ButtonContainer = styled.button`
   padding: ${(props) => (props.padding ? props.padding : "1rem 2.5rem")};
+  width: ${(props) => props.width};
   background-color: var(--primary-color);
   border: none;
   border-radius: 5px;

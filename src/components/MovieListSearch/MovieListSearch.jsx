@@ -4,18 +4,14 @@ import {
   selectedMovie,
   fetchMovies,
   fetchAdvancedSearch,
+  fetchActorMovies,
 } from "../../redux/actions/index";
 import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
 import Pagination from "../Pagination/Pagination.component";
 
 import Card from "../card/Card";
 const MovieListSearch = (props) => {
-  const [filteredMovies, setFilteredMovies] = useState(null);
-  useDidUpdateEffect(() => {
-    const filtered = props.advancedSearchMovies.results.filter((movie) => {
-      return movie;
-    });
-  }, [props.advancedSearchMovies]);
+  console.log(props, "props");
 
   const movies = () => {
     if (props.fetchMoviesData) {
@@ -37,7 +33,7 @@ const MovieListSearch = (props) => {
           </div>
         </>
       );
-    } else {
+    } else if (props.fetchAdvancedSearch) {
       return (
         <>
           <Pagination
@@ -47,6 +43,24 @@ const MovieListSearch = (props) => {
           <div style={styleDiv}>
             {props.advancedSearchMovies &&
               props.advancedSearchMovies.results.map((movie) => {
+                if (movie === null) return;
+
+                return (
+                  <div key={movie.id}>
+                    <Card movie={movie}></Card>
+                  </div>
+                );
+              })}
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Pagination api={props.fetchActorMovies} data={props.actorMovies} />
+          <div style={styleDiv}>
+            {props.actorMovies &&
+              props.actorMovies.results.map((movie) => {
                 if (movie === null) return;
 
                 return (
@@ -88,9 +102,11 @@ const MovieListSearch = (props) => {
 const mapStateToProps = (state) => ({
   fetchMoviesData: state.fetchMovies,
   advancedSearchMovies: state.fetchAdvancedSearch,
+  actorsMovies: state.actorMovies,
 });
 export default connect(mapStateToProps, {
   selectedMovie: selectedMovie,
   fetchMovies: (page) => fetchMovies(page),
   fetchAdvancedSearch: (page) => fetchAdvancedSearch(page),
+  fetchActorMovies: (id, page) => fetchActorMovies(id, page),
 })(MovieListSearch);
