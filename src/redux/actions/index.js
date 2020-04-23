@@ -294,8 +294,6 @@ export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
   let directorsArray = [];
   let writersArray = [];
   const fetchCastIds = async (castType, arrayType) => {
-    console.log("castYpe", castType);
-
     const fetch = await Promise.all(
       castType.map(async (cast) => {
         const castDetails = await tmdbCastId(cast);
@@ -356,24 +354,11 @@ export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
     directors: directorsArray[0],
     writers: writersArray[0],
   };
-  console.log(obj);
 
   const movies = await tmdbAdvancedMoviesApi(obj);
 
   dispatch({ type: "FETCH_ADVANCED_MOVIES", payload: movies });
 };
-
-// const popularMoviesData = [];
-//       const data = await tmdbApi();
-//       Promise.all(
-//         data.map(async item => {
-//           const movies = await tmdbIdApi(item.id);
-
-//           popularMoviesData.push(movies);
-//         })
-//       );
-//       props.popularMovies(popularMoviesData);
-//     };
 
 export const fetchCastSuggestion = (type, query) => async (dispatch) => {
   let fetchIds;
@@ -417,10 +402,32 @@ export const displayUserSearch = (search) => {
 };
 
 export const fetchActorMovies = (name, page) => async (dispatch) => {
+  console.log(name.length);
+
+  if (name.length < 0) {
+    return;
+  }
   const fetchId = await tmdbCastId(name);
   const id = fetchId.results[0].id;
+
   const movies = await tmdbCastMoviesApi(id, page);
+
   dispatch({ type: "FETCH_ACTOR_MOVIES", payload: movies });
+};
+
+export const fetchActors = (actors, page) => async (dispatch) => {
+  console.log(actors);
+
+  const actorsArray = [];
+  console.log("hi", actors);
+
+  await Promise.all(
+    actors[page].map(async (cast) => {
+      const actorDetails = await tmdbCastId(cast);
+      actorsArray.push(actorDetails.results[0]);
+    })
+  );
+  dispatch({ type: "FETCH_ACTORS", payload: actorsArray });
 };
 
 export const isSending = (bool) => {

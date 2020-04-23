@@ -7,7 +7,7 @@ import {
   advancedSearchGenres,
   advancedSearchCast,
 } from "../utlis/advancedSearchConfiguration";
-import filterMovies from "../utlis/filterMovies";
+import { filterMovies, filterActors } from "../utlis/filterMovies";
 const ApiKey = "3e296e6f6a1b142633468c58b584ab9b";
 
 export const tmdbApiDiscover = async () => {
@@ -175,14 +175,11 @@ export const tmdbAdvancedMoviesApi = async ({
   const data = await response.json();
 
   const filtered = await filterMovies(data);
-  console.log(data, filtered);
 
   return filtered;
 };
 
 export const tmdbCastMoviesApi = async (id, page) => {
-  console.log(id);
-
   const response = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${page}&with_cast=${id}`
   );
@@ -190,6 +187,14 @@ export const tmdbCastMoviesApi = async (id, page) => {
   const data = await response.json();
   return data;
 };
+
+export const tmdbPopularActorsAPi = async () => {
+  const response = await fetch(`https://api.themoviedb.org/3/person/popular?api_key=${ApiKey}&language=en-US&page=2
+  `);
+  const data = await response.json();
+  const filtered = await filterActors(data);
+};
+tmdbPopularActorsAPi();
 
 /*
 to fetch actors,directors and writers in the movie you need to do the following:

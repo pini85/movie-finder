@@ -15,6 +15,7 @@ const persistConfig = {
     "optionActive",
     "movieSlider",
     "displayUserAdvancedSearch",
+    "fetchAdvancedSearch",
   ],
 };
 

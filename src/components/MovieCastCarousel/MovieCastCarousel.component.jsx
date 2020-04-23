@@ -17,7 +17,7 @@ const MovieCastCarousel = ({
   name,
   character,
   profile,
-  fetchCastMovies,
+  fetchActorMovies,
   history,
 }) => {
   const profileImage = () => {

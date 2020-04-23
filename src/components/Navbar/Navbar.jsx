@@ -40,6 +40,10 @@ const Navbar = (props) => {
           link="/advanced-search/"
           title="Advanced Search"
         ></NavbarItem>
+        <NavbarItem
+          link="/popular-actors/page/1"
+          title="Popular Actors"
+        ></NavbarItem>
       </NavbarItemContainer>
 
       <Search />

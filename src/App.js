@@ -10,6 +10,7 @@ import MovieListSearch from "./components/MovieListSearch/MovieListSearch";
 import TvShows from "./components/TvShows/TvShows.component";
 import AdvancedSearch from "./components/AdvancedSearch/AdvancedSearch.component";
 import ActorMovies from "./components/ActorMovies/ActorMovies.component";
+import PopularActors from "./components/PopularActors/PopularActors.component";
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
           path="/advanced-search/:query/page/:page"
           component={MovieListSearch}
         />
+        <Route path="/popular-actors/" component={PopularActors} />
         <Route path="/actors/:name/page/:page" component={ActorMovies} />
       </Switch>
     </Router>

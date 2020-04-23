@@ -165,10 +165,15 @@ const displayUserSavedSearchReducer = (displaySearch = null, action) => {
 
 const fetchActorMoviesReducer = (movies = null, action) => {
   if (action.type === "FETCH_ACTOR_MOVIES") {
-    console.log(action.payload);
     return action.payload;
   }
   return movies;
+};
+const fetchActorsReducer = (actors = null, action) => {
+  if (action.type === "FETCH_ACTORS") {
+    return action.payload;
+  }
+  return actors;
 };
 
 export default combineReducers({
@@ -195,4 +200,5 @@ export default combineReducers({
   userAdvancedSearches: userAdvancedSearchesReducer,
   displayUserAdvancedSearch: displayUserSavedSearchReducer,
   fetchActorMovies: fetchActorMoviesReducer,
+  popularActors: fetchActorsReducer,
 });

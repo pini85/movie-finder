@@ -1,5 +1,5 @@
 import { tmdbIdApi } from "../apis/tmdbApi";
-const filterMovies = async (data) => {
+export const filterMovies = async (data) => {
   const page = data.page;
   const total_results = data.total_results;
   const total_pages = data.total_pages;
@@ -19,4 +19,15 @@ const filterMovies = async (data) => {
   return obj;
 };
 
-export default filterMovies;
+export const filterActors = async (data) => {
+  const page = data.page;
+  const total_results = data.total_results;
+  const total_pages = data.total_pages;
+  const results = data.results;
+  const filter = results.filter((actor) => {
+    return (
+      actor.known_for[0].media_type !== "tv" &&
+      actor.known_for_department === "Acting"
+    );
+  });
+};

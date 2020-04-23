@@ -17,6 +17,7 @@
     "node-sass": "^4.13.1",
     "node-vibrant": "^3.1.5",
     "opensubtitles-api": "^5.1.0",
+    "papaparse": "^5.2.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-loading-skeleton": "^2.0.1",

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   text-align: center;
-  padding-top: 2rem;
+  padding: 2rem 0;
 `;
 export const FirstLetterContainer = styled.span`
   position: relative;

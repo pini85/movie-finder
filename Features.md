@@ -9,9 +9,10 @@ Features need to be done:
 - Mobile
 - Fix all bugs
 
-  - search cannot click on movie in suggestions
-  - fix percentage circle on display movie
-  - pagination is acting up
+* search cannot click on movie in suggestions
+* fix percentage circle on display movie
+* pagination is acting up
+* do better filters. Exclude movies with no poster and rating of 0
 
-- Add animations with motion-framer
-- Add tv shows
+* Add animations with motion-framer
+* Add tv shows

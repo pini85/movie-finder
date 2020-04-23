@@ -3,16 +3,16 @@ import { withRouter } from "react-router-dom";
 import { Container, ButtonContainer } from "./pagination.styles";
 import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
 
-const Pagination = ({ api, data, history, location }) => {
+const Pagination = ({ api, data, actor, history, location }) => {
   const [buttons, setButtons] = useState(null);
   const [count, setCount] = useState(1);
   const [amount, setAmount] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = data ? data.total_pages : null;
+
   const changeLocation = () => {
     const loc = location.pathname;
-    console.log(loc);
 
     const split = loc.split("/");
     return loc.replace(split[split.length - 1], currentPage);
@@ -25,7 +25,11 @@ const Pagination = ({ api, data, history, location }) => {
 
   useDidUpdateEffect(() => {
     const fetchData = async () => {
-      await api(currentPage);
+      if (actor) {
+        await api(actor, currentPage);
+      } else {
+        await api(currentPage);
+      }
       history.push(changeLocation());
     };
     fetchData();
@@ -86,9 +90,9 @@ const Pagination = ({ api, data, history, location }) => {
   };
 
   const bold = (page) => {
-    // console.log("..................");
-    // console.log("page", page);
-    // console.log("currentPage", currentPage);
+    //
+    //
+    //
 
     return page == currentPage
       ? { fontWeight: "700", background: "var(--secondary-color-lightest)" }

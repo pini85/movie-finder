@@ -11,7 +11,7 @@ import Pagination from "../Pagination/Pagination.component";
 
 import Card from "../card/Card";
 const MovieListSearch = (props) => {
-  console.log(props, "props");
+  console.log(props.actorsMovies);
 
   const movies = () => {
     if (props.fetchMoviesData) {
@@ -33,7 +33,7 @@ const MovieListSearch = (props) => {
           </div>
         </>
       );
-    } else if (props.fetchAdvancedSearch) {
+    } else if (props.advancedSearchMovies) {
       return (
         <>
           <Pagination
@@ -57,10 +57,14 @@ const MovieListSearch = (props) => {
     } else {
       return (
         <>
-          <Pagination api={props.fetchActorMovies} data={props.actorMovies} />
+          <Pagination
+            api={props.fetchActorMovies}
+            data={props.actorsMovies}
+            actor={props.name}
+          />
           <div style={styleDiv}>
-            {props.actorMovies &&
-              props.actorMovies.results.map((movie) => {
+            {props.actorsMovies &&
+              props.actorsMovies.results.map((movie) => {
                 if (movie === null) return;
 
                 return (
@@ -102,7 +106,7 @@ const MovieListSearch = (props) => {
 const mapStateToProps = (state) => ({
   fetchMoviesData: state.fetchMovies,
   advancedSearchMovies: state.fetchAdvancedSearch,
-  actorsMovies: state.actorMovies,
+  actorsMovies: state.fetchActorMovies,
 });
 export default connect(mapStateToProps, {
   selectedMovie: selectedMovie,
