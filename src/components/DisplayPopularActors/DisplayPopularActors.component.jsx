@@ -8,10 +8,14 @@ import { Container } from "./DisplayPopularActors.styles";
 const DisplayPopularActors = (props) => {
   return (
     <>
-      <Pagination api={props.fetchActors} data={props.actors} />
+      <Pagination
+        api={props.fetchActors}
+        data={props.actors}
+        actor={props.actors}
+      />
       <Container>
         {props.actors &&
-          props.actors.map((actor) => {
+          props.actors.results.map((actor) => {
             return (
               <>
                 <ActorCard actor={actor} />

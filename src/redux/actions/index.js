@@ -402,8 +402,6 @@ export const displayUserSearch = (search) => {
 };
 
 export const fetchActorMovies = (name, page) => async (dispatch) => {
-  console.log(name.length);
-
   if (name.length < 0) {
     return;
   }
@@ -416,18 +414,24 @@ export const fetchActorMovies = (name, page) => async (dispatch) => {
 };
 
 export const fetchActors = (actors, page) => async (dispatch) => {
-  console.log(actors);
+  const actorsObject = {};
+  actorsObject.total_results = actors.total_results;
+  actorsObject.total_pages = actors.total_pages;
+  actorsObject.results = [actors];
+  console.log("actorsObject", actorsObject);
+  console.log("actors", actors);
+  console.log(actors[2]);
 
-  const actorsArray = [];
-  console.log("hi", actors);
+  // console.log("array?", actorsObject.results[0]);
 
   await Promise.all(
     actors[page].map(async (cast) => {
       const actorDetails = await tmdbCastId(cast);
-      actorsArray.push(actorDetails.results[0]);
+      actorsObject.results.push(actorDetails.results[0]);
     })
   );
-  dispatch({ type: "FETCH_ACTORS", payload: actorsArray });
+
+  dispatch({ type: "FETCH_ACTORS", payload: actorsObject });
 };
 
 export const isSending = (bool) => {

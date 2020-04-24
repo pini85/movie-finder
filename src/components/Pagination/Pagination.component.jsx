@@ -10,6 +10,7 @@ const Pagination = ({ api, data, actor, history, location }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = data ? data.total_pages : null;
+  console.log(data, "totalPages");
 
   const changeLocation = () => {
     const loc = location.pathname;
@@ -26,6 +27,8 @@ const Pagination = ({ api, data, actor, history, location }) => {
   useDidUpdateEffect(() => {
     const fetchData = async () => {
       if (actor) {
+        console.log("im hereeeee");
+
         await api(actor, currentPage);
       } else {
         await api(currentPage);

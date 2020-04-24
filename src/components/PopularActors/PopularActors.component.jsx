@@ -12,7 +12,8 @@ const PopularActors = (props) => {
       let names = [];
       const actorsPerPage = 10;
       const totalPages = data && Math.round(data.length / actorsPerPage);
-      pages.totalPages = totalPages;
+      pages.total_pages = totalPages;
+      pages.total_results = data && data.length;
 
       //
 
@@ -25,10 +26,9 @@ const PopularActors = (props) => {
         pageNumber++;
       }
 
-      if (Object.keys(pages).length > 0) {
+      if (Object.keys(pages).length > 0 && pages.total_pages) {
         props.fetchActors(pages, 1);
       }
-      console.log(pages);
     };
 
     actors();
