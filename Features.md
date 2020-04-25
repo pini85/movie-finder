@@ -5,6 +5,7 @@ Features need to be done:
 - Save advanced Searches
 - Click on Cast to get relevant Movies
 - Create search Top actors movies
+- Reviews
 - Spinner
 - Mobile
 - Fix all bugs
