@@ -1,5 +1,4 @@
 const findGenreWithId = (genres, id) => {
-  debugger;
   const genre = genres.filter((genre) => {
     return genre.id === parseInt(id);
   });

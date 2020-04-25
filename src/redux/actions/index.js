@@ -413,25 +413,27 @@ export const fetchActorMovies = (name, page) => async (dispatch) => {
   dispatch({ type: "FETCH_ACTOR_MOVIES", payload: movies });
 };
 
-export const fetchActors = (actors, page) => async (dispatch) => {
-  const actorsObject = {};
-  actorsObject.total_results = actors.total_results;
-  actorsObject.total_pages = actors.total_pages;
-  actorsObject.results = [actors];
-  console.log("actorsObject", actorsObject);
-  console.log("actors", actors);
-  console.log(actors[2]);
-
-  // console.log("array?", actorsObject.results[0]);
+export const createPopularActors = (actors) => {
+  return {
+    type: "CREATE_POPULAR_ACTORS",
+    payload: actors,
+  };
+};
+export const fetchPopularActors = (page) => async (dispatch, getState) => {
+  const actorsObj = getState().createPopularActors;
+  const actors = {};
+  actors.total_results = actorsObj.total_results;
+  actors.total_pages = actorsObj.total_pages;
+  actors.results = [];
 
   await Promise.all(
-    actors[page].map(async (cast) => {
+    actorsObj[page].map(async (cast) => {
       const actorDetails = await tmdbCastId(cast);
-      actorsObject.results.push(actorDetails.results[0]);
+      actors.results.push(actorDetails.results[0]);
     })
   );
 
-  dispatch({ type: "FETCH_ACTORS", payload: actorsObject });
+  dispatch({ type: "FETCH_POPULAR_ACTORS", payload: actors });
 };
 
 export const isSending = (bool) => {

@@ -4,13 +4,14 @@ import { Container, ButtonContainer } from "./pagination.styles";
 import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
 
 const Pagination = ({ api, data, actor, history, location }) => {
+  console.log(actor);
+
   const [buttons, setButtons] = useState(null);
   const [count, setCount] = useState(1);
   const [amount, setAmount] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
 
   const totalPages = data ? data.total_pages : null;
-  console.log(data, "totalPages");
 
   const changeLocation = () => {
     const loc = location.pathname;
@@ -25,10 +26,10 @@ const Pagination = ({ api, data, actor, history, location }) => {
   }, []);
 
   useDidUpdateEffect(() => {
+    console.log(actor);
+
     const fetchData = async () => {
       if (actor) {
-        console.log("im hereeeee");
-
         await api(actor, currentPage);
       } else {
         await api(currentPage);

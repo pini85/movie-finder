@@ -169,8 +169,14 @@ const fetchActorMoviesReducer = (movies = null, action) => {
   }
   return movies;
 };
-const fetchActorsReducer = (actors = null, action) => {
-  if (action.type === "FETCH_ACTORS") {
+const fetchPopularActorsReducer = (actors = null, action) => {
+  if (action.type === "FETCH_POPULAR_ACTORS") {
+    return action.payload;
+  }
+  return actors;
+};
+const createPopularActorsReducer = (actors = null, action) => {
+  if (action.type === "CREATE_POPULAR_ACTORS") {
     return action.payload;
   }
   return actors;
@@ -200,5 +206,6 @@ export default combineReducers({
   userAdvancedSearches: userAdvancedSearchesReducer,
   displayUserAdvancedSearch: displayUserSavedSearchReducer,
   fetchActorMovies: fetchActorMoviesReducer,
-  popularActors: fetchActorsReducer,
+  fetchPopularActors: fetchPopularActorsReducer,
+  createPopularActors: createPopularActorsReducer,
 });

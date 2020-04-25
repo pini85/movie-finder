@@ -17,6 +17,7 @@ const persistConfig = {
     "displayUserAdvancedSearch",
     "fetchAdvancedSearch",
     "fetchActors",
+    "fetchMovies",
   ],
 };
 

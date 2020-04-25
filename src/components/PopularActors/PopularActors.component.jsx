@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import Papa from "papaparse";
-import { fetchActors } from "../../redux/actions/index";
+import {
+  createPopularActors,
+  fetchPopularActors,
+} from "../../redux/actions/index";
 import CategoryTitle from "../CategoryTitle/CategoryTitle.component";
 import DisplayPopularActors from "../DisplayPopularActors/DisplayPopularActors.component";
 
 const PopularActors = (props) => {
   useEffect(() => {
     const actors = (data) => {
-      let pages = {};
+      let actors = {};
       let names = [];
       const actorsPerPage = 10;
       const totalPages = data && Math.round(data.length / actorsPerPage);
-      pages.total_pages = totalPages;
-      pages.total_results = data && data.length;
+      actors.total_pages = totalPages;
+      actors.total_results = data && data.length;
 
       //
 
@@ -22,12 +25,13 @@ const PopularActors = (props) => {
       }
       let pageNumber = 1;
       for (let j = 1; j < names.length; j += actorsPerPage) {
-        pages[pageNumber] = names.slice(j, j + 10);
+        actors[pageNumber] = names.slice(j, j + 10);
         pageNumber++;
       }
 
-      if (Object.keys(pages).length > 0 && pages.total_pages) {
-        props.fetchActors(pages, 1);
+      if (Object.keys(actors).length > 0 && actors.total_pages) {
+        props.createPopularActors(actors);
+        props.fetchPopularActors(1);
       }
     };
 
@@ -49,15 +53,16 @@ const PopularActors = (props) => {
 
   return (
     <>
+      {}
       <CategoryTitle title="popular actors" />
-
-      {props.actors && <DisplayPopularActors actors={props.actors} />}
+      {props.fetchPopularActorsData && <DisplayPopularActors />}
     </>
   );
 };
 const mapStateToProps = (state) => ({
-  actors: state.popularActors,
+  fetchPopularActorsData: state.fetchPopularActors,
 });
 export default connect(mapStateToProps, {
-  fetchActors: (actors, page) => fetchActors(actors, page),
+  createPopularActors: (actors) => createPopularActors(actors),
+  fetchPopularActors: (page) => fetchPopularActors(page),
 })(PopularActors);

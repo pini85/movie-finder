@@ -7,9 +7,9 @@ import {
   Img,
   Title,
 } from "./ActorCard.styles";
-const ActorCard = ({ actor }) => {
+const ActorCard = ({ actor, handleClick }) => {
   return (
-    <Container>
+    <Container onClick={() => handleClick(actor.name)}>
       <CardContainer>
         <ImageContainer>
           <Img

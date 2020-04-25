@@ -1,31 +1,48 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchActors } from "../../redux/actions/index";
+import { withRouter } from "react-router-dom";
+import { compose } from "redux";
+import {
+  fetchPopularActors,
+  fetchActorMovies,
+} from "../../redux/actions/index";
 
 import ActorCard from "../ActorCard/ActorCard.component";
 import Pagination from "../Pagination/Pagination.component";
 import { Container } from "./DisplayPopularActors.styles";
 const DisplayPopularActors = (props) => {
+  console.log(props);
+
+  const handleClick = (name) => {
+    props.fetchActorMovies(name, 1);
+    props.history.push(`/search/${name}/page/1`);
+  };
   return (
     <>
       <Pagination
-        api={props.fetchActors}
-        data={props.actors}
-        actor={props.actors}
+        api={props.fetchPopularActors}
+        data={props.fetchPopularActorsData}
       />
       <Container>
-        {props.actors &&
-          props.actors.results.map((actor) => {
+        {props.fetchPopularActorsData &&
+          props.fetchPopularActorsData.results.map((actor) => {
             return (
-              <>
-                <ActorCard actor={actor} />
-              </>
+              <div key={actor.id}>
+                <ActorCard handleClick={handleClick} actor={actor} />
+              </div>
             );
           })}
       </Container>
     </>
   );
 };
-export default connect(null, {
-  fetchActors: (data, page) => fetchActors(data, page),
-})(DisplayPopularActors);
+const mapStateToProps = (state) => ({
+  fetchPopularActorsData: state.fetchPopularActors,
+});
+export default compose(
+  withRouter,
+  connect(mapStateToProps, {
+    fetchPopularActors: (page) => fetchPopularActors(page),
+    fetchActorMovies: (name, page) => fetchActorMovies(name, page),
+  })
+)(DisplayPopularActors);
