@@ -38,21 +38,23 @@ const Home = (props) => {
     flexWrap: "wrap",
     justifyContent: "center",
     flexDirection: "column",
-    padding: "0 35rem",
+    padding: "0 15rem",
 
     backgroundColor: "var(--secondary-color)",
     overflow: "hidden",
   };
   return (
     <div style={styleContainer}>
-      <Carousel
-        type="movieSlider"
-        slidesToShow={1}
-        slidesToScroll={1}
-        autoPlay={true}
-        fade={true}
-        color="var(--primary-color)"
-      ></Carousel>
+      <div style={{ padding: "0 15rem" }} className="hi">
+        <Carousel
+          type="movieSlider"
+          slidesToShow={1}
+          slidesToScroll={1}
+          autoPlay={true}
+          fade={true}
+          color="var(--primary-color)"
+        ></Carousel>
+      </div>
 
       <div style={{ width: "100%" }}>
         <Header>Welcome to Movie Finder</Header>

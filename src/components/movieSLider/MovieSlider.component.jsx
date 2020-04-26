@@ -10,7 +10,7 @@ const movieSlider = (props) => {
   const test = () => {};
 
   const Container = styled.div`
-    height: 48rem;
+    height: 50rem;
     background: url(https://image.tmdb.org/t/p/w1280//${props.movie.backdrop_path});
 
     background-size: 100% 70%;
