@@ -1,7 +1,7 @@
 .slick-slider {
-  width: 98vw;
+  width: 100%;
 }
-.slick-dots li button:before {
+/* .slick-dots li button:before {
   color: white;
 }
 .slick-dots li.slick-active button:before {
@@ -34,4 +34,4 @@
 }
 .slick-slider.slick-initialized {
   padding: 0 14vw;
-}
+} */

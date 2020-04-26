@@ -38,6 +38,7 @@ const Home = (props) => {
     flexWrap: "wrap",
     justifyContent: "center",
     flexDirection: "column",
+    padding: "0 35rem",
 
     backgroundColor: "var(--secondary-color)",
     overflow: "hidden",
@@ -50,6 +51,7 @@ const Home = (props) => {
         slidesToScroll={1}
         autoPlay={true}
         fade={true}
+        color="var(--primary-color)"
       ></Carousel>
 
       <div style={{ width: "100%" }}>

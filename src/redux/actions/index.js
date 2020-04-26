@@ -13,6 +13,7 @@ import {
   tmdbCastId,
   tmdbCastInfoApi,
   tmdbCastMoviesApi,
+  tmdbMovieReviewsApi,
 } from "../../apis/tmdbApi";
 import omdbApi from "../../apis/omdbApi";
 import torrentApi from "../../apis/torrentApi";
@@ -100,6 +101,8 @@ const fetchMovie = async (dispatch, getState) => {
   const omdbData = await omdbApi(tmdbData.imdb_id);
   const torrentData = await torrentApi(tmdbData.imdb_id);
   const movieCredits = await tmdbMovieCreditsApi(id);
+  const reviews = await tmdbMovieReviewsApi(id);
+  console.log("reviews", reviews);
 
   // export const fetchMovieSlider = () => async dispatch => {
   //   const data = await tmdbMovieSliderApi();
@@ -210,6 +213,7 @@ const fetchMovie = async (dispatch, getState) => {
     actors: await actorsList(),
     cast: movieCredits.cast,
     runTime: tmdbData.runtime,
+    reviews: reviews,
     magnets: magnets,
     plot: tmdbData.overview,
     tagLine: tmdbData.tagline,

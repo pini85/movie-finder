@@ -188,21 +188,18 @@ export const tmdbCastMoviesApi = async (id, page) => {
   return data;
 };
 
-export const tmdbPopularActorsAPi = async () => {
-  const response = await fetch(`https://api.themoviedb.org/3/person/popular?api_key=${ApiKey}&language=en-US&page=2
-  `);
-  const data = await response.json();
-  const filtered = await filterActors(data);
+export const tmdbMovieReviewsApi = async (id) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/${id} /reviews?api_key=${ApiKey}&language=en-US&page=1`
+  );
+  const data = response.json();
+  return data;
 };
-tmdbPopularActorsAPi();
 
-/*
-to fetch actors,directors and writers in the movie you need to do the following:
- user queries bruce willis
- https://api.themoviedb.org/3/search/person?api_key=###&query=bruce+willis
-
- you can then get their id which is 62
- and then query with it:
- https://api.themoviedb.org/3/discover/movie?api_key=3e296e6f6a1b142633468c58b584ab9b&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_cast=62
-
-*/
+// export const tmdbPopularActorsAPi = async () => {
+//   const response = await fetch(`https://api.themoviedb.org/3/person/popular?api_key=${ApiKey}&language=en-US&page=2
+//   `);
+//   const data = await response.json();
+//   const filtered = await filterActors(data);
+// };
+// tmdbPopularActorsAPi();

@@ -8,7 +8,7 @@ const Modal = ({ isToggled, setToggled, skew, children }) => {
       return {
         transform: "translate(-50%, -25%) skewY(-2.5deg)",
         top: "50%",
-        left: "49"
+        left: "49",
       };
     }
   };
@@ -24,10 +24,11 @@ const Modal = ({ isToggled, setToggled, skew, children }) => {
           }
         >
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 0, width: "75%" }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
+            ``
             <motion.div initial={{ y: 0 }} animate={{ y: 30 }} exit={{ y: 30 }}>
               <div className="YO">
                 <ButtonContainer

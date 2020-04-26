@@ -55,7 +55,7 @@ export const TagLineContainer = styled.div`
 export const BottomContainer = styled.div`
   height: 46.4%;
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
 `;
 
 export const OptionsContainer = styled.div`
@@ -73,8 +73,8 @@ export const OptionsContainer = styled.div`
 `;
 
 export const PlotContainer = styled.div`
-  width: 50%;
-  height: 100%;
+  width: 80%;
+  /* height: 100%; */
   padding: 2rem;
   align-self: flex-start;
   color: ${(props) => props.color};
@@ -91,3 +91,8 @@ export const MovieCastContainer = styled.div`
 
   background: ${(props) => props.color};
 `;
+
+export const LeftSide = styled.div`
+  width: 75%;
+`;
+export const RightSide = styled.div``;

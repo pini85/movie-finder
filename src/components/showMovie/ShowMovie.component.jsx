@@ -6,6 +6,7 @@ import ShowMovieInfo from "../showMovieInfo/ShowMovieInfo.component";
 import ShowMovieOption from "../ShowMovieOption/ShowMovieOption.component";
 import MovieCast from "../MovieCast/MovieCast.component";
 import Trailer from "../Trailer/Trailer.component";
+import Reviews from "../Reviews/Review.component";
 import {
   Container,
   HeroContainer,
@@ -16,6 +17,8 @@ import {
   OptionsContainer,
   PlotContainer,
   MovieCastContainer,
+  LeftSide,
+  RightSide,
 } from "./ShowMovie.styles";
 import styled from "styled-components";
 
@@ -70,21 +73,30 @@ const ShowMovie = ({ item, colors, goToMovie }) => {
               <Trailer poster={item.poster} />
             </HeroContainer>
             <BottomContainer>
-              <PlotContainer color={colors.darkVibrant}>
-                {item.tagLine && (
-                  <TagLineContainer>
-                    <span>&ldquo;</span>
-                    {item.tagLine}
-                    <span>&rdquo;</span>
-                  </TagLineContainer>
-                )}
-                <div>{item.plot}</div>
-              </PlotContainer>
-              <OptionsContainer>
-                <ShowMovieOption title="torrents" type="torrent" left={true} />
-                <ShowMovieOption title="subtitles" type="sub" right={true} />
-                <ShowMovieOption title="magnets" type="magnets" left={true} />
-              </OptionsContainer>
+              <LeftSide>
+                <PlotContainer color={colors.darkVibrant}>
+                  {item.tagLine && (
+                    <TagLineContainer>
+                      <span>&ldquo;</span>
+                      {item.tagLine}
+                      <span>&rdquo;</span>
+                    </TagLineContainer>
+                  )}
+                  <div>{item.plot}</div>
+                </PlotContainer>
+                <Reviews />
+              </LeftSide>
+              <RightSide>
+                <OptionsContainer>
+                  <ShowMovieOption
+                    title="torrents"
+                    type="torrent"
+                    left={true}
+                  />
+                  <ShowMovieOption title="subtitles" type="sub" right={true} />
+                  <ShowMovieOption title="magnets" type="magnets" left={true} />
+                </OptionsContainer>
+              </RightSide>
             </BottomContainer>
             {/* 
             <div style={{ display: "flex" }}>

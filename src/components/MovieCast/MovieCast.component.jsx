@@ -3,7 +3,12 @@ import { connect } from "react-redux";
 
 import Carousel from "../carousel/carousel.component";
 
-const MovieCast = ({ cast }) => {
+const MovieCast = ({ cast, color }) => {
+  const styling = {
+    padding: "0 4rem",
+  };
+  console.log(styling.padding);
+
   return (
     <>
       <Carousel
@@ -13,6 +18,8 @@ const MovieCast = ({ cast }) => {
         slidesToScroll={6}
         autoPlay={false}
         fade={false}
+        styling={styling}
+        color={color}
       ></Carousel>
     </>
   );
@@ -20,6 +27,7 @@ const MovieCast = ({ cast }) => {
 
 const mapStateToProps = (state) => ({
   cast: state.displayMovie.cast,
+  color: state.displayMovie.colors.vibrant,
 });
 
 export default connect(mapStateToProps)(MovieCast);

@@ -106,6 +106,7 @@ const Trailer = ({ poster, fetchTrailers, trailers, colors }) => {
           slidesToScroll={1}
           autoPlay={false}
           fade={true}
+          color="var(--primary-color)"
         ></Carousel>
         {isLoading ? (
           <FontAwesomeIcon
