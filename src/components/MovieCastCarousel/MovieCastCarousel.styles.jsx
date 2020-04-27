@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 export const Container = styled.div`
   cursor: pointer;
   position: relative;
+
   color: ${(props) => props.fontColor};
   font-weight: 700;
   border-radius: 10px;
@@ -10,7 +11,7 @@ export const Container = styled.div`
   height: 30rem;
   max-width: 18rem;
   margin: 0 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
   text-align: left;
 
   font-size: 16px;

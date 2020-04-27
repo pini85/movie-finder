@@ -82,7 +82,7 @@ const ShowMovie = ({ item, colors, goToMovie }) => {
                       <span>&rdquo;</span>
                     </TagLineContainer>
                   )}
-                  <div>{item.plot}</div>
+                  <p>{item.plot}</p>
                 </PlotContainer>
                 <Reviews />
               </LeftSide>
@@ -98,8 +98,8 @@ const ShowMovie = ({ item, colors, goToMovie }) => {
                 </OptionsContainer>
               </RightSide>
             </BottomContainer>
-            {/* 
-            <div style={{ display: "flex" }}>
+
+            {/* <div style={{ display: "flex" }}>
               <DarkVibrant></DarkVibrant>
               <VibrantC></VibrantC>
               <LightVibrant></LightVibrant>

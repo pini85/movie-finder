@@ -53,6 +53,8 @@ const Home = (props) => {
           autoPlay={true}
           fade={true}
           color="var(--primary-color)"
+          activeDotColor="var(--primary-color)"
+          dotsColor="white"
         ></Carousel>
       </div>
 

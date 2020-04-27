@@ -15,12 +15,12 @@ export const CarouselStyling = styled(Slider)`
   & .slick-arrow.slick-prev {
     position: absolute;
     top: 50%;
-    left: 0.5%;
+    left: 1rem;
   }
   & .slick-arrow.slick-next {
     position: absolute;
     top: 50%;
-    right: 1%;
+    right: 1.8rem;
   }
   & .slick-next::before,
   & .slick-prev::before {
@@ -30,11 +30,12 @@ export const CarouselStyling = styled(Slider)`
 
   & .slick-dots {
     height: 4rem;
-    bottom: -20px;
+    width: 89%;
+    bottom: -17px;
   }
   & .slick-dots li.slick-active button:before {
     opacity: 0.8;
-    color: var(--primary-color);
+    color: ${(props) => props.activeDotColor};
   }
   & .slick-dots li button:before {
     opacity: 0.5;

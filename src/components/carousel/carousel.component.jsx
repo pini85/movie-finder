@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import styled from "styled-components";
 import { TrailerContainer } from "./Carousel.styles";
 import YouTube from "react-youtube";
 import "./carousel.styles.css";
@@ -21,12 +20,9 @@ const Carousel = ({
   autoplay,
   fade,
   color,
+  activeDotColor,
+  dotColor,
 }) => {
-  const Test = styled(Slider)`
-    & .slick-slider.slick-initialized {
-      padding: 0 14vw;
-    }
-  `;
   const optsYouTube = {
     height: "390",
     width: "640",
@@ -113,7 +109,11 @@ const Carousel = ({
 
   return (
     <div style={styleContainer}>
-      <CarouselStyling color={color}>
+      <CarouselStyling
+        color={color}
+        activeDotColor={activeDotColor}
+        dotColor={dotColor}
+      >
         <Slider {...settings}>{category()}</Slider>
       </CarouselStyling>
     </div>

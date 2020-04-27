@@ -61,7 +61,6 @@ export const BottomContainer = styled.div`
 export const OptionsContainer = styled.div`
   width: 50%;
   height: 100%;
-  margin-top: 5rem;
 
   display: flex;
   flex-direction: column;
