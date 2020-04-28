@@ -34,18 +34,18 @@ const Home = (props) => {
   };
 
   const styleContainer = {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "center",
-    flexDirection: "column",
-    padding: "0 15rem",
+    // display: "flex",
+    // flexWrap: "wrap",
+    // justifyContent: "center",
+    // flexDirection: "column",
+    padding: "0 8vw",
 
     backgroundColor: "var(--secondary-color)",
     overflow: "hidden",
   };
   return (
     <div style={styleContainer}>
-      <div style={{ padding: "0 15rem" }} className="hi">
+      <div style={{ padding: "0 10%" }} className="hi">
         <Carousel
           type="movieSlider"
           slidesToShow={1}
