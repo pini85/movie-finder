@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { motion, AnimatePresence } from "framer-motion";
 import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
 import { fetchCastSuggestion } from "../../redux/actions/index";
 import CastSuggestion from "../CastSuggestion/CastSuggestion.component";
+import CastOptions from "../CastOptions/CastOptions.component";
 import Input from "../Input/Input.component";
 import Button from "../Button/Button";
-import { Container } from "./Cast.styles";
+import { Container, CastSuggestionsContainer } from "./Cast.styles";
 
 const Cast = ({
   type,
@@ -15,8 +17,10 @@ const Cast = ({
   advancedSearchValue,
   advancedSearchSetValue,
   setCastArray,
+  setCastOption,
 }) => {
   const [isFocused, setFocused] = useState(false);
+  const [activateInput, setActivateInput] = useState(false);
 
   useDidUpdateEffect(() => {
     setTimeout(() => {
@@ -37,26 +41,38 @@ const Cast = ({
     }, 100);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
     setCastArray((value) => [...value, advancedSearchValue]);
     advancedSearchSetValue("");
   };
 
   return (
     <Container>
-      <Input
-        focus={handleFocus}
-        blur={handleBlur}
-        handleOnChange={handleOnChange}
-        value={advancedSearchValue}
-        placeholder={placeholder}
-      ></Input>
+      {!activateInput && (
+        <CastOptions
+          name={placeholder}
+          setActivateInput={setActivateInput}
+          setCastArray={setCastArray}
+          setCastOption={setCastOption}
+        />
+      )}
+
+      {activateInput && (
+        <Input
+          focus={handleFocus}
+          blur={handleBlur}
+          handleOnChange={handleOnChange}
+          value={advancedSearchValue}
+          placeholder={placeholder}
+        ></Input>
+      )}
+
       <Button
         handleClick={handleSubmit}
         padding="0.5rem 1rem"
         title="&#43;"
       ></Button>
-      <div style={{ position: "absolute", zIndex: "5" }}>
+      <CastSuggestionsContainer>
         {isFocused &&
           advancedSearchValue.length > 0 &&
           castSuggestions &&
@@ -74,7 +90,7 @@ const Cast = ({
               </div>
             );
           })}
-      </div>
+      </CastSuggestionsContainer>
     </Container>
   );
 };

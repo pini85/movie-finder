@@ -122,7 +122,7 @@ const Carousel = ({
 const mapStateToProps = (state) => ({
   movies: state.movieSlider,
   trailers: state.trailers,
-  reviews: state.displayMovie.reviews,
+  reviews: state.displayMovie ? state.displayMovie.reviews : null,
 });
 
 export default connect(mapStateToProps)(Carousel);

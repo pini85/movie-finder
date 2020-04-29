@@ -5,10 +5,12 @@ export const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
   color: var(--text-white);
-  margin: 3rem 0;
+  margin-bottom: 3rem;
+  margin-top: 1rem;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 `;
 export const TopSearchContainer = styled.div`
   margin-bottom: 3rem;

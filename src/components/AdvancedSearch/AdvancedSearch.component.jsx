@@ -41,11 +41,12 @@ const AdvancedSearch = (props) => {
   const [displayGenre, setDisplayGenre] = useState("");
   const [runTime, setRunTime] = useState("");
   const [actors, setActors] = useState("");
-  const [actorsArray, setActorsArray] = useState([]);
+  const [actorsArray, setActorsArray] = useState({});
   const [directors, setDirectors] = useState("");
   const [directorsArray, setDirectorsArray] = useState([]);
   const [writers, setWriters] = useState("");
   const [writersArray, setWritersArray] = useState([]);
+  const [castOption, setCastOption] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -179,6 +180,7 @@ const AdvancedSearch = (props) => {
         break;
     }
   };
+  console.log(actorsArray);
 
   const handleSubmit = () => {
     const editFromYear = `${fromYear}-01-01`;
@@ -266,6 +268,7 @@ const AdvancedSearch = (props) => {
             advancedSearchValue={actors}
             advancedSearchSetValue={setActors}
             setCastArray={setActorsArray}
+            setCastOption={setCastOption}
           ></Cast>
           <Cast
             type="Directing"
