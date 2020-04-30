@@ -9,8 +9,9 @@ Features need to be done:
 - Spinner
 - Mobile
 - Fix all bugs
+  -enter when searching
 - animations -> First thing is to make an accordian to reviews
-- Add animations with motion-framer
+-
 - secret tapping to get the torrent etc
 - Add tv shows
 

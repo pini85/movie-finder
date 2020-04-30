@@ -78,17 +78,20 @@ export const advancedSearchGenres = (genres) => {
   }
 };
 
-export const advancedSearchCast = (type) => {
-  if (type.length === 1) {
-    return [`with_cast=${type[0]}`];
-  } else {
-    const x = type.map((cast) => {
-      if (type[type.length - 1] === cast) {
-        return cast;
-      }
-      return `with_cast=${cast}%2C`;
-    });
-    console.log(x);
-    return x;
+export const advancedSearchCast = (cast) => {
+  if (cast.values.length < 1) return "";
+  let string = "";
+  const option = cast.option === "or" ? "||" : ",";
+  if (cast.length === 1) {
+    return [cast[0]];
   }
+  cast.values.map((actor) => {
+    if (!string) {
+      string += actor;
+    } else {
+      string += option + actor;
+    }
+  });
+
+  return string;
 };

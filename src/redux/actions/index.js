@@ -102,7 +102,6 @@ const fetchMovie = async (dispatch, getState) => {
   const torrentData = await torrentApi(tmdbData.imdb_id);
   const movieCredits = await tmdbMovieCreditsApi(id);
   const reviews = await tmdbMovieReviewsApi(id);
-  console.log("reviews", reviews);
 
   // export const fetchMovieSlider = () => async dispatch => {
   //   const data = await tmdbMovieSliderApi();
@@ -299,14 +298,14 @@ export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
   let writersArray = [];
   const fetchCastIds = async (castType, arrayType) => {
     const fetch = await Promise.all(
-      castType.map(async (cast) => {
+      castType.values.map(async (cast) => {
         const castDetails = await tmdbCastId(cast);
-        //
 
         return castDetails.results[0].id;
       })
     );
-    return arrayType.push(fetch);
+
+    return arrayType.push({ values: fetch, option: castType.option });
   };
 
   await fetchCastIds(
@@ -357,6 +356,7 @@ export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
     actors: actorsArray[0],
     directors: directorsArray[0],
     writers: writersArray[0],
+    actorsOption: actorsArray,
   };
 
   const movies = await tmdbAdvancedMoviesApi(obj);

@@ -10,7 +10,7 @@ export const SearchContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  overflow: visible;
 `;
 export const TopSearchContainer = styled.div`
   margin-bottom: 3rem;

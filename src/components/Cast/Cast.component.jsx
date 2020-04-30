@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { connect } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
 import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
@@ -21,6 +21,7 @@ const Cast = ({
 }) => {
   const [isFocused, setFocused] = useState(false);
   const [activateInput, setActivateInput] = useState(false);
+  const inputRef = useRef(null);
 
   useDidUpdateEffect(() => {
     setTimeout(() => {
@@ -41,7 +42,7 @@ const Cast = ({
     }, 100);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
     setCastArray((value) => [...value, advancedSearchValue]);
     advancedSearchSetValue("");
   };
@@ -52,21 +53,29 @@ const Cast = ({
         <CastOptions
           name={placeholder}
           setActivateInput={setActivateInput}
-          setCastArray={setCastArray}
           setCastOption={setCastOption}
+          inputRef={inputRef}
         />
       )}
-
-      {activateInput && (
-        <Input
-          focus={handleFocus}
-          blur={handleBlur}
-          handleOnChange={handleOnChange}
-          value={advancedSearchValue}
-          placeholder={placeholder}
-        ></Input>
-      )}
-
+      <AnimatePresence>
+        {activateInput && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+          >
+            <Input
+              inputRef={inputRef}
+              focus={handleFocus}
+              blur={handleBlur}
+              handleOnChange={handleOnChange}
+              value={advancedSearchValue}
+              placeholder={placeholder}
+            ></Input>
+          </motion.div>
+        )}
+      </AnimatePresence>
       <Button
         handleClick={handleSubmit}
         padding="0.5rem 1rem"

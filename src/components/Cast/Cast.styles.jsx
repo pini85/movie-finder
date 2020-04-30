@@ -11,4 +11,5 @@ export const CastSuggestionsContainer = styled.div`
   position: absolute;
   left: 0;
   top: 3.5rem;
+  z-index: 999;
 `;

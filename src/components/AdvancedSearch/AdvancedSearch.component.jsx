@@ -41,12 +41,14 @@ const AdvancedSearch = (props) => {
   const [displayGenre, setDisplayGenre] = useState("");
   const [runTime, setRunTime] = useState("");
   const [actors, setActors] = useState("");
-  const [actorsArray, setActorsArray] = useState({});
+  const [actorsArray, setActorsArray] = useState([]);
+  const [castActorsOption, setCastActorsOption] = useState(null);
   const [directors, setDirectors] = useState("");
   const [directorsArray, setDirectorsArray] = useState([]);
+  const [castDirectorsOption, setCastDirectorsOption] = useState(null);
   const [writers, setWriters] = useState("");
   const [writersArray, setWritersArray] = useState([]);
-  const [castOption, setCastOption] = useState(null);
+  const [castWritersOption, setCastWritersOption] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -180,7 +182,6 @@ const AdvancedSearch = (props) => {
         break;
     }
   };
-  console.log(actorsArray);
 
   const handleSubmit = () => {
     const editFromYear = `${fromYear}-01-01`;
@@ -192,9 +193,9 @@ const AdvancedSearch = (props) => {
       voteCount,
       genres,
       runTime,
-      actorsArray,
-      directorsArray,
-      writersArray,
+      actorsArray: { option: castActorsOption, values: actorsArray },
+      directorsArray: { option: castDirectorsOption, values: directorsArray },
+      writersArray: { option: castWritersOption, values: writersArray },
     };
     props.createAdvancedSearch(searchObj);
     props.fetchAdvancedSearch(1);
@@ -268,7 +269,7 @@ const AdvancedSearch = (props) => {
             advancedSearchValue={actors}
             advancedSearchSetValue={setActors}
             setCastArray={setActorsArray}
-            setCastOption={setCastOption}
+            setCastOption={setCastActorsOption}
           ></Cast>
           <Cast
             type="Directing"
@@ -276,6 +277,7 @@ const AdvancedSearch = (props) => {
             advancedSearchValue={directors}
             advancedSearchSetValue={setDirectors}
             setCastArray={setDirectorsArray}
+            setCastOption={setCastDirectorsOption}
           ></Cast>
           <Cast
             type="Writing"
@@ -283,6 +285,7 @@ const AdvancedSearch = (props) => {
             advancedSearchValue={writers}
             advancedSearchSetValue={setWriters}
             setCastArray={setWritersArray}
+            setCastOption={setCastWritersOption}
           ></Cast>
         </BottomSearchContainer>
       </SearchContainer>

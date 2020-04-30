@@ -4,8 +4,6 @@ import { Container, ButtonContainer } from "./pagination.styles";
 import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
 
 const Pagination = ({ api, data, actor, history, location }) => {
-  console.log(actor);
-
   const [buttons, setButtons] = useState(null);
   const [count, setCount] = useState(1);
   const [amount, setAmount] = useState(20);
@@ -26,8 +24,6 @@ const Pagination = ({ api, data, actor, history, location }) => {
   }, []);
 
   useDidUpdateEffect(() => {
-    console.log(actor);
-
     const fetchData = async () => {
       if (actor) {
         await api(actor, currentPage);

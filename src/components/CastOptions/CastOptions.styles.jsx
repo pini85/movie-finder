@@ -27,13 +27,19 @@ export const TitleContainer = styled.div`
 `;
 
 export const OptionsContainer = styled.div`
-  /* position: absolute; */
-  top: 0;
-  left: 0;
   width: 100%;
   font-size: 1.5rem;
   color: var(--text-dark);
   display: flex;
   flex-direction: column;
   background: var(--primary-color);
+`;
+
+export const OptionContainer = styled.div`
+  cursor: pointer;
+  padding: 0.7rem;
+  font-weight: 700;
+  &:hover {
+    background: var(--primary-color-light);
+  }
 `;

@@ -4,8 +4,9 @@ import {
   Container,
   TitleContainer,
   OptionsContainer,
+  OptionContainer,
 } from "./CastOptions.styles";
-const CastOptions = ({ name, setCastOption, setActivateInput }) => {
+const CastOptions = ({ name, setCastOption, setActivateInput, inputRef }) => {
   const [isToggled, setToggled] = useState(false);
   const [isActive, setActive] = useState(false);
 
@@ -16,7 +17,10 @@ const CastOptions = ({ name, setCastOption, setActivateInput }) => {
   const handleOptionClick = (e) => {
     setToggled((prevValue) => !prevValue);
     setActive((prevValue) => !prevValue);
-    setActivateInput(true);
+    setTimeout(() => {
+      setActivateInput(true);
+      inputRef.current.focus();
+    }, 340);
     setCastOption(e.target.getAttribute("data-tag"));
   };
   return (
@@ -35,16 +39,20 @@ const CastOptions = ({ name, setCastOption, setActivateInput }) => {
           >
             <OptionsContainer>
               <div>- Do you want actors -</div>
-              <TitleContainer
+              <OptionContainer
+                data-tag="or"
+                onClick={(e) => handleOptionClick(e)}
+              >
+                In different movies
+              </OptionContainer>
+
+              <div>- OR -</div>
+              <OptionContainer
                 data-tag="and"
                 onClick={(e) => handleOptionClick(e)}
               >
                 In the same movie
-              </TitleContainer>
-              <div>- OR -</div>
-              <TitleContainer data-tag="or">
-                In different movies{" "}
-              </TitleContainer>
+              </OptionContainer>
             </OptionsContainer>
           </motion.div>
         )}

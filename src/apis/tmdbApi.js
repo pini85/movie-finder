@@ -158,6 +158,7 @@ export const tmdbAdvancedMoviesApi = async ({
   directors,
   writers,
 }) => {
+  // 1100||62
   const response = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&include_adult=false&include_video=false&sort_by=popularity.desc&primary_release_date.gte=${fromYear}&primary_release_date.lte=${toYear}&${advancedSearchRating(
       rating
@@ -165,11 +166,10 @@ export const tmdbAdvancedMoviesApi = async ({
       votes
     )}&with_genres=${genres}&${advancedSearchRunTime(
       runTime
-    )}&${advancedSearchRunTime(runTime)}&${advancedSearchCast(actors).map(
-      (cast) => cast
-    )}&${advancedSearchCast(directors).map(
-      (cast) => cast
-    )}&${advancedSearchCast(writers).map((cast) => cast)}&page=${page}`
+    )}&${advancedSearchRunTime(runTime)}&with_cast=${advancedSearchCast(actors)}
+    &with_cast=${advancedSearchCast(directors)}&with_cast=${advancedSearchCast(
+      writers
+    )}&page=${page}`
   );
 
   const data = await response.json();
