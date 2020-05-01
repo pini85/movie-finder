@@ -144,9 +144,12 @@ const fetchCastSuggestionsReducer = (suggestions = null, action) => {
 };
 
 const userAdvancedSearchesReducer = (savedSearches = [], action) => {
+  console.log("went hre");
   switch (action.type) {
     case "SAVE_ADVANCED_SEARCH":
       return [...savedSearches, action.payload];
+    case "DEFAULT_ADVANCED_SEARCH":
+      return [...savedSearches, ...action.payload];
     case "REMOVE_ADVANCED_SEARCH":
       return [...savedSearches].filter((search) => {
         return search !== action.payload;

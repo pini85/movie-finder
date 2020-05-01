@@ -212,6 +212,9 @@ const AdvancedSearch = (props) => {
     setActorsArray([]);
     setDirectorsArray([]);
     setWritersArray([]);
+    setCastActorsOption(null);
+    setCastDirectorsOption(null);
+    setCastWritersOption(null);
   };
 
   return (

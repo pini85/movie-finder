@@ -10,8 +10,9 @@ Features need to be done:
 - Mobile
 - Fix all bugs
   -enter when searching
+  - when no movies ofund say movies not found
 - animations -> First thing is to make an accordian to reviews
--
+- allow to update saved search
 - secret tapping to get the torrent etc
 - Add tv shows
 

@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import {
   displayUserSearch,
   removeUserAdvancedSearch,
+  defaultSearches,
 } from "../../redux/actions";
 import {
   Container,
@@ -16,10 +17,13 @@ import {
 import Button from "../Button/Button";
 
 const AdvancedSearchSaved = (props) => {
-  console.log(props);
-
   const handleClick = (search) => {
     props.displayUserSearch(search);
+  };
+  const handleDefaultSearch = () => {
+    console.log("event handler");
+
+    props.defaultSearches();
   };
 
   const handleRemoveClick = (search) => {
@@ -29,6 +33,11 @@ const AdvancedSearchSaved = (props) => {
     <Container>
       <Title>Saved Search Results</Title>
       <SearchContainer>
+        {props.displayUserSearches.length < 1 && <div>No searches saved</div>}
+        <div onClick={handleDefaultSearch} style={{ background: "red" }}>
+          Load authors search results
+        </div>
+
         {props.displayUserSearches &&
           props.displayUserSearches.map((search) => {
             console.log(search);
@@ -57,6 +66,7 @@ const mapStateToProps = (state) => ({
 const mapStateToDispatch = {
   displayUserSearch: (search) => displayUserSearch(search),
   removeUserAdvancedSearch: (obj) => removeUserAdvancedSearch(obj),
+  defaultSearches: defaultSearches,
 };
 export default connect(
   mapStateToProps,

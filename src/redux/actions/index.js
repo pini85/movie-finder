@@ -405,6 +405,59 @@ export const displayUserSearch = (search) => {
   };
 };
 
+export const defaultSearches = () => {
+  console.log("came here");
+
+  const defaultSearches = [
+    {
+      search: {
+        name: "caca",
+        fromYear: "2019",
+        toYear: "2019",
+        rating: 7,
+        voteCount: 15000,
+        runTime: 60,
+        genres: "Comedy",
+        actors: ["yo", "hi"],
+        directors: [],
+        writers: [],
+      },
+    },
+    {
+      search: {
+        name: "pipi",
+        fromYear: "2019",
+        toYear: "2019",
+        rating: 7,
+        voteCount: 15000,
+        runTime: 60,
+        genres: "Comedy",
+        actors: ["yo", "hi"],
+        directors: [],
+        writers: [],
+      },
+    },
+    {
+      search: {
+        name: "",
+        fromYear: "2019",
+        toYear: "2019",
+        rating: 7,
+        voteCount: 15000,
+        runTime: 60,
+        genres: "Comedy",
+        actors: ["yo", "hi"],
+        directors: [],
+        writers: [],
+      },
+    },
+  ];
+  return {
+    type: "DEFAULT_ADVANCED_SEARCH",
+    payload: defaultSearches,
+  };
+};
+
 export const fetchActorMovies = (name, page) => async (dispatch) => {
   if (name.length < 0) {
     return;

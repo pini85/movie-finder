@@ -38,14 +38,13 @@ const CastOptions = ({ name, setCastOption, setActivateInput, inputRef }) => {
             style={{ overflow: "hidden" }}
           >
             <OptionsContainer>
-              <div>- Do you want actors -</div>
+              <div>Do you want {name} in</div>
               <OptionContainer
                 data-tag="or"
                 onClick={(e) => handleOptionClick(e)}
               >
                 In different movies
               </OptionContainer>
-
               <div>- OR -</div>
               <OptionContainer
                 data-tag="and"

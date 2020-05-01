@@ -32,13 +32,14 @@ export const OptionsContainer = styled.div`
   color: var(--text-dark);
   display: flex;
   flex-direction: column;
-  background: var(--primary-color);
+  background: white;
 `;
 
 export const OptionContainer = styled.div`
   cursor: pointer;
   padding: 0.7rem;
   font-weight: 700;
+  /* background: var(--secondary-color); */
   &:hover {
     background: var(--primary-color-light);
   }
