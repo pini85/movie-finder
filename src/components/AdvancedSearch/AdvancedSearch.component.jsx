@@ -184,19 +184,41 @@ const AdvancedSearch = (props) => {
   };
 
   const handleSubmit = () => {
+    let searchObj;
     const editFromYear = `${fromYear}-01-01`;
     const editToYear = `${toYear}-01-01`;
-    const searchObj = {
-      fromYear: fromYear ? editFromYear : fromYear,
-      toYear: toYear ? editToYear : toYear,
-      rating,
-      voteCount,
-      genres,
-      runTime,
-      actorsArray: { option: castActorsOption, values: actorsArray },
-      directorsArray: { option: castDirectorsOption, values: directorsArray },
-      writersArray: { option: castWritersOption, values: writersArray },
-    };
+    if (props.displayAdvancedSearch) {
+      searchObj = {
+        fromYear: props.displayAdvancedSearch.search.fromYear
+          ? editFromYear
+          : props.displayAdvancedSearch.search.fromYear,
+        toYear: props.displayAdvancedSearch.search.toYear
+          ? editToYear
+          : props.displayAdvancedSearch.search.toYear,
+        rating: props.displayAdvancedSearch.search.rating,
+        voteCun: props.displayAdvancedSearch.search.voteCount,
+        genres: props.displayAdvancedSearch.search.genres,
+        runTe: props.displayAdvancedSearch.search.runTime,
+        actorsArray: {
+          option: "or",
+          values: props.displayAdvancedSearch.search.actors,
+        },
+        directorsArray: props.displayAdvancedSearch.search.directors,
+        writersArray: props.displayAdvancedSearch.search.writers,
+      };
+    } else {
+      searchObj = {
+        fromYear: fromYear ? editFromYear : fromYear,
+        toYear: toYear ? editToYear : toYear,
+        rating,
+        voteCount,
+        genres,
+        runTime,
+        actorsArray: { option: castActorsOption, values: actorsArray },
+        directorsArray: { option: castDirectorsOption, values: directorsArray },
+        writersArray: { option: castWritersOption, values: writersArray },
+      };
+    }
     props.createAdvancedSearch(searchObj);
     props.fetchAdvancedSearch(1);
     props.history.push(`/advanced-search/dsfdsgg/page/1`);
@@ -319,6 +341,7 @@ const AdvancedSearch = (props) => {
 const mapStateToProps = (state) => ({
   genres: state.genres,
   advancedSearch: state.advancedSearch,
+  displayAdvancedSearch: state.displayUserAdvancedSearch,
 });
 
 const mapStateToDispatch = {

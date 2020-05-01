@@ -18,6 +18,7 @@ import {
 import omdbApi from "../../apis/omdbApi";
 import torrentApi from "../../apis/torrentApi";
 import subtitlesApi from "../../apis/subtitlesApi";
+import { fetchComedianActors } from "../../scraper/imdb";
 import magnet from "../../apis/magnet";
 import * as Vibrant from "node-vibrant";
 
@@ -309,20 +310,19 @@ export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
   };
 
   await fetchCastIds(
-    savedSearch && savedSearch.active
-      ? savedSearch.search.actors
-      : search.actorsArray,
+    savedSearch ? savedSearch.search.actors[0] : search.actorsArray,
     actorsArray
   );
+
   await fetchCastIds(
     savedSearch && savedSearch.active
-      ? savedSearch.search.directors
+      ? savedSearch.search.directors[0]
       : search.directorsArray,
     directorsArray
   );
   await fetchCastIds(
     savedSearch && savedSearch.active
-      ? savedSearch.search.writers
+      ? savedSearch.search.writers[0]
       : search.writersArray,
     writersArray
   );
@@ -405,57 +405,56 @@ export const displayUserSearch = (search) => {
   };
 };
 
-export const defaultSearches = () => {
-  console.log("came here");
-
+export const defaultSearches = () => async (dispatch) => {
+  const comedyActors = await fetchComedianActors();
   const defaultSearches = [
     {
       search: {
-        name: "caca",
-        fromYear: "2019",
+        name: "Hilarious Comedies",
+        fromYear: "2010",
         toYear: "2019",
         rating: 7,
         voteCount: 15000,
-        runTime: 60,
+        runTime: 90,
         genres: "Comedy",
-        actors: ["yo", "hi"],
-        directors: [],
-        writers: [],
+        actors: { option: "or", values: [comedyActors] },
+        directors: { option: "or", values: [] },
+        writers: { option: "or", values: [] },
       },
     },
     {
       search: {
-        name: "pipi",
+        name: "Action Movies",
         fromYear: "2019",
         toYear: "2019",
-        rating: 7,
+        rating: 1,
         voteCount: 15000,
         runTime: 60,
-        genres: "Comedy",
-        actors: ["yo", "hi"],
-        directors: [],
-        writers: [],
+        genres: "Action",
+        actors: { option: "or", values: ["yo", "hi"] },
+        directors: { option: "or", values: [] },
+        writers: { option: "or", values: [] },
       },
     },
     {
       search: {
-        name: "",
+        name: "Rare Movies",
         fromYear: "2019",
         toYear: "2019",
         rating: 7,
         voteCount: 15000,
-        runTime: 60,
-        genres: "Comedy",
-        actors: ["yo", "hi"],
-        directors: [],
-        writers: [],
+        runTime: 90,
+        genres: "Horror",
+        actors: { option: "or", values: ["yo", "hi"] },
+        directors: { option: "or", values: [] },
+        writers: { option: "or", values: [] },
       },
     },
   ];
-  return {
+  return dispatch({
     type: "DEFAULT_ADVANCED_SEARCH",
     payload: defaultSearches,
-  };
+  });
 };
 
 export const fetchActorMovies = (name, page) => async (dispatch) => {

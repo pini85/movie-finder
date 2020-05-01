@@ -144,7 +144,6 @@ const fetchCastSuggestionsReducer = (suggestions = null, action) => {
 };
 
 const userAdvancedSearchesReducer = (savedSearches = [], action) => {
-  console.log("went hre");
   switch (action.type) {
     case "SAVE_ADVANCED_SEARCH":
       return [...savedSearches, action.payload];

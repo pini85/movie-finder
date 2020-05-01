@@ -7,6 +7,7 @@ import {
   removeUserAdvancedSearch,
   defaultSearches,
 } from "../../redux/actions";
+
 import {
   Container,
   SearchContainer,
@@ -20,9 +21,7 @@ const AdvancedSearchSaved = (props) => {
   const handleClick = (search) => {
     props.displayUserSearch(search);
   };
-  const handleDefaultSearch = () => {
-    console.log("event handler");
-
+  const handleDefaultSearch = async () => {
     props.defaultSearches();
   };
 
@@ -33,15 +32,17 @@ const AdvancedSearchSaved = (props) => {
     <Container>
       <Title>Saved Search Results</Title>
       <SearchContainer>
-        {props.displayUserSearches.length < 1 && <div>No searches saved</div>}
-        <div onClick={handleDefaultSearch} style={{ background: "red" }}>
-          Load authors search results
-        </div>
+        {props.displayUserSearches.length < 1 && (
+          <div>
+            <div>No searches saved</div>
+            <div onClick={handleDefaultSearch} style={{ background: "red" }}>
+              Load authors search results
+            </div>
+          </div>
+        )}
 
         {props.displayUserSearches &&
           props.displayUserSearches.map((search) => {
-            console.log(search);
-
             return (
               <ButtonContainer>
                 <Button

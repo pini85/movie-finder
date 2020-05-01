@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { saveUserAdvancedSearch, displayUserSearch } from "../../redux/actions";
+import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
 import Modal from "../Modal/Modal.component";
 import Input from "../Input/Input.component";
 
@@ -32,6 +33,7 @@ const AdvancedSearchResult = ({
 }) => {
   const [isSaved, setSaved] = useState(false);
   const [savedName, setSavedName] = useState("");
+  useDidUpdateEffect(() => {}, [displayUserSavedAdvancedSearch]);
 
   const na = (query) => {
     if (!query) {
@@ -41,10 +43,7 @@ const AdvancedSearchResult = ({
   };
 
   const displayResults = (type) => {
-    if (
-      displayUserSavedAdvancedSearch &&
-      displayUserSavedAdvancedSearch.active
-    ) {
+    if (displayUserSavedAdvancedSearch) {
       switch (type) {
         case "fromYear":
           return na(displayUserSavedAdvancedSearch.search.fromYear);
@@ -65,7 +64,6 @@ const AdvancedSearchResult = ({
         case "writers":
           return displayUserSavedAdvancedSearch.search.writers;
       }
-      console.log("yup");
     } else {
       switch (type) {
         case "fromYear":
@@ -112,6 +110,7 @@ const AdvancedSearchResult = ({
 
   return (
     <Container>
+      {displayUserSavedAdvancedSearch ? <div>hi</div> : null}
       <Title>Search Information</Title>
       <div>
         From Year:<ResultSpan>{displayResults("fromYear")}</ResultSpan>

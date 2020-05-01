@@ -81,7 +81,7 @@ export const advancedSearchGenres = (genres) => {
 export const advancedSearchCast = (cast) => {
   if (cast.values.length < 1) return "";
   let string = "";
-  const option = cast.option === "or" ? "||" : ",";
+  const option = cast.option === "and" ? "," : "||";
   if (cast.length === 1) {
     return [cast[0]];
   }
