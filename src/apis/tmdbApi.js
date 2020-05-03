@@ -6,8 +6,12 @@ import {
   advancedSearchVotes,
   advancedSearchGenres,
   advancedSearchCast,
+  displayFromYear,
+  displayFromYear,
+  displayGenre,
 } from "../utlis/advancedSearchConfiguration";
 import { filterMovies, filterActors } from "../utlis/filterMovies";
+import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 const ApiKey = "3e296e6f6a1b142633468c58b584ab9b";
 
 export const tmdbApiDiscover = async () => {
@@ -158,29 +162,23 @@ export const tmdbAdvancedMoviesApi = async ({
   directors,
   writers,
 }) => {
-  console.log(actors);
-  console.log(genres);
-
   const response = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&include_adult=false&include_video=false&sort_by=popularity.desc&primary_release_date.gte=${fromYear}&primary_release_date.lte=${toYear}&${advancedSearchRating(
-      rating
-    )}&${advancedSearchVotes(
-      votes
-    )}&with_genres=${genres}&${advancedSearchRunTime(
-      runTime
-    )}&${advancedSearchRunTime(runTime)}&with_cast=${advancedSearchCast(actors)}
-    &with_cast=${advancedSearchCast(directors)}&with_cast=${advancedSearchCast(
+    `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&include_adult=false&include_video=false&sort_by=popularity.desc&${displayFromYear(
+      fromYear
+    )}${displayToYear(toYear)}${advancedSearchRating(rating)}${displayGenre(
+      genres
+    )}${advancedSearchRunTime(runTime)}${advancedSearchCast(
+      actors
+    )}${advancedSearchCast(directors)}${advancedSearchCast(
       writers
     )}&page=${page}`
   );
 
+  // https://api.themoviedb.org/3/discover/movie?api_key=3e296e6f6a1b142633468c58b584ab9b&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=2018-01-01&primary_release_date.lte=2019-01-01&release_date.gte=7&vote_count.gte=1000&with_crew=10859&with_genres=35&with_runtime.gte=120
+  console.log(response);
+
   const data = await response.json();
-  console.log(
-    console.log(`https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&include_adult=false&include_video=false&sort_by=popularity.desc&with_cast=${advancedSearchCast(
-      actors
-    )}
-  &page=${page}`)
-  );
+  console.log(data);
 
   const filtered = await filterMovies(data);
 
