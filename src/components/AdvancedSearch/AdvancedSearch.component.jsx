@@ -207,6 +207,8 @@ const AdvancedSearch = (props) => {
         writersArray: props.displayAdvancedSearch.search.writers,
       };
     } else {
+      console.log("im in else");
+
       searchObj = {
         fromYear: fromYear ? editFromYear : fromYear,
         toYear: toYear ? editToYear : toYear,

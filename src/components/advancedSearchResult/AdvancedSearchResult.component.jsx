@@ -43,6 +43,7 @@ const AdvancedSearchResult = ({
   };
 
   const displayResults = (type) => {
+    console.log(displayUserSavedAdvancedSearch);
     if (displayUserSavedAdvancedSearch) {
       switch (type) {
         case "fromYear":
@@ -58,11 +59,11 @@ const AdvancedSearchResult = ({
         case "genres":
           return na(displayUserSavedAdvancedSearch.search.genres);
         case "actors":
-          return displayUserSavedAdvancedSearch.search.actors;
+          return displayUserSavedAdvancedSearch.search.actors.values;
         case "directors":
-          return displayUserSavedAdvancedSearch.search.directors;
+          return displayUserSavedAdvancedSearch.search.directors.values;
         case "writers":
-          return displayUserSavedAdvancedSearch.search.writers;
+          return displayUserSavedAdvancedSearch.search.writers.values;
       }
     } else {
       switch (type) {
@@ -80,6 +81,7 @@ const AdvancedSearchResult = ({
           return na(genres);
         case "actors":
           return actors;
+
         case "directors":
           return directors;
         case "writers":
@@ -132,8 +134,8 @@ const AdvancedSearchResult = ({
       </div>
       <div>
         Actors:
-        {displayResults("actors").length > 0 ? (
-          displayResults("actors").map((actor) => <Result>{actor}, </Result>)
+        {actors.length > 0 || displayUserSavedAdvancedSearch ? (
+          displayResults("actors").map((actor) => <Result>{actor}</Result>)
         ) : (
           <ResultSpan>N/A</ResultSpan>
         )}

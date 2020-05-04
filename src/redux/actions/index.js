@@ -293,11 +293,14 @@ export const createAdvancedSearch = (obj) => {
 export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
   const search = getState().advancedSearch;
   const savedSearch = getState().displayUserAdvancedSearch;
+  console.log("inside fetchCast", savedSearch);
 
   let actorsArray = [];
   let directorsArray = [];
   let writersArray = [];
   const fetchCastIds = async (castType, arrayType) => {
+    console.log("castType", castType);
+
     const fetch = await Promise.all(
       castType.values.map(async (cast) => {
         const castDetails = await tmdbCastId(cast);
@@ -309,8 +312,12 @@ export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
     return arrayType.push({ values: fetch, option: castType.option });
   };
 
+  // await fetchCastIds(
+  //   savedSearch ? savedSearch.search.actors[0] : search.actorsArray,
+  //   actorsArray
+  // );
   await fetchCastIds(
-    savedSearch ? savedSearch.search.actors[0] : search.actorsArray,
+    savedSearch ? savedSearch.search.actors : search.actorsArray,
     actorsArray
   );
 
@@ -329,30 +336,13 @@ export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
 
   const obj = {
     page: page,
-    fromYear:
-      savedSearch && savedSearch.active
-        ? savedSearch.search.fromYear
-        : search.fromYear,
-    toYear:
-      savedSearch && savedSearch.active
-        ? savedSearch.search.toYear
-        : search.toYear,
-    rating:
-      savedSearch && savedSearch.active
-        ? savedSearch.search.rating
-        : search.rating,
-    votes:
-      savedSearch && savedSearch.active
-        ? savedSearch.search.voteCount
-        : search.voteCount,
-    genres:
-      savedSearch && savedSearch.active
-        ? savedSearch.search.genres
-        : search.genres,
-    runTime:
-      savedSearch && savedSearch.active
-        ? savedSearch.search.runTime
-        : search.runTime,
+    fromYear: savedSearch ? savedSearch.search.fromYear : search.fromYear,
+    toYear: savedSearch ? savedSearch.search.toYear : search.toYear,
+    sortBy: savedSearch ? savedSearch.search.sortBy : search.sortBy,
+    rating: savedSearch ? savedSearch.search.rating : search.rating,
+    votes: savedSearch ? savedSearch.search.voteCount : search.voteCount,
+    genres: savedSearch ? savedSearch.search.genres : search.genres,
+    runTime: savedSearch ? savedSearch.search.runTime : search.runTime,
     actors: actorsArray[0],
     directors: directorsArray[0],
     writers: writersArray[0],
@@ -407,17 +397,19 @@ export const displayUserSearch = (search) => {
 
 export const defaultSearches = () => async (dispatch) => {
   const comedyActors = await fetchComedianActors();
+
   const defaultSearches = [
     {
       search: {
         name: "Hilarious Comedies",
-        fromYear: "2010",
-        toYear: "2019",
-        rating: 7,
-        voteCount: 15000,
+        fromYear: "1985-01-01",
+        toYear: "",
+        sortBy: "vote-average",
+        rating: 5,
+        voteCount: 100,
         runTime: 90,
-        genres: "Comedy",
-        actors: { option: "or", values: [comedyActors] },
+        genres: "35",
+        actors: { option: "or", values: comedyActors },
         directors: { option: "or", values: [] },
         writers: { option: "or", values: [] },
       },
@@ -451,6 +443,8 @@ export const defaultSearches = () => async (dispatch) => {
       },
     },
   ];
+  console.log("insideDefaultSearchs", defaultSearches[0]);
+
   return dispatch({
     type: "DEFAULT_ADVANCED_SEARCH",
     payload: defaultSearches,

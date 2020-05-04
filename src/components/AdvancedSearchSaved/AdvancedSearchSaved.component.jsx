@@ -19,6 +19,8 @@ import Button from "../Button/Button";
 
 const AdvancedSearchSaved = (props) => {
   const handleClick = (search) => {
+    console.log("clicked on defaultSearch", search);
+
     props.displayUserSearch(search);
   };
   const handleDefaultSearch = async () => {

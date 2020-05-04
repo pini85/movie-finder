@@ -5,6 +5,7 @@ export const fetchComedianActors = async () => {
   const response = await fetch(
     "https://cors-anywhere.herokuapp.com/https://www.imdb.com/list/ls051583078/?sort=list_order,asc&mode=detail&page=1"
   );
+
   const text = await response.text();
   const $ = cheerio.load(text);
 

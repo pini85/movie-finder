@@ -7,11 +7,11 @@ import {
   advancedSearchGenres,
   advancedSearchCast,
   displayFromYear,
-  displayFromYear,
+  displayToYear,
   displayGenre,
+  advancedSearchSortBy,
 } from "../utlis/advancedSearchConfiguration";
 import { filterMovies, filterActors } from "../utlis/filterMovies";
-import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
 const ApiKey = "3e296e6f6a1b142633468c58b584ab9b";
 
 export const tmdbApiDiscover = async () => {
@@ -154,6 +154,7 @@ export const tmdbAdvancedMoviesApi = async ({
   page,
   fromYear,
   toYear,
+  sortBy,
   rating,
   votes,
   genres,
@@ -162,16 +163,20 @@ export const tmdbAdvancedMoviesApi = async ({
   directors,
   writers,
 }) => {
+  console.log("toYear", sortBy);
+
   const response = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&include_adult=false&include_video=false&sort_by=popularity.desc&${displayFromYear(
-      fromYear
-    )}${displayToYear(toYear)}${advancedSearchRating(rating)}${displayGenre(
-      genres
-    )}${advancedSearchRunTime(runTime)}${advancedSearchCast(
-      actors
-    )}${advancedSearchCast(directors)}${advancedSearchCast(
-      writers
-    )}&page=${page}`
+    `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&include_adult=false&include_video=false${advancedSearchSortBy(
+      sortBy
+    )}${displayFromYear(fromYear)}${displayToYear(
+      toYear
+    )}${advancedSearchRating(rating)}${advancedSearchVotes(
+      votes
+    )}${displayGenre(genres)}${advancedSearchRunTime(
+      runTime
+    )}${advancedSearchCast(actors)}${advancedSearchCast(
+      directors
+    )}${advancedSearchCast(writers)}&page=${page}`
   );
 
   // https://api.themoviedb.org/3/discover/movie?api_key=3e296e6f6a1b142633468c58b584ab9b&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=2018-01-01&primary_release_date.lte=2019-01-01&release_date.gte=7&vote_count.gte=1000&with_crew=10859&with_genres=35&with_runtime.gte=120
