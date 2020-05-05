@@ -95,3 +95,8 @@ export const LeftSide = styled.div`
   width: 75%;
 `;
 export const RightSide = styled.div``;
+
+export const DirectorAndWriterContainer = styled.div`
+  font-size: 1.5rem;
+  padding: 2rem;
+`;

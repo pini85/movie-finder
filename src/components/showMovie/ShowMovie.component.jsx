@@ -19,6 +19,7 @@ import {
   MovieCastContainer,
   LeftSide,
   RightSide,
+  DirectorAndWriterContainer,
 } from "./ShowMovie.styles";
 import styled from "styled-components";
 
@@ -85,6 +86,10 @@ const ShowMovie = ({ item, colors, goToMovie }) => {
                   <p>{item.plot}</p>
                 </PlotContainer>
                 <Reviews />
+                {/* <DirectorAndWriterContainer>
+                  <div>Director: {item.director}</div>
+                  <div>Writers: {item.writer}</div>
+                </DirectorAndWriterContainer> */}
               </LeftSide>
               <RightSide>
                 <OptionsContainer>

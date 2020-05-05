@@ -293,14 +293,11 @@ export const createAdvancedSearch = (obj) => {
 export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
   const search = getState().advancedSearch;
   const savedSearch = getState().displayUserAdvancedSearch;
-  console.log("inside fetchCast", savedSearch);
 
   let actorsArray = [];
   let directorsArray = [];
   let writersArray = [];
   const fetchCastIds = async (castType, arrayType) => {
-    console.log("castType", castType);
-
     const fetch = await Promise.all(
       castType.values.map(async (cast) => {
         const castDetails = await tmdbCastId(cast);
@@ -443,7 +440,6 @@ export const defaultSearches = () => async (dispatch) => {
       },
     },
   ];
-  console.log("insideDefaultSearchs", defaultSearches[0]);
 
   return dispatch({
     type: "DEFAULT_ADVANCED_SEARCH",

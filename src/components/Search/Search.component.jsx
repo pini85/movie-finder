@@ -17,7 +17,6 @@ const Search = (props) => {
   useDidUpdateEffect(() => {
     setTimeout(async () => {
       const data = !!searchQuery.length && (await tmdbQueryApi(1, searchQuery));
-      console.log("search", data);
 
       props.movieSuggestions(data);
     }, 150);

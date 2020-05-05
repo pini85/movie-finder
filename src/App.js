@@ -12,10 +12,12 @@ import AdvancedSearch from "./components/AdvancedSearch/AdvancedSearch.component
 import ActorMovies from "./components/ActorMovies/ActorMovies.component";
 import PopularActors from "./components/PopularActors/PopularActors.component";
 
+import BouncingDvd from "./components/spinners/BouncingDvd/BouncingDvd.component";
+
 const App = () => {
   return (
     <Router>
-      <Navbar />
+      {/* <Navbar /> */}
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/movie/:id" component={ShowMovie} />
@@ -29,6 +31,7 @@ const App = () => {
         />
         <Route path="/popular-actors/" component={PopularActors} />
         <Route path="/actors/:name/page/:page" component={ActorMovies} />
+        <Route exact path="/spinner/" component={BouncingDvd} />
       </Switch>
     </Router>
   );
