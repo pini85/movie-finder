@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Container, CanvasContainer } from "./BouncingDvd.styles";
 const BouncingDvd = () => {
-  let scale = 1.17;
+  let scale = 1.0;
   let logoColor;
   const canvasRef = useRef(null);
   let dvd = {
@@ -17,7 +17,7 @@ const BouncingDvd = () => {
   const main = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-    const imgPath = "https://i.ibb.co/gj6cfG4/dvd-logo.png";
+    const imgPath = "https://i.ibb.co/9VGZCT8/DVD-LOGO-1.png";
     dvd.img.src = imgPath;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
@@ -31,7 +31,7 @@ const BouncingDvd = () => {
 
       ctx.fillStyle = "#000";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = logoColor; //color changes here
+      ctx.fillStyle = logoColor;
       ctx.fillRect(dvd.x, dvd.y, dvd.img.width * scale, dvd.img.height * scale);
       ctx.drawImage(
         dvd.img,
@@ -40,7 +40,6 @@ const BouncingDvd = () => {
         dvd.img.width * scale,
         dvd.img.height * scale
       );
-      ctx.clearRect(0, 0, dvd.img.width * scale, dvd.img.height * scale);
       dvd.x += dvd.xSpeed;
       dvd.y += dvd.ySpeed;
       checkHitBox();
@@ -50,10 +49,7 @@ const BouncingDvd = () => {
   const checkHitBox = () => {
     const canvas = canvasRef.current;
     if (dvd.x + dvd.img.width * scale >= canvas.width || dvd.x <= 0) {
-      console.log("hi");
-
       dvd.xSpeed *= -1;
-      console.log(dvd.xSpeed);
 
       pickColor();
     }
@@ -71,10 +67,11 @@ const BouncingDvd = () => {
 
     logoColor = "rgb(" + r + "," + g + ", " + b + ")";
   }
+
   return (
-    <Container>
-      <canvas ref={canvasRef} width={1000} height={1000} />
-    </Container>
+    <CanvasContainer>
+      <canvas id="tv-screen" ref={canvasRef} width={1000} height={1000} />
+    </CanvasContainer>
   );
 };
 export default BouncingDvd;
