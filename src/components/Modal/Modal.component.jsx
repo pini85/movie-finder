@@ -27,8 +27,8 @@ const Modal = ({ isToggled, setToggled, skew, children }) => {
             initial={{ opacity: 0, width: "75%" }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            duration={1}
           >
-            ``
             <motion.div initial={{ y: 0 }} animate={{ y: 30 }} exit={{ y: 30 }}>
               <div className="YO">
                 <ButtonContainer

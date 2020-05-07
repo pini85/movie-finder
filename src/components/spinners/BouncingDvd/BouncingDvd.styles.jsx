@@ -4,7 +4,6 @@ export const Container = styled.div`
 `;
 
 export const CanvasContainer = styled.div`
-  position: relative;
-  z-index: 999;
-  background: black;
+  height: 93vh;
+  /* margin: 7vh 14vw; */
 `;

@@ -5,22 +5,31 @@ const BouncingDvd = () => {
   let logoColor;
   const canvasRef = useRef(null);
   let dvd = {
-    x: 200,
-    y: 300,
-    xSpeed: 10,
-    ySpeed: 10,
+    x: 300,
+    y: 400,
+    xSpeed: 8,
+    ySpeed: 8,
     img: new Image(),
   };
   useEffect(() => {
     main();
   }, []);
+  function vh(v) {
+    var h = Math.max(
+      document.documentElement.clientHeight,
+      window.innerHeight || 0
+    );
+    return (v * h) / 100;
+  }
+
   const main = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     const imgPath = "https://i.ibb.co/9VGZCT8/DVD-LOGO-1.png";
     dvd.img.src = imgPath;
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.height = window.innerHeight - vh(7);
+
     pickColor();
     update();
   };

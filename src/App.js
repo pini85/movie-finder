@@ -17,7 +17,7 @@ import BouncingDvd from "./components/spinners/BouncingDvd/BouncingDvd.component
 const App = () => {
   return (
     <Router>
-      {/* <Navbar /> */}
+      <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/movie/:id" component={ShowMovie} />
