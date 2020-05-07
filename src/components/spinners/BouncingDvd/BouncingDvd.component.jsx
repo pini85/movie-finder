@@ -25,38 +25,47 @@ const BouncingDvd = () => {
     update();
   };
   const update = () => {
+    let ctx;
     setTimeout(() => {
       const canvas = canvasRef.current;
-      const ctx = canvas.getContext("2d");
-
-      ctx.fillStyle = "#000";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = logoColor;
-      ctx.fillRect(dvd.x, dvd.y, dvd.img.width * scale, dvd.img.height * scale);
-      ctx.drawImage(
-        dvd.img,
-        dvd.x,
-        dvd.y,
-        dvd.img.width * scale,
-        dvd.img.height * scale
-      );
-      dvd.x += dvd.xSpeed;
-      dvd.y += dvd.ySpeed;
-      checkHitBox();
-      update();
+      if (canvas) {
+        ctx = canvas.getContext("2d");
+        ctx.fillStyle = "#000";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = logoColor;
+        ctx.fillRect(
+          dvd.x,
+          dvd.y,
+          dvd.img.width * scale,
+          dvd.img.height * scale
+        );
+        ctx.drawImage(
+          dvd.img,
+          dvd.x,
+          dvd.y,
+          dvd.img.width * scale,
+          dvd.img.height * scale
+        );
+        dvd.x += dvd.xSpeed;
+        dvd.y += dvd.ySpeed;
+        checkHitBox();
+        update();
+      }
     }, 20);
   };
   const checkHitBox = () => {
     const canvas = canvasRef.current;
-    if (dvd.x + dvd.img.width * scale >= canvas.width || dvd.x <= 0) {
-      dvd.xSpeed *= -1;
+    if (canvas) {
+      if (dvd.x + dvd.img.width * scale >= canvas.width || dvd.x <= 0) {
+        dvd.xSpeed *= -1;
 
-      pickColor();
-    }
+        pickColor();
+      }
 
-    if (dvd.y + dvd.img.height * scale >= canvas.height || dvd.y <= 0) {
-      dvd.ySpeed *= -1;
-      pickColor();
+      if (dvd.y + dvd.img.height * scale >= canvas.height || dvd.y <= 0) {
+        dvd.ySpeed *= -1;
+        pickColor();
+      }
     }
   };
   function pickColor() {
