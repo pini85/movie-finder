@@ -30,7 +30,7 @@ const BouncingDvd = () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight - vh(7);
 
-    pickColor();
+    // pickColor();
     update();
   };
   const update = () => {
@@ -39,9 +39,9 @@ const BouncingDvd = () => {
       const canvas = canvasRef.current;
       if (canvas) {
         ctx = canvas.getContext("2d");
-        ctx.fillStyle = "#000";
+        ctx.fillStyle = "#524763";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = logoColor;
+        ctx.fillStyle = logoColor || "#82d8d8";
         ctx.fillRect(
           dvd.x,
           dvd.y,
