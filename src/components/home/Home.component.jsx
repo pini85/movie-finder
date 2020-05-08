@@ -10,6 +10,7 @@ import {
 import Carousel from "../carousel/carousel.component";
 import Options from "../Options/Options.component";
 import MovieListHome from "../MovieListCategory/MovieListCategory.component";
+import BouncingDvd from "../spinners/BouncingDvd/BouncingDvd.component";
 
 const Home = (props) => {
   useEffect(() => {
@@ -45,6 +46,7 @@ const Home = (props) => {
   };
   return (
     <div style={styleContainer}>
+      <BouncingDvd></BouncingDvd>
       <div style={{ padding: "0 10%" }} className="hi">
         <Carousel
           type="movieSlider"

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Container, CanvasContainer } from "./BouncingDvd.styles";
 const BouncingDvd = () => {
-  let scale = 1.0;
+  let scale = 0.5;
   let logoColor;
   const canvasRef = useRef(null);
   let dvd = {
