@@ -46,7 +46,7 @@ const Home = (props) => {
   };
   return (
     <div style={styleContainer}>
-      <BouncingDvd></BouncingDvd>
+      {/* <BouncingDvd></BouncingDvd> */}
       <div style={{ padding: "0 10%" }} className="hi">
         <Carousel
           type="movieSlider"

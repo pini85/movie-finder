@@ -5,7 +5,7 @@ export const Container = styled.div`
 
 export const CanvasContainer = styled.div`
   position: fixed;
-  opacity: 0.2;
+  /* opacity: 0.1; */
   top: 0;
   left: 0;
   height: 93vh;
