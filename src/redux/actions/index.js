@@ -482,9 +482,9 @@ export const fetchPopularActors = (page) => async (dispatch, getState) => {
   dispatch({ type: "FETCH_POPULAR_ACTORS", payload: actors });
 };
 
-export const isSending = (bool) => {
+export const isFetching = (bool) => {
   return {
-    type: "IS_SENDING",
+    type: "IS_FETCHING",
     payload: bool,
   };
 };

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { compose } from "redux";
 import { withRouter } from "react-router-dom";
 import { Container, ButtonContainer } from "./pagination.styles";
 import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
+import { isFetching } from "../../redux/actions/index";
 
-const Pagination = ({ api, data, actor, history, location }) => {
+const Pagination = ({ api, data, actor, history, location, isFetching }) => {
   const [buttons, setButtons] = useState(null);
   const [count, setCount] = useState(1);
   const [amount, setAmount] = useState(20);
@@ -26,9 +29,14 @@ const Pagination = ({ api, data, actor, history, location }) => {
   useDidUpdateEffect(() => {
     const fetchData = async () => {
       if (actor) {
+        isFetching(true);
+
         await api(actor, currentPage);
+        isFetching(false);
       } else {
+        isFetching(true);
         await api(currentPage);
+        isFetching(false);
       }
       history.push(changeLocation());
     };
@@ -142,4 +150,9 @@ const Pagination = ({ api, data, actor, history, location }) => {
   );
 };
 
-export default withRouter(Pagination);
+export default compose(
+  withRouter,
+  connect(null, {
+    isFetching: (bool) => isFetching(bool),
+  })
+)(Pagination);

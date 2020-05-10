@@ -61,11 +61,11 @@ const highestRatedReducer = (highestRated = null, action) => {
   return highestRated;
 };
 
-const isSendingReducer = (sending = false, action) => {
-  if (action.type === "IS_SENDING") {
+const isFetchingReducer = (fetching = false, action) => {
+  if (action.type === "IS_FETCHING") {
     return action.payload;
   }
-  return sending;
+  return fetching;
 };
 
 const optionActiveReducer = (active = 1, action) => {
@@ -189,7 +189,6 @@ export default combineReducers({
   selectedMovie: selectedMovieReducer,
   movieSuggestions: movieSuggestionsReducer,
   search: searchQueryReducer,
-  isSending: isSendingReducer,
   selectedMovieId: selectedMovieIdReducer,
   movieSlider: movieSliderReducer,
   newestMovies: newestMoviesReducer,
@@ -210,4 +209,5 @@ export default combineReducers({
   fetchActorMovies: fetchActorMoviesReducer,
   fetchPopularActors: fetchPopularActorsReducer,
   createPopularActors: createPopularActorsReducer,
+  isFetching: isFetchingReducer,
 });

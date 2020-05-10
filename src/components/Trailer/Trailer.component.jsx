@@ -36,6 +36,8 @@ const Trailer = ({ poster, fetchTrailers, trailers, colors }) => {
     return (
       trailers &&
       trailers.map((trailer) => {
+        console.log(trailer);
+
         return (
           <>
             <YouTube

@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { selectedMovieId, selectedMovie } from "../../redux/actions/index";
 import Button from "../Button/Button";
+import Spin from "../spinners/Spin/Spin.component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -20,6 +21,9 @@ import {
 } from "./Card.styles";
 
 const Card = (props) => {
+  const [isLoaded, setLoaded] = useState(false);
+  console.log(props.isFetching);
+
   const handleClick = () => {
     console.log(props.movie);
 
@@ -27,6 +31,9 @@ const Card = (props) => {
     props.selectedMovie(props.movie);
 
     props.history.push(`/movie/${props.movie.id}`);
+  };
+  const test = () => {
+    setLoaded(true);
   };
 
   const image = () => {
@@ -43,40 +50,51 @@ const Card = (props) => {
     }
     return name;
   };
+  console.log(isLoaded);
+
   return (
     <CardContainer>
-      <CardInner>
-        <CardFront image={image}>
-          <Year>
-            {props.movie.release_date
-              ? props.movie.release_date.substr(0, 4)
-              : "N/A"}
-          </Year>
-          <Rating>
-            <div style={{ marginRight: "5px", color: "orange" }}>
-              <FontAwesomeIcon icon={faStar} />
-            </div>
-            <div>{props.movie.vote_average}</div>
-          </Rating>
-          <TitleFront> {title(props.movie.title)}</TitleFront>
-        </CardFront>
-        <CardBack image={image}>
-          <Gradient>
-            <ButtonContainer>
-              <a onClick={handleClick}>
-                <Button title="Details" />
-              </a>
-            </ButtonContainer>
-          </Gradient>
-          <TitleBack> {title(props.movie.title)}</TitleBack>
-        </CardBack>
-      </CardInner>
+      {props.isFetching ? (
+        <div style={{ display: "flex" }}>
+          <Spin></Spin>
+        </div>
+      ) : (
+        <CardInner>
+          <CardFront onLoad={test} image={image}>
+            <Year>
+              {props.movie.release_date
+                ? props.movie.release_date.substr(0, 4)
+                : "N/A"}
+            </Year>
+            <Rating>
+              <div style={{ marginRight: "5px", color: "orange" }}>
+                <FontAwesomeIcon icon={faStar} />
+              </div>
+              <div>{props.movie.vote_average}</div>
+            </Rating>
+            <TitleFront> {title(props.movie.title)}</TitleFront>
+          </CardFront>
+          <CardBack image={image}>
+            <Gradient>
+              <ButtonContainer>
+                <a onClick={handleClick}>
+                  <Button title="Details" />
+                </a>
+              </ButtonContainer>
+            </Gradient>
+            <TitleBack> {title(props.movie.title)}</TitleBack>
+          </CardBack>
+        </CardInner>
+      )}
     </CardContainer>
   );
 };
+const mapStatToProps = (state) => ({
+  isFetching: state.isFetching,
+});
 export default compose(
   withRouter,
-  connect(null, {
+  connect(mapStatToProps, {
     selectedMovieId: selectedMovieId,
     selectedMovie: (movie) => selectedMovie(movie),
   })

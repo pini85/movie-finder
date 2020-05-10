@@ -72,6 +72,7 @@ export const tmdbTrailersApi = async (id) => {
     `https://api.themoviedb.org/3/movie/${id}/videos?api_key=3e296e6f6a1b142633468c58b584ab9b&language=en-US`
   );
   const data = await response.json();
+  console.log("DATA", data);
 
   const sliced =
     data.results.length > 3 ? data.results.slice(0, 3) : data.results;

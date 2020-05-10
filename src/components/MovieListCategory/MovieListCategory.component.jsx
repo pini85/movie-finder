@@ -9,6 +9,7 @@ import {
 
 import Card from "../card/Card";
 const MovieListCategory = (props) => {
+  // const [isLoading, setLoading] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       switch (props.category) {
