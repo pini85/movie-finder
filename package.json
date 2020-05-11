@@ -33,6 +33,7 @@
     "redux-thunk": "^2.3.0",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.0.1",
+    "styled-normalize": "^8.0.7",
     "thepiratebay": "^1.4.7",
     "webtorrent": "^0.107.17",
     "yify-api": "^1.1.1"

@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import "./App.css";
 import Home from "./components/home/Home.component";
 import Navbar from "./components/Navbar/Navbar";
 import Search from "./components/Search/Search.component";
@@ -11,7 +10,6 @@ import TvShows from "./components/TvShows/TvShows.component";
 import AdvancedSearch from "./components/AdvancedSearch/AdvancedSearch.component";
 import ActorMovies from "./components/ActorMovies/ActorMovies.component";
 import PopularActors from "./components/PopularActors/PopularActors.component";
-
 import Spin from "./components/spinners/Spin/Spin.component";
 
 const App = () => {

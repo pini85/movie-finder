@@ -15,14 +15,14 @@ export const Container = styled.div`
   height: 8vmax;
   border-right: 4px solid var(--primary-color);
   border-radius: 100%;
-  animation: ${spinRight} 800ms linear infinite;
+  animation: ${spinRight} 1s linear infinite;
   &::after {
     content: "";
     display: block;
     position: absolute;
     border-left: 3px solid var(--primary-color);
     border-radius: 100%;
-    animation: ${spinLeft} 800ms linear infinite;
+    animation: ${spinLeft} 1s linear infinite;
     width: 4vmax;
     height: 4vmax;
     top: calc(50% - 2vmax);
@@ -41,6 +41,6 @@ export const Container = styled.div`
     left: calc(50% - 3vmax);
     border-left: 3px solid var(--primary-color);
     border-radius: 100%;
-    animation: ${spinLeft} 800ms linear infinite;
+    animation: ${spinLeft} 1s linear infinite;
   }
 `;
