@@ -10,7 +10,6 @@ import {
 import Carousel from "../carousel/carousel.component";
 import Options from "../Options/Options.component";
 import MovieListHome from "../MovieListCategory/MovieListCategory.component";
-import BouncingDvd from "../spinners/BouncingDvd/BouncingDvd.component";
 
 const Home = (props) => {
   useEffect(() => {
@@ -36,7 +35,6 @@ const Home = (props) => {
 
   return (
     <Container>
-      {/* <BouncingDvd></BouncingDvd> */}
       <CarouselContainer>
         <Carousel
           type="movieSlider"

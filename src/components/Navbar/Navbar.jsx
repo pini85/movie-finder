@@ -39,7 +39,19 @@ const Navbar = (props) => {
           </NavbarItemContainer>
         </>
       ) : (
-        <Hamburger></Hamburger>
+        <Hamburger>
+          <NavbarItem link="/" title="home"></NavbarItem>
+          <NavbarItem link="/movies/latest/page/1" title="movies"></NavbarItem>
+          <NavbarItem link="/tv/latest/page/1" title="tv shows"></NavbarItem>
+          <NavbarItem
+            link="/advanced-search/"
+            title="Advanced Search"
+          ></NavbarItem>
+          <NavbarItem
+            link="/popular-actors/page/1"
+            title="Popular Actors"
+          ></NavbarItem>
+        </Hamburger>
       )}
 
       <Search />

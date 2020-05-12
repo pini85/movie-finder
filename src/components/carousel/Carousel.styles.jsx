@@ -8,6 +8,9 @@ export const TrailerContainer = styled.div`
 export const CarouselStyling = styled(Slider)`
   & .slick-slider.slick-initialized {
     padding: 0 4rem;
+    @media screen and (max-width: 700px) {
+      padding: 0;
+    }
   }
   & .slick-arrow {
     font-size: 2rem;

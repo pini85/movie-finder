@@ -5,11 +5,7 @@ const Hamburger = ({ children }) => {
   return (
     <Container onClick={() => setOpen((value) => !value)}>
       <HandleBars isOpen={isOpen}>
-        {isOpen ? (
-          <Navigation>
-            <h1>hello</h1>
-          </Navigation>
-        ) : null}
+        {isOpen ? <Navigation>{children}</Navigation> : null}
       </HandleBars>
     </Container>
   );

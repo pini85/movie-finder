@@ -6,6 +6,10 @@ export const Container = styled.div`
   height: fit-content;
   margin: 4rem;
   color: ${(props) => props.fontColor};
+  @media screen and (max-width: 800px) {
+    width: auto;
+  }
+
   &:before {
     content: "";
     position: absolute;

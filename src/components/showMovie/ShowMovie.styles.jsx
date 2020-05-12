@@ -59,8 +59,12 @@ export const TagLineContainer = styled.div`
 `;
 
 export const BottomContainer = styled.div`
-  height: 46.4%;
+  /* height: 46.4%; */
   display: flex;
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+    align-items: center;
+  }
   /* flex-wrap: wrap; */
 `;
 
@@ -75,6 +79,9 @@ export const OptionsContainer = styled.div`
 
   align-self: flex-start;
   padding: 4rem 0;
+  @media screen and (max-width: 800px) {
+    width: auto;
+  }
 `;
 
 export const PlotContainer = styled.div`
