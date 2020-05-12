@@ -12,6 +12,9 @@ export const CarouselContainer = styled.div`
   @media screen and (max-width: 1200px) {
     padding: 0 3%;
   }
+  @media screen and (max-width: 700px) {
+    padding: 0;
+  }
 `;
 export const Header = styled.div`
   font-size: var(--heading-primary);
