@@ -1,5 +1,18 @@
 import styled from "styled-components";
-
+export const Container = styled.div`
+  padding: 0 8vw;
+  background-color: var(--secondary-color);
+  overflow: hidden;
+  @media screen and (max-width: 1300px) {
+    padding: 0;
+  }
+`;
+export const CarouselContainer = styled.div`
+  padding: 0 10%;
+  @media screen and (max-width: 1200px) {
+    padding: 0 3%;
+  }
+`;
 export const Header = styled.div`
   font-size: var(--heading-primary);
   font-weight: 700;

@@ -68,6 +68,9 @@ const Trailer = ({ poster, fetchTrailers, trailers, colors }) => {
     bottom: -75px;
     right: -60px;
     transition: all 0.3s;
+    @media screen and (max-width: 1000px) {
+      right: 30px;
+    }
     &:hover {
       transform: scale(1.2) skewY(-2.5deg) rotate(5deg);
     }

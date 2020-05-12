@@ -4,6 +4,12 @@ export const Container = styled.div`
   padding: 0 14vw;
   background-image: ${(props) =>
     `linear-gradient(to bottom, ${props.color1}, ${props.color2})`};
+  @media screen and (max-width: 1200px) {
+    padding: 0 10vw;
+  }
+  @media screen and (max-width: 1000px) {
+    padding: 0;
+  }
 `;
 
 export const HeroContainer = styled.div`

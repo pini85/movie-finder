@@ -1,21 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-
 import Carousel from "../carousel/carousel.component";
+import useWidth from "../../hooks/useWidth.hooks";
 
 const MovieCast = ({ cast, colors }) => {
+  const width = useWidth();
+
   const styling = {
     padding: "0 4rem",
   };
-  console.log(styling.padding);
-
+  const responsive = () => {
+    switch (true) {
+      case width <= 1400:
+        return 5;
+      default:
+        return 6;
+    }
+  };
   return (
     <>
       <Carousel
         movieCast={cast}
         type="movieCast"
-        slidesToShow={6}
-        slidesToScroll={6}
+        slidesToShow={responsive()}
+        slidesToScroll={responsive()}
         autoPlay={false}
         fade={false}
         styling={styling}

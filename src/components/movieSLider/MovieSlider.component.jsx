@@ -5,8 +5,6 @@ import MovieSliderInfo from "../movie-slider-info/MovieSliderInfo.component";
 import styled from "styled-components";
 
 const movieSlider = (props) => {
-  // debugger;
-
   const test = () => {};
 
   const Container = styled.div`

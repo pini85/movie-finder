@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Header, Paragraph } from "./Home.styles";
+import { Container, CarouselContainer, Header, Paragraph } from "./Home.styles";
 import { connect } from "react-redux";
 import {
   fetchMovieSlider,
@@ -34,20 +34,10 @@ const Home = (props) => {
     }
   };
 
-  const styleContainer = {
-    // display: "flex",
-    // flexWrap: "wrap",
-    // justifyContent: "center",
-    // flexDirection: "column",
-    padding: "0 8vw",
-
-    backgroundColor: "var(--secondary-color)",
-    overflow: "hidden",
-  };
   return (
-    <div style={styleContainer}>
+    <Container>
       {/* <BouncingDvd></BouncingDvd> */}
-      <div style={{ padding: "0 10%" }} className="hi">
+      <CarouselContainer>
         <Carousel
           type="movieSlider"
           slidesToShow={1}
@@ -58,7 +48,7 @@ const Home = (props) => {
           activeDotColor="var(--primary-color)"
           dotsColor="white"
         ></Carousel>
-      </div>
+      </CarouselContainer>
 
       <div style={{ width: "100%" }}>
         <Header>Welcome to Movie Finder</Header>
@@ -67,7 +57,7 @@ const Home = (props) => {
       <Options />
 
       {showList()}
-    </div>
+    </Container>
   );
 };
 const mapStateToDispatch = {

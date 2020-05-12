@@ -19,6 +19,9 @@ export const Container = styled.div`
   background: transparent;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   transition: all 0.3s;
+  @media screen and (max-width: 1200px) {
+    height: 33rem;
+  }
   &:hover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   }
