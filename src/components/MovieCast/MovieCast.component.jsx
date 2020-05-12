@@ -11,7 +11,9 @@ const MovieCast = ({ cast, colors }) => {
   };
   const responsive = () => {
     switch (true) {
-      case width <= 1400:
+      case width < 800:
+        return 4;
+      case width < 1400:
         return 5;
       default:
         return 6;
