@@ -24,7 +24,6 @@ const movieSlider = (props) => {
 
   return (
     <Container>
-      <button onClick={test}>CLICK ME</button>
       <MovieSliderInfo movie={props.movie} />
     </Container>
   );

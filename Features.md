@@ -20,6 +20,8 @@ Features need to be done:
 BUGS:
 
 - url for advanced search
+- trailers
+- sliders
 - search cannot click on movie in suggestions
 - fix percentage circle on display movie
 - pagination is acting up

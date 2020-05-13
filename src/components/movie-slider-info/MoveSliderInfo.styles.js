@@ -6,6 +6,9 @@ export const Container = styled.div`
   margin-bottom: 3rem;
   border-radius: 8px;
   padding: 2rem;
+  @media screen and (max-width: 700px) {
+    width: 90%;
+  }
 `;
 
 export const DetailContainer = styled.div`

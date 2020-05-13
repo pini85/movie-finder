@@ -9,11 +9,13 @@ export const Container = styled.div`
 `;
 export const CarouselContainer = styled.div`
   padding: 0 10%;
+  margin-top: 2rem;
   @media screen and (max-width: 1200px) {
     padding: 0 3%;
   }
   @media screen and (max-width: 700px) {
     padding: 0;
+    margin-top: 0;
   }
 `;
 export const Header = styled.div`
