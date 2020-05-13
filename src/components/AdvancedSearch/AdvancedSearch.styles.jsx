@@ -14,11 +14,18 @@ export const SearchContainer = styled.div`
 `;
 export const TopSearchContainer = styled.div`
   margin-bottom: 3rem;
+  @media screen and (max-width: 700px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const BottomSearchContainer = styled.div`
   display: flex;
   justify-content: center;
+  @media screen and (max-width: 700px) {
+    flex-direction: column;
+  }
 `;
 
 export const ButtonContainer = styled.div`
@@ -32,8 +39,14 @@ export const Divider = styled.div`
   height: 33rem;
   width: 2px;
   background: var(--text-white);
+  @media screen and (max-width: 700px) {
+    display: none;
+  }
 `;
 
 export const AdvancedSearchResultContainer = styled.div`
   display: flex;
+  @media screen and (max-width: 700px) {
+    flex-direction: column;
+  }
 `;

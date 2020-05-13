@@ -5,15 +5,15 @@ import { withRouter } from "react-router-dom";
 import { Container, ButtonContainer } from "./pagination.styles";
 import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
 import { isFetching } from "../../redux/actions/index";
+import useWidth from "../../hooks/useWidth.hooks";
 
 const Pagination = ({ api, data, actor, history, location, isFetching }) => {
   const [buttons, setButtons] = useState(null);
   const [count, setCount] = useState(1);
   const [amount, setAmount] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
-
   const totalPages = data ? data.total_pages : null;
-
+  const width = useWidth();
   const changeLocation = () => {
     const loc = location.pathname;
 
@@ -24,6 +24,11 @@ const Pagination = ({ api, data, actor, history, location, isFetching }) => {
   useEffect(() => {
     setCurrentPage(1);
     history.push(changeLocation());
+    if (width <= 500) {
+      setAmount(5);
+    } else if (width <= 700) {
+      setAmount(10);
+    }
   }, []);
 
   useDidUpdateEffect(() => {

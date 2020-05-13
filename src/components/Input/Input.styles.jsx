@@ -5,5 +5,9 @@ export const StyledInput = styled.input`
   height: 2.5rem;
   padding: 1.5rem;
   margin: 0 1rem;
+  font-size: 1.3rem;
   border: 2px solid var(--primary-color);
+  @media screen and (max-width: 800px) {
+    width: 30vw;
+  }
 `;

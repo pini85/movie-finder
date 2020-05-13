@@ -6,6 +6,10 @@ export const Container = styled.div`
   color: var(--text-white);
   font-size: 2rem;
   padding: 0 5rem;
+  @media screen and (max-width: 700px) {
+    width: 100%;
+    margin-bottom: 4rem;
+  }
 `;
 export const SearchContainer = styled.div`
   display: flex;

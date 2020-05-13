@@ -10,6 +10,9 @@ export const StyleSelect = styled.select`
 
   font-size: 1.5rem;
   background: white;
+  @media screen and (max-width: 700px) {
+    margin: 1rem 1rem;
+  }
 `;
 
 export const StyleOptionDisabled = styled.option`

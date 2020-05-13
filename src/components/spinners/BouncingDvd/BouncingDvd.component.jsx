@@ -1,6 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Container, CanvasContainer } from "./BouncingDvd.styles";
+import useWidth from "../../../hooks/useWidth.hooks";
 const BouncingDvd = () => {
+  const width = useWidth();
+
   let scale = 0.5;
   let logoColor;
   const canvasRef = useRef(null);

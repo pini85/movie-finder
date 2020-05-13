@@ -7,6 +7,9 @@ export const Container = styled.div`
   font-size: 2rem;
   text-align: center;
   padding: 0 5rem;
+  @media screen and (max-width: 700px) {
+    width: 100%;
+  }
 `;
 
 export const Title = styled.div`
