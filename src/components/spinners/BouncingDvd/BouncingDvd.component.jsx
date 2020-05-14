@@ -30,7 +30,10 @@ const BouncingDvd = () => {
     const ctx = canvas.getContext("2d");
     const imgPath = "https://i.ibb.co/9VGZCT8/DVD-LOGO-1.png";
     dvd.img.src = imgPath;
-    canvas.width = window.innerWidth;
+    canvas.width = width;
+    console.log(window.innerWidth);
+    console.log(width);
+
     canvas.height = window.innerHeight - vh(7);
 
     // pickColor();
@@ -63,7 +66,7 @@ const BouncingDvd = () => {
         checkHitBox();
         update();
       }
-    }, 20);
+    }, 25);
   };
   const checkHitBox = () => {
     const canvas = canvasRef.current;
