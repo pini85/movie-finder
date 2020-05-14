@@ -6,7 +6,7 @@ const BouncingDvd = () => {
   const height = useWidth().height;
   console.log(width);
 
-  let scale = 0.11;
+  let scale = width > 700 ? 0.5 : 0.2;
   //0.11 0.5
   //40 25
   let logoColor;
@@ -16,7 +16,7 @@ const BouncingDvd = () => {
     y: 400,
     xSpeed: 8,
     ySpeed: 8,
-    speed: 40,
+    speed: width > 700 ? 25 : 40,
     img: new Image(),
   };
   useEffect(() => {
