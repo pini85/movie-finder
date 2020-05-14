@@ -4,9 +4,8 @@ import useWidth from "../../../hooks/useWidth.hooks";
 const BouncingDvd = () => {
   const width = useWidth().width;
   const height = useWidth().height;
-  console.log(width);
 
-  let scale = width > 700 ? 0.5 : 0.2;
+  let scale = 0.5;
   //0.11 0.5
   //40 25
   let logoColor;
@@ -16,7 +15,7 @@ const BouncingDvd = () => {
     y: 400,
     xSpeed: 8,
     ySpeed: 8,
-    speed: width > 700 ? 25 : 40,
+    speed: 25,
     img: new Image(),
   };
   useEffect(() => {
@@ -33,7 +32,7 @@ const BouncingDvd = () => {
   const main = () => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
-    const imgPath = "https://i.ibb.co/9VGZCT8/DVD-LOGO-1.png";
+    const imgPath = "https://i.ibb.co/pJ8CK41/DVD-1.png";
     dvd.img.src = imgPath;
     canvas.width = width;
     // console.log(window.innerWidth);
@@ -98,8 +97,8 @@ const BouncingDvd = () => {
 
   return (
     <CanvasContainer>
-      <h1>{width}</h1>
-      <h1>{height}</h1>
+      {/* <h1>{width}</h1>
+      <h1>{height}</h1> */}
       <canvas id="tv-screen" ref={canvasRef} width={1000} height={1000} />
     </CanvasContainer>
   );
