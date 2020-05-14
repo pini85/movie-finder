@@ -2,7 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import { Container, CanvasContainer } from "./BouncingDvd.styles";
 import useWidth from "../../../hooks/useWidth.hooks";
 const BouncingDvd = () => {
-  const width = useWidth();
+  const width = useWidth().width;
+  const height = useWidth().height;
+  console.log(width);
 
   let scale = 0.11;
   //0.11 0.5
@@ -33,11 +35,10 @@ const BouncingDvd = () => {
     const ctx = canvas.getContext("2d");
     const imgPath = "https://i.ibb.co/9VGZCT8/DVD-LOGO-1.png";
     dvd.img.src = imgPath;
-    canvas.width = window.innerWidth;
-    console.log(window.innerWidth);
-    console.log(width);
-
-    canvas.height = window.innerHeight - vh(7);
+    canvas.width = width;
+    // console.log(window.innerWidth);
+    // console.log(width);
+    canvas.height = height - vh(7);
 
     // pickColor();
     update();
@@ -98,6 +99,7 @@ const BouncingDvd = () => {
   return (
     <CanvasContainer>
       <h1>{width}</h1>
+      <h1>{height}</h1>
       <canvas id="tv-screen" ref={canvasRef} width={1000} height={1000} />
     </CanvasContainer>
   );
