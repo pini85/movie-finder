@@ -1,12 +1,9 @@
 import styled, { keyframes } from "styled-components";
 const spinLeft = keyframes`
-@keyframes spinLeft {
   from {transform:rotate(0deg);}
   to {transform:rotate(720deg);}
-}
 `;
 const spinRight = keyframes`
-
   from {transform:rotate(360deg);}
   to {transform:rotate(0deg);}
   `;
