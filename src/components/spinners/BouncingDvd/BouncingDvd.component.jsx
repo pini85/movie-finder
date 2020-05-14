@@ -4,7 +4,9 @@ import useWidth from "../../../hooks/useWidth.hooks";
 const BouncingDvd = () => {
   const width = useWidth();
 
-  let scale = 0.5;
+  let scale = width > 700 ? 0.5 : 0.11;
+  //0.11
+  //40
   let logoColor;
   const canvasRef = useRef(null);
   let dvd = {
@@ -12,6 +14,7 @@ const BouncingDvd = () => {
     y: 400,
     xSpeed: 8,
     ySpeed: 8,
+    speed: width > 700 ? 25 : 40,
     img: new Image(),
   };
   useEffect(() => {
@@ -30,7 +33,7 @@ const BouncingDvd = () => {
     const ctx = canvas.getContext("2d");
     const imgPath = "https://i.ibb.co/9VGZCT8/DVD-LOGO-1.png";
     dvd.img.src = imgPath;
-    canvas.width = width;
+    canvas.width = window.innerWidth;
     console.log(window.innerWidth);
     console.log(width);
 
@@ -66,7 +69,7 @@ const BouncingDvd = () => {
         checkHitBox();
         update();
       }
-    }, 25);
+    }, dvd.speed);
   };
   const checkHitBox = () => {
     const canvas = canvasRef.current;

@@ -32,9 +32,9 @@ export const CarouselStyling = styled(Slider)`
     font-size: 3rem;
 
     color: ${(props) => props.color};
-    @media screen and (max-width: 700px) {
+    /* @media screen and (max-width: 700px) {
       font-size: 4rem;
-    }
+    } */
   }
 
   & .slick-dots {

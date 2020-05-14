@@ -40,7 +40,7 @@ const Carousel = ({
     autoplaySpeed: 4000,
     fade: fade,
     pauseOnHover: true,
-    lazyLoad: false,
+    lazyLoad: true,
   };
   const styleContainer = {
     display: "flex",
