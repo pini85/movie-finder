@@ -4,9 +4,9 @@ import useWidth from "../../../hooks/useWidth.hooks";
 const BouncingDvd = () => {
   const width = useWidth();
 
-  let scale = width > 700 ? 0.5 : 0.11;
-  //0.11
-  //40
+  let scale = 0.11;
+  //0.11 0.5
+  //40 25
   let logoColor;
   const canvasRef = useRef(null);
   let dvd = {
@@ -14,7 +14,7 @@ const BouncingDvd = () => {
     y: 400,
     xSpeed: 8,
     ySpeed: 8,
-    speed: width > 700 ? 25 : 40,
+    speed: 40,
     img: new Image(),
   };
   useEffect(() => {
@@ -97,6 +97,7 @@ const BouncingDvd = () => {
 
   return (
     <CanvasContainer>
+      <h1>{width}</h1>
       <canvas id="tv-screen" ref={canvasRef} width={1000} height={1000} />
     </CanvasContainer>
   );
