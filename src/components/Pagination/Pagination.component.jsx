@@ -13,7 +13,7 @@ const Pagination = ({ api, data, actor, history, location, isFetching }) => {
   const [amount, setAmount] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = data ? data.total_pages : null;
-  const width = useWidth();
+  const width = useWidth().width;
   const changeLocation = () => {
     const loc = location.pathname;
 

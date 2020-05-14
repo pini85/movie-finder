@@ -71,11 +71,15 @@ const ShowMovie = ({ item, colors, goToMovie }) => {
     background: ${item ? colors.lightMuted : "var(secondary-color-light)"};
   `;
   const width = useWidth().width;
+  console.log(width);
+
   const spinner = () => {
-    if (width > 1000) {
-      return <BouncingDvd></BouncingDvd>;
-    } else {
+    console.log(width);
+
+    if (width < 1000) {
       return <Film></Film>;
+    } else {
+      return <BouncingDvd></BouncingDvd>;
     }
   };
 
