@@ -10,6 +10,7 @@ import TvShows from "./components/TvShows/TvShows.component";
 import AdvancedSearch from "./components/AdvancedSearch/AdvancedSearch.component";
 import ActorMovies from "./components/ActorMovies/ActorMovies.component";
 import PopularActors from "./components/PopularActors/PopularActors.component";
+import Customize from "./components/Customize/Customize.component";
 import Film from "./components/spinners/Film/Film.component";
 
 const App = () => {
@@ -29,6 +30,7 @@ const App = () => {
         />
         <Route path="/popular-actors/" component={PopularActors} />
         <Route path="/actors/:name/page/:page" component={ActorMovies} />
+        <Route exact path="/customize" component={Customize} />
         <Route exact path="/spinner/" component={Film} />
       </Switch>
     </Router>

@@ -14,6 +14,7 @@ export const Container = styled.div`
   padding: 0%, 0%;
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
 `;
 
 export const ButtonContainer = styled.div`

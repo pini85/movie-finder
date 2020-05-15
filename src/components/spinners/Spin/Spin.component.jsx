@@ -1,9 +1,10 @@
 import React from "react";
-import { Container } from "./Spin.styles";
+import { Container, SpinContainer } from "./Spin.styles";
 const Spin = () => {
-  {
-    debugger;
-  }
-  return <Container></Container>;
+  return (
+    <Container>
+      <SpinContainer></SpinContainer>
+    </Container>
+  );
 };
 export default Spin;

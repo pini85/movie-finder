@@ -37,6 +37,7 @@ const Pagination = ({ api, data, actor, history, location, isFetching }) => {
         isFetching(true);
 
         await api(actor, currentPage);
+
         isFetching(false);
       } else {
         isFetching(true);

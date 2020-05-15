@@ -7,7 +7,17 @@ const spinRight = keyframes`
   from {transform:rotate(360deg);}
   to {transform:rotate(0deg);}
   `;
+
 export const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+export const SpinContainer = styled.div`
+  /* display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; */
   width: 8vmax;
   height: 8vmax;
   border-right: 4px solid var(--primary-color);

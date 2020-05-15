@@ -7,7 +7,7 @@ import UseWidth from "../../hooks/useWidth.hooks";
 import { Container, NavbarItemContainer, Img } from "./Navbar.styles";
 
 const Navbar = (props) => {
-  const width = UseWidth();
+  const width = UseWidth().width;
 
   return (
     <Container>
@@ -36,6 +36,7 @@ const Navbar = (props) => {
               link="/popular-actors/page/1"
               title="Popular Actors"
             ></NavbarItem>
+            <NavbarItem link="/customize" title="Customize"></NavbarItem>
           </NavbarItemContainer>
         </>
       ) : (

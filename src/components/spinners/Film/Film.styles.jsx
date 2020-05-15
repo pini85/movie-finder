@@ -12,7 +12,7 @@ const light = keyframes`
 
 `;
 export const Container = styled.div`
-  height: 100vh;
+  /* height: 100vh; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -145,6 +145,7 @@ export const CameraBodyLight = styled.div`
 `;
 
 export const LoadingContainer = styled.div`
-  font-size: 2rem;
+  font-size: 1.5rem;
+  color: var(--text-white);
   margin-top: -6rem;
 `;
