@@ -184,6 +184,13 @@ const createPopularActorsReducer = (actors = null, action) => {
   return actors;
 };
 
+const displayThemeReducer = (theme = "default-theme", action) => {
+  if (action.type === "DISPLAY_THEME") {
+    return action.payload;
+  }
+  return theme;
+};
+
 export default combineReducers({
   fetchMovies: fetchMoviesReducer,
   selectedMovie: selectedMovieReducer,
@@ -210,4 +217,5 @@ export default combineReducers({
   fetchPopularActors: fetchPopularActorsReducer,
   createPopularActors: createPopularActorsReducer,
   isFetching: isFetchingReducer,
+  displayTheme: displayThemeReducer,
 });

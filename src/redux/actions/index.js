@@ -102,6 +102,9 @@ const fetchMovie = async (dispatch, getState) => {
   const omdbData = await omdbApi(tmdbData.imdb_id);
   const torrentData = await torrentApi(tmdbData.imdb_id);
   const movieCredits = await tmdbMovieCreditsApi(id);
+  console.log("movieCredits", movieCredits);
+  console.log(omdbData);
+
   const reviews = await tmdbMovieReviewsApi(id);
 
   // export const fetchMovieSlider = () => async dispatch => {
@@ -110,22 +113,22 @@ const fetchMovie = async (dispatch, getState) => {
   //     data.map(movie => tmdbIdApi(movie.id))
   //   );
 
-  const actorsList = async () => {
-    const actors = omdbData.Actors.trim().split(",");
-    const fetchActors = await Promise.all(
-      actors.map(async (actor) => await tmdbActorsApi(actor))
-    );
+  // const actorsList = async () => {
+  //   const actors = omdbData.Actors.trim().split(",");
+  //   const fetchActors = await Promise.all(
+  //     actors.map(async (actor) => await tmdbActorsApi(actor))
+  //   );
 
-    const x = fetchActors.map((page) => {
-      return page.results.slice(0, 1).map((actor) => {
-        return {
-          name: actor.name,
-          profile: actor.profile_path,
-        };
-      });
-    });
-    return x;
-  };
+  //   const x = fetchActors.map((page) => {
+  //     return page.results.slice(0, 1).map((actor) => {
+  //       return {
+  //         name: actor.name,
+  //         profile: actor.profile_path,
+  //       };
+  //     });
+  //   });
+  //   return x;
+  // };
 
   const imageTarget = () => {
     return tmdbData.backdrop_path
@@ -210,7 +213,7 @@ const fetchMovie = async (dispatch, getState) => {
     genre: omdbData.Genre,
     director: omdbData.Director,
     writer: omdbData.Writer,
-    actors: await actorsList(),
+    // actors: await actorsList(),
     cast: movieCredits.cast,
     runTime: tmdbData.runtime,
     reviews: reviews,
@@ -486,5 +489,12 @@ export const isFetching = (bool) => {
   return {
     type: "IS_FETCHING",
     payload: bool,
+  };
+};
+
+export const displayTheme = (theme) => {
+  return {
+    type: "DISPLAY_THEME",
+    payload: theme,
   };
 };

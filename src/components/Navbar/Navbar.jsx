@@ -3,7 +3,9 @@ import Search from "../Search/Search.component";
 import { Link } from "react-router-dom";
 import NavbarItem from "../NavbarItem/NavbarItem.component";
 import Hamburger from "../Hamburger/Hamburger.component";
+import LightSwitch from "../LightSwitch/LightSwitch.component";
 import UseWidth from "../../hooks/useWidth.hooks";
+import "../../themes/replaceTheme";
 import { Container, NavbarItemContainer, Img } from "./Navbar.styles";
 
 const Navbar = (props) => {
@@ -37,6 +39,7 @@ const Navbar = (props) => {
               title="Popular Actors"
             ></NavbarItem>
             <NavbarItem link="/customize" title="Customize"></NavbarItem>
+            <LightSwitch></LightSwitch>
           </NavbarItemContainer>
         </>
       ) : (

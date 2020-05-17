@@ -8,8 +8,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import CategoryTitle from "../CategoryTitle/CategoryTitle.component";
 import Modal from "../Modal/Modal.component";
 import CustomizeOption from "../CustomizeOption/CustomizeOption.component";
+import { darkTheme } from "../../themes";
 
 const Customize = () => {
+  darkTheme();
+  // document.documentElement.style.setProperty("--primary-color", "red");
   const [isToggled, setToggled] = useState(true);
   const [option, setOption] = useState(null);
   const [isSpinners, setSpinners] = useState(null);

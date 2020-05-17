@@ -1,4 +1,6 @@
 import React from "react";
+import { connect } from "react-redux";
+
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Home from "./components/home/Home.component";
 import Navbar from "./components/Navbar/Navbar";
@@ -13,28 +15,34 @@ import PopularActors from "./components/PopularActors/PopularActors.component";
 import Customize from "./components/Customize/Customize.component";
 import Film from "./components/spinners/Film/Film.component";
 
-const App = () => {
+const App = ({ theme }) => {
   return (
-    <Router>
-      <Navbar />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/movie/:id" component={ShowMovie} />
-        <Route path="/movies/:category/page/:page" component={Movies} />
-        <Route path="/tv/:category/page/:page" component={TvShows} />
-        <Route path="/search/:query/page/:page" component={MovieListSearch} />
-        <Route exact path="/advanced-search" component={AdvancedSearch} />
-        <Route
-          path="/advanced-search/:query/page/:page"
-          component={MovieListSearch}
-        />
-        <Route path="/popular-actors/" component={PopularActors} />
-        <Route path="/actors/:name/page/:page" component={ActorMovies} />
-        <Route exact path="/customize" component={Customize} />
-        <Route exact path="/spinner/" component={Film} />
-      </Switch>
-    </Router>
+    <div id="app" className={theme}>
+      <Router>
+        <Navbar />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/movie/:id" component={ShowMovie} />
+          <Route path="/movies/:category/page/:page" component={Movies} />
+          <Route path="/tv/:category/page/:page" component={TvShows} />
+          <Route path="/search/:query/page/:page" component={MovieListSearch} />
+          <Route exact path="/advanced-search" component={AdvancedSearch} />
+          <Route
+            path="/advanced-search/:query/page/:page"
+            component={MovieListSearch}
+          />
+          <Route path="/popular-actors/" component={PopularActors} />
+          <Route path="/actors/:name/page/:page" component={ActorMovies} />
+          <Route exact path="/customize" component={Customize} />
+          <Route exact path="/spinner/" component={Film} />
+        </Switch>
+      </Router>
+    </div>
   );
 };
 
-export default App;
+const mapStateToProps = (state) => ({
+  theme: state.displayTheme,
+});
+
+export default connect(mapStateToProps)(App);
