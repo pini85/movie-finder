@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import NavbarItem from "../NavbarItem/NavbarItem.component";
 import Hamburger from "../Hamburger/Hamburger.component";
 import LightSwitch from "../LightSwitch/LightSwitch.component";
+import Customize from "../Customize/Customize.component";
 import UseWidth from "../../hooks/useWidth.hooks";
 import "../../themes/replaceTheme";
 import { Container, NavbarItemContainer, Img } from "./Navbar.styles";
@@ -38,8 +39,8 @@ const Navbar = (props) => {
               link="/popular-actors/page/1"
               title="Popular Actors"
             ></NavbarItem>
-            <NavbarItem link="/customize" title="Customize"></NavbarItem>
           </NavbarItemContainer>
+          <Customize></Customize>
           <LightSwitch></LightSwitch>
         </>
       ) : (

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.li`
+  list-style-type: none;
   position: relative;
   font-size: 2rem;
   @media screen and (max-width: 900px) {

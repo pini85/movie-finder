@@ -22,3 +22,5 @@ export const Img = styled.img`
   width: ${(props) => (props.width < 1000 ? "18rem" : "23rem")};
   margin-top: 1rem;
 `;
+
+export const CustomizeContainer = styled.div``;

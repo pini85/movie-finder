@@ -21,8 +21,6 @@ import {
 } from "./Card.styles";
 
 const Card = (props) => {
-  console.log(props);
-
   const [isLoaded, setLoaded] = useState(false);
 
   const handleClick = () => {

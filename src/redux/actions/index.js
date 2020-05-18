@@ -494,6 +494,8 @@ export const isFetching = (bool) => {
 };
 
 export const displayTheme = (theme) => {
+  console.log(theme);
+
   return {
     type: "DISPLAY_THEME",
     payload: theme,

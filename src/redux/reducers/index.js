@@ -185,6 +185,8 @@ const createPopularActorsReducer = (actors = null, action) => {
 };
 
 const displayThemeReducer = (theme = "default-theme", action) => {
+  console.log("hello");
+
   if (action.type === "DISPLAY_THEME") {
     return action.payload;
   }
