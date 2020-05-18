@@ -19,6 +19,7 @@ const persistConfig = {
     "fetchMovies",
     "displayUserAdvancedSearch",
     "displayMovie",
+    "isFetching",
   ],
 };
 

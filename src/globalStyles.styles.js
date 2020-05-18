@@ -63,6 +63,11 @@ body {
   font-weight: 400;
   line-height: 1.7;
 }
+#app {
+  min-height:100vh;
+  background:var(--secondary-color)
+}
+
 ul {list-style-type: none; }
 a:visited {
   color: var(--text-white);

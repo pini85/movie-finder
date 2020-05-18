@@ -21,12 +21,11 @@ import {
 } from "./Card.styles";
 
 const Card = (props) => {
+  console.log(props);
+
   const [isLoaded, setLoaded] = useState(false);
-  console.log(props.isFetching);
 
   const handleClick = () => {
-    console.log(props.movie);
-
     props.selectedMovieId(props.movie.id);
     props.selectedMovie(props.movie);
 
@@ -50,7 +49,6 @@ const Card = (props) => {
     }
     return name;
   };
-  console.log(isLoaded);
 
   return (
     <CardContainer>

@@ -64,6 +64,7 @@ export const fetchMovies = (page) => async (dispatch, getState) => {
 
 export const fetchNewestMovies = (page) => async (dispatch, getState) => {
   const response = await tmdbNewestTodayApi(page);
+  console.log(response);
 
   dispatch({ type: "FETCH_NEWEST_MOVIES", payload: response });
 };

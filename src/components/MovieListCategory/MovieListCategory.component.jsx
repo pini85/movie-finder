@@ -5,6 +5,7 @@ import {
   fetchMovies,
   fetchNewestMovies,
   fetchHighestRatedMovies,
+  isFetching,
 } from "../../redux/actions/index";
 
 import Card from "../card/Card";
@@ -15,10 +16,12 @@ const MovieListCategory = (props) => {
       switch (props.category) {
         case "newest movies":
           await props.newestMovies(1);
+          props.isFetching(false);
 
           break;
         case "highest rating":
           props.highestRatedMovies(1);
+          props.isFetching(false);
 
           break;
       }
@@ -88,6 +91,7 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   selectedMovie: selectedMovie,
   fetchMovies: (page) => fetchMovies(page),
+  isFetching: (bool) => isFetching(bool),
 
   newestMovies: (page) => fetchNewestMovies(page),
   highestRatedMovies: (page) => fetchHighestRatedMovies(page),
