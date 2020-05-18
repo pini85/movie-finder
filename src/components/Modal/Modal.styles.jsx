@@ -8,7 +8,7 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   padding-top: 8rem;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.65);
 
   transform: perspective(0px) rotateY(0deg);
   padding: 0%, 0%;
