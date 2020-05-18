@@ -39,8 +39,8 @@ const Navbar = (props) => {
               title="Popular Actors"
             ></NavbarItem>
             <NavbarItem link="/customize" title="Customize"></NavbarItem>
-            <LightSwitch></LightSwitch>
           </NavbarItemContainer>
+          <LightSwitch></LightSwitch>
         </>
       ) : (
         <Hamburger>

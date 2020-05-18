@@ -13,6 +13,7 @@ export const Container = styled.div`
 `;
 export const NavbarItemContainer = styled.ul`
   display: flex;
+  align-items: center;
   margin-right: auto;
 `;
 
