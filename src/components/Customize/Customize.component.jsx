@@ -28,7 +28,13 @@ const Customize = ({ displayTheme }) => {
         <FontAwesomeIcon icon={faCog} />
       </IconContainer>
 
-      <Modal isToggled={isToggled} setToggled={setToggled}>
+      <Modal
+        isToggled={isToggled}
+        setToggled={setToggled}
+        setSpinners={setSpinners}
+        setThemes={setThemes}
+        setOption={setOption}
+      >
         <CategoryTitle title="Customize your experience" />
         <Container>
           <div onClick={() => setSpinners((value) => !value)}>Spinners</div>

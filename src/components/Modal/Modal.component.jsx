@@ -2,7 +2,23 @@ import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Container, Button, ButtonContainer } from "./Modal.styles";
 
-const Modal = ({ isToggled, setToggled, skew, children }) => {
+const Modal = ({
+  isToggled,
+  setToggled,
+  setSpinners,
+  setThemes,
+  setOption,
+  skew,
+  children,
+}) => {
+  const handleClick = () => {
+    setToggled(false);
+    if (setSpinners || setThemes) {
+      setSpinners(false);
+      setThemes(false);
+      setOption(null);
+    }
+  };
   const trailerStyles = () => {
     if (skew) {
       return {
@@ -38,7 +54,7 @@ const Modal = ({ isToggled, setToggled, skew, children }) => {
                       : null
                   }
                 >
-                  <Button onClick={() => setToggled(false)}>
+                  <Button onClick={handleClick}>
                     <div> &#215;</div>
                   </Button>
                 </ButtonContainer>
