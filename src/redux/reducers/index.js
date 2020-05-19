@@ -185,12 +185,16 @@ const createPopularActorsReducer = (actors = null, action) => {
 };
 
 const displayThemeReducer = (theme = "default-theme", action) => {
-  console.log("hello");
-
   if (action.type === "DISPLAY_THEME") {
     return action.payload;
   }
   return theme;
+};
+const displaySpinnerReducer = (spinner = "dvd", action) => {
+  if (action.type === "DISPLAY_SPINNER") {
+    return action.payload;
+  }
+  return spinner;
 };
 
 export default combineReducers({
@@ -220,4 +224,5 @@ export default combineReducers({
   createPopularActors: createPopularActorsReducer,
   isFetching: isFetchingReducer,
   displayTheme: displayThemeReducer,
+  displaySpinner: displaySpinnerReducer,
 });

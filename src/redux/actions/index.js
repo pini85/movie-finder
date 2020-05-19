@@ -494,10 +494,15 @@ export const isFetching = (bool) => {
 };
 
 export const displayTheme = (theme) => {
-  console.log(theme);
-
   return {
     type: "DISPLAY_THEME",
     payload: theme,
+  };
+};
+
+export const displaySpinner = (spinner) => {
+  return {
+    type: "DISPLAY_SPINNER",
+    payload: spinner,
   };
 };
