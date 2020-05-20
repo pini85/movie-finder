@@ -4,6 +4,8 @@ import useWidth from "../../../hooks/useWidth.hooks";
 const BouncingDvd = () => {
   const width = useWidth().width;
   const height = useWidth().height;
+  const el = document.getElementById("app");
+  const style = getComputedStyle(el);
 
   let scale = 0.5;
   //0.11 0.5
@@ -17,7 +19,9 @@ const BouncingDvd = () => {
     ySpeed: 8,
     speed: 25,
     img: new Image(),
+    background: style.getPropertyValue("--secondary-color"),
   };
+
   useEffect(() => {
     main();
   }, []);
@@ -35,8 +39,8 @@ const BouncingDvd = () => {
     const imgPath = "https://i.ibb.co/pJ8CK41/DVD-1.png";
     dvd.img.src = imgPath;
     canvas.width = width;
-    // console.log(window.innerWidth);
-    // console.log(width);
+    //
+    //
     canvas.height = height - vh(7);
 
     // pickColor();
@@ -48,7 +52,7 @@ const BouncingDvd = () => {
       const canvas = canvasRef.current;
       if (canvas) {
         ctx = canvas.getContext("2d");
-        ctx.fillStyle = "#524763";
+        ctx.fillStyle = dvd.background;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = logoColor || "#82d8d8";
         ctx.fillRect(

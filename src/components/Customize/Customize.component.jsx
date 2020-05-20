@@ -28,7 +28,7 @@ const Customize = ({ displayTheme, theme, displaySpinner, spinner }) => {
     setOption(type);
     displaySpinner(type);
   };
-  console.log(isToggled);
+  console.log("rerender");
 
   return (
     <>

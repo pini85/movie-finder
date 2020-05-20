@@ -10,11 +10,13 @@ export const Container = styled.div`
 `;
 export const HandleBars = styled.span`
   position: relative;
+  bottom: -1.5rem;
   height: 4px;
   width: 5rem;
   display: inline-block;
   background-color: ${(props) =>
     props.isOpen ? "transparent" : "var(--primary-color)"};
+  transition: all 1s;
   &::after {
     content: "";
     position: absolute;
@@ -22,9 +24,10 @@ export const HandleBars = styled.span`
     width: 100%;
     background-color: var(--primary-color);
     left: 0;
-    top: ${(props) => (props.isOpen ? "0" : "1.5rem")};
-    transform: ${(props) => (props.isOpen ? "rotate(135deg)" : null)};
-    transition: all 0.2s;
+    top: -1.5rem;
+    transform: ${(props) =>
+      props.isOpen ? "rotate(405deg) translateY(-4px) translateX(-6px)" : null};
+    transition: all 0.5s;
   }
   &::before {
     content: "";
@@ -33,9 +36,12 @@ export const HandleBars = styled.span`
     width: 100%;
     background-color: var(--primary-color);
     left: 0;
-    top: ${(props) => (props.isOpen ? "0" : "-1.5rem")};
-    transform: ${(props) => (props.isOpen ? "rotate(-135deg)" : null)};
-    transition: all 0.2s;
+    top: -3rem;
+    transform: ${(props) =>
+      props.isOpen
+        ? "rotate(-405deg) translateY(1px) translateX(-3px);"
+        : null};
+    transition: all 0.5s;
   }
 `;
 export const Navigation = styled.div`

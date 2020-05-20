@@ -75,4 +75,8 @@ a:visited {
 :any-link {
   text-decoration: none;
 }
+/* button
+{
+    outline: 0 none;
+} */
 `;
