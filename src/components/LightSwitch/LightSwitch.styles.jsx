@@ -13,7 +13,7 @@ export const Container = styled.div`
   &:after {
     content: "";
     position: absolute;
-    top: 2px;
+    top: 6%;
     left: 4px;
     height: 85%;
     width: 45%;

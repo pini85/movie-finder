@@ -23,4 +23,11 @@ export const Img = styled.img`
   margin-top: 1rem;
 `;
 
+export const ContainerSmall = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+`;
+
 export const CustomizeContainer = styled.div``;

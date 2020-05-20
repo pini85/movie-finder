@@ -10,13 +10,11 @@ export const Container = styled.div`
 `;
 export const HandleBars = styled.span`
   position: relative;
-  bottom: -1.5rem;
   height: 4px;
   width: 5rem;
   display: inline-block;
   background-color: ${(props) =>
     props.isOpen ? "transparent" : "var(--primary-color)"};
-  transition: all 1s;
   &::after {
     content: "";
     position: absolute;
@@ -24,10 +22,9 @@ export const HandleBars = styled.span`
     width: 100%;
     background-color: var(--primary-color);
     left: 0;
-    top: -1.5rem;
-    transform: ${(props) =>
-      props.isOpen ? "rotate(405deg) translateY(-4px) translateX(-6px)" : null};
-    transition: all 0.5s;
+    top: ${(props) => (props.isOpen ? "0" : "1.5rem")};
+    transform: ${(props) => (props.isOpen ? "rotate(135deg)" : null)};
+    transition: all 0.2s;
   }
   &::before {
     content: "";
@@ -36,19 +33,29 @@ export const HandleBars = styled.span`
     width: 100%;
     background-color: var(--primary-color);
     left: 0;
-    top: -3rem;
-    transform: ${(props) =>
-      props.isOpen
-        ? "rotate(-405deg) translateY(1px) translateX(-3px);"
-        : null};
-    transition: all 0.5s;
+    top: ${(props) => (props.isOpen ? "0" : "-1.5rem")};
+    transform: ${(props) => (props.isOpen ? "rotate(-135deg)" : null)};
+    transition: all 0.2s;
   }
 `;
 export const Navigation = styled.div`
   position: absolute;
-  top: 3.5vh;
-  left: -24px;
-  height: 60rem;
+  top: 6rem;
+  left: -30px;
   width: 30rem;
-  background: blue;
+  padding: 7rem 3rem;
+  background: var(--primary-color);
+  clip-path: polygon(
+    0% 20%,
+    60% 20%,
+    60% 0%,
+    100% 50%,
+    60% 100%,
+    60% 80%,
+    0% 80%
+  );
+  
+  /* transform: ${(props) => (props.isOpen ? "translateX(33rem)" : null)}; */
+  transition: all 3s;
+  /* transition-timing-function: cubic-bezier(0.17, 0.67, 0.78, 1.74); */
 `;
