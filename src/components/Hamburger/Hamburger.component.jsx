@@ -15,7 +15,7 @@ const Hamburger = () => {
               exit={{ opacity: 0 }}
               transition={{ duration: 1 }}
             >
-              <Navigation></Navigation>
+              <Navigation setOpen={setOpen}></Navigation>
             </motion.div>
           )}
         </AnimatePresence>

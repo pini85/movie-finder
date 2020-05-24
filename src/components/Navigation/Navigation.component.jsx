@@ -9,13 +9,16 @@ import {
 import Customize from "../Customize/Customize.component";
 import Search from "../Search/Search.component";
 import LightSwitch from "../LightSwitch/LightSwitch.component";
+import { Link } from "react-router-dom";
 import useWidth from "../../hooks/useWidth.hooks";
-const Navigation = () => {
+const Navigation = ({ setOpen }) => {
   const width = useWidth().width;
-  console.log(width);
+  const handleClick = () => {
+    setOpen((val) => !val);
+  };
 
   return (
-    <Container>
+    <Container onClick={(e) => e.stopPropagation()}>
       {width < 500 ? (
         <>
           <CustomizeContainer>
@@ -28,11 +31,23 @@ const Navigation = () => {
         </>
       ) : null}
       <Options>
-        <Option link="/">Home</Option>
-        <Option link="/movies/latest/page/1">Movies</Option>
-        <Option link="/tv/latest/page/1">Tv Shows</Option>
-        <Option link="/advanced-search/">Advanced Search</Option>
-        <Option link="/popular-actors/page/1">Popular Actors</Option>
+        <Link onClick={handleClick} to="/">
+          <Option>Home</Option>
+        </Link>
+        <Link onClick={handleClick} to="/movies/latest/page/1">
+          <Option>Movies</Option>
+        </Link>
+
+        <Link onClick={handleClick} to="/tv/latest/page/1">
+          <Option>Tv Shows</Option>
+        </Link>
+
+        <Link onClick={handleClick} to="/advanced-search/">
+          <Option>Advanced Search</Option>
+        </Link>
+        <Link onClick={handleClick} to="/popular-actors/page/1">
+          <Option>Popular Actors</Option>
+        </Link>
       </Options>
     </Container>
   );
