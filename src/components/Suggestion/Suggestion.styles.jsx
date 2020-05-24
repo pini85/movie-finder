@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  width: 35rem;
+  width: ${(props) => (props.width > 500 ? "35rem" : null)};
   padding: 1rem;
   font-size: 1.7rem;
   color: var(--text-white);

@@ -10,8 +10,10 @@ import {
 } from "../../redux/actions/index";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilm, faStar } from "@fortawesome/free-solid-svg-icons";
+import useWidth from "../../hooks/useWidth.hooks";
 
 const Suggestion = (props) => {
+  const width = useWidth().width;
   const handleClick = () => {
     props.selectedMovieId(props.item.id);
     props.movieSuggestions(false);
@@ -20,7 +22,7 @@ const Suggestion = (props) => {
 
   return (
     <a onClick={handleClick}>
-      <Container>
+      <Container width={width}>
         <Img
           src={`http://image.tmdb.org/t/p/w92/${props.item.poster_path}`}
           alt=""

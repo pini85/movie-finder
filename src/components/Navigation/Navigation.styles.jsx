@@ -9,6 +9,7 @@ export const Container = styled.div`
 `;
 
 export const SearchContainer = styled.div`
+  position: relative;
   padding: 1.5rem 2rem;
   width: max-content;
 `;
