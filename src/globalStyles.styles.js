@@ -46,13 +46,13 @@ ${normalize}
 }
 html { 
   font-size:62.5%;
-  @media screen and (max-width:1300px){
+  @media screen and (max-width:1400px){
     font-size:55%;
   }
-  @media screen and (max-width:1200px){
+  @media screen and (max-width:1300px){
     font-size:49%;
   }
-  @media screen and (max-width:1000px){
+  @media screen and (max-width:1100px){
     font-size:45%;
   }
  }

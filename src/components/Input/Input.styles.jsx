@@ -10,4 +10,7 @@ export const StyledInput = styled.input`
   @media screen and (max-width: 800px) {
     width: 30vw;
   }
+  @media screen and (max-width: 500px) {
+    width: 35vw;
+  }
 `;

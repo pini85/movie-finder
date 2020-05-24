@@ -3,15 +3,24 @@ export const Container = styled.div`
   position: absolute;
   top: 3.8vh;
   left: -30px;
-  width: 30rem;
   background: var(--secondary-color);
   border: 2px solid var(--primary-color);
-  border-top-right-radius: 50%;
-  border-bottom-right-radius: 5px;
+  border-bottom-right-radius: 10px;
+`;
+
+export const SearchContainer = styled.div`
+  padding: 1.5rem 2rem;
+  width: max-content;
+`;
+
+export const CustomizeContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 `;
 
 export const Options = styled.ul`
-  padding: 7rem 3rem;
+  padding: 1.5rem 3rem 3rem 3rem;
 `;
 
 export const Option = styled.li`

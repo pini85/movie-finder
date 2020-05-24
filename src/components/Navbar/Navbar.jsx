@@ -49,16 +49,22 @@ const Navbar = (props) => {
           <LightSwitch></LightSwitch>
         </>
       ) : (
-        <ContainerSmall>
+        <>
           <Hamburger />
-          <div style={{ display: "flex", alignItems: "center" }}>
-            <Customize></Customize>
-            <LightSwitch></LightSwitch>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              marginLeft: "auto",
+            }}
+          >
+            {width > 500 ? <Customize></Customize> : null}
+            {width > 500 ? <LightSwitch></LightSwitch> : null}
           </div>
-        </ContainerSmall>
+        </>
       )}
 
-      <Search />
+      {width > 500 ? <Search /> : null}
     </Container>
   );
 };

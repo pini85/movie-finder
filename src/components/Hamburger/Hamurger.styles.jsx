@@ -45,15 +45,7 @@ export const Navigation = styled.div`
   width: 30rem;
   padding: 7rem 3rem;
   background: var(--primary-color);
-  clip-path: polygon(
-    0% 20%,
-    60% 20%,
-    60% 0%,
-    100% 50%,
-    60% 100%,
-    60% 80%,
-    0% 80%
-  );
+ 
   
   /* transform: ${(props) => (props.isOpen ? "translateX(33rem)" : null)}; */
   transition: all 3s;

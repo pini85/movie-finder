@@ -164,7 +164,7 @@ export const tmdbAdvancedMoviesApi = async ({
   directors,
   writers,
 }) => {
-  console.log("toYear", sortBy);
+  console.log("directors", directors);
 
   const response = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&include_adult=false&include_video=false${advancedSearchSortBy(
