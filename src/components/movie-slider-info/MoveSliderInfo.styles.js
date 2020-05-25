@@ -21,7 +21,7 @@ export const DetailContainer = styled.div`
 `;
 
 export const Header = styled.div`
-  font-size: var(--heading-secondary);
+  font-size: var(--heading - secondary);
 `;
 
 export const Plot = styled.div`

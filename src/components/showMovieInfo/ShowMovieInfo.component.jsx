@@ -14,8 +14,11 @@ const Container = styled.div`
   margin-top: 3rem;
   border-radius: 8px;
   padding: 2rem 4rem;
-
   color: ${(props) => props.color};
+  @media screen and (max-width: 500px) {
+    padding: 2rem 4rem 0rem 4rem;
+
+  }
 `;
 
 const TitleContainer = styled.div`

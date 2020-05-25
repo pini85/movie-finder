@@ -43,7 +43,7 @@ const Trailer = ({ poster, fetchTrailers, trailers, colors }) => {
             <YouTube
               videoId={trailer.key}
               opts={optsYouTube}
-              // onReady={_onReadyYouTube}
+            // onReady={_onReadyYouTube}
             />
           </>
         );
@@ -71,6 +71,10 @@ const Trailer = ({ poster, fetchTrailers, trailers, colors }) => {
     @media screen and (max-width: 1000px) {
       right: 30px;
     }
+    @media screen and (max-width: 500px) {
+      top: 217px;
+    }
+    
     &:hover {
       transform: scale(1.2) skewY(-2.5deg) rotate(5deg);
     }

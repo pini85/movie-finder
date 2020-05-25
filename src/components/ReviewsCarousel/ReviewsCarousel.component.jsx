@@ -1,6 +1,7 @@
 import React from "react";
 import { Container } from "./ReviewsCarousel.styles";
 import { connect } from "react-redux";
+import { ContentContainer } from "./ReviewsCarousel.styles";
 
 const ReviewsCarousel = ({ author, content, color }) => {
   const cutContent = (content) => {
@@ -15,7 +16,7 @@ const ReviewsCarousel = ({ author, content, color }) => {
       <div>
         <i>By: {author} </i>
       </div>
-      <p>{cutContent(content)}</p>
+      <ContentContainer>{cutContent(content)}</ContentContainer>
     </Container>
   );
 };

@@ -15,14 +15,14 @@ export const Container = styled.div`
 export const HeroContainer = styled.div`
   height: 50vh;
   position: relative;
-
   z-index: 1;
-
   transform: skewY(2.5deg) translateY(-30px);
-
   color: var(--text-white);
   display: flex;
   justify-content: center;
+  @media screen and (max-width: 500px) {
+    height: 40vh;
+  }
 
   &:after {
     content: "";
@@ -56,11 +56,16 @@ export const TagLineContainer = styled.div`
   font-size: 3rem;
   font-weight: 700;
   font-style: italic;
+  @media screen and (max-width: 500px) {
+    font-size: 2.5rem;
+    padding-right: 21rem;
+    padding-bottom: 6rem;
+  }
 `;
 
 export const BottomContainer = styled.div`
-  /* height: 46.4%; */
   display: flex;
+
   @media screen and (max-width: 800px) {
     flex-direction: column;
     align-items: center;
@@ -91,6 +96,11 @@ export const PlotContainer = styled.div`
   align-self: flex-start;
   color: ${(props) => props.color};
   font-size: var(--paragraph);
+  @media screen and (max-width: 500px) {
+    width: auto;
+    padding: 0;
+    padding-top: 4rem;
+  }
 `;
 
 export const MovieCastContainer = styled.div`
@@ -106,6 +116,11 @@ export const MovieCastContainer = styled.div`
 
 export const LeftSide = styled.div`
   width: 75%;
+  @media screen and (max-width: 500px) {
+    width: auto;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 `;
 export const RightSide = styled.div``;
 

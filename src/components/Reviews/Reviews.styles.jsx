@@ -9,11 +9,15 @@ export const Container = styled.div`
   @media screen and (max-width: 800px) {
     width: auto;
   }
+  @media screen and (max-width: 500px) {
+    margin: 0;
+    margin-top: 3rem;
+  }
 
   &:before {
     content: "";
     position: absolute;
-    left: 5rem;
+    left: 41px;
     top: 11%;
     height: 64.5%;
     width: 1px;
@@ -22,7 +26,7 @@ export const Container = styled.div`
   &:after {
     content: "";
     position: absolute;
-    right: 4.5rem;
+    right: 41px;
     top: 11%;
     height: 64.5%;
     width: 1px;
