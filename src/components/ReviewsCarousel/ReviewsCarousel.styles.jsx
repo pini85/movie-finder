@@ -8,6 +8,7 @@ export const Container = styled.div`
 
 export const ContentContainer = styled.div`
   padding: 0 5rem;
+  word-break: break-word;
   @media screen and (max-width: 500px) {
     padding: 0 5rem;
   }

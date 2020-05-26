@@ -9,7 +9,7 @@ export const Container = styled.div`
   border-radius: 10px;
   padding: 5px;
   height: 30rem;
-  max-width: 18rem;
+  max-width: 80%;
   margin: 0 1rem;
   margin-bottom: 4rem;
   text-align: left;
@@ -39,6 +39,8 @@ export const Img = styled.img`
   border-radius: 10px;
   padding-top: 1rem;
   margin: 0 auto;
+  height: 70%;
+  width: 100%;
   ${(props) => (!props.profile ? noPhotoStyles : null)}
 `;
 

@@ -48,6 +48,9 @@ export const TopContainer = styled.div`
 export const MovieCard = styled.div`
   background: ${(props) => props.color};
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+  @media only screen and (max-width: 500px) {
+    overflow: hidden;
+  }
 `;
 
 export const TagLineContainer = styled.div`
@@ -58,8 +61,8 @@ export const TagLineContainer = styled.div`
   font-style: italic;
   @media screen and (max-width: 500px) {
     font-size: 2.5rem;
-    padding-right: 21rem;
-    padding-bottom: 6rem;
+    padding-right: 18rem;
+    padding-bottom: 3rem;
   }
 `;
 
@@ -98,13 +101,13 @@ export const PlotContainer = styled.div`
   font-size: var(--paragraph);
   @media screen and (max-width: 500px) {
     width: auto;
-    padding: 0;
-    padding-top: 4rem;
+    padding: ${(props) =>
+      props.tagline ? "4rem 4rem 0 4rem" : "0rem 25rem 0 4rem"};
   }
 `;
 
 export const MovieCastContainer = styled.div`
-  margin: 4rem 0;
+  margin-top: 4rem;
   padding-top: 2.5rem;
   padding-bottom: 3rem;
   border-radius: 5px;
@@ -117,7 +120,7 @@ export const MovieCastContainer = styled.div`
 export const LeftSide = styled.div`
   width: 75%;
   @media screen and (max-width: 500px) {
-    width: auto;
+    width: fit-content;
     padding-left: 2rem;
     padding-right: 2rem;
   }

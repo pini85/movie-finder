@@ -37,7 +37,6 @@ const ShowMovie = ({ item, colors, goToMovie }) => {
     };
     fetchData();
   }, [id]);
-  console.log(isLoading);
 
   const VibrantC = styled.div`
     height: 5rem;
@@ -70,71 +69,72 @@ const ShowMovie = ({ item, colors, goToMovie }) => {
     background: ${item ? colors.lightMuted : "var(secondary-color-light)"};
   `;
   const width = useWidth().width;
-  console.log(width);
 
   const spinner = () => {
-    console.log(width);
-
     if (width < 1000) {
       return <Film></Film>;
     } else {
       return <BouncingDvd></BouncingDvd>;
     }
   };
+  console.log("tagline", item && item.tagLine);
 
   return (
     <div>
       {isLoading
         ? spinner()
         : item && (
-          <Container color1={colors.darkMuted} color2={colors.muted}>
-            <MovieCard color={colors.lightVibrant}>
-              <HeroContainer poster={item.backdrop}>
-                <TopContainer>
-                  <ShowMovieInfo />
-                </TopContainer>
-                <Trailer poster={item.poster} />
-              </HeroContainer>
-              <BottomContainer>
-                <LeftSide>
-                  <PlotContainer color={colors.darkVibrant}>
-                    {item.tagLine && (
-                      <TagLineContainer>
-                        <span>&ldquo;</span>
-                        {item.tagLine}
-                        <span>&rdquo;</span>
-                      </TagLineContainer>
-                    )}
-                    <p>{item.plot}</p>
-                  </PlotContainer>
-                  <Reviews />
-                  {/* <DirectorAndWriterContainer>
+            <Container color1={colors.darkMuted} color2={colors.muted}>
+              <MovieCard color={colors.lightVibrant}>
+                <HeroContainer poster={item.backdrop}>
+                  <TopContainer>
+                    <ShowMovieInfo />
+                  </TopContainer>
+                  <Trailer poster={item.poster} />
+                </HeroContainer>
+                <BottomContainer>
+                  <LeftSide>
+                    <PlotContainer
+                      tagline={item.tagLine}
+                      color={colors.darkVibrant}
+                    >
+                      {item.tagLine && (
+                        <TagLineContainer>
+                          <span>&ldquo;</span>
+                          {item.tagLine}
+                          <span>&rdquo;</span>
+                        </TagLineContainer>
+                      )}
+                      <p>{item.plot}</p>
+                    </PlotContainer>
+                    <Reviews />
+                    {/* <DirectorAndWriterContainer>
                   <div>Director: {item.director}</div>
                   <div>Writers: {item.writer}</div>
                 </DirectorAndWriterContainer> */}
-                </LeftSide>
-                <RightSide>
-                  <OptionsContainer>
-                    <ShowMovieOption
-                      title="torrents"
-                      type="torrent"
-                      left={true}
-                    />
-                    <ShowMovieOption
-                      title="subtitles"
-                      type="sub"
-                      right={true}
-                    />
-                    <ShowMovieOption
-                      title="magnets"
-                      type="magnets"
-                      left={true}
-                    />
-                  </OptionsContainer>
-                </RightSide>
-              </BottomContainer>
+                  </LeftSide>
+                  <RightSide>
+                    <OptionsContainer>
+                      <ShowMovieOption
+                        title="torrents"
+                        type="torrent"
+                        left={true}
+                      />
+                      <ShowMovieOption
+                        title="subtitles"
+                        type="sub"
+                        right={true}
+                      />
+                      <ShowMovieOption
+                        title="magnets"
+                        type="magnets"
+                        left={true}
+                      />
+                    </OptionsContainer>
+                  </RightSide>
+                </BottomContainer>
 
-              {/* <div style={{ display: "flex" }}>
+                {/* <div style={{ display: "flex" }}>
               <DarkVibrant></DarkVibrant>
               <VibrantC></VibrantC>
               <LightVibrant></LightVibrant>
@@ -144,12 +144,12 @@ const ShowMovie = ({ item, colors, goToMovie }) => {
               <Muted></Muted>
               <LightMuted></LightMuted>
             </div> */}
-              <MovieCastContainer color={colors.lightVibrant}>
-                <MovieCast />
-              </MovieCastContainer>
-            </MovieCard>
-          </Container>
-        )}
+                <MovieCastContainer color={colors.lightVibrant}>
+                  <MovieCast />
+                </MovieCastContainer>
+              </MovieCard>
+            </Container>
+          )}
     </div>
   );
 };

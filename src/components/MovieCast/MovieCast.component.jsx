@@ -4,15 +4,17 @@ import Carousel from "../carousel/carousel.component";
 import useWidth from "../../hooks/useWidth.hooks";
 
 const MovieCast = ({ cast, colors }) => {
-  const width = useWidth();
+  const width = useWidth().width;
 
   const styling = {
     padding: "0 4rem",
   };
   const responsive = () => {
     switch (true) {
+      case width < 500:
+        return 2;
       case width < 800:
-        return 4;
+        return 3;
       case width < 1400:
         return 5;
       default:

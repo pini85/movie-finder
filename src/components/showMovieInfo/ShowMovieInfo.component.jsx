@@ -9,15 +9,14 @@ const Container = styled.div`
   color: ${(props) => props.color};
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
   text-align: center;
-  width: fit-content;
   height: fit-content;
   margin-top: 3rem;
   border-radius: 8px;
   padding: 2rem 4rem;
   color: ${(props) => props.color};
   @media screen and (max-width: 500px) {
-    padding: 2rem 4rem 0rem 4rem;
-
+    padding: 2rem 4rem 1rem 4rem;
+    width: 100vw;
   }
 `;
 

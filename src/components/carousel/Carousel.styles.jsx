@@ -18,13 +18,13 @@ export const CarouselStyling = styled(Slider)`
   & .slick-arrow.slick-prev {
     position: absolute;
     top: 50%;
-    left: 1rem;
+    left: 11px;
     z-index: 99;
   }
   & .slick-arrow.slick-next {
     position: absolute;
     top: 50%;
-    right: 1.8rem;
+    right: 19px;
     z-index: 99;
   }
   & .slick-next::before,
