@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Container, Button, ButtonContainer } from "./Modal.styles";
 

@@ -62,6 +62,7 @@ body {
   min-height: 100vh;
   font-weight: 400;
   line-height: 1.7;
+  overflow: hidden;
 }
 #app {
   min-height:100vh;

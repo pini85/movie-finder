@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   position: absolute;
-  top: -5vh;
-  left: -14vw;
+  /* top: -5vh;
+  left: -14vw; */
   z-index: 999;
   display: flex;
   justify-content: center;
