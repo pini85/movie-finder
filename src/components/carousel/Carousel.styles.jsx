@@ -4,6 +4,7 @@ export const TrailerContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  transform: ${(props) => (props.width < 800 ? "scale(0.5)" : null)};
 `;
 export const CarouselStyling = styled(Slider)`
   /* & .slick-slider.slick-initialized {

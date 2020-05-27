@@ -9,6 +9,7 @@ import MovieSlider from "../movieSLider/MovieSlider.component";
 import MovieCastCarousel from "../MovieCastCarousel/MovieCastCarousel.component";
 import ReviewsCarousel from "../ReviewsCarousel/ReviewsCarousel.component";
 import { CarouselStyling } from "./Carousel.styles";
+import useWidth from "../../hooks/useWidth.hooks";
 const Carousel = ({
   type,
   trailers,
@@ -23,6 +24,7 @@ const Carousel = ({
   activeDotColor,
   dotColor,
 }) => {
+  const width = useWidth().width;
   const optsYouTube = {
     height: "390",
     width: "640",
@@ -56,7 +58,7 @@ const Carousel = ({
           trailers.map((trailer) => {
             return (
               <div key={trailer.id}>
-                <TrailerContainer>
+                <TrailerContainer width={width}>
                   <YouTube
                     videoId={trailer.key}
                     opts={optsYouTube}

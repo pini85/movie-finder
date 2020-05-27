@@ -11,6 +11,10 @@ const Modal = ({
   skew,
   children,
 }) => {
+  useEffect(() => {
+    isToggled && (document.body.style.overflow = "hidden");
+    !isToggled && (document.body.style.overflow = "unset");
+  }, [isToggled]);
   const handleClick = () => {
     setToggled(false);
     if (setSpinners || setThemes) {

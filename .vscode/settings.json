@@ -1,9 +1,12 @@
 {
     "cSpell.ignoreWords": [
         "api",
+        "fontawesome",
+        "fortawesome",
         "omdb",
         "persistor",
         "tmdb",
-        "trailers"
+        "trailers",
+        "youtube"
     ]
 }

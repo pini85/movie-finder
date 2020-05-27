@@ -6,7 +6,7 @@ export const TrailerContainer = styled.div`
   align-items: center;
   transform: skewY(-2.5deg);
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-  background: url(https://image.tmdb.org/t/p/w185//${props => (props.poster ? props.poster : null)});
+  background: url(https://image.tmdb.org/t/p/w185//${(props) => (props.poster ? props.poster : null)});
 
   background-size: 100% 100%;
   background-repeat: cover;
@@ -28,21 +28,25 @@ export const TrailerPlay = styled.div`
   border-radius: 100%;
   background: rgba(0, 0, 0, 0.6);
   transition: all 0.3s;
-  ${props => props.vibrant}
+  ${(props) => props.vibrant}
   /* &:hover {
   background: var(--secondary-color);
 } */
   &:hover:after {
-    color: ${props => props.vibrantDark};
+    color: ${(props) => props.vibrantDark};
   }
   &:after {
     content: "\\0025BA";
     position: absolute;
     font-size: 4rem;
-    color: ${props => props.vibrant};
+    color: ${(props) => props.vibrant};
     top: 50%;
     left: 53%;
     transform: translate(-50%, -50%);
     transition: all 0.3s;
   }
+`;
+
+export const YouTubeContainer = styled.div`
+  transform: scale(0.5);
 `;

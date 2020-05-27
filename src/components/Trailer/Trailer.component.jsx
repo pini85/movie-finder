@@ -7,8 +7,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilm } from "@fortawesome/free-solid-svg-icons";
 import Modal from "../Modal/Modal.component";
 import Carousel from "../carousel/carousel.component";
+import useWidth from "../../hooks/useWidth.hooks";
 
 const Trailer = ({ poster, fetchTrailers, trailers, colors }) => {
+  const width = useWidth().width;
+  console.log(width < 800);
+
   const [isToggled, setToggled] = useState(false);
   const [isLoading, setLoading] = useState(false);
   useEffect(() => {
@@ -33,19 +37,14 @@ const Trailer = ({ poster, fetchTrailers, trailers, colors }) => {
       // access to player in all event handlers via event.target
       event.target.pauseVideo();
     };
+
     return (
       trailers &&
       trailers.map((trailer) => {
-        console.log(trailer);
-
         return (
-          <>
-            <YouTube
-              videoId={trailer.key}
-              opts={optsYouTube}
-            // onReady={_onReadyYouTube}
-            />
-          </>
+          <YouTubeContainer width={width}>
+            <YouTube videoId={trailer.key} opts={optsYouTube} />
+          </YouTubeContainer>
         );
       })
     );
@@ -74,7 +73,7 @@ const Trailer = ({ poster, fetchTrailers, trailers, colors }) => {
     @media screen and (max-width: 500px) {
       top: 217px;
     }
-    
+
     &:hover {
       transform: scale(1.2) skewY(-2.5deg) rotate(5deg);
     }
@@ -102,6 +101,10 @@ const Trailer = ({ poster, fetchTrailers, trailers, colors }) => {
       transition: all 0.3s;
     }
   `;
+  const YouTubeContainer = styled.div`
+    transform: scale(0.5);
+  `;
+
   return (
     <>
       <TrailerContainer>
