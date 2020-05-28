@@ -11,8 +11,6 @@ import useWidth from "../../hooks/useWidth.hooks";
 
 const Trailer = ({ poster, fetchTrailers, trailers, colors }) => {
   const width = useWidth().width;
-  console.log(width < 800);
-
   const [isToggled, setToggled] = useState(false);
   const [isLoading, setLoading] = useState(false);
   useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Container, Button, ButtonContainer } from "./Modal.styles";
 
@@ -11,10 +11,17 @@ const Modal = ({
   skew,
   children,
 }) => {
+  const [x, setX] = useState(null);
+  const [y, setY] = useState(null);
+  const ref = useRef(null);
+  const tCor = ref.current && ref.current.getBoundingClientRect().y;
+  console.log(tCor);
+
   useEffect(() => {
     isToggled && (document.body.style.overflow = "hidden");
     !isToggled && (document.body.style.overflow = "unset");
   }, [isToggled]);
+
   const handleClick = () => {
     setToggled(false);
     if (setSpinners || setThemes) {
@@ -39,6 +46,7 @@ const Modal = ({
     <AnimatePresence>
       {isToggled && (
         <Container
+          ref={ref}
           style={
             skew ? { transform: "skewY(-2.5deg)" } : { top: "0", left: "-15px" }
           }

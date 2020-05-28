@@ -10,6 +10,7 @@ import Reviews from "../Reviews/Review.component";
 import BouncingDvd from "../spinners/BouncingDvd/BouncingDvd.component";
 import Film from "../spinners/Film/Film.component";
 import useWidth from "../../hooks/useWidth.hooks";
+
 import {
   Container,
   HeroContainer,
@@ -77,7 +78,6 @@ const ShowMovie = ({ item, colors, goToMovie }) => {
       return <BouncingDvd></BouncingDvd>;
     }
   };
-  console.log("tagline", item && item.tagLine);
 
   return (
     <div>
