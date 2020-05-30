@@ -7,7 +7,6 @@ import { faFilm } from "@fortawesome/free-solid-svg-icons";
 import Modal from "../Modal/Modal.component";
 import Carousel from "../carousel/carousel.component";
 import useWidth from "../../hooks/useWidth.hooks";
-import useScreenPosition from "../../hooks/useScreenPosition.hooks";
 import {
   TrailerContainer,
   TrailerPlay,
@@ -16,6 +15,7 @@ import {
 
 const Trailer = ({ poster, fetchTrailers, trailers, colors }) => {
   const width = useWidth().width;
+
   const [isToggled, setToggled] = useState(false);
   const [isLoading, setLoading] = useState(false);
   useEffect(() => {
@@ -50,9 +50,8 @@ const Trailer = ({ poster, fetchTrailers, trailers, colors }) => {
   };
   const handleClick = (e) => {
     setToggled(true);
-    console.log(e.target);
+    window.scrollTo(0, 0);
   };
-  console.log(isToggled);
 
   return (
     <>

@@ -22,17 +22,22 @@ const ShowMovieOption = ({ colors, title, type, left, right }) => {
         return null;
     }
   };
+  const handleClick = () => {
+    setToggled(true);
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
       <Container
+        onClick={handleClick}
         left={left}
         right={right}
         color1={colors.darkVibrant}
         color2={colors.vibrant}
         textLight={colors.lightVibrant}
       >
-        <div onClick={() => setToggled(true)}>{title}</div>
+        <div>{title}</div>
       </Container>
 
       {isToggled && (

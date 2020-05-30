@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Container, Button, ButtonContainer } from "./Modal.styles";
 
@@ -11,13 +11,9 @@ const Modal = ({
   skew,
   children,
 }) => {
-  const ref = useRef(null);
-  const yCord = ref.current && ref.current.getBoundingClientRect().y;
-  console.log("y", yCord);
-
   useEffect(() => {
-    isToggled && (document.body.style.overflow = "hidden");
-    !isToggled && (document.body.style.overflow = "unset");
+    // isToggled && (document.body.style.overflow = "hidden");
+    // !isToggled && (document.body.style.overflow = "unset");
   }, [isToggled]);
 
   const handleClick = () => {
@@ -28,24 +24,11 @@ const Modal = ({
       setOption(null);
     }
   };
-  const trailerStyles = () => {
-    if (skew) {
-      return {
-        transform: "translate(-50%, -25%) skewY(-2.5deg)",
-        top: "50%",
-        left: "49",
-      };
-    }
-  };
-
-  //Multilayer animations
 
   return (
     <AnimatePresence>
       {isToggled && (
         <Container
-          ref={ref}
-          y={Math.round(yCord)}
           style={
             skew ? { transform: "skewY(-2.5deg)" } : { top: "0", left: "-15px" }
           }
