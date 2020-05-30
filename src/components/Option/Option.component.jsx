@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { history, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import { optionActive } from "../../redux/actions";
 

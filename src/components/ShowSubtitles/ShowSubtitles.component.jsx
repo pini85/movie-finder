@@ -5,33 +5,31 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFilm } from "@fortawesome/free-solid-svg-icons";
 import { SpinnerContainer } from "./showSubtitles.styles";
 
-const ShowSubtitles = props => {
+const ShowSubtitles = ({ fetchSubtitles, subtitles }) => {
   const [isLoading, setLoading] = useState(true);
   useEffect(() => {
     const fetchData = async () => {
-      console.log("hellooooo");
-
-      await props.fetchSubtitles();
+      await fetchSubtitles();
       setLoading(false);
     };
     fetchData();
-  }, []);
+  }, [fetchSubtitles]);
   return (
     <>
       <SpinnerContainer>
         {isLoading ? <FontAwesomeIcon icon={faFilm} /> : null}
       </SpinnerContainer>
-      {props.subtitles && (
+      {subtitles && (
         <div>
-          <a href={props.subtitles}> subtitle</a>
+          <a href={subtitles}> subtitle</a>
         </div>
       )}
     </>
   );
 };
-const mapStateToProps = state => ({
-  subtitles: state.fetchSubtitles
+const mapStateToProps = (state) => ({
+  subtitles: state.fetchSubtitles,
 });
 export default connect(mapStateToProps, {
-  fetchSubtitles: fetchSubtitles
+  fetchSubtitles: fetchSubtitles,
 })(ShowSubtitles);

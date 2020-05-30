@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 import { saveUserAdvancedSearch, displayUserSearch } from "../../redux/actions";
 import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
@@ -43,7 +43,6 @@ const AdvancedSearchResult = ({
   };
 
   const displayResults = (type) => {
-    console.log(displayUserSavedAdvancedSearch);
     if (displayUserSavedAdvancedSearch) {
       switch (type) {
         case "fromYear":
@@ -134,6 +133,7 @@ const AdvancedSearchResult = ({
       </div>
       <div>
         Actors:
+        {console.log(actors.length > 0)}
         {actors.length > 0 || displayUserSavedAdvancedSearch ? (
           displayResults("actors").map((actor) => <Result>{actor}</Result>)
         ) : (

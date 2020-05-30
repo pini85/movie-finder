@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from "react";
-import { Container, CanvasContainer } from "./BouncingDvd.styles";
+import React, { useEffect, useRef } from "react";
+import { CanvasContainer } from "./BouncingDvd.styles";
 import useWidth from "../../../hooks/useWidth.hooks";
 const BouncingDvd = () => {
   const width = useWidth().width;

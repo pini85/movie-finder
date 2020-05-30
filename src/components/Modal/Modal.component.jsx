@@ -11,11 +11,9 @@ const Modal = ({
   skew,
   children,
 }) => {
-  const [x, setX] = useState(null);
-  const [y, setY] = useState(null);
   const ref = useRef(null);
-  const tCor = ref.current && ref.current.getBoundingClientRect().y;
-  console.log(tCor);
+  const yCord = ref.current && ref.current.getBoundingClientRect().y;
+  console.log("y", yCord);
 
   useEffect(() => {
     isToggled && (document.body.style.overflow = "hidden");
@@ -47,6 +45,7 @@ const Modal = ({
       {isToggled && (
         <Container
           ref={ref}
+          y={Math.round(yCord)}
           style={
             skew ? { transform: "skewY(-2.5deg)" } : { top: "0", left: "-15px" }
           }

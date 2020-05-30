@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchActorMovies, fetchMovies } from "../../redux/actions";
+import { fetchActorMovies } from "../../redux/actions";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 

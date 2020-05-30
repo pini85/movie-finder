@@ -2,17 +2,17 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchTorrents } from "../../redux/actions";
 
-const ShowTorrents = props => {
+const ShowTorrents = ({ fetchTorrents, torrents }) => {
   useEffect(() => {
     const fetchData = async () => {
-      await props.fetchTorrents();
+      await fetchTorrents();
     };
     fetchData();
-  }, []);
+  }, [fetchTorrents]);
 
   return (
-    props.torrents &&
-    props.torrents.map(torrent => {
+    torrents &&
+    torrents.map((torrent) => {
       return (
         <div>
           {}
@@ -28,9 +28,9 @@ const ShowTorrents = props => {
     })
   );
 };
-const mapStateToProps = state => ({
-  torrents: state.fetchTorrents
+const mapStateToProps = (state) => ({
+  torrents: state.fetchTorrents,
 });
 export default connect(mapStateToProps, {
-  fetchTorrents: fetchTorrents
+  fetchTorrents: fetchTorrents,
 })(ShowTorrents);

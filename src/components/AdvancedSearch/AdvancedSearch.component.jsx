@@ -15,7 +15,6 @@ import {
   fetchGenres,
   createAdvancedSearch,
   fetchAdvancedSearch,
-  history,
 } from "../../redux/actions/index";
 import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
 import findGenreWithId from "../../utlis/findGenreWithId";

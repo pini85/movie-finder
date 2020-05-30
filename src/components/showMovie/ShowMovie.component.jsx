@@ -24,7 +24,6 @@ import {
   LeftSide,
   RightSide,
 } from "./ShowMovie.styles";
-import styled from "styled-components";
 
 const ShowMovie = ({ item, colors, goToMovie }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -39,36 +38,36 @@ const ShowMovie = ({ item, colors, goToMovie }) => {
     fetchData();
   }, [id]);
 
-  const VibrantC = styled.div`
-    height: 5rem;
-    width: 5rem;
-    background: ${item ? colors.vibrant : "var(primary-color)"};
-  `;
-  const DarkVibrant = styled.div`
-    height: 5rem;
-    width: 5rem;
-    background: ${item ? colors.darkVibrant : "var(primary-color)"};
-  `;
-  const LightVibrant = styled.div`
-    height: 5rem;
-    width: 5rem;
-    background: ${item ? colors.lightVibrant : "var(primary-color-light)"};
-  `;
-  const Muted = styled.div`
-    height: 5rem;
-    width: 5rem;
-    background: ${item ? colors.muted : "var(secondary-color)"};
-  `;
-  const DarkMuted = styled.div`
-    height: 5rem;
-    width: 5rem;
-    background: ${item ? colors.darkMuted : "var(secondary-color"};
-  `;
-  const LightMuted = styled.div`
-    height: 5rem;
-    width: 5rem;
-    background: ${item ? colors.lightMuted : "var(secondary-color-light)"};
-  `;
+  // const VibrantC = styled.div`
+  //   height: 5rem;
+  //   width: 5rem;
+  //   background: ${item ? colors.vibrant : "var(primary-color)"};
+  // `;
+  // const DarkVibrant = styled.div`
+  //   height: 5rem;
+  //   width: 5rem;
+  //   background: ${item ? colors.darkVibrant : "var(primary-color)"};
+  // `;
+  // const LightVibrant = styled.div`
+  //   height: 5rem;
+  //   width: 5rem;
+  //   background: ${item ? colors.lightVibrant : "var(primary-color-light)"};
+  // `;
+  // const Muted = styled.div`
+  //   height: 5rem;
+  //   width: 5rem;
+  //   background: ${item ? colors.muted : "var(secondary-color)"};
+  // `;
+  // const DarkMuted = styled.div`
+  //   height: 5rem;
+  //   width: 5rem;
+  //   background: ${item ? colors.darkMuted : "var(secondary-color"};
+  // `;
+  // const LightMuted = styled.div`
+  //   height: 5rem;
+  //   width: 5rem;
+  //   background: ${item ? colors.lightMuted : "var(secondary-color-light)"};
+  // `;
   const width = useWidth().width;
 
   const spinner = () => {

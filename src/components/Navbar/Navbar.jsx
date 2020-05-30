@@ -7,12 +7,7 @@ import LightSwitch from "../LightSwitch/LightSwitch.component";
 import Customize from "../Customize/Customize.component";
 import UseWidth from "../../hooks/useWidth.hooks";
 import "../../themes/replaceTheme";
-import {
-  Container,
-  NavbarItemContainer,
-  ContainerSmall,
-  Img,
-} from "./Navbar.styles";
+import { Container, NavbarItemContainer, Img } from "./Navbar.styles";
 
 const Navbar = (props) => {
   const width = UseWidth().width;

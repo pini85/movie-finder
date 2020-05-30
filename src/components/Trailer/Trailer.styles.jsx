@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 export const TrailerContainer = styled.div`
   position: absolute;
   display: flex;
@@ -6,7 +6,10 @@ export const TrailerContainer = styled.div`
   align-items: center;
   transform: skewY(-2.5deg);
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
-  background: url(https://image.tmdb.org/t/p/w185//${(props) => (props.poster ? props.poster : null)});
+  background: ${(props) =>
+    `url(https://image.tmdb.org/t/p/w185//${
+      props.poster ? props.poster : null
+    })`};
 
   background-size: 100% 100%;
   background-repeat: cover;
@@ -28,12 +31,9 @@ export const TrailerPlay = styled.div`
   border-radius: 100%;
   background: rgba(0, 0, 0, 0.6);
   transition: all 0.3s;
-  ${(props) => props.vibrant}
-  /* &:hover {
-  background: var(--secondary-color);
-} */
+
   &:hover:after {
-    color: ${(props) => props.vibrantDark};
+    color: ${(props) => props.color};
   }
   &:after {
     content: "\\0025BA";

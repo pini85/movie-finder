@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Container, CarouselContainer, Header, Paragraph } from "./Home.styles";
 import { connect } from "react-redux";
 import {
@@ -30,6 +30,8 @@ const Home = (props) => {
             COMING SOON
           </h1>
         );
+      default:
+        return null;
     }
   };
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
@@ -12,7 +12,6 @@ import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
 
 const Search = (props) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [isSending, setIsSending] = useState(false);
 
   useDidUpdateEffect(() => {
     setTimeout(async () => {

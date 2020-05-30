@@ -8,12 +8,12 @@ const ShowMagnets = ({ fetchMagnets, magnets }) => {
       await fetchMagnets();
     };
     fetchData();
-  }, []);
+  }, [fetchMagnets]);
 
   return (
     <div>
       {magnets &&
-        magnets.map(magnet => {
+        magnets.map((magnet) => {
           console.log(magnet);
 
           return <a href={magnet}>MAGNET</a>;
@@ -22,12 +22,12 @@ const ShowMagnets = ({ fetchMagnets, magnets }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  magnets: state.fetchMagnets
+const mapStateToProps = (state) => ({
+  magnets: state.fetchMagnets,
 });
 
 export default connect(mapStateToProps, {
-  fetchMagnets: fetchMagnets
+  fetchMagnets: fetchMagnets,
 })(ShowMagnets);
 
 // import React, { useEffect, useState } from "react";

@@ -8,7 +8,6 @@ import {
   fetchActorMovies,
   fetchPopularActors,
 } from "../../redux/actions/index";
-import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
 import Pagination from "../Pagination/Pagination.component";
 
 import Card from "../card/Card";

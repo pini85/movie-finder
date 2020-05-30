@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { TrailerContainer } from "./Carousel.styles";
 import YouTube from "react-youtube";
 import "./carousel.styles.css";

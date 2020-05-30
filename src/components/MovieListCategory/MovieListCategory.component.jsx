@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import {
   selectedMovie,
@@ -24,6 +24,8 @@ const MovieListCategory = (props) => {
           props.isFetching(false);
 
           break;
+        default:
+          return null;
       }
     };
     fetchData();

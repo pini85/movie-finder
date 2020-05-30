@@ -1,12 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import MovieSliderInfo from "../movie-slider-info/MovieSliderInfo.component";
 
 import styled from "styled-components";
 
 const movieSlider = (props) => {
-  const test = () => {};
-
   const Container = styled.div`
     height: 50rem;
     background: url(https://image.tmdb.org/t/p/w1280//${props.movie.backdrop_path});
