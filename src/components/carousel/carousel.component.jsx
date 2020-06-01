@@ -110,7 +110,7 @@ const Carousel = ({
   };
 
   return (
-    <div style={styleContainer}>
+    <>
       <CarouselStyling
         color={color}
         activeDotColor={activeDotColor}
@@ -118,7 +118,7 @@ const Carousel = ({
       >
         <Slider {...settings}>{category()}</Slider>
       </CarouselStyling>
-    </div>
+    </>
   );
 };
 const mapStateToProps = (state) => ({

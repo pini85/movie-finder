@@ -3,20 +3,21 @@ import styled from "styled-components";
 export const Container = styled.div`
   cursor: pointer;
   position: relative;
+  margin: 0 auto;
 
   color: ${(props) => props.fontColor};
   font-weight: 700;
   border-radius: 10px;
   padding: 5px;
-  height: 30rem;
-  max-width: 80%;
-  margin: 0 1rem;
+  height: 33rem;
+  width: min-content;
+  /* max-width: 80%; */
+  /* margin: 0 1rem; */
   margin-bottom: 4rem;
   text-align: left;
-
   font-size: 16px;
   background: ${(props) => props.color};
-  background: transparent;
+  /* background: transparent; */
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   transition: all 0.3s;
   @media screen and (max-width: 1200px) {
@@ -37,10 +38,9 @@ width:14rem
 `;
 export const Img = styled.img`
   border-radius: 10px;
-  padding-top: 1rem;
   margin: 0 auto;
-  height: 70%;
-  width: 100%;
+  height: 21rem;
+  /* width: 100%; */
   ${(props) => (!props.profile ? noPhotoStyles : null)}
 `;
 

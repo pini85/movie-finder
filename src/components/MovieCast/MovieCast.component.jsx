@@ -15,7 +15,7 @@ const MovieCast = ({ cast, colors }) => {
         return 2;
       case width < 800:
         return 3;
-      case width < 1400:
+      case width < 1500:
         return 5;
       default:
         return 6;
@@ -31,7 +31,7 @@ const MovieCast = ({ cast, colors }) => {
         autoPlay={false}
         fade={false}
         styling={styling}
-        color={colors.vibrant}
+        color={colors.darkVibrant}
         activeDotColor={colors.darkMuted}
         dotsColor={colors.lightMuted}
       ></Carousel>

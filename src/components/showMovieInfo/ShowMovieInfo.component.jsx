@@ -44,6 +44,11 @@ const ReviewItem = styled.div`
   margin: 0.5rem 1rem 0rem 1rem;
   color: ${(props) => props.color};
   font-weight: 700;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 5px;
+  height: 6rem;
+  width: 8rem;
+  border-radius: 10px;
 `;
 
 const Image = styled.img`
@@ -71,6 +76,9 @@ const CircleRating = styled.div`
     background: red;
   }
 `;
+const ReviewValueContainer = styled.div`
+  font-size: 1.5rem;
+`;
 const ShowMovieInfo = ({ colors, movie }) => {
   return (
     <Container color={colors.lightVibrant}>
@@ -90,9 +98,9 @@ const ShowMovieInfo = ({ colors, movie }) => {
             return (
               <ReviewItem color={colors.vibrant}>
                 <Image src={rate.img} alt="" />
-                <div style={{ fontSize: "1.5rem" }}>
+                <ReviewValueContainer>
                   {rate.rating ? rate.rating.Value : rate.imdb.Value}
-                </div>
+                </ReviewValueContainer>
               </ReviewItem>
             );
           })}

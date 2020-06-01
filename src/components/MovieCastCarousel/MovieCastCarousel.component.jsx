@@ -33,7 +33,7 @@ const MovieCastCarousel = ({
   return (
     <Container
       onClick={handleClick}
-      fontColor={colors.darktMuted}
+      fontColor={colors.darkMuted}
       color={colors.vibrant}
     >
       <Img

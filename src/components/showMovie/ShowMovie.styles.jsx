@@ -108,6 +108,9 @@ export const PlotContainer = styled.div`
 
 export const MovieCastContainer = styled.div`
   margin-top: 4rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+  margin: 0 auto;
   padding-top: 2.5rem;
   padding-bottom: 3rem;
   border-radius: 5px;

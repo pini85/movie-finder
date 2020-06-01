@@ -1,5 +1,6 @@
 .slick-slider {
   width: 100%;
+  overflow: visible;
 }
 /* .slick-dots li button:before {
   color: white;

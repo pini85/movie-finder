@@ -22,6 +22,9 @@ export const TrailerContainer = styled.div`
   &:hover {
     transform: scale(1.2) skewY(-2.5deg) rotate(5deg);
   }
+  @media screen and (max-width: 1000px) {
+    right: 16px;
+  }
 `;
 export const TrailerPlay = styled.div`
   cursor: pointer;

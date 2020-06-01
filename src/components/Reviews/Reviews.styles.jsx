@@ -18,7 +18,7 @@ export const Container = styled.div`
     content: "";
     position: absolute;
     left: 41px;
-    top: 11%;
+    top: 19%;
     height: 64.5%;
     width: 1px;
     background: ${(props) => props.borderColor};
@@ -27,7 +27,7 @@ export const Container = styled.div`
     content: "";
     position: absolute;
     right: 41px;
-    top: 11%;
+    top: 19%;
     height: 64.5%;
     width: 1px;
     background: ${(props) => props.borderColor};

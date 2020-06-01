@@ -7,26 +7,38 @@ export const TrailerContainer = styled.div`
   transform: ${(props) => (props.width < 800 ? "scale(0.5)" : null)};
 `;
 export const CarouselStyling = styled(Slider)`
+
   /* & .slick-slider.slick-initialized {
     padding: 0 4rem;
     @media screen and (max-width: 700px) {
       padding: 0;
     }
   } */
+  & .slick-list {
+    overflow:visible;
+  }
   & .slick-arrow {
     font-size: 2rem;
   }
   & .slick-arrow.slick-prev {
     position: absolute;
     top: 50%;
-    left: 11px;
+    left: -18px;
     z-index: 99;
+    @media screen and (min-width:800px){
+     left:-18px;
+    }
   }
   & .slick-arrow.slick-next {
     position: absolute;
     top: 50%;
-    right: 19px;
+    /* next should be 10px more than prev */
+    right: -16px;
     z-index: 99;
+
+    /* @media screen and (man-width: 1300px){
+      right:6;
+    } */
   }
   & .slick-next::before,
   & .slick-prev::before {
@@ -53,4 +65,11 @@ export const CarouselStyling = styled(Slider)`
     opacity: 0.5;
     color: white;
   }
+  /* .slick-slide {
+    margin: 0 1px;
+  }
+  /* the parent */
+  .slick-list {
+    margin: 0 -1px;
+  } */
 `;
