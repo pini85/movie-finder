@@ -21,7 +21,7 @@ export const HeroContainer = styled.div`
   display: flex;
   justify-content: center;
   @media screen and (max-width: 500px) {
-    height: 40vh;
+    height: 45vh;
   }
 
   &:after {
@@ -108,8 +108,8 @@ export const PlotContainer = styled.div`
 
 export const MovieCastContainer = styled.div`
   margin-top: 4rem;
-  padding-left: 3rem;
-  padding-right: 3rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
   margin: 0 auto;
   padding-top: 2.5rem;
   padding-bottom: 3rem;

@@ -23,7 +23,8 @@ export const CarouselStyling = styled(Slider)`
   & .slick-arrow.slick-prev {
     position: absolute;
     top: 50%;
-    left: -18px;
+    left: -12px;
+    left:0;
     z-index: 99;
     @media screen and (min-width:800px){
      left:-18px;
@@ -33,7 +34,8 @@ export const CarouselStyling = styled(Slider)`
     position: absolute;
     top: 50%;
     /* next should be 10px more than prev */
-    right: -16px;
+    right: -10px;
+    right:0;
     z-index: 99;
 
     /* @media screen and (man-width: 1300px){
