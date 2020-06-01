@@ -8,7 +8,8 @@ Features need to be done:
 <!-- - Reviews -->
 <!-- - Spinner -->
 
-- Mobile
+<!-- - Mobile -->
+
 - Fix all bugs
 
 * animations -> First thing is to make an accordian to reviews

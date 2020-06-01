@@ -16,7 +16,7 @@ const movieSlider = (props) => {
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-attachment: inherit;
     background-position: center;
   `;
 

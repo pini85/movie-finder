@@ -302,8 +302,11 @@ export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
   let directorsArray = [];
   let writersArray = [];
   const fetchCastIds = async (castType, arrayType) => {
+    console.log(castType);
+
     const fetch = await Promise.all(
-      castType.values.map(async (cast) => {
+      //removed values from  castType.values.map
+      castType.map(async (cast) => {
         const castDetails = await tmdbCastId(cast);
 
         return castDetails.results[0].id;
@@ -317,20 +320,23 @@ export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
   //   savedSearch ? savedSearch.search.actors[0] : search.actorsArray,
   //   actorsArray
   // );
+
   await fetchCastIds(
     savedSearch ? savedSearch.search.actors : search.actorsArray,
     actorsArray
   );
 
+  console.log(savedSearch.search.directors);
   await fetchCastIds(
     savedSearch && savedSearch.active
-      ? savedSearch.search.directors[0]
+      ? savedSearch.search.directors
       : search.directorsArray,
     directorsArray
   );
+
   await fetchCastIds(
     savedSearch && savedSearch.active
-      ? savedSearch.search.writers[0]
+      ? savedSearch.search.writers
       : search.writersArray,
     writersArray
   );
