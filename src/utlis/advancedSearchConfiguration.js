@@ -82,13 +82,15 @@ export const advancedSearchVotes = (votes) => {
 // };
 
 export const advancedSearchCast = (cast) => {
-  if (cast.values.length < 1) return "";
+  console.log("cast", cast);
+
+  if (cast.length < 1) return "";
   let string = "&with_cast=";
   const option = cast.option === "and" ? "," : "||";
   if (cast.length === 1) {
     return [cast[0]];
   }
-  cast.values.map((actor) => {
+  cast.map((actor) => {
     if (!string) {
       string += actor;
     } else {
@@ -100,14 +102,14 @@ export const advancedSearchCast = (cast) => {
 };
 export const displayFromYear = (value) => {
   if (value) {
-    return `&primary_release_date.gte=${value}`;
+    return `&primary_release_date.gte=${value}-01-01`;
   } else {
     return "";
   }
 };
 export const displayToYear = (value) => {
   if (value) {
-    return `&primary_release_date.lte=${value}`;
+    return `&primary_release_date.lte=${value}-01-01`;
   } else {
     return "";
   }
