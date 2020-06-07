@@ -120,7 +120,7 @@ export const advancedSearchSortBy = (value) => {
     case "vote-average":
       return "&sort_by=vote_average.desc";
     default:
-      return "&sort_by=popularity.desc.desc";
+      return "&sort_by=vote_average.desc";
   }
 };
 export const displayGenre = (value) => {

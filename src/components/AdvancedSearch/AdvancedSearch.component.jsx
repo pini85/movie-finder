@@ -184,16 +184,12 @@ const AdvancedSearch = (props) => {
 
   const handleSubmit = () => {
     let searchObj;
-    const editFromYear = `${fromYear}-01-01`;
-    const editToYear = `${toYear}-01-01`;
+    // const editFromYear = `${fromYear}-01-01`;
+    // const editToYear = `${toYear}-01-01`;
     if (props.displayAdvancedSearch) {
       searchObj = {
-        fromYear: props.displayAdvancedSearch.search.fromYear
-          ? editFromYear
-          : props.displayAdvancedSearch.search.fromYear,
-        toYear: props.displayAdvancedSearch.search.toYear
-          ? editToYear
-          : props.displayAdvancedSearch.search.toYear,
+        fromYear: props.displayAdvancedSearch.search.fromYear,
+        toYear: props.displayAdvancedSearch.search.toYear,
         rating: props.displayAdvancedSearch.search.rating,
         voteCun: props.displayAdvancedSearch.search.voteCount,
         genres: props.displayAdvancedSearch.search.genres,
@@ -209,8 +205,8 @@ const AdvancedSearch = (props) => {
       console.log("im in else");
 
       searchObj = {
-        fromYear: fromYear ? editFromYear : fromYear,
-        toYear: toYear ? editToYear : toYear,
+        fromYear: fromYear,
+        toYear: toYear,
         rating,
         voteCount,
         genres,
@@ -222,7 +218,12 @@ const AdvancedSearch = (props) => {
     }
     props.createAdvancedSearch(searchObj);
     props.fetchAdvancedSearch(1);
-    props.history.push(`/advanced-search/dsfdsgg/page/1`);
+    console.log(props.displayAdvancedSearch.search.fromYear, "hi");
+
+    props.history.push(
+      `/advanced-search/from-year=${searchObj.fromYear}/page/1`
+    );
+    // /cars?color=blue&type=sedan&doors=4
   };
 
   const resetSearch = () => {

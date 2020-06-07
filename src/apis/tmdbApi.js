@@ -72,7 +72,6 @@ export const tmdbTrailersApi = async (id) => {
     `https://api.themoviedb.org/3/movie/${id}/videos?api_key=3e296e6f6a1b142633468c58b584ab9b&language=en-US`
   );
   const data = await response.json();
-  console.log("DATA", data);
 
   const sliced =
     data.results.length > 3 ? data.results.slice(0, 3) : data.results;
@@ -164,7 +163,7 @@ export const tmdbAdvancedMoviesApi = async ({
   directors,
   writers,
 }) => {
-  console.log("directors", directors);
+  console.log(sortBy);
 
   const response = await fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${ApiKey}&language=en-US&include_adult=false&include_video=false${advancedSearchSortBy(
@@ -182,19 +181,10 @@ export const tmdbAdvancedMoviesApi = async ({
     ])}&page=${page}`
   );
 
-  // https://api.themoviedb.org/3/discover/movie?api_key=3e296e6f6a1b142633468c58b584ab9b&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&primary_release_date.gte=2018-01-01&primary_release_date.lte=2019-01-01&release_date.gte=7&vote_count.gte=1000&with_crew=10859&with_genres=35&with_runtime.gte=120
-  console.log(response);
-
   const data = await response.json();
-  console.log(data);
+
   const filtered = await filterMovies(data);
-  const x = await fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=3e296e6f6a1b142633468c58b584ab9b&language=en-US&include_adult=false&include_video=false&sort_by=popularity.desc.desc&primary_release_date.gte=2001-01-01&primary_release_date.lte=2020-01-01&vote_average.gte=5&vote_count.gte=1&with_cast=204||6193||380||6730||8784||55638||1032&page=1
-    `
-  );
-  // https://api.themoviedb.org/3/discover/movie?api_key=3e296e6f6a1b142633468c58b584ab9b&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1
-  const y = await x.json();
-  console.log("y", y);
+
   return filtered;
 };
 
