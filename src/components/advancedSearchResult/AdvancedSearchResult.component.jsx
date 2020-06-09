@@ -58,11 +58,11 @@ const AdvancedSearchResult = ({
         case "genres":
           return na(displayUserSavedAdvancedSearch.search.genres);
         case "actors":
-          return displayUserSavedAdvancedSearch.search.actors;
+          return displayUserSavedAdvancedSearch.search.actors.values;
         case "directors":
-          return displayUserSavedAdvancedSearch.search.directors;
+          return displayUserSavedAdvancedSearch.search.directors.values;
         case "writers":
-          return displayUserSavedAdvancedSearch.search.writers;
+          return displayUserSavedAdvancedSearch.search.writers.values;
       }
     } else {
       switch (type) {
@@ -101,9 +101,18 @@ const AdvancedSearchResult = ({
         voteCount,
         runTime,
         genres,
-        actors,
-        directors,
-        writers,
+        actors: {
+          option: null,
+          values: actors,
+        },
+        directors: {
+          option: null,
+          values: directors,
+        },
+        writers: {
+          option: null,
+          values: writers,
+        },
       },
     };
     saveUserAdvancedSearch(obj);

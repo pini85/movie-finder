@@ -296,6 +296,8 @@ export const createAdvancedSearch = (obj) => {
 
 export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
   const search = getState().advancedSearch;
+  console.log("search", search);
+
   const savedSearch = getState().displayUserAdvancedSearch;
 
   let actorsArray = [];
@@ -306,7 +308,7 @@ export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
 
     const fetch = await Promise.all(
       //removed values from  castType.values.map
-      castType.map(async (cast) => {
+      castType.values.map(async (cast) => {
         const castDetails = await tmdbCastId(cast);
 
         return castDetails.results[0].id;
@@ -326,7 +328,7 @@ export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
     actorsArray
   );
 
-  console.log(savedSearch.search.directors);
+  // console.log(savedSearch.search.directors);
   await fetchCastIds(
     savedSearch && savedSearch.active
       ? savedSearch.search.directors
@@ -355,6 +357,7 @@ export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
     writers: writersArray[0],
     actorsOption: actorsArray,
   };
+  console.log("obj", obj.actors);
 
   const movies = await tmdbAdvancedMoviesApi(obj);
 
@@ -409,7 +412,7 @@ export const defaultSearches = () => async (dispatch) => {
     {
       search: {
         name: "Hilarious Comedies",
-        fromYear: "1985-01-01",
+        fromYear: "1985",
         toYear: "",
         sortBy: "vote-average",
         rating: 5,

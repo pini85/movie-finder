@@ -90,12 +90,11 @@ export const advancedSearchCast = (cast) => {
   if (cast.length === 1) {
     return [cast[0]];
   }
-  cast.map((actor) => {
-    if (!string) {
-      string += actor;
-    } else {
-      string += option + actor;
-    }
+  string += cast[0];
+  cast.slice(1).map((actor) => {
+    // if (!string) {
+    //   string += actor;
+    return (string += option + actor);
   });
 
   return string;

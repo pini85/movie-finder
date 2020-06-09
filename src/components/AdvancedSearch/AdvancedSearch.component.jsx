@@ -218,7 +218,9 @@ const AdvancedSearch = (props) => {
     }
     props.createAdvancedSearch(searchObj);
     props.fetchAdvancedSearch(1);
-    console.log(props.displayAdvancedSearch.search.fromYear, "hi");
+    const createAdvancedSearchUrl = (obj) => {
+      let url = "/advanced-search/";
+    };
 
     props.history.push(
       `/advanced-search/from-year=${searchObj.fromYear}/page/1`
