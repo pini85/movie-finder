@@ -218,13 +218,31 @@ const AdvancedSearch = (props) => {
     }
     props.createAdvancedSearch(searchObj);
     props.fetchAdvancedSearch(1);
-    const createAdvancedSearchUrl = (obj) => {
+    const createUrl = (obj) => {
       let url = "/advanced-search/";
+      const fromY = searchObj.fromYear ? `fromYear=${searchObj.fromYear}` : "";
+      const toY = searchObj.toYear ? `&toYear=${searchObj.toYear}` : "";
+      const rating = searchObj.rating ? `&rating=${searchObj.rating}` : "";
+      const voteCount = searchObj.voteCount
+        ? `&vote-vount=${searchObj.voteCount}`
+        : "";
+      const genres = searchObj.genres ? `&generes=${searchObj.genres}` : "";
+      const runTime = searchObj.runTime ? `&runTime=${searchObj.runTime}` : "";
+      const actors = searchObj.actorsArray.values.length
+        ? `&actors=${searchObj.actorsArray.values}`
+        : "";
+      const directors = searchObj.directorsArray.values.length
+        ? `&directors=${searchObj.directorsArray.values}`
+        : "";
+      const writers = searchObj.writersArray.values.length
+        ? `&writers=${searchObj.writersArray.values}`
+        : "";
+
+      url += `${fromY}${toY}${rating}${voteCount}${genres}${runTime}${actors}${directors}${writers}`;
+      return url;
     };
 
-    props.history.push(
-      `/advanced-search/from-year=${searchObj.fromYear}/page/1`
-    );
+    props.history.push(`${createUrl()}/page/1`);
     // /cars?color=blue&type=sedan&doors=4
   };
 

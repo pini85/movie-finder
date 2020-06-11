@@ -88,12 +88,10 @@ export const advancedSearchCast = (cast) => {
   let string = "&with_cast=";
   const option = cast.option === "and" ? "," : "||";
   if (cast.length === 1) {
-    return [cast[0]];
+    return (string += [cast[0]]);
   }
   string += cast[0];
   cast.slice(1).map((actor) => {
-    // if (!string) {
-    //   string += actor;
     return (string += option + actor);
   });
 
