@@ -20,9 +20,10 @@ Features need to be done:
 
 BUGS:
 
-- url for advanced search
+<!-- - url for advanced search -->s
+
 - trailers
-- sliders
+<!-- - sliders -->
 - search cannot click on movie in suggestions
 - fix percentage circle on display movie
 - pagination is acting up

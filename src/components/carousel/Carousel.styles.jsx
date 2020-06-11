@@ -15,7 +15,7 @@ export const CarouselStyling = styled(Slider)`
     }
   } */
   & .slick-list {
-    overflow:visible;
+    /* overflow:visible; */
   }
   & .slick-arrow {
     font-size: 2rem;
@@ -23,23 +23,20 @@ export const CarouselStyling = styled(Slider)`
   & .slick-arrow.slick-prev {
     position: absolute;
     top: 50%;
-    left: -12px;
-    left:0;
+    left:5px;
     z-index: 99;
     @media screen and (min-width:800px){
-     left:-18px;
+     /* left:-18px; */
     }
   }
   & .slick-arrow.slick-next {
     position: absolute;
     top: 50%;
     /* next should be 10px more than prev */
-    right: -10px;
-    right:0;
+    right:12px;
     z-index: 99;
-
-    /* @media screen and (man-width: 1300px){
-      right:6;
+    /* @media screen and (max-width: 1300px){
+      right:0;
     } */
   }
   & .slick-next::before,
