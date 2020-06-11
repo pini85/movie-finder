@@ -23,9 +23,9 @@ BUGS:
 <!-- - url for advanced search -->s
 
 - trailers
-<!-- - sliders -->
-- search cannot click on movie in suggestions
-- fix percentage circle on display movie
+    <!-- - sliders -->
+    <!-- - search cannot click on movie in suggestions -->
+  <!-- - fix percentage circle on display movie -->
 - pagination is acting up
 - do better filters. Exclude movies with no poster and rating of 0
 - enter when searching

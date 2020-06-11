@@ -18,6 +18,7 @@ const Suggestion = (props) => {
     props.selectedMovieId(props.item.id);
     props.movieSuggestions(false);
     props.search("");
+    props.history.push(`/movie/${props.item.id}`);
   };
 
   return (
