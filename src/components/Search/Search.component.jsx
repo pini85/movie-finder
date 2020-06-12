@@ -29,6 +29,11 @@ const Search = (props) => {
     // setIsSending(false);
     props.history.push(`/search/q=${searchQuery}/page/1`);
   };
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      handleClick();
+    }
+  };
 
   const container = {
     display: "flex",
@@ -39,7 +44,7 @@ const Search = (props) => {
   };
 
   return (
-    <div style={container}>
+    <div onKeyDown={handleKeyDown} style={container}>
       <Input
         value={searchQuery}
         handleOnChange={handleChange}
@@ -49,7 +54,7 @@ const Search = (props) => {
         search={true}
         title={"search"}
         // disabled={isSending}
-        handleClick={handleClick}
+        handleClick={(e) => handleClick(e)}
       ></Button>
 
       {props.userSuggestions && <Suggestions items={props.userSuggestions} />}
