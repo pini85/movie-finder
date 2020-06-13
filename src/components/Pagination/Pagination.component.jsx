@@ -32,9 +32,12 @@ const Pagination = ({ api, data, actor, history, location, isFetching }) => {
   }, []);
 
   useDidUpdateEffect(() => {
+    console.log("im here", actor);
+
     const fetchData = async () => {
       if (actor) {
         isFetching(true);
+        console.log("YEAH BABY", actor);
 
         await api(actor, currentPage);
 

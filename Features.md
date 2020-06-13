@@ -13,7 +13,7 @@ Features need to be done:
 - Fix all bugs
 
 * animations -> First thing is to make an accordian to reviews
-* link to imdb on movie page
+<!-- * link to imdb on movie page -->
 * Better Performance
 * allow to update saved search
 * secret tapping to get the torrent etc
@@ -22,11 +22,11 @@ Features need to be done:
 BUGS:
 
 <!-- - url for advanced search -->s
+<!-- - trailers -->
+<!-- - sliders -->
+<!-- - search cannot click on movie in suggestions -->
+<!-- - fix percentage circle on display movie -->
 
-- trailers
-    <!-- - sliders -->
-    <!-- - search cannot click on movie in suggestions -->
-  <!-- - fix percentage circle on display movie -->
 - pagination is acting up
 - do better filters. Exclude movies with no poster and rating of 0
 <!-- - enter when searching -->

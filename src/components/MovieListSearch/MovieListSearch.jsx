@@ -13,6 +13,7 @@ import Pagination from "../Pagination/Pagination.component";
 import Card from "../card/Card";
 const MovieListSearch = (props) => {
   const { query } = useParams();
+  console.log("params", useParams());
 
   const movies = () => {
     if (props.fetchMoviesData) {

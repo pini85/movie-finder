@@ -32,7 +32,7 @@ const App = ({ theme }) => {
             component={MovieListSearch}
           />
           <Route path="/popular-actors/" component={PopularActors} />
-          <Route path="/actors/:name/page/:page" component={ActorMovies} />
+          <Route path="/actors/:query/page/:page" component={ActorMovies} />
           <Route exact path="/customize" component={Customize} />
           <Route exact path="/spinner/" component={Film} />
         </Switch>
