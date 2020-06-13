@@ -95,13 +95,17 @@ const ShowMovieInfo = ({ colors, movie }) => {
       <ReviewContainer color={colors.vibrant}>
         {movie.ratings &&
           movie.ratings.map((rate) => {
+            console.log(rate);
+
             return (
-              <ReviewItem color={colors.vibrant}>
-                <Image src={rate.img} alt="" />
-                <ReviewValueContainer>
-                  {rate.rating ? rate.rating.Value : rate.imdb.Value}
-                </ReviewValueContainer>
-              </ReviewItem>
+              <a href={rate.url} target="blank">
+                <ReviewItem color={colors.vibrant}>
+                  <Image src={rate.img} alt="" />
+                  <ReviewValueContainer>
+                    {rate.rating ? rate.rating.Value : rate.imdb.Value}
+                  </ReviewValueContainer>
+                </ReviewItem>
+              </a>
             );
           })}
         <CirclePercentage rating={movie.tmdbRating * 10} />

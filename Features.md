@@ -13,6 +13,7 @@ Features need to be done:
 - Fix all bugs
 
 * animations -> First thing is to make an accordian to reviews
+* link to imdb on movie page
 * Better Performance
 * allow to update saved search
 * secret tapping to get the torrent etc
@@ -28,7 +29,7 @@ BUGS:
   <!-- - fix percentage circle on display movie -->
 - pagination is acting up
 - do better filters. Exclude movies with no poster and rating of 0
-- enter when searching
+<!-- - enter when searching -->
 - when no movies found say movies not found
 - advancedSearch.Reset to work on saved searches. Allow to search for a new search
 - when clicking on cast and pagination jumps to display only 1 page

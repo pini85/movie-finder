@@ -64,7 +64,6 @@ export const fetchMovies = (page) => async (dispatch, getState) => {
 
 export const fetchNewestMovies = (page) => async (dispatch, getState) => {
   const response = await tmdbNewestTodayApi(page);
-  console.log(response);
 
   dispatch({ type: "FETCH_NEWEST_MOVIES", payload: response });
 };
@@ -103,8 +102,6 @@ const fetchMovie = async (dispatch, getState) => {
   const omdbData = await omdbApi(tmdbData.imdb_id);
   const torrentData = await torrentApi(tmdbData.imdb_id);
   const movieCredits = await tmdbMovieCreditsApi(id);
-  console.log("movieCredits", movieCredits);
-  console.log(omdbData);
 
   const reviews = await tmdbMovieReviewsApi(id);
 
@@ -166,6 +163,9 @@ const fetchMovie = async (dispatch, getState) => {
       return magnet(omdbData.Title, torrent.hash, torrent.url);
     });
   }
+  console.log(omdbData.Title);
+  // Jumanji: The Next Level
+  // jumanji_the_next_level
 
   const ratings = () => {
     switch (omdbData.Ratings.length) {
@@ -174,6 +174,7 @@ const fetchMovie = async (dispatch, getState) => {
           {
             imdb: omdbData.Ratings[0],
             img: "https://i.ibb.co/dth8xgq/imdb.png",
+            url: `https://www.imdb.com/title/${tmdbData.imdb_id}/`,
           },
         ];
 
@@ -182,6 +183,7 @@ const fetchMovie = async (dispatch, getState) => {
           {
             rating: omdbData.Ratings[0],
             img: "https://i.ibb.co/dth8xgq/imdb.png",
+            url: `https://www.imdb.com/title/${tmdbData.imdb_id}/`,
           },
           {
             rating: omdbData.Ratings[1],
@@ -193,6 +195,7 @@ const fetchMovie = async (dispatch, getState) => {
           {
             rating: omdbData.Ratings[0],
             img: "https://i.ibb.co/dth8xgq/imdb.png",
+            url: `https://www.imdb.com/title/${tmdbData.imdb_id}/`,
           },
           {
             rating: omdbData.Ratings[1],
@@ -296,7 +299,6 @@ export const createAdvancedSearch = (obj) => {
 
 export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
   const search = getState().advancedSearch;
-  console.log("search", search);
 
   const savedSearch = getState().displayUserAdvancedSearch;
 
@@ -304,8 +306,6 @@ export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
   let directorsArray = [];
   let writersArray = [];
   const fetchCastIds = async (castType, arrayType) => {
-    console.log(castType);
-
     const fetch = await Promise.all(
       //removed values from  castType.values.map
       castType.values.map(async (cast) => {
@@ -328,7 +328,7 @@ export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
     actorsArray
   );
 
-  // console.log(savedSearch.search.directors);
+  //
   await fetchCastIds(
     savedSearch && savedSearch.active
       ? savedSearch.search.directors
@@ -357,7 +357,6 @@ export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
     writers: writersArray[0],
     actorsOption: actorsArray,
   };
-  console.log("obj", obj.actors);
 
   const movies = await tmdbAdvancedMoviesApi(obj);
 
