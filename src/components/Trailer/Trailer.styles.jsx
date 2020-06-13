@@ -51,5 +51,5 @@ export const TrailerPlay = styled.div`
 `;
 
 export const YouTubeContainer = styled.div`
-  transform: scale(0.5);
+  /* transform: scale(0.5); */
 `;

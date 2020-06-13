@@ -79,6 +79,8 @@ export const BottomContainer = styled.div`
 export const OptionsContainer = styled.div`
   width: 50%;
   height: 100%;
+  z-index: 0;
+  position: relative;
 
   display: flex;
   flex-direction: column;
