@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import { goToMovie } from "../../redux/actions/index";
@@ -25,7 +26,7 @@ import {
   RightSide,
 } from "./ShowMovie.styles";
 
-const ShowMovie = ({ item, colors, goToMovie }) => {
+const ShowMovie = ({ item, colors, goToMovie, isSecretSequence }) => {
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
 
@@ -106,6 +107,7 @@ const ShowMovie = ({ item, colors, goToMovie }) => {
                       )}
                       <p>{item.plot}</p>
                     </PlotContainer>
+
                     <Reviews />
                     {/* <DirectorAndWriterContainer>
                   <div>Director: {item.director}</div>
@@ -113,23 +115,34 @@ const ShowMovie = ({ item, colors, goToMovie }) => {
                 </DirectorAndWriterContainer> */}
                   </LeftSide>
                   <RightSide>
-                    <OptionsContainer>
-                      <ShowMovieOption
-                        title="torrents"
-                        type="torrent"
-                        left={true}
-                      />
-                      <ShowMovieOption
-                        title="subtitles"
-                        type="sub"
-                        right={true}
-                      />
-                      <ShowMovieOption
-                        title="magnets"
-                        type="magnets"
-                        left={true}
-                      />
-                    </OptionsContainer>
+                    <AnimatePresence>
+                      {isSecretSequence && (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <OptionsContainer>
+                            <ShowMovieOption
+                              title="torrents"
+                              type="torrent"
+                              left={true}
+                            />
+                            <ShowMovieOption
+                              title="subtitles"
+                              type="sub"
+                              right={true}
+                            />
+                            <ShowMovieOption
+                              title="magnets"
+                              type="magnets"
+                              left={true}
+                            />
+                          </OptionsContainer>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </RightSide>
                 </BottomContainer>
 
@@ -158,6 +171,7 @@ const mapStateToProps = (state) => {
     return {
       item: state.displayMovie,
       colors: state.displayMovie.colors,
+      isSecretSequence: state.isSecretSequence,
     };
   } else {
     return {};

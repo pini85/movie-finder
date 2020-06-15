@@ -4,9 +4,13 @@ import Carousel from "../carousel/carousel.component";
 import { Container } from "./Reviews.styles";
 
 import {} from "./Reviews.styles";
-const Reviews = ({ colors }) => {
+const Reviews = ({ colors, isSecretSequence }) => {
   return (
-    <Container borderColor={colors.vibrant} fontColor={colors.darkMuted}>
+    <Container
+      borderColor={colors.vibrant}
+      fontColor={colors.darkMuted}
+      secretSequence={isSecretSequence}
+    >
       <Carousel
         type="reviews"
         color={colors.vibrant}
@@ -20,5 +24,6 @@ const Reviews = ({ colors }) => {
 const mapStateToProps = (state) => ({
   reviews: state.displayMovie.reviews,
   colors: state.displayMovie.colors,
+  isSecretSequence: state.isSecretSequence,
 });
 export default connect(mapStateToProps)(Reviews);

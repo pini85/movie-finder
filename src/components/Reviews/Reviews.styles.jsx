@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   position: relative;
-  width: 70%;
+  width: ${(props) => (props.secretSequence ? "70%" : "100%")};
   height: fit-content;
   margin: 4rem;
   color: ${(props) => props.fontColor};

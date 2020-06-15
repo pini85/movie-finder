@@ -13,7 +13,10 @@ Features need to be done:
 - Fix all bugs
 
 * animations -> First thing is to make an accordian to reviews
+
+- animate thwe width of the review when secret comes up
 <!-- * link to imdb on movie page -->
+
 * Better Performance
 * allow to update saved search
 * secret tapping to get the torrent etc

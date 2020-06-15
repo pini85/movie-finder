@@ -514,3 +514,10 @@ export const displaySpinner = (spinner) => {
     payload: spinner,
   };
 };
+
+export const isSecretSequence = (bool) => {
+  return {
+    type: "SECRET_SEQUENCE",
+    payload: bool,
+  };
+};

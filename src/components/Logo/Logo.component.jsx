@@ -1,23 +1,24 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { isSecretSequence } from "../../redux/actions/index";
 import UseWidth from "../../hooks/useWidth.hooks";
 import { Img } from "./Logo.styles";
-const Logo = () => {
+const Logo = (props) => {
   const [sequences, setSequences] = useState([]);
   const [secretSequences] = useState([81, 87, 69, 65, 83, 68]);
   const width = UseWidth().width;
-  const el = useRef(null);
 
   useEffect(() => {
     const onKeyDown = (e) => {
       setSequences((value) => [...value, e.keyCode]);
-      console.log(sequences);
-      console.count();
 
       if (
         sequences.length === 6 &&
         sequences.toString() === secretSequences.toString()
       ) {
+        props.secretSequence(!props.x);
+
         setSequences([]);
       }
       if (sequences.length === 6) {
@@ -43,4 +44,9 @@ const Logo = () => {
     </Link>
   );
 };
-export default Logo;
+const mapStateToProps = (state) => ({
+  x: state.isSecretSequence,
+});
+export default connect(mapStateToProps, {
+  secretSequence: (bool) => isSecretSequence(bool),
+})(Logo);

@@ -130,7 +130,9 @@ export const LeftSide = styled.div`
     padding-right: 2rem;
   }
 `;
-export const RightSide = styled.div``;
+export const RightSide = styled.div`
+  display: flex;
+`;
 
 export const DirectorAndWriterContainer = styled.div`
   font-size: 1.5rem;

@@ -197,6 +197,13 @@ const displaySpinnerReducer = (spinner = "dvd", action) => {
   return spinner;
 };
 
+const isSecretSequenceReducer = (bool = false, action) => {
+  if (action.type === "SECRET_SEQUENCE") {
+    return action.payload;
+  }
+  return bool;
+};
+
 export default combineReducers({
   fetchMovies: fetchMoviesReducer,
   selectedMovie: selectedMovieReducer,
@@ -225,4 +232,5 @@ export default combineReducers({
   isFetching: isFetchingReducer,
   displayTheme: displayThemeReducer,
   displaySpinner: displaySpinnerReducer,
+  isSecretSequence: isSecretSequenceReducer,
 });
