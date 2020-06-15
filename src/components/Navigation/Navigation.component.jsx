@@ -26,7 +26,7 @@ const Navigation = ({ setOpen }) => {
             <Customize></Customize>
           </CustomizeContainer>
           <SearchContainer>
-            <Search></Search>
+            <Search setOpen={setOpen}></Search>
           </SearchContainer>
         </>
       ) : null}

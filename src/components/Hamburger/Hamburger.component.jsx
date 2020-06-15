@@ -4,8 +4,9 @@ import { Container, HandleBars } from "./Hamurger.styles";
 import Navigation from "../Navigation/Navigation.component";
 const Hamburger = () => {
   const [isOpen, setOpen] = useState(false);
+
   return (
-    <Container onClick={() => setOpen((value) => !value)}>
+    <Container onClick={() => setOpen((val) => !val)}>
       <HandleBars isOpen={isOpen}>
         <AnimatePresence>
           {isOpen && (

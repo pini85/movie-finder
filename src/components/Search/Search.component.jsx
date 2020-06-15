@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
@@ -9,9 +8,11 @@ import Suggestions from "../Suggestions/Suggestions.component";
 import Button from "../Button/Button";
 import Input from "../Input/Input.component";
 import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
+import useWidth from "../../hooks/useWidth.hooks";
 
 const Search = (props) => {
   const [searchQuery, setSearchQuery] = useState("");
+  const width = useWidth().width;
 
   useDidUpdateEffect(() => {
     setTimeout(async () => {
@@ -22,11 +23,12 @@ const Search = (props) => {
   }, [searchQuery]);
 
   const handleClick = () => {
-    // setIsSending(true);
     props.search(searchQuery);
     props.fetchMovies(1);
     setSearchQuery("");
-    // setIsSending(false);
+    if (width < 500) {
+      props.setOpen((val) => !val);
+    }
     props.history.push(`/search/q=${searchQuery}/page/1`);
   };
   const handleKeyDown = (e) => {

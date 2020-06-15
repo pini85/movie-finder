@@ -19,12 +19,12 @@ Features need to be done:
 
 * Better Performance
 * allow to update saved search
-* secret tapping to get the torrent etc
+<!-- * secret tapping to get the torrent etc -->
 * Add tv shows
 
 BUGS:
 
-<!-- - url for advanced search -->s
+<!-- - url for advanced search -->
 <!-- - trailers -->
 <!-- - sliders -->
 <!-- - search cannot click on movie in suggestions -->
