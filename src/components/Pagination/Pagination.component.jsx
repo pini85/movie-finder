@@ -32,12 +32,9 @@ const Pagination = ({ api, data, actor, history, location, isFetching }) => {
   }, []);
 
   useDidUpdateEffect(() => {
-    console.log("im here", actor);
-
     const fetchData = async () => {
       if (actor) {
         isFetching(true);
-        console.log("YEAH BABY", actor);
 
         await api(actor, currentPage);
 
@@ -103,7 +100,11 @@ const Pagination = ({ api, data, actor, history, location, isFetching }) => {
 
   const last = (setCount) => {
     setCurrentPage(totalPages);
-    setCount(totalPages - 19);
+    if (totalPages === 5) {
+      setCount(totalPages - 4);
+    } else {
+      setCount(totalPages - 19);
+    }
   };
 
   const bold = (page) => {

@@ -11,11 +11,9 @@ import ActorCard from "../ActorCard/ActorCard.component";
 import Pagination from "../Pagination/Pagination.component";
 import { Container } from "./DisplayPopularActors.styles";
 const DisplayPopularActors = (props) => {
-  console.log(props);
-
-  const handleClick = (name) => {
-    props.fetchActorMovies(name, 1);
-    props.history.push(`/search/${name}/page/1`);
+  const handleClick = (query) => {
+    props.fetchActorMovies(query, 1);
+    props.history.push(`/search/${query}/page/1`);
   };
   return (
     <>

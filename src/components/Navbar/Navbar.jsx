@@ -1,10 +1,10 @@
 import React from "react";
 import Search from "../Search/Search.component";
-import { Link } from "react-router-dom";
 import NavbarItem from "../NavbarItem/NavbarItem.component";
 import Hamburger from "../Hamburger/Hamburger.component";
 import LightSwitch from "../LightSwitch/LightSwitch.component";
 import Customize from "../Customize/Customize.component";
+import Logo from "../Logo/Logo.component";
 import UseWidth from "../../hooks/useWidth.hooks";
 import "../../themes/replaceTheme";
 import { Container, NavbarItemContainer, Img } from "./Navbar.styles";
@@ -16,15 +16,8 @@ const Navbar = (props) => {
     <Container>
       {width > 1100 ? (
         <>
-          <Link to="/">
-            <div>
-              <Img
-                width={width}
-                src={require("../../assets/images/logo.png")}
-                alt=""
-              />
-            </div>
-          </Link>
+          <Logo></Logo>
+
           <NavbarItemContainer>
             <NavbarItem
               link="/movies/latest/page/1"

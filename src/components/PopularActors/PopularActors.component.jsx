@@ -18,8 +18,6 @@ const PopularActors = (props) => {
       actors.total_pages = totalPages;
       actors.total_results = data && data.length;
 
-      //
-
       for (let index in data) {
         names.push(data[index][0]);
       }
@@ -53,7 +51,6 @@ const PopularActors = (props) => {
 
   return (
     <>
-      {}
       <CategoryTitle title="popular actors" />
       {props.fetchPopularActorsData && <DisplayPopularActors />}
     </>

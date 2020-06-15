@@ -13,7 +13,7 @@ import Pagination from "../Pagination/Pagination.component";
 import Card from "../card/Card";
 const MovieListSearch = (props) => {
   const { query } = useParams();
-  console.log("params", useParams());
+  console.log("query", query);
 
   const movies = () => {
     if (props.fetchMoviesData) {
@@ -23,8 +23,9 @@ const MovieListSearch = (props) => {
           <div style={styleDiv}>
             {props.fetchMoviesData &&
               props.fetchMoviesData.results.map((movie) => {
+                console.log(movie);
+
                 if (movie === null) return;
-                //zz
 
                 return (
                   <div key={movie.id}>

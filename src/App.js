@@ -31,7 +31,7 @@ const App = ({ theme }) => {
             path="/advanced-search/:query/page/:page"
             component={MovieListSearch}
           />
-          <Route path="/popular-actors/" component={PopularActors} />
+          <Route path="/popular-actors/:query" component={PopularActors} />
           <Route path="/actors/:query/page/:page" component={ActorMovies} />
           <Route exact path="/customize" component={Customize} />
           <Route exact path="/spinner/" component={Film} />
