@@ -103,6 +103,7 @@ export const Gradient = styled.div`
 `;
 
 export const ButtonContainer = styled.div`
+  outline: none;
   display: flex;
   height: 100%;
   justify-content: center;

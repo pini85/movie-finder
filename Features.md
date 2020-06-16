@@ -35,4 +35,9 @@ BUGS:
 <!-- - enter when searching -->
 - when no movies found say movies not found
 - advancedSearch.Reset to work on saved searches. Allow to search for a new search
-<!-- - when clicking on cast and pagination jumps to display only 1 page -->
+  <!-- - when clicking on cast and pagination jumps to display only 1 page -->
+  when going to a new window ability to save the paginaiton where you left off.
+  create pagination to bottom of the page
+
+Backend:
+crud operation on saved advanced searches

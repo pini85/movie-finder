@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { compose } from "redux";
 import { selectedMovieId, selectedMovie } from "../../redux/actions/index";
 import Button from "../Button/Button";
@@ -24,10 +25,12 @@ const Card = (props) => {
   const [isLoaded, setLoaded] = useState(false);
 
   const handleClick = () => {
+    console.log("IM RUN TOO");
+
     props.selectedMovieId(props.movie.id);
     props.selectedMovie(props.movie);
 
-    props.history.push(`/movie/${props.movie.id}`);
+    // props.history.push(`/movie/${props.movie.id}`);
   };
   const test = () => {
     setLoaded(true);
@@ -73,9 +76,13 @@ const Card = (props) => {
           <CardBack image={image}>
             <Gradient>
               <ButtonContainer>
-                <a onClick={handleClick}>
+                <Link
+                  style={{ outline: "none" }}
+                  to={`/movie/${props.movie.id}`}
+                  onClick={handleClick}
+                >
                   <Button title="Details" />
-                </a>
+                </Link>
               </ButtonContainer>
             </Gradient>
             <TitleBack> {title(props.movie.title)}</TitleBack>

@@ -11,6 +11,7 @@ export const ButtonContainer = styled.button`
   font-size: 1.5rem;
   font-weight: 700;
   transition: all 0.3s;
+  outline: transparent;
 
   &:hover {
     background-color: var(--primary-color-light);
