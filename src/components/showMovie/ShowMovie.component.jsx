@@ -8,6 +8,7 @@ import ShowMovieOption from "../ShowMovieOption/ShowMovieOption.component";
 import MovieCast from "../MovieCast/MovieCast.component";
 import Trailer from "../Trailer/Trailer.component";
 import Reviews from "../Reviews/Review.component";
+import LoadingScreen from "../LoadingScreen/LoadingScreen.component";
 import BouncingDvd from "../spinners/BouncingDvd/BouncingDvd.component";
 import Film from "../spinners/Film/Film.component";
 import useWidth from "../../hooks/useWidth.hooks";
@@ -81,72 +82,73 @@ const ShowMovie = ({ item, colors, goToMovie, isSecretSequence }) => {
 
   return (
     <div>
-      {isLoading
-        ? spinner()
-        : item && (
-            <Container color1={colors.darkMuted} color2={colors.muted}>
-              <MovieCard color={colors.lightVibrant}>
-                <HeroContainer poster={item.backdrop}>
-                  <TopContainer>
-                    <ShowMovieInfo />
-                  </TopContainer>
-                  <Trailer poster={item.poster} />
-                </HeroContainer>
-                <BottomContainer>
-                  <LeftSide>
-                    <PlotContainer
-                      tagline={item.tagLine}
-                      color={colors.darkVibrant}
-                    >
-                      {item.tagLine && (
-                        <TagLineContainer>
-                          <span>&ldquo;</span>
-                          {item.tagLine}
-                          <span>&rdquo;</span>
-                        </TagLineContainer>
-                      )}
-                      <p>{item.plot}</p>
-                    </PlotContainer>
+      {isLoading ? (
+        <LoadingScreen></LoadingScreen>
+      ) : (
+        item && (
+          <Container color1={colors.darkMuted} color2={colors.muted}>
+            <MovieCard color={colors.lightVibrant}>
+              <HeroContainer poster={item.backdrop}>
+                <TopContainer>
+                  <ShowMovieInfo />
+                </TopContainer>
+                <Trailer poster={item.poster} />
+              </HeroContainer>
+              <BottomContainer>
+                <LeftSide>
+                  <PlotContainer
+                    tagline={item.tagLine}
+                    color={colors.darkVibrant}
+                  >
+                    {item.tagLine && (
+                      <TagLineContainer>
+                        <span>&ldquo;</span>
+                        {item.tagLine}
+                        <span>&rdquo;</span>
+                      </TagLineContainer>
+                    )}
+                    <p>{item.plot}</p>
+                  </PlotContainer>
 
-                    <Reviews />
-                    {/* <DirectorAndWriterContainer>
+                  <Reviews />
+                  {/* <DirectorAndWriterContainer>
                   <div>Director: {item.director}</div>
                   <div>Writers: {item.writer}</div>
                 </DirectorAndWriterContainer> */}
-                  </LeftSide>
-                  <RightSide>
-                    <AnimatePresence>
-                      {isSecretSequence && (
-                        <motion.div
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <OptionsContainer>
-                            <ShowMovieOption
-                              title="torrents"
-                              type="torrent"
-                              left={true}
-                            />
-                            <ShowMovieOption
-                              title="subtitles"
-                              type="sub"
-                              right={true}
-                            />
-                            <ShowMovieOption
-                              title="magnets"
-                              type="magnets"
-                              left={true}
-                            />
-                          </OptionsContainer>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </RightSide>
-                </BottomContainer>
+                </LeftSide>
+                <RightSide>
+                  <AnimatePresence>
+                    {isSecretSequence && (
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <OptionsContainer>
+                          <ShowMovieOption
+                            title="torrents"
+                            type="torrent"
+                            left={true}
+                          />
+                          <ShowMovieOption
+                            title="subtitles"
+                            type="sub"
+                            right={true}
+                          />
+                          <ShowMovieOption
+                            title="magnets"
+                            type="magnets"
+                            left={true}
+                          />
+                        </OptionsContainer>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </RightSide>
+              </BottomContainer>
 
-                {/* <div style={{ display: "flex" }}>
+              {/* <div style={{ display: "flex" }}>
               <DarkVibrant></DarkVibrant>
               <VibrantC></VibrantC>
               <LightVibrant></LightVibrant>
@@ -156,12 +158,13 @@ const ShowMovie = ({ item, colors, goToMovie, isSecretSequence }) => {
               <Muted></Muted>
               <LightMuted></LightMuted>
             </div> */}
-                <MovieCastContainer color={colors.lightVibrant}>
-                  <MovieCast />
-                </MovieCastContainer>
-              </MovieCard>
-            </Container>
-          )}
+              <MovieCastContainer color={colors.lightVibrant}>
+                <MovieCast />
+              </MovieCastContainer>
+            </MovieCard>
+          </Container>
+        )
+      )}
     </div>
   );
 };

@@ -28,7 +28,6 @@ const Customize = ({ displayTheme, theme, displaySpinner, spinner }) => {
     setOption(type);
     displaySpinner(type);
   };
-  console.log("rerender");
 
   return (
     <>
