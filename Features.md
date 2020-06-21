@@ -13,8 +13,7 @@ Features need to be done:
 - Fix all bugs
 
 * add .catch()
-* add max-width of our containers
-* add flex grow to our cards
+<!-- * add flex grow to our cards -->
 * when open the first to the actors in show movie you need to refresh to get the results
 * try background-image url(foo) no-repeat center center/cover on images
 * add a better ui for advanced search saves and button author

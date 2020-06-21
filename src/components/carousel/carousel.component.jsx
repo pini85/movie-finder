@@ -73,7 +73,6 @@ const Carousel = ({
         return (
           movies &&
           movies.map((movie) => {
-            // debugger;
             return (
               <div key={movie.id}>
                 <MovieSlider movie={movie}></MovieSlider>

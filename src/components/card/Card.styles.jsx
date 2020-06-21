@@ -53,7 +53,8 @@ export const CardBack = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-image: ${(props) => `url(${props.image()})`};
+  background: ${(props) =>
+    `url(${props.image()})no-repeat center center/cover`};
   color: white;
 `;
 //image.tmdb.org/t/p/w185//${props.movie.poster_path
