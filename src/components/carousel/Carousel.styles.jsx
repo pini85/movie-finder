@@ -50,11 +50,7 @@ export const CarouselStyling = styled(Slider)`
   }
 
   & .slick-dots {
-    height: 4rem;
-
-    bottom: -17px;
-    display: flex;
-    justify-content: center;
+   z
   }
   & .slick-dots li.slick-active button:before {
     opacity: 0.8;

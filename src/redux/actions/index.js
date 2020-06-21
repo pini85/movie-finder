@@ -163,7 +163,7 @@ const fetchMovie = async (dispatch, getState) => {
       return magnet(omdbData.Title, torrent.hash, torrent.url);
     });
   }
-  console.log(omdbData.Title);
+
   // Jumanji: The Next Level
   // jumanji_the_next_level
 
