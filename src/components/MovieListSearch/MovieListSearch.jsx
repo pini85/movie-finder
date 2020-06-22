@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -16,13 +16,14 @@ const MovieListSearch = (props) => {
   console.log("query", query);
 
   const movies = () => {
-    if (props.fetchMoviesData) {
+    const showMovies = (fetch, data) => {
+      console.log(data);
       return (
         <>
-          <Pagination api={props.fetchMovies} data={props.fetchMoviesData} />
+          <Pagination api={fetch} data={data} />
           <div style={styleDiv}>
-            {props.fetchMoviesData &&
-              props.fetchMoviesData.results.map((movie) => {
+            {data &&
+              data.results.map((movie) => {
                 console.log(movie);
 
                 if (movie === null) return;
@@ -36,71 +37,20 @@ const MovieListSearch = (props) => {
           </div>
         </>
       );
-    } else if (props.advancedSearchMovies) {
-      return (
-        <>
-          <Pagination
-            api={props.fetchAdvancedSearch}
-            data={props.advancedSearchMovies}
-          />
-          <div style={styleDiv}>
-            {props.advancedSearchMovies &&
-              props.advancedSearchMovies.results.map((movie) => {
-                if (movie === null) return;
-
-                return (
-                  <div key={movie.id}>
-                    <Card movie={movie}></Card>
-                  </div>
-                );
-              })}
-          </div>
-        </>
-      );
-    } else if (props.fetchActorMovies) {
-      return (
-        <>
-          <Pagination
-            api={props.fetchActorMovies}
-            data={props.actorsMovies}
-            actor={query}
-          />
-          <div style={styleDiv}>
-            {props.actorsMovies &&
-              props.actorsMovies.results.map((movie) => {
-                if (movie === null) return;
-
-                return (
-                  <div key={movie.id}>
-                    <Card movie={movie}></Card>
-                  </div>
-                );
-              })}
-          </div>
-        </>
-      );
-    } else if (props.fetchPopularActorsData) {
-      return (
-        <>
-          <Pagination
-            api={props.fetchActorMovies}
-            data={props.fetchPopularActorsData}
-            actor={query}
-          />
-          <div style={styleDiv}>
-            {props.fetchPopularActorsData &&
-              props.fetchPopularActorsData.results.map((movie) => {
-                if (movie === null) return;
-
-                return (
-                  <div key={movie.id}>
-                    <Card movie={movie}></Card>
-                  </div>
-                );
-              })}
-          </div>
-        </>
-      );
+    };
+    switch (props.showSearchResults) {
+      case "search":
+        console.log("yup");
+        return showMovies(props.fetchMovies, props.fetchMoviesData);
+      case "advanced-search":
+        return showMovies(
+          props.fetchAdvancedSearch,
+          props.advancedSearchMoviesData
+        );
+      case "actor":
+        return showMovies(props.fetchActorMovies, props.actorsMoviesData);
+      default:
+        return null;
     }
   };
 
@@ -130,9 +80,10 @@ const MovieListSearch = (props) => {
 };
 const mapStateToProps = (state) => ({
   fetchMoviesData: state.fetchMovies,
-  advancedSearchMovies: state.fetchAdvancedSearch,
-  actorsMovies: state.fetchActorMovies,
+  advancedSearchMoviesData: state.fetchAdvancedSearch,
+  actorsMoviesData: state.fetchActorMovies,
   fetchPopularActorsData: state.fetchPopularActors,
+  showSearchResults: state.showSearchResults,
 });
 export default connect(mapStateToProps, {
   selectedMovie: selectedMovie,

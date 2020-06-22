@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchActorMovies } from "../../redux/actions";
+import { fetchActorMovies, showSearchResults } from "../../redux/actions";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 
@@ -18,6 +18,7 @@ const MovieCastCarousel = ({
   character,
   profile,
   fetchActorMovies,
+  showSearchResults,
   history,
 }) => {
   const profileImage = () => {
@@ -27,6 +28,8 @@ const MovieCastCarousel = ({
   };
   const handleClick = () => {
     fetchActorMovies(name, 1);
+    showSearchResults("actor");
+
     history.push(`/actors/${name}/page/1`);
   };
 
@@ -55,7 +58,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapStateToDispatch = {
-  fetchActorMovies: (name, page) => fetchActorMovies(name),
+  fetchActorMovies: (name) => fetchActorMovies(name),
+  showSearchResults: (type) => showSearchResults(type),
 };
 export default compose(
   withRouter,

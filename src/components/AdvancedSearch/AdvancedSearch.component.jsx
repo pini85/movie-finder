@@ -15,6 +15,7 @@ import {
   fetchGenres,
   createAdvancedSearch,
   fetchAdvancedSearch,
+  showSearchResults,
 } from "../../redux/actions/index";
 import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
 import findGenreWithId from "../../utlis/findGenreWithId";
@@ -218,6 +219,7 @@ const AdvancedSearch = (props) => {
     }
     props.createAdvancedSearch(searchObj);
     props.fetchAdvancedSearch(1);
+    props.showSearchResults("advanced-search");
     const createUrl = (obj) => {
       let url = "/advanced-search/";
       const fromY = searchObj.fromYear ? `fromYear=${searchObj.fromYear}` : "";
@@ -370,6 +372,7 @@ const mapStateToDispatch = {
   fetchGenres: fetchGenres,
   createAdvancedSearch: createAdvancedSearch,
   fetchAdvancedSearch: fetchAdvancedSearch,
+  showSearchResults: showSearchResults,
 };
 
 export default compose(

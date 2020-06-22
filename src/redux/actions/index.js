@@ -521,3 +521,10 @@ export const isSecretSequence = (bool) => {
     payload: bool,
   };
 };
+
+export const showSearchResults = (type) => {
+  return {
+    type: "SHOW_SEARCH_RESULTS",
+    payload: type,
+  };
+};

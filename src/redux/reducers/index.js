@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { store } from "../configureStore";
 
 const fetchMoviesReducer = (request = null, action) => {
   if (action.type === "FETCH_MOVIES") {
@@ -204,6 +205,13 @@ const isSecretSequenceReducer = (bool = false, action) => {
   return bool;
 };
 
+const showSearchResultsReducer = (type = null, action) => {
+  if (action.type === "SHOW_SEARCH_RESULTS") {
+    return action.payload;
+  }
+  return type;
+};
+
 export default combineReducers({
   fetchMovies: fetchMoviesReducer,
   selectedMovie: selectedMovieReducer,
@@ -233,4 +241,5 @@ export default combineReducers({
   displayTheme: displayThemeReducer,
   displaySpinner: displaySpinnerReducer,
   isSecretSequence: isSecretSequenceReducer,
+  showSearchResults: showSearchResultsReducer,
 });

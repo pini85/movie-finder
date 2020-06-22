@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
-import { search, fetchMovies, movieSuggestions } from "../../redux/actions";
+import {
+  search,
+  fetchMovies,
+  movieSuggestions,
+  showSearchResults,
+} from "../../redux/actions";
 import { tmdbQueryApi } from "../../apis/tmdbApi";
 import Suggestions from "../Suggestions/Suggestions.component";
 import Button from "../Button/Button";
@@ -25,6 +30,7 @@ const Search = (props) => {
   const handleClick = () => {
     props.search(searchQuery);
     props.fetchMovies(1);
+    props.showSearchResults("search");
     setSearchQuery("");
     if (width < 500) {
       props.setOpen((val) => !val);
@@ -78,5 +84,6 @@ export default compose(
     search: search,
     fetchMovies: (page) => fetchMovies(page),
     movieSuggestions: movieSuggestions,
+    showSearchResults: showSearchResults,
   })
 )(Search);
