@@ -13,19 +13,15 @@ import Pagination from "../Pagination/Pagination.component";
 import Card from "../card/Card";
 const MovieListSearch = (props) => {
   const { query } = useParams();
-  console.log("query", query);
-
+  console.log(query);
   const movies = () => {
-    const showMovies = (fetch, data) => {
-      console.log(data);
+    const showMovies = (fetch, data, actor) => {
       return (
         <>
-          <Pagination api={fetch} data={data} />
+          <Pagination api={fetch} data={data} actor={actor} />
           <div style={styleDiv}>
             {data &&
               data.results.map((movie) => {
-                console.log(movie);
-
                 if (movie === null) return;
 
                 return (
@@ -40,7 +36,6 @@ const MovieListSearch = (props) => {
     };
     switch (props.showSearchResults) {
       case "search":
-        console.log("yup");
         return showMovies(props.fetchMovies, props.fetchMoviesData);
       case "advanced-search":
         return showMovies(
@@ -48,7 +43,11 @@ const MovieListSearch = (props) => {
           props.advancedSearchMoviesData
         );
       case "actor":
-        return showMovies(props.fetchActorMovies, props.actorsMoviesData);
+        return showMovies(
+          props.fetchActorMovies,
+          props.actorsMoviesData,
+          query
+        );
       default:
         return null;
     }

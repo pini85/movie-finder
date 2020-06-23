@@ -33,7 +33,7 @@ export const CarouselStyling = styled(Slider)`
     position: absolute;
     top: 50%;
     /* next should be 10px more than prev */
-    right:12px;
+    right:15px;
     z-index: 99;
     /* @media screen and (max-width: 1300px){
       right:0;
