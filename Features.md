@@ -13,10 +13,10 @@ Features need to be done:
 - Fix all bugs
 
 * add .catch()
-  <!-- * add flex grow to our cards -->
-  <!-- * when open the first to the actors in show movie you need to refresh to get the results -->
-  <!-- * try background-image url(foo) no-repeat center center/cover on images -->
-* select actor pagination goes to 1 when next page
+    <!-- * add flex grow to our cards -->
+    <!-- * when open the first to the actors in show movie you need to refresh to get the results -->
+    <!-- * try background-image url(foo) no-repeat center center/cover on images -->
+  <!-- * select actor pagination goes to 1 when next page -->
 * add a better ui for advanced search saves and button author
 * add the css for popular actors
 * style the advancedsaved search buttons that every odd child is the other direction.

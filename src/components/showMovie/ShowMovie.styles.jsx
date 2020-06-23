@@ -81,7 +81,6 @@ export const OptionsContainer = styled.div`
   height: 100%;
   z-index: 0;
   position: relative;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -89,8 +88,19 @@ export const OptionsContainer = styled.div`
 
   align-self: flex-start;
   padding: 4rem 0;
-  @media screen and (max-width: 800px) {
-    width: auto;
+  & > :nth-child(odd) {
+    background: ${(props) =>
+      `linear-gradient(to right, ${props.color2}, ${props.color1})`};
+    text-align: left;
+    padding-left: 10%;
+    transform: perspective(500px) rotateY(45deg);
+  }
+  & > :nth-child(even) {
+    background: ${(props) =>
+      `linear-gradient(to left, ${props.color2}, ${props.color1})`};
+    text-align: right;
+    padding-right: 10%;
+    transform: perspective(500px) rotateY(-45deg);
   }
 `;
 

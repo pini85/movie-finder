@@ -7,7 +7,7 @@ import ShowSubtitles from "../ShowSubtitles/ShowSubtitles.component";
 import ShowMagnets from "../ShowMagnets/ShowMagnets.component";
 import { Container, ModalContainer } from "./showMovieOption.styles";
 
-const ShowMovieOption = ({ colors, title, type, left, right }) => {
+const ShowMovieOption = ({ colors, title, type }) => {
   const [isToggled, setToggled] = useState(false);
 
   const showOption = () => {
@@ -29,14 +29,7 @@ const ShowMovieOption = ({ colors, title, type, left, right }) => {
 
   return (
     <>
-      <Container
-        onClick={handleClick}
-        left={left}
-        right={right}
-        color1={colors.darkVibrant}
-        color2={colors.vibrant}
-        textLight={colors.lightVibrant}
-      >
+      <Container onClick={handleClick} textLight={colors.lightVibrant}>
         <div>{title}</div>
       </Container>
 

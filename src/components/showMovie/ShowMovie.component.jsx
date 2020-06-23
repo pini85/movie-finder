@@ -125,22 +125,13 @@ const ShowMovie = ({ item, colors, goToMovie, isSecretSequence }) => {
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <OptionsContainer>
-                          <ShowMovieOption
-                            title="torrents"
-                            type="torrent"
-                            left={true}
-                          />
-                          <ShowMovieOption
-                            title="subtitles"
-                            type="sub"
-                            right={true}
-                          />
-                          <ShowMovieOption
-                            title="magnets"
-                            type="magnets"
-                            left={true}
-                          />
+                        <OptionsContainer
+                          color1={colors.darkVibrant}
+                          color2={colors.vibrant}
+                        >
+                          <ShowMovieOption title="torrents" type="torrent" />
+                          <ShowMovieOption title="subtitles" type="sub" />
+                          <ShowMovieOption title="magnets" type="magnets" />
                         </OptionsContainer>
                       </motion.div>
                     )}
