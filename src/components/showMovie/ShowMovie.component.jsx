@@ -49,6 +49,7 @@ const ShowMovie = ({ item, colors, goToMovie, isSecretSequence }) => {
     setToggled(true);
     setOptionType(type);
     window.scrollTo(0, 0);
+    document.body.style.overflow = "hidden";
   };
   const showOption = () => {
     switch (optionType) {
@@ -102,17 +103,18 @@ const ShowMovie = ({ item, colors, goToMovie, isSecretSequence }) => {
       ) : (
         item && (
           <Container color1={colors.darkMuted} color2={colors.muted}>
+            <Trailer poster={item.poster} />
             {isToggled && (
               <Modal isToggled={isToggled} setToggled={setToggled}>
                 <ModalContainer>{isToggled && showOption()}</ModalContainer>
               </Modal>
             )}
+
             <MovieCard color={colors.lightVibrant}>
               <HeroContainer poster={item.backdrop}>
                 <TopContainer>
                   <ShowMovieInfo />
                 </TopContainer>
-                <Trailer poster={item.poster} />
               </HeroContainer>
               <BottomContainer>
                 <LeftSide>

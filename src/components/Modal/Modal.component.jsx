@@ -13,6 +13,7 @@ const Modal = ({
 }) => {
   const handleClick = () => {
     setToggled(false);
+    document.body.style.overflow = "auto";
     if (setSpinners || setThemes) {
       setSpinners(false);
       setThemes(false);
@@ -22,11 +23,7 @@ const Modal = ({
   return (
     <AnimatePresence>
       {isToggled && (
-        <Container
-          style={
-            skew ? { transform: "skewY(-2.5deg)" } : { top: "0", left: "-15px" }
-          }
-        >
+        <Container>
           <motion.div
             initial={{ opacity: 0, width: "75%" }}
             animate={{ opacity: 1 }}

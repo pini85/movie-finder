@@ -14,6 +14,8 @@ export const Container = styled.div`
   padding: 0%, 0%;
   height: 100vh;
   width: 100vw;
+  top: 0;
+    left: 0;
   overflow: hidden;
 `;
 

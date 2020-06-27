@@ -51,6 +51,7 @@ const Trailer = ({ poster, fetchTrailers, trailers, colors }) => {
   const handleClick = (e) => {
     setToggled(true);
     window.scrollTo(0, 0);
+    document.body.style.overflow = "hidden";
   };
 
   return (

@@ -4,7 +4,6 @@ export const TrailerContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: skewY(-2.5deg);
   box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
   background: ${(props) =>
     `url(https://image.tmdb.org/t/p/w185//${
@@ -16,13 +15,15 @@ export const TrailerContainer = styled.div`
   background-attachment: inherit;
   height: 25rem;
   width: 17rem;
-  bottom: -75px;
-  right: -60px;
+  bottom: 305px;
+  right: 188px;
+  z-index: 1;
   transition: all 0.3s;
   &:hover {
-    transform: scale(1.2) skewY(-2.5deg) rotate(5deg);
+    transform: scale(1.2) rotate(5deg);
   }
   @media screen and (max-width: 1000px) {
+    top: 260px;
     right: 16px;
   }
 `;
