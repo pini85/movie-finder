@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchTorrents } from "../../redux/actions";
 
 const ShowTorrents = ({ fetchTorrents, torrents }) => {
+  console.log("im clicked");
   useEffect(() => {
     const fetchData = async () => {
       await fetchTorrents();

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Container, Button, ButtonContainer } from "./Modal.styles";
 
@@ -11,11 +11,6 @@ const Modal = ({
   skew,
   children,
 }) => {
-  useEffect(() => {
-    // isToggled && (document.body.style.overflow = "hidden");
-    // !isToggled && (document.body.style.overflow = "unset");
-  }, [isToggled]);
-
   const handleClick = () => {
     setToggled(false);
     if (setSpinners || setThemes) {

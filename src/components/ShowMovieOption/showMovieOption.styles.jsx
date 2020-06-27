@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { getColorDiffStatus } from "node-vibrant/lib/util";
 
 export const ModalContainer = styled.div`
   background: white;

@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { connect } from "react-redux";
+// import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { goToMovie } from "../../redux/actions/index";
 import ShowMovieInfo from "../showMovieInfo/ShowMovieInfo.component";
-import ShowMovieOption from "../ShowMovieOption/ShowMovieOption.component";
+import ShowTorrents from "../ShowTorrents/ShowTorrents.component";
+import ShowSubtitles from "../ShowSubtitles/ShowSubtitles.component";
+import ShowMagnets from "../ShowMagnets/ShowMagnets.component";
+import OptionButton from "../OptionButton/OptionButton.component";
+import OptionButtonWrapper from "../OptionButtonWrapper/OptionButtonWrapper.component";
 import MovieCast from "../MovieCast/MovieCast.component";
 import Trailer from "../Trailer/Trailer.component";
 import Reviews from "../Reviews/Review.component";
+import Modal from "../Modal/Modal.component";
 import LoadingScreen from "../LoadingScreen/LoadingScreen.component";
-import BouncingDvd from "../spinners/BouncingDvd/BouncingDvd.component";
-import Film from "../spinners/Film/Film.component";
-import useWidth from "../../hooks/useWidth.hooks";
 
 import {
   Container,
@@ -25,10 +28,13 @@ import {
   MovieCastContainer,
   LeftSide,
   RightSide,
+  ModalContainer,
 } from "./ShowMovie.styles";
 
 const ShowMovie = ({ item, colors, goToMovie, isSecretSequence }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isToggled, setToggled] = useState(false);
+  const [optionType, setOptionType] = useState(null);
   const { id } = useParams();
 
   useEffect(() => {
@@ -39,6 +45,23 @@ const ShowMovie = ({ item, colors, goToMovie, isSecretSequence }) => {
     };
     fetchData();
   }, [id]);
+  const handleOptionClick = (type) => {
+    setToggled(true);
+    setOptionType(type);
+    window.scrollTo(0, 0);
+  };
+  const showOption = () => {
+    switch (optionType) {
+      case "torrent":
+        return <ShowTorrents></ShowTorrents>;
+      case "sub":
+        return <ShowSubtitles></ShowSubtitles>;
+      case "magnets":
+        return <ShowMagnets></ShowMagnets>;
+      default:
+        return null;
+    }
+  };
 
   // const VibrantC = styled.div`
   //   height: 5rem;
@@ -70,23 +93,19 @@ const ShowMovie = ({ item, colors, goToMovie, isSecretSequence }) => {
   //   width: 5rem;
   //   background: ${item ? colors.lightMuted : "var(secondary-color-light)"};
   // `;
-  const width = useWidth().width;
-
-  const spinner = () => {
-    if (width < 1000) {
-      return <Film></Film>;
-    } else {
-      return <BouncingDvd></BouncingDvd>;
-    }
-  };
 
   return (
-    <div>
+    <>
       {isLoading ? (
         <LoadingScreen></LoadingScreen>
       ) : (
         item && (
           <Container color1={colors.darkMuted} color2={colors.muted}>
+            {isToggled && (
+              <Modal isToggled={isToggled} setToggled={setToggled}>
+                <ModalContainer>{isToggled && showOption()}</ModalContainer>
+              </Modal>
+            )}
             <MovieCard color={colors.lightVibrant}>
               <HeroContainer poster={item.backdrop}>
                 <TopContainer>
@@ -125,30 +144,49 @@ const ShowMovie = ({ item, colors, goToMovie, isSecretSequence }) => {
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <OptionsContainer
-                          color1={colors.darkVibrant}
-                          color2={colors.vibrant}
-                        >
-                          <ShowMovieOption title="torrents" type="torrent" />
+                        <OptionsContainer>
+                          <OptionButtonWrapper
+                            textColor={colors.lightVibrant}
+                            color1={colors.darkVibrant}
+                            color2={colors.vibrant}
+                          >
+                            <OptionButton
+                              handleOptionClick={handleOptionClick}
+                              title="torrents"
+                              type="torrent"
+                            />
+                            <OptionButton
+                              handleOptionClick={handleOptionClick}
+                              title="subtitles"
+                              type="subtitles"
+                            />
+                            <OptionButton
+                              handleOptionClick={handleOptionClick}
+                              title="magnets"
+                              type="magnets"
+                            />
+                          </OptionButtonWrapper>
+
+                          {/* <ShowMovieOption title="torrents" type="torrent" />
                           <ShowMovieOption title="subtitles" type="sub" />
-                          <ShowMovieOption title="magnets" type="magnets" />
+                          <ShowMovieOption title="magnets" type="magnets" /> */}
                         </OptionsContainer>
                       </motion.div>
                     )}
                   </AnimatePresence>
                 </RightSide>
               </BottomContainer>
-
-              {/* <div style={{ display: "flex" }}>
-              <DarkVibrant></DarkVibrant>
-              <VibrantC></VibrantC>
-              <LightVibrant></LightVibrant>
-            </div>
-            <div style={{ display: "flex" }}>
-              <DarkMuted></DarkMuted>
-              <Muted></Muted>
-              <LightMuted></LightMuted>
-            </div> */}
+              {/* 
+              <div style={{ display: "flex" }}>
+                <DarkVibrant></DarkVibrant>
+                <VibrantC></VibrantC>
+                <LightVibrant></LightVibrant>
+              </div>
+              <div style={{ display: "flex" }}>
+                <DarkMuted></DarkMuted>
+                <Muted></Muted>
+                <LightMuted></LightMuted>
+              </div> */}
               <MovieCastContainer color={colors.lightVibrant}>
                 <MovieCast />
               </MovieCastContainer>
@@ -156,7 +194,7 @@ const ShowMovie = ({ item, colors, goToMovie, isSecretSequence }) => {
           </Container>
         )
       )}
-    </div>
+    </>
   );
 };
 

@@ -15,7 +15,7 @@ export const Container = styled.div`
 export const HeroContainer = styled.div`
   height: 50vh;
   position: relative;
-  z-index: 1;
+  /* z-index: 1; */
   transform: skewY(2.5deg) translateY(-30px);
   color: var(--text-white);
   display: flex;
@@ -88,7 +88,7 @@ export const OptionsContainer = styled.div`
 
   align-self: flex-start;
   padding: 4rem 0;
-  & > :nth-child(odd) {
+  /* & > :nth-child(odd) {
     background: ${(props) =>
       `linear-gradient(to right, ${props.color2}, ${props.color1})`};
     text-align: left;
@@ -101,7 +101,7 @@ export const OptionsContainer = styled.div`
     text-align: right;
     padding-right: 10%;
     transform: perspective(500px) rotateY(-45deg);
-  }
+  } */
 `;
 
 export const PlotContainer = styled.div`
@@ -147,4 +147,8 @@ export const RightSide = styled.div`
 export const DirectorAndWriterContainer = styled.div`
   font-size: 1.5rem;
   padding: 2rem;
+`;
+export const ModalContainer = styled.div`
+  background: white;
+  width: 50rem;
 `;
