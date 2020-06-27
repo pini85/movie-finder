@@ -16,6 +16,8 @@ import {
   IconContainer,
 } from "./AdvancedSearchSaved.styles";
 import Button from "../Button/Button";
+import OptionButtonWrapper from "../OptionButtonWrapper/OptionButtonWrapper.component";
+import OptionButton from "../OptionButton/OptionButton.component";
 
 const AdvancedSearchSaved = (props) => {
   const handleClick = (search) => {
@@ -47,11 +49,16 @@ const AdvancedSearchSaved = (props) => {
           props.displayUserSearches.map((search) => {
             return (
               <ButtonContainer>
-                <Button
-                  handleClick={() => handleClick(search)}
-                  title={search.search.name}
-                  width="35rem"
-                ></Button>
+                <OptionButtonWrapper
+                  color1="var(--primary-color-light)"
+                  color2="var(--primary-color)"
+                >
+                  <OptionButton
+                    handleOptionClick={() => handleClick(search)}
+                    title={search.search.name}
+                    textColor="white"
+                  />
+                </OptionButtonWrapper>
                 <IconContainer onClick={() => handleRemoveClick(search)}>
                   <FontAwesomeIcon icon={faTrash} />
                 </IconContainer>

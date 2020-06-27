@@ -14,5 +14,6 @@ export const Container = styled.div`
 
   transition: all 0.3s;
   cursor: pointer;
+  margin: 2rem;
   /* z-index: 1; */
 `;

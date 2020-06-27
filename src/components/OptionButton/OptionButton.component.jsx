@@ -5,17 +5,11 @@ const OptionButton = ({
   handleOptionClick,
   title,
   textColor,
-  color1,
-  color2,
+
   type,
 }) => {
   return (
-    <Container
-      onClick={() => handleOptionClick(type)}
-      textColor={textColor}
-      color1={color1}
-      color2={color2}
-    >
+    <Container onClick={() => handleOptionClick(type)} textColor={textColor}>
       <div>{title}</div>
     </Container>
   );

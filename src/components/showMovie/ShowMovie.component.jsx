@@ -169,10 +169,6 @@ const ShowMovie = ({ item, colors, goToMovie, isSecretSequence }) => {
                               type="magnets"
                             />
                           </OptionButtonWrapper>
-
-                          {/* <ShowMovieOption title="torrents" type="torrent" />
-                          <ShowMovieOption title="subtitles" type="sub" />
-                          <ShowMovieOption title="magnets" type="magnets" /> */}
                         </OptionsContainer>
                       </motion.div>
                     )}

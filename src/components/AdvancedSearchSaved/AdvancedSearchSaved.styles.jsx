@@ -38,10 +38,11 @@ export const Title = styled.div`
 export const ButtonContainer = styled.div`
   margin: 1rem 0;
   display: flex;
+  align-items: center;
 `;
 
 export const IconContainer = styled.div`
-  margin-left: 1rem;
+  margin-left: -6rem;
   transition: all 0.3s;
   cursor: pointer;
   &:hover {
