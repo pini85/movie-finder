@@ -19,7 +19,6 @@ const Modal = ({
       setOption(null);
     }
   };
-
   return (
     <AnimatePresence>
       {isToggled && (
@@ -48,7 +47,6 @@ const Modal = ({
                   </Button>
                 </ButtonContainer>
               </div>
-
               {children}
             </motion.div>
           </motion.div>

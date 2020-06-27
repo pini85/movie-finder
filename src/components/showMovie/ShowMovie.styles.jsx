@@ -27,7 +27,6 @@ export const HeroContainer = styled.div`
   &:after {
     content: "";
     position: absolute;
-
     height: 100%;
     width: 100%;
     top: 0;
