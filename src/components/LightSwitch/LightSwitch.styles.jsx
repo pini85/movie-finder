@@ -24,9 +24,5 @@ export const Container = styled.div`
     border-radius: 50%;
     transform: ${(props) => (props.toggle ? "translateX(88%)" : null)};
     transition: all 0.3s;
-    /* @media screen and (max-width: 1400px) {
-      transform: ${(props) => (props.toggle ? "translateX(18px)" : null)};
-    } */
-
   }
 `;

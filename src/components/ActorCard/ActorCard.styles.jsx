@@ -13,6 +13,14 @@ export const ImageContainer = styled.div`
   transition: 0.5s;
   z-index: 1;
 `;
+export const Title = styled.div`
+  position: relative;
+  font-size: 2rem;
+  font-weight: 700;
+  color: transparent;
+
+  transition: all 0.2s 0.2s;
+`;
 
 export const CardContainer = styled.div`
   position: relative;
@@ -39,13 +47,19 @@ export const CardContainer = styled.div`
   &:hover ${ImageContainer} {
     bottom: 4rem;
   }
+  &:hover ${Title} {
+    z-index: 2;
+    color: var(--text-dark);
+  }
   &:hover::before {
     transform: rotate(20deg);
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+    z-index: 0;
   }
   &:hover::after {
     transform: rotate(10deg);
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+    z-index: 0;
   }
 `;
 
@@ -65,10 +79,4 @@ export const DetailContainer = styled.div`
   bottom: 10px;
   height: 30px;
   text-align: center;
-`;
-
-export const Title = styled.div`
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--text-dark);
 `;
