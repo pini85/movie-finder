@@ -96,7 +96,6 @@ const ShowMovie = ({ item, colors, goToMovie, isSecretSequence }) => {
 
   return (
     <>
-      hi
       {isLoading ? (
         <LoadingScreen></LoadingScreen>
       ) : (
