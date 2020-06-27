@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { connect } from "react-redux";
@@ -18,15 +18,24 @@ import {
 import Button from "../Button/Button";
 import OptionButtonWrapper from "../OptionButtonWrapper/OptionButtonWrapper.component";
 import OptionButton from "../OptionButton/OptionButton.component";
+import Spinner from "../spinners/Spin/Spin.component";
 
 const AdvancedSearchSaved = (props) => {
-  const handleClick = (search) => {
-    console.log("clicked on defaultSearch", search);
+  const [isLoading, setLoading] = useState(false);
+  const [isDisabled, setDisabled] = useState(false);
+  console.log(isLoading);
 
+  const handleClick = (search) => {
     props.displayUserSearch(search);
   };
   const handleDefaultSearch = async () => {
-    props.defaultSearches();
+    console.log("hiiiii");
+
+    setLoading(true);
+    setDisabled(true);
+    await props.defaultSearches();
+    setLoading(false);
+    setDisabled(false);
   };
 
   const handleRemoveClick = (search) => {
@@ -38,10 +47,18 @@ const AdvancedSearchSaved = (props) => {
       <SearchContainer>
         {props.displayUserSearches.length < 1 && (
           <div>
-            <div>No searches saved</div>
-            <div onClick={handleDefaultSearch} style={{ background: "red" }}>
-              Load authors search results
-            </div>
+            <div style={{ marginBottom: "2rem" }}>No searches saved</div>
+            {!isDisabled ? (
+              <Button
+                title=" Load Movie Finder's cool searches"
+                handleClick={handleDefaultSearch}
+              ></Button>
+            ) : null}
+            {isLoading ? (
+              <div style={{ marginTop: "2rem" }}>
+                <Spinner></Spinner>{" "}
+              </div>
+            ) : null}
           </div>
         )}
 
