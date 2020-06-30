@@ -4,14 +4,23 @@ import { compose } from "redux";
 import { withRouter } from "react-router-dom";
 import { Container, ButtonContainer } from "./pagination.styles";
 import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
-import { isFetching } from "../../redux/actions/index";
+import { isFetching, currentPage } from "../../redux/actions/index";
 import useWidth from "../../hooks/useWidth.hooks";
 
-const Pagination = ({ api, data, actor, history, location, isFetching }) => {
+const Pagination = ({
+  api,
+  data,
+  actor,
+  history,
+  location,
+  isFetching,
+  currentPage,
+  setCurrentPage,
+}) => {
   const [buttons, setButtons] = useState(null);
   const [count, setCount] = useState(1);
   const [amount, setAmount] = useState(20);
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
   const totalPages = data ? data.total_pages : null;
   const width = useWidth().width;
   const changeLocation = () => {
@@ -20,6 +29,7 @@ const Pagination = ({ api, data, actor, history, location, isFetching }) => {
     const split = loc.split("/");
     return loc.replace(split[split.length - 1], currentPage);
   };
+  console.log(currentPage);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -162,9 +172,14 @@ const Pagination = ({ api, data, actor, history, location, isFetching }) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  currentPage: state.currentPage,
+});
+
 export default compose(
   withRouter,
-  connect(null, {
+  connect(mapStateToProps, {
     isFetching: (bool) => isFetching(bool),
+    setCurrentPage: (page) => currentPage(page),
   })
 )(Pagination);

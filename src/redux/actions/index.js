@@ -528,3 +528,10 @@ export const showSearchResults = (type) => {
     payload: type,
   };
 };
+
+export const currentPage = (page) => {
+  return {
+    type: "CURRENT_PAGE",
+    payload: page,
+  };
+};

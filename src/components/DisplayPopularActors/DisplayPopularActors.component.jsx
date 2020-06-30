@@ -31,6 +31,10 @@ const DisplayPopularActors = (props) => {
             );
           })}
       </Container>
+      <Pagination
+        api={props.fetchPopularActors}
+        data={props.fetchPopularActorsData}
+      />
     </>
   );
 };

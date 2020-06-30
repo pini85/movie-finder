@@ -1,14 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "./ReviewsCarousel.styles";
 import { connect } from "react-redux";
 import { ContentContainer } from "./ReviewsCarousel.styles";
 
 const ReviewsCarousel = ({ author, content, color }) => {
-  const cutContent = (content) => {
+  const [exposedText, setExposedText] = useState(null);
+  const [hiddenText, setHiddenText] = useState(null);
+  const [isHidden, setHidden] = useState(true);
+  useEffect(() => {
     if (author === "msbreviews") {
-      return content.slice(97, 497);
+      setExposedText(content.slice(97, 497));
+      setHiddenText(content.slice(498));
     }
-    return content.slice(0, 410);
+    setExposedText(content.slice(0, 410));
+    setHiddenText(content.slice(411));
+  }, []);
+  const handleClick = () => {
+    setHidden((val) => !val);
   };
 
   return (
@@ -16,7 +24,9 @@ const ReviewsCarousel = ({ author, content, color }) => {
       <div>
         <i>By: {author} </i>
       </div>
-      <ContentContainer>{cutContent(content)}</ContentContainer>
+      <ContentContainer>{exposedText}</ContentContainer>
+      <div onClick={handleClick}>{!isHidden ? "Show more..." : "Collapse"}</div>
+      <div>{!isHidden && hiddenText}</div>
     </Container>
   );
 };

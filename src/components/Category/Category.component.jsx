@@ -27,6 +27,7 @@ const Category = ({
           <>
             <Pagination api={fetchNewestMovies} data={newestMovies} />
             <MovieListCategory category="newest movies" />
+            <Pagination api={fetchNewestMovies} data={newestMovies} />
           </>
         );
 

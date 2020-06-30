@@ -63,6 +63,8 @@ const AdvancedSearchResult = ({
           return displayUserSavedAdvancedSearch.search.directors.values;
         case "writers":
           return displayUserSavedAdvancedSearch.search.writers.values;
+        default:
+          return null;
       }
     } else {
       switch (type) {
@@ -85,6 +87,8 @@ const AdvancedSearchResult = ({
           return directors;
         case "writers":
           return writers;
+        default:
+          return null;
       }
     }
   };

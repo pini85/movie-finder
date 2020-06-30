@@ -10,19 +10,16 @@ import {
 
 import Card from "../card/Card";
 const MovieListCategory = (props) => {
-  // const [isLoading, setLoading] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       switch (props.category) {
         case "newest movies":
           await props.newestMovies(1);
           props.isFetching(false);
-
           break;
         case "highest rating":
           props.highestRatedMovies(1);
           props.isFetching(false);
-
           break;
         default:
           return null;
@@ -35,7 +32,9 @@ const MovieListCategory = (props) => {
     return (
       category &&
       category.results.map((item) => {
-        if (item === null) return;
+        if (item === null) {
+          return;
+        }
 
         return (
           <div key={item.id}>
@@ -52,6 +51,8 @@ const MovieListCategory = (props) => {
         return iterate(props.newestMoviesData);
       case "highest rating":
         return iterate(props.highestRatedMoviesData);
+      default:
+        return null;
     }
   };
 

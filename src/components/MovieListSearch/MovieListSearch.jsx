@@ -31,6 +31,8 @@ const MovieListSearch = (props) => {
                 );
               })}
           </div>
+
+          <Pagination api={fetch} data={data} actor={actor} />
         </>
       );
     };

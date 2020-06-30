@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
-import { optionActive } from "../../redux/actions";
+import { optionActive, currentPage } from "../../redux/actions";
 
 import { Container } from "./Option.styles";
 
@@ -14,6 +14,8 @@ const Option = ({
   dataType,
   changeUrl,
   changeUrlName,
+  currentPage,
+  setCurrentPage,
 }) => {
   const activeEl = () => {
     if (optionActiveData === 1 && dataType === 1) {
@@ -38,6 +40,9 @@ const Option = ({
 
   const handleClick = (e) => {
     optionActive(e);
+    if (currentPage !== 1) {
+      setCurrentPage(1);
+    }
     if (changeUrl) {
       history.push(`/movies/${changeUrlName}/page/1`);
     }
@@ -51,9 +56,11 @@ const Option = ({
 };
 const mapStateToDispatch = {
   optionActive: optionActive,
+  setCurrentPage: currentPage,
 };
 const mapStateToProps = (state) => ({
   optionActiveData: state.optionActive,
+  currentPage: state.currentPage,
 });
 
 export default compose(

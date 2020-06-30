@@ -3,7 +3,6 @@ import { TrailerContainer } from "./Carousel.styles";
 import YouTube from "react-youtube";
 import "./carousel.styles.css";
 import { connect } from "react-redux";
-
 import Slider from "react-slick";
 import MovieSlider from "../movieSLider/MovieSlider.component";
 import MovieCastCarousel from "../MovieCastCarousel/MovieCastCarousel.component";
@@ -44,11 +43,6 @@ const Carousel = ({
     pauseOnHover: true,
     lazyLoad: true,
   };
-  const styleContainer = {
-    display: "flex",
-    justifyContent: "center",
-    width: "100%",
-  };
 
   const category = () => {
     switch (type) {
@@ -59,11 +53,7 @@ const Carousel = ({
             return (
               <div key={trailer.id}>
                 <TrailerContainer width={width}>
-                  <YouTube
-                    videoId={trailer.key}
-                    opts={optsYouTube}
-                    // onReady={_onReadyYouTube}
-                  />
+                  <YouTube videoId={trailer.key} opts={optsYouTube} />
                 </TrailerContainer>
               </div>
             );
@@ -105,6 +95,8 @@ const Carousel = ({
             );
           })
         );
+      default:
+        return null;
     }
   };
 

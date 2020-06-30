@@ -211,6 +211,12 @@ const showSearchResultsReducer = (type = null, action) => {
   }
   return type;
 };
+const currentPageReducer = (page = 1, action) => {
+  if (action.type === "CURRENT_PAGE") {
+    return action.payload;
+  }
+  return page;
+};
 
 export default combineReducers({
   fetchMovies: fetchMoviesReducer,
@@ -242,4 +248,5 @@ export default combineReducers({
   displaySpinner: displaySpinnerReducer,
   isSecretSequence: isSecretSequenceReducer,
   showSearchResults: showSearchResultsReducer,
+  currentPage: currentPageReducer,
 });
