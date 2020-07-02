@@ -13,3 +13,8 @@ export const ContentContainer = styled.div`
     padding: 0 5rem;
   }
 `;
+
+export const TextContainer = styled.span`
+  color: ${(props) => props.color};
+  cursor: pointer;
+`;

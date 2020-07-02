@@ -23,11 +23,13 @@ Features need to be done:
 * create default props to all components
 * animations -> First thing is to make an accordian to reviews
 
-- animate thwe width of the review when secret comes up
+- animate thwewidth of the review when secret comes up
 <!-- * link to imdb on movie page -->
 
 * Better Performance
 * allow to update saved search
+* create a special color to indicate that you have been in this movie page already
+* create a special button to download subtitiels and click on 1st magnet
 <!-- * secret tapping to get the torrent etc -->
 * Add tv shows
 
@@ -50,6 +52,8 @@ BUGS:
 
 Backend:
 crud operation on saved advanced searches
+allow users to save to favorites
+get logic to show recommandations based on favorites or watched movies
 
 - use a class .is-required for a form. and use an after pseudo element content:'\*'
   s
