@@ -48,10 +48,11 @@ const ReviewsCarousel = ({ author, content, color }) => {
           <span onClick={handleClick}>
             {isHidden ? (
               <TextContainer color={color.darkVibrant}>
+                {" "}
                 ...Show more
               </TextContainer>
             ) : (
-              <TextContainer> Collapse</TextContainer>
+              <TextContainer color={color.darkVibrant}> Collapse</TextContainer>
             )}
           </span>
         )}
