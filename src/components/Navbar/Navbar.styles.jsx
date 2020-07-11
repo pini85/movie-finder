@@ -10,6 +10,7 @@ export const Container = styled.div`
   height: 7vh;
   padding: 3rem;
   z-index: 5;
+  transition: background 0.5s;
 `;
 export const NavbarItemContainer = styled.ul`
   display: flex;

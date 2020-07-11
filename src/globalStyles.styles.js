@@ -64,10 +64,12 @@ body {
   line-height: 1.7;
   overflow-x:hidden;
 
+
 }
 #app {
   min-height:100vh;
-  background:var(--secondary-color)
+  background:var(--secondary-color);
+
 }
 
 ul {list-style-type: none; }

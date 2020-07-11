@@ -49,6 +49,8 @@ BUGS:
   <!-- - when clicking on cast and pagination jumps to display only 1 page -->
   <!-- when going to a new window ability to save the paginaiton where you left off.
   create pagination to bottom of the page -->
+  create a transition between color modes
+  import \* as actions from '../actions/index';
 
 Backend:
 crud operation on saved advanced searches
