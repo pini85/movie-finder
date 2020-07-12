@@ -11,6 +11,7 @@ const persistConfig = {
   storage,
   blacklist: [
     "movieSuggestions",
+    "castSuggestions",
     "optionActive",
     "movieSlider",
     "displayUserAdvancedSearch",

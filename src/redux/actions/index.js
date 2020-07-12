@@ -363,7 +363,9 @@ export const fetchAdvancedSearch = (page) => async (dispatch, getState) => {
   dispatch({ type: "FETCH_ADVANCED_MOVIES", payload: movies });
 };
 
-export const fetchCastSuggestion = (type, query) => async (dispatch) => {
+export const fetchCastSuggestion = (type, query, searchBar) => async (
+  dispatch
+) => {
   let fetchIds;
   let ids;
   let idsType;
@@ -373,14 +375,28 @@ export const fetchCastSuggestion = (type, query) => async (dispatch) => {
   }
 
   if (ids) {
-    idsType = ids.filter((cast) => {
-      return type === cast.known_for_department;
-    });
+    if (!searchBar) {
+      idsType = ids.filter((cast) => {
+        return type === cast.known_for_department;
+      });
+    } else if (searchBar) {
+      idsType = ids.filter((cast) => {
+        return (
+          "Acting" === cast.known_for_department ||
+          "Directing" === cast.known_for_department
+        );
+      });
+    }
 
     const castSuggestions = await Promise.all(
       idsType.map((cast) => tmdbCastInfoApi(cast.id))
     );
-    dispatch({ type: "FETCH_CAST_SUGGESTIONS", payload: castSuggestions });
+
+    const sortedByPopularity = castSuggestions.sort((a, b) => {
+      return a.popularity < b.popularity ? 1 : -1;
+    });
+
+    dispatch({ type: "FETCH_CAST_SUGGESTIONS", payload: sortedByPopularity });
   } else {
     dispatch({ type: "FETCH_CAST_SUGGESTIONS", payload: query });
   }

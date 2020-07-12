@@ -7,6 +7,7 @@ import {
   fetchMovies,
   movieSuggestions,
   showSearchResults,
+  fetchCastSuggestion,
 } from "../../redux/actions";
 import { tmdbQueryApi } from "../../apis/tmdbApi";
 import Suggestions from "../Suggestions/Suggestions.component";
@@ -22,8 +23,9 @@ const Search = (props) => {
   useDidUpdateEffect(() => {
     setTimeout(async () => {
       const data = !!searchQuery.length && (await tmdbQueryApi(1, searchQuery));
+      props.fetchCastSuggestion(null, searchQuery, true);
 
-      props.movieSuggestions(data);
+      props.fetchMovieSuggestions(data);
     }, 150);
   }, [searchQuery]);
 
@@ -65,7 +67,7 @@ const Search = (props) => {
         handleClick={(e) => handleClick(e)}
       ></Button>
 
-      {props.userSuggestions && <Suggestions items={props.userSuggestions} />}
+      {props.movieSuggestions && <Suggestions />}
     </div>
   );
 };
@@ -74,7 +76,8 @@ const mapStateToProps = (state) => ({
   isSending: state.isSending,
   // fetchMoves: state.fetchMovies,
   selectedMovies: state.selectedMovies,
-  userSuggestions: state.movieSuggestions,
+  movieSuggestions: state.movieSuggestions,
+  castSuggestions: state.castSuggestions,
   query: state.search,
 });
 
@@ -83,7 +86,8 @@ export default compose(
   connect(mapStateToProps, {
     search: search,
     fetchMovies: (page) => fetchMovies(page),
-    movieSuggestions: movieSuggestions,
+    fetchMovieSuggestions: movieSuggestions,
     showSearchResults: showSearchResults,
+    fetchCastSuggestion: fetchCastSuggestion,
   })
 )(Search);

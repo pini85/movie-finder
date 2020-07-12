@@ -4,16 +4,29 @@ import { connect } from "react-redux";
 import { Container } from "./suggestions.styles";
 
 const Suggestions = (props) => {
+  const suggestions = () => {
+    if (props.castSuggestions) {
+      const array = [];
+      const cast = props.castSuggestions.slice(0, 2);
+
+      const movies = props.movieSuggestions.results.slice(0, 4);
+      array.push(...cast, ...movies);
+
+      return array;
+    }
+  };
+
   return (
     <Container>
-      {props.userSuggestions &&
-        props.userSuggestions.results.splice(0, 6).map((suggestion) => {
+      {suggestions() &&
+        suggestions().map((suggestion) => {
           return <Suggestion key={suggestion.id} item={suggestion} />;
         })}
     </Container>
   );
 };
 const mapStateToProps = (state) => ({
-  userSuggestions: state.movieSuggestions,
+  movieSuggestions: state.movieSuggestions,
+  castSuggestions: state.castSuggestions,
 });
 export default connect(mapStateToProps)(Suggestions);
