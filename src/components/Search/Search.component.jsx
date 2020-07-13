@@ -51,6 +51,7 @@ const Search = (props) => {
   };
   const handleChange = (e) => {
     setSearchQuery(e.target.value);
+    // props.search(e.target.value);
   };
 
   return (
@@ -67,7 +68,9 @@ const Search = (props) => {
         handleClick={(e) => handleClick(e)}
       ></Button>
 
-      {props.movieSuggestions && <Suggestions />}
+      {props.movieSuggestions && (
+        <Suggestions setSearchQuery={setSearchQuery} />
+      )}
     </div>
   );
 };

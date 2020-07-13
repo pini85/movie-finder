@@ -20,7 +20,13 @@ const Suggestions = (props) => {
     <Container>
       {suggestions() &&
         suggestions().map((suggestion) => {
-          return <Suggestion key={suggestion.id} item={suggestion} />;
+          return (
+            <Suggestion
+              key={suggestion.id}
+              item={suggestion}
+              setSearchQuery={props.setSearchQuery}
+            />
+          );
         })}
     </Container>
   );

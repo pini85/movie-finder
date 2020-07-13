@@ -3,6 +3,8 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   width: ${(props) => (props.width > 500 ? "35rem" : null)};
+  background: ${(props) =>
+    props.type === "actor" ? "var(--secondary-color-light)" : null};
   padding: 1rem;
   font-size: 1.7rem;
   color: var(--text-white);
