@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
@@ -13,20 +13,33 @@ import { tmdbQueryApi } from "../../apis/tmdbApi";
 import Suggestions from "../Suggestions/Suggestions.component";
 import Button from "../Button/Button";
 import Input from "../Input/Input.component";
-import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
+// import useDidUpdateEffect from "../../hooks/useDidUpdateEffect.hooks";
 import useWidth from "../../hooks/useWidth.hooks";
 
 const Search = (props) => {
   const [searchQuery, setSearchQuery] = useState("");
   const width = useWidth().width;
 
-  useDidUpdateEffect(() => {
-    setTimeout(async () => {
-      const data = !!searchQuery.length && (await tmdbQueryApi(1, searchQuery));
-      props.fetchCastSuggestion(null, searchQuery, true);
-
+  useEffect(() => {
+    const search = async () => {
+      const data = await tmdbQueryApi(1, searchQuery);
       props.fetchMovieSuggestions(data);
-    }, 150);
+      props.fetchCastSuggestion(null, searchQuery, true);
+    };
+    if (searchQuery && !props.movieSuggestions.length) {
+      search();
+    } else {
+      const timeOutId = setTimeout(async () => {
+        if (searchQuery) {
+          search();
+        } else {
+          props.fetchMovieSuggestions(false);
+        }
+      }, 100);
+      return () => {
+        clearTimeout(timeOutId);
+      };
+    }
   }, [searchQuery]);
 
   const handleClick = () => {
