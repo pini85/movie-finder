@@ -13,7 +13,7 @@
     "@testing-library/user-event": "^7.1.2",
     "framer-motion": "^1.9.0",
     "hex-rgb": "^4.1.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "node-sass": "^4.13.1",
     "node-vibrant": "^3.1.5",
     "opensubtitles-api": "^5.1.0",
